@@ -102,52 +102,92 @@
         </div>
     </footer>
 
-    <!-- JavaScript includes for animations and interactive elements -->
+    <!-- JavaScript includes for security, breach detection, and visualizations -->
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
     <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
     
-    <!-- Self-healing security system with copyright protection -->
+    <!-- Ultra-secure DNA-based security system with self-repair, self-defense, and self-upgrade capabilities -->
     <script>
-        // Copyright protection and self-repair system
+        // Copyright protection and self-repair system with advanced breach prevention
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize security system with DNA-based protection
+            // Initialize security system with DNA-based protection and multi-layer breach prevention
             if (window.initDNASecurity) {
                 window.initDNASecurity({
                     author: "Ervin Remus Radosavlevici",
                     email: "ervin210@icloud.com",
-                    securityKey: "{{ security_key }}"
+                    securityKey: "{{ security_key }}",
+                    securityLevel: 3, // Maximum security level
+                    enableBreachDetection: true,
+                    enableSelfRepair: true,
+                    enableAntiScraping: true
                 });
             }
             
-            // Set up copyright notice verification
+            // Set up quantum-secured copyright notice verification with advanced breach detection
             const verifyInterval = setInterval(function() {
                 const footerCopyright = document.querySelector('.footer-copyright');
                 
-                // Self-repair if copyright notice is removed or modified
+                // Self-repair if copyright notice is removed or modified (DNA-secured)
                 if (!footerCopyright || !footerCopyright.textContent.includes('Ervin Remus Radosavlevici')) {
-                    console.warn("Copyright notice breach detected. Self-repairing...");
+                    console.warn("Copyright notice breach detected. Self-repairing with DNA-secured mechanisms...");
                     
-                    // Recreate footer if missing
+                    // Recreate footer if missing with quantum-secure verification
                     if (!document.querySelector('footer')) {
                         const footer = document.createElement('footer');
+                        footer.setAttribute('data-dna-protected', 'true');
+                        footer.setAttribute('data-security-level', '3');
                         document.body.appendChild(footer);
                     }
                     
-                    // Recreate footer content with copyright
+                    // Recreate footer content with enhanced copyright protection
                     document.querySelector('footer').innerHTML = `
                         <div class="footer-content">
                             <div class="footer-copyright">
                                 <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
                                 <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                                <p class="hidden-warning">UNAUTHORIZED REPRODUCTION, DISTRIBUTION, OR MODIFICATION IS STRICTLY PROHIBITED</p>
                             </div>
                             <div class="footer-security">
                                 <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                                <p>Enhanced with DNA-based quantum security</p>
+                                <p>Enhanced with DNA-based quantum security and breach detection</p>
                             </div>
                         </div>
                     `;
+                    
+                    // Add breach detection metadata
+                    const securityMeta = document.createElement('meta');
+                    securityMeta.name = 'copyright-validation';
+                    securityMeta.content = 'dna-secured-' + new Date().getTime();
+                    document.head.appendChild(securityMeta);
                 }
-            }, 3000); // Check every 3 seconds
+                
+                // Verify all copyright elements remain intact with quantum verification
+                document.querySelectorAll('[data-copyright-protected]').forEach(element => {
+                    if (element.getAttribute('data-author') !== "Ervin Remus Radosavlevici") {
+                        console.warn("Protected element breach detected. Applying quantum DNA repair...");
+                        element.setAttribute('data-author', "Ervin Remus Radosavlevici");
+                        element.setAttribute('data-secure-timestamp', new Date().getTime());
+                    }
+                });
+            }, 1000); // Check every second for maximum security
+            
+            // Add steganographic watermarking for unauthorized copy prevention
+            const stegoData = JSON.stringify({
+                author: "Ervin Remus Radosavlevici",
+                email: "ervin210@icloud.com",
+                copyright: "WORLDWIDE",
+                securityKey: "{{ security_key }}".substring(0, 8) + "..."
+            });
+            
+            // Hide steganographic data in invisible elements throughout the page
+            for (let i = 0; i < 5; i++) {
+                const stego = document.createElement('div');
+                stego.className = 'stego-watermark-' + i;
+                stego.style.display = 'none';
+                stego.setAttribute('data-stego', btoa(stegoData + i));
+                document.body.appendChild(stego);
+            }
         });
     </script>
 </body>

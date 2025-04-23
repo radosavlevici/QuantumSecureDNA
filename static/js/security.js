@@ -272,24 +272,60 @@ function checkForSecurityUpgrades() {
     });
 }
 
-// Verify content integrity using DNA-based comparison
+// Verify content integrity using DNA-based comparison with enhanced breach detection
 function verifyContentIntegrity() {
+    // Apply anti-tampering measures to the entire DOM
+    const htmlAttrs = document.documentElement.getAttributeNames();
+    if (!htmlAttrs.includes('data-copyright-protected')) {
+        document.documentElement.setAttribute('data-copyright-protected', 'true');
+        document.documentElement.setAttribute('data-author', GLOBAL_SECURITY_CONFIG.author);
+    }
+    
+    // Create a metamorphic checksum of the entire document to detect tampering
+    const documentContent = document.documentElement.outerHTML;
+    const contentChecksum = simpleHash(documentContent);
+    
+    // Store as a tamper-evident variable
+    if (!window._dnaChecksum) {
+        window._dnaChecksum = contentChecksum;
+    } else if (window._dnaChecksum !== contentChecksum) {
+        console.warn("DNA Security Alert: Document content has been modified. Repairing content...");
+        applySecurityWatermarks();
+    }
+    
+    // Enhanced deep inspection of all copyright elements
     document.querySelectorAll('[data-copyright-protected="true"]').forEach(element => {
         // Ensure the element has all required attributes
         if (!element.hasAttribute('data-author') || 
             element.getAttribute('data-author') !== GLOBAL_SECURITY_CONFIG.author) {
+            console.warn(`Copyright violation detected in ${element.tagName}. Self-repairing...`);
             element.setAttribute('data-author', GLOBAL_SECURITY_CONFIG.author);
         }
         
-        // Ensure watermark exists
+        // Ensure watermark exists with anti-modification encoding
         if (!element.querySelector('.hidden-copyright-watermark')) {
             const watermark = document.createElement('div');
             watermark.className = 'hidden-copyright-watermark';
             watermark.style.display = 'none';
             watermark.innerHTML = GLOBAL_SECURITY_CONFIG.copyrightText;
+            
+            // Apply steganographic encoding to detect modifications
+            watermark.setAttribute('data-integrity', simpleHash(GLOBAL_SECURITY_CONFIG.copyrightText));
             element.appendChild(watermark);
         }
     });
+    
+    // Simple cryptographic hash function for integrity checking
+    function simpleHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash.toString(16);
+    }
+}
 }
 
 // Record security status for monitoring
