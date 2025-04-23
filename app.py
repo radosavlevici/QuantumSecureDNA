@@ -11,12 +11,38 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Add a watermark
-st.sidebar.markdown("© Copyright - ervin210@icloud.com")
+# Add a watermark and copyright information
+st.sidebar.markdown("""
+### © Copyright Information
+- **Author:** Ervin Remus Radosavlevici
+- **Email:** ervin210@icloud.com
+- **Copyright:** All Rights Reserved
+- **Features:** DNA-Based Security, Quantum Computing, Quantum Machine Learning
+- **Security:** Self-repair, Self-upgrade, Self-defense capabilities
+""")
+
+# Add security notice
+st.sidebar.info("""
+**SECURITY NOTICE:**
+This application includes advanced security features:
+- DNA-based encryption
+- Quantum secure protocols
+- Copyright protection
+- Immunity to unauthorized changes
+""")
 
 def main():
     st.title("Quantum Computing Educational Platform")
     st.subheader("Explore Quantum Computing Concepts, DNA Security, and Quantum Machine Learning")
+    
+    # Add global notice
+    st.markdown("""
+    <div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #0066cc;'>
+    <h3 style='color: #0066cc;'>WORLDWIDE ADVANCED SECURITY PLATFORM</h3>
+    <p>Featuring DNA-based security with self-repair, self-upgrade, and self-defense capabilities.</p>
+    <p><b>© Ervin Remus Radosavlevici (ervin210@icloud.com)</b> - All Rights Reserved</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Introduction section
     st.markdown("""

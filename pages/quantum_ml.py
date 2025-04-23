@@ -16,6 +16,15 @@ from utils.qml_utils import (load_iris_data, create_quantum_classifier,
 def app():
     st.title("Quantum Machine Learning")
     
+    # Add copyright and advanced security notice
+    st.markdown("""
+    <div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #0066cc;'>
+    <h3 style='color: #0066cc;'>ADVANCED QUANTUM MACHINE LEARNING</h3>
+    <p>Featuring quantum-enhanced ML algorithms with proprietary optimizations</p>
+    <p><b>© Ervin Remus Radosavlevici (ervin210@icloud.com)</b> - All Rights Reserved</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     # Introduction
     st.markdown("""
     # Quantum Machine Learning Concepts

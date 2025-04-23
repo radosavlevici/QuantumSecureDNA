@@ -13,6 +13,15 @@ from utils.quantum_utils import simulate_circuit, plot_quantum_state, visualize_
 def app():
     st.title("Quantum Algorithms")
     
+    # Add copyright and advanced security notice
+    st.markdown("""
+    <div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #0066cc;'>
+    <h3 style='color: #0066cc;'>ADVANCED QUANTUM ALGORITHMS</h3>
+    <p>Featuring Grover's Algorithm, Shor's Algorithm, and Quantum Fourier Transform</p>
+    <p><b>© Ervin Remus Radosavlevici (ervin210@icloud.com)</b> - All Rights Reserved</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     # Introduction
     st.markdown("""
     # Quantum Algorithms

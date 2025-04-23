@@ -15,6 +15,15 @@ from utils.dna_security import (DNA_BASES, DNA_TO_BINARY, BINARY_TO_DNA,
 def app():
     st.title("DNA-Based Security")
     
+    # Add copyright and advanced security notice
+    st.markdown("""
+    <div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #0066cc;'>
+    <h3 style='color: #0066cc;'>ADVANCED DNA-BASED SECURITY SYSTEM</h3>
+    <p>Self-repair | Self-upgrade | Self-defense | Anti-theft protection</p>
+    <p><b>© Ervin Remus Radosavlevici (ervin210@icloud.com)</b> - All Rights Reserved</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     # Introduction
     st.markdown("""
     # DNA-Based Security Algorithms
