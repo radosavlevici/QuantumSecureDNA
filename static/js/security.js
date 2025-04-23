@@ -19,7 +19,7 @@ const GLOBAL_SECURITY_CONFIG = {
     copyrightYear: "2025",
     securityLevel: 3, // Maximum security
     securityKey: null, // Will be set during initialization
-    selfRepairInterval: 3000, // Check every 3 seconds
+    selfRepairInterval: 1000, // Check every second
     selfUpgradeInterval: 60000, // Self-upgrade check every minute
     protectedElements: [
         '.copyright-notice',
@@ -236,42 +236,6 @@ function initContentProtection() {
     });
 }
 
-// Initialize self-upgrade capabilities
-function initSelfUpgrade() {
-    // Set up interval to check for and apply security upgrades
-    setInterval(() => {
-        // Check for new security capabilities
-        checkForSecurityUpgrades();
-        
-        // Apply DNA-based content verification
-        verifyContentIntegrity();
-        
-        // Record security status
-        recordSecurityStatus();
-    }, GLOBAL_SECURITY_CONFIG.selfUpgradeInterval);
-}
-
-// Check for security upgrades
-function checkForSecurityUpgrades() {
-    // This would normally connect to a server for updates
-    // For now, just log that the check is happening
-    console.info('Checking for DNA security system upgrades...');
-    
-    // Add any new protected elements to the watch list
-    const newProtectedSelectors = [
-        '.quantum-circuit',
-        '.dna-encryption',
-        '.simulation-result'
-    ];
-    
-    // Add any new selectors that aren't already in the protected list
-    newProtectedSelectors.forEach(selector => {
-        if (!GLOBAL_SECURITY_CONFIG.protectedElements.includes(selector)) {
-            GLOBAL_SECURITY_CONFIG.protectedElements.push(selector);
-        }
-    });
-}
-
 // Verify content integrity using DNA-based comparison with enhanced breach detection
 function verifyContentIntegrity() {
     // Apply anti-tampering measures to the entire DOM
@@ -326,6 +290,41 @@ function verifyContentIntegrity() {
         return hash.toString(16);
     }
 }
+
+// Initialize self-upgrade capabilities
+function initSelfUpgrade() {
+    // Set up interval to check for and apply security upgrades
+    setInterval(() => {
+        // Check for new security capabilities
+        checkForSecurityUpgrades();
+        
+        // Apply DNA-based content verification
+        verifyContentIntegrity();
+        
+        // Record security status
+        recordSecurityStatus();
+    }, GLOBAL_SECURITY_CONFIG.selfUpgradeInterval);
+}
+
+// Check for security upgrades
+function checkForSecurityUpgrades() {
+    // This would normally connect to a server for updates
+    // For now, just log that the check is happening
+    console.info('Checking for DNA security system upgrades...');
+    
+    // Add any new protected elements to the watch list
+    const newProtectedSelectors = [
+        '.quantum-circuit',
+        '.dna-encryption',
+        '.simulation-result'
+    ];
+    
+    // Add any new selectors that aren't already in the protected list
+    newProtectedSelectors.forEach(selector => {
+        if (!GLOBAL_SECURITY_CONFIG.protectedElements.includes(selector)) {
+            GLOBAL_SECURITY_CONFIG.protectedElements.push(selector);
+        }
+    });
 }
 
 // Record security status for monitoring
