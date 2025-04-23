@@ -1057,6 +1057,7 @@ dependencies = [
     { name = "qiskit" },
     { name = "qiskit-aer" },
     { name = "scikit-learn" },
+    { name = "sqlalchemy" },
     { name = "streamlit" },
 ]
 
@@ -1075,6 +1076,7 @@ requires-dist = [
     { name = "qiskit", specifier = ">=2.0.0" },
     { name = "qiskit-aer", specifier = ">=0.17.0" },
     { name = "scikit-learn", specifier = ">=1.6.1" },
+    { name = "sqlalchemy", specifier = ">=2.0.40" },
     { name = "streamlit", specifier = ">=1.44.1" },
 ]
 

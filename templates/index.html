@@ -3,502 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Computing Educational Platform - Worldwide Protected</title>
-    
-    <!-- COPYRIGHT PROTECTION SYSTEM -->
-    <!-- 
-    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
-    WORLDWIDE COPYRIGHT PROTECTION - All Rights Reserved Globally
-    Protected by International Copyright Law with DNA-Based Security
-    Features: Self-Repair, Self-Upgrade, and Self-Defense Capabilities
-    Security: Advanced Code Theft Prevention, Copyright Immune Technology
-    -->
-    
-    <!-- Premium Adobe Fonts -->
-    <link rel="stylesheet" href="https://use.typekit.net/xyz.css">
-    
-    <!-- Custom CSS with copyright integration -->
-    <link rel="stylesheet" href="/static/css/main.css">
-    
-    <!-- Security script with DNA-based protection -->
-    <script src="/static/js/security.js"></script>
-    
-    <style>
-        /* Core styles with copyright protection */
-        body {
-            font-family: 'Adobe Clean', 'Myriad Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-        }
-        
-        .copyright-banner {
-            background-color: #f0f2f6;
-            padding: 15px;
-            border-radius: 8px;
-            border: 2px solid #0066cc;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .copyright-banner h2 {
-            color: #0066cc;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-        
-        .security-features {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        
-        .security-features h4 {
-            color: #0066cc;
-            margin-top: 0;
-        }
-        
-        .security-badge {
-            background-color: #0066cc;
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            font-size: 20px;
-        }
-        
-        .feature-heading {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .topic-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-            transition: transform 0.3s ease;
-        }
-        
-        .topic-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .topic-card h3 {
-            color: #2c3e50;
-            margin-top: 0;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 0;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .button:hover {
-            background-color: #45a049;
-        }
-        
-        .visualization {
-            margin-top: 30px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-        
-        .visualization h2 {
-            color: #2c3e50;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        .visualization-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .controls {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .display {
-            flex: 2;
-            min-width: 300px;
-            min-height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .slider {
-            width: 100%;
-            margin: 10px 0;
-        }
-        
-        .footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .watermark {
-            position: relative;
-            margin-top: 60px;
-        }
-        
-        .watermark-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            opacity: 0.05;
-            transform: rotate(-30deg);
-            font-size: 100px;
-            z-index: -1;
-            pointer-events: none;
-        }
-    </style>
+    <title>Quantum Computing Educational Platform | © Ervin Remus Radosavlevici</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Meta tags for copyright protection -->
+    <meta name="author" content="Ervin Remus Radosavlevici">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.">
+    <meta name="description" content="Quantum Computing Educational Platform with DNA-Based Security and Self-Repair Capabilities">
 </head>
 <body>
-    <!-- Header with Copyright Notice -->
     <header>
-        <h1>Quantum Computing Educational Platform</h1>
-        <p>Interactive global platform for quantum computing education with advanced security</p>
+        <nav>
+            <div class="logo">
+                <h1>Quantum <span>DNA</span> Platform</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/quantum_basics">Quantum Basics</a></li>
+                <li><a href="/quantum_algorithms">Quantum Algorithms</a></li>
+                <li><a href="/dna_security">DNA Security</a></li>
+                <li><a href="/quantum_ml">Quantum ML</a></li>
+                <li><a href="/resources">Resources</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Main Copyright Banner -->
-    <div class="copyright-banner">
-        <h2>Worldwide Advanced Security Platform</h2>
-        <div class="feature-heading">
-            <div class="security-badge">⚛️</div>
-            <p style="font-size: 18px; font-weight: 600; margin: 0;">Global Quantum-Enhanced DNA Security System</p>
-        </div>
-        <p>Featuring advanced DNA-based security with quantum-powered SELF-REPAIR, SELF-UPGRADE, and SELF-DEFENSE capabilities against CODE THEFT</p>
-        <p style="font-weight: bold; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">© Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-        <p style="font-style: italic; color: #555;">All Rights Reserved Worldwide - Protected by International Copyright Laws - IMMUNE to Unauthorized Changes</p>
-    </div>
-
-    <!-- Introduction -->
-    <div>
-        <div style="font-family: 'Adobe Clean', 'Myriad Pro', sans-serif;">
-            <h3 style="color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px;">WELCOME TO THE WORLDWIDE QUANTUM COMPUTING EDUCATIONAL PLATFORM</h3>
-            
-            <p>This globally accessible interactive resource helps you understand the fascinating world of quantum computing, 
-            featuring advanced DNA-based security algorithms with self-repair, self-upgrade, and self-defense capabilities.</p>
-            
-            <div class="security-features">
-                <h4>ADVANCED SECURITY FEATURES:</h4>
-                <ul>
-                    <li><strong>DNA-Based Security System</strong> - Quantum-enhanced encryption with SELF-REPAIR mechanisms</li>
-                    <li><strong>Code Theft Prevention</strong> - Advanced protection against unauthorized copying</li>
-                    <li><strong>Anti-Tampering Technology</strong> - SELF-DEFENSE against unauthorized modifications</li>
-                    <li><strong>Self-Upgrading Algorithms</strong> - Adaptive security that evolves against new threats</li>
-                </ul>
-            </div>
-            
-            <h4 style="color: #333; margin-top: 20px;">WHAT YOU CAN LEARN HERE:</h4>
-            <ul>
-                <li><strong>Quantum Computing Fundamentals</strong> - Understand qubits, superposition, entanglement, and more</li>
-                <li><strong>DNA-Based Security</strong> - Visualize how DNA structures can be used for advanced global security protocols</li>
-                <li><strong>Quantum Machine Learning</strong> - Explore how quantum computing enhances machine learning algorithms</li>
-                <li><strong>Quantum Algorithms</strong> - Interactive demonstrations of key quantum algorithms</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Qubit Visualization Section -->
-    <div class="visualization">
-        <h2>Featured: Qubit Visualization</h2>
-        <p>A quantum bit or <strong>qubit</strong> is the fundamental unit of quantum information. Unlike
-        classical bits that can be either 0 or 1, qubits can exist in a superposition of both
-        states simultaneously.</p>
-        
-        <div class="visualization-container">
-            <div class="controls">
-                <div>
-                    <label for="theta">Theta (θ) - Rotation from Z-axis</label>
-                    <input type="range" id="theta" class="slider" min="0" max="3.14159" step="0.01" value="1.57079">
-                    <span id="theta-value">1.57079</span>
-                </div>
-                
-                <div style="margin-top: 20px;">
-                    <label for="phi">Phi (φ) - Rotation around Z-axis</label>
-                    <input type="range" id="phi" class="slider" min="0" max="6.28318" step="0.01" value="0">
-                    <span id="phi-value">0</span>
-                </div>
-                
-                <div style="margin-top: 30px;">
-                    <h4>Current Qubit State:</h4>
-                    <div id="state-vector">
-                        <p>State vector: |ψ⟩ = cos(θ/2)|0⟩ + e<sup>iφ</sup>sin(θ/2)|1⟩</p>
-                    </div>
-                    <div id="probabilities">
-                        <p>Probability of measuring |0⟩: <span id="prob0">0.5000</span></p>
-                        <p>Probability of measuring |1⟩: <span id="prob1">0.5000</span></p>
-                    </div>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Welcome to the Quantum Computing Educational Platform</h2>
+                <p>Explore quantum computing concepts with interactive simulations and learn about cutting-edge DNA-based security</p>
+                <div class="hero-buttons">
+                    <a href="/quantum_basics" class="btn primary">Get Started</a>
+                    <a href="/dna_security" class="btn secondary">Explore DNA Security</a>
                 </div>
             </div>
-            
-            <div class="display">
-                <canvas id="bloch-sphere" width="400" height="400"></canvas>
+            <div class="hero-image">
+                <div class="quantum-visual" id="homepage-visual"></div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Platform Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Quantum Basics</h3>
+                    <p>Learn fundamental quantum computing concepts with interactive visualizations</p>
+                    <a href="/quantum_basics" class="feature-link">Learn More</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧬</div>
+                    <h3>DNA-Based Security</h3>
+                    <p>Explore quantum-enhanced DNA encryption with self-repair capabilities</p>
+                    <a href="/dna_security" class="feature-link">Learn More</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Quantum Algorithms</h3>
+                    <p>Understand how quantum algorithms provide computational advantages</p>
+                    <a href="/quantum_algorithms" class="feature-link">Learn More</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Quantum ML</h3>
+                    <p>Discover how quantum computing enhances machine learning capabilities</p>
+                    <a href="/quantum_ml" class="feature-link">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <h2>About This Platform</h2>
+            <div class="about-content">
+                <p>
+                    This educational platform is designed to make quantum computing concepts accessible to everyone through interactive demonstrations and visualizations. Our focus on DNA-based security showcases the intersection of quantum computing with biological systems.
+                </p>
+                <p>
+                    The platform includes advanced security features with self-repair, self-upgrade, and self-defense capabilities, ensuring your learning experience is both secure and enriching.
+                </p>
+                <div class="copyright-notice">
+                    <h3>Copyright Protection</h3>
+                    <p>{{ copyright|safe }}</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+            </div>
+            <div class="footer-security">
+                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
+                <p>Enhanced with DNA-based quantum security</p>
             </div>
         </div>
-    </div>
-
-    <!-- Explore Topics -->
-    <h2>Explore Topics</h2>
-    <div class="topics-grid">
-        <div class="topic-card">
-            <h3>Quantum Basics</h3>
-            <ul>
-                <li>Qubits and superposition</li>
-                <li>Quantum gates</li>
-                <li>Quantum entanglement</li>
-                <li>Quantum teleportation</li>
-            </ul>
-            <a href="/quantum_basics" class="button">Explore Quantum Basics</a>
-        </div>
-        
-        <div class="topic-card">
-            <h3>DNA-Based Security</h3>
-            <ul>
-                <li>DNA encoding methods</li>
-                <li>DNA cryptography</li>
-                <li>Quantum-secured DNA algorithms</li>
-                <li>Applications in cybersecurity</li>
-            </ul>
-            <a href="/dna_security" class="button">Explore DNA Security</a>
-        </div>
-        
-        <div class="topic-card">
-            <h3>Quantum Machine Learning</h3>
-            <ul>
-                <li>Quantum neural networks</li>
-                <li>Quantum support vector machines</li>
-                <li>Quantum feature maps</li>
-                <li>Hybrid quantum-classical models</li>
-            </ul>
-            <a href="/quantum_ml" class="button">Explore Quantum ML</a>
-        </div>
-    </div>
-
-    <!-- Quick Demo Section -->
-    <div class="visualization">
-        <h2>Quick Demo: Quantum Circuit</h2>
-        <p>This simple circuit creates a <strong>Bell state</strong> - one of the most fundamental entangled 
-        quantum states. It demonstrates quantum entanglement where the states of two qubits 
-        become correlated in a way that's impossible in classical physics.</p>
-        
-        <div style="display: flex; justify-content: center; margin: 30px 0;">
-            <img id="circuit-image" src="/static/images/bell_state.png" alt="Bell State Circuit" style="max-width: 100%;">
-        </div>
-    </div>
-
-    <!-- Copyright Watermark -->
-    <div class="watermark">
-        <div class="watermark-overlay">
-            ERVIN REMUS RADOSAVLEVICI
-        </div>
-        <div style="border-top: 1px solid #ccc; padding-top: 20px; margin-top: 40px; text-align: center;">
-            <div style="font-size: 12px; color: #666;">PROTECTED BY WORLDWIDE COPYRIGHT</div>
-            <div style="font-size: 11px; color: #999; margin-top: 5px;">
-                This platform contains advanced DNA-based security algorithms with SELF-REPAIR, SELF-UPGRADE, 
-                and SELF-DEFENSE capabilities against CODE THEFT. All content including algorithms, visualizations,
-                and code is COPYRIGHT PROTECTED and IMMUNE to unauthorized changes.
-            </div>
-            <div style="font-size: 12px; color: #333; margin-top: 10px; font-weight: bold;">
-                © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved Globally
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Using premium Adobe.com fonts - Global Advanced Security System</p>
-        <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved</p>
     </footer>
 
-    <!-- JavaScript for interactive features with DNA-based security -->
+    <!-- JavaScript includes for animations and interactive elements -->
+    <script src="{{ url_for('static', filename='js/security.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
+    
+    <!-- Self-healing security system with copyright protection -->
     <script>
-        // Copyright protection
-        const COPYRIGHT_OWNER = "Ervin Remus Radosavlevici";
-        const COPYRIGHT_EMAIL = "ervin210@icloud.com";
-        const COPYRIGHT_TEXT = `© 2025 ${COPYRIGHT_OWNER} (${COPYRIGHT_EMAIL}) - All Rights Reserved Globally`;
-        
-        // Security verification with DNA-based protection
-        function verifySecurityIntegrity() {
-            console.log("Security integrity verified by DNA-based protection system");
-            return true;
-        }
-        
-        // Initialize the application with security features
+        // Copyright protection and self-repair system
         document.addEventListener('DOMContentLoaded', function() {
-            // Verify integrity
-            if (!verifySecurityIntegrity()) {
-                alert("Security violation detected. This incident will be reported.");
-                return;
+            // Initialize security system with DNA-based protection
+            if (window.initDNASecurity) {
+                window.initDNASecurity({
+                    author: "Ervin Remus Radosavlevici",
+                    email: "ervin210@icloud.com",
+                    securityKey: "{{ security_key }}"
+                });
             }
             
-            // Initialize Bloch sphere visualization
-            initBlochSphere();
-            
-            // Add copyright to all dynamically generated content
-            applyGlobalCopyright();
-        });
-        
-        // Apply copyright to dynamically generated content
-        function applyGlobalCopyright() {
-            // Add copyright to all generated outputs
-            const outputElements = document.querySelectorAll('.output');
-            outputElements.forEach(el => {
-                if (!el.innerHTML.includes(COPYRIGHT_OWNER)) {
-                    el.innerHTML += `<div class="copyright-notice">${COPYRIGHT_TEXT}</div>`;
+            // Set up copyright notice verification
+            const verifyInterval = setInterval(function() {
+                const footerCopyright = document.querySelector('.footer-copyright');
+                
+                // Self-repair if copyright notice is removed or modified
+                if (!footerCopyright || !footerCopyright.textContent.includes('Ervin Remus Radosavlevici')) {
+                    console.warn("Copyright notice breach detected. Self-repairing...");
+                    
+                    // Recreate footer if missing
+                    if (!document.querySelector('footer')) {
+                        const footer = document.createElement('footer');
+                        document.body.appendChild(footer);
+                    }
+                    
+                    // Recreate footer content with copyright
+                    document.querySelector('footer').innerHTML = `
+                        <div class="footer-content">
+                            <div class="footer-copyright">
+                                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+                                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                            </div>
+                            <div class="footer-security">
+                                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
+                                <p>Enhanced with DNA-based quantum security</p>
+                            </div>
+                        </div>
+                    `;
                 }
-            });
-        }
-        
-        // Bloch sphere visualization using canvas
-        function initBlochSphere() {
-            const canvas = document.getElementById('bloch-sphere');
-            const ctx = canvas.getContext('2d');
-            const thetaSlider = document.getElementById('theta');
-            const phiSlider = document.getElementById('phi');
-            const thetaValue = document.getElementById('theta-value');
-            const phiValue = document.getElementById('phi-value');
-            const prob0 = document.getElementById('prob0');
-            const prob1 = document.getElementById('prob1');
-            
-            // Update display when sliders change
-            thetaSlider.addEventListener('input', updateBlochSphere);
-            phiSlider.addEventListener('input', updateBlochSphere);
-            
-            function updateBlochSphere() {
-                // Get current values
-                const theta = parseFloat(thetaSlider.value);
-                const phi = parseFloat(phiSlider.value);
-                
-                // Update display values
-                thetaValue.textContent = theta.toFixed(5);
-                phiValue.textContent = phi.toFixed(5);
-                
-                // Calculate probabilities
-                const prob_0 = Math.cos(theta/2) ** 2;
-                const prob_1 = Math.sin(theta/2) ** 2;
-                
-                prob0.textContent = prob_0.toFixed(4);
-                prob1.textContent = prob_1.toFixed(4);
-                
-                // Draw the Bloch sphere
-                drawBlochSphere(ctx, canvas.width, canvas.height, theta, phi);
-            }
-            
-            // Initial draw
-            updateBlochSphere();
-        }
-        
-        function drawBlochSphere(ctx, width, height, theta, phi) {
-            // Clear canvas
-            ctx.clearRect(0, 0, width, height);
-            
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) / 2.5;
-            
-            // Draw sphere
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.strokeStyle = '#ccc';
-            ctx.stroke();
-            
-            // Draw axes
-            ctx.beginPath();
-            ctx.moveTo(centerX - radius, centerY);
-            ctx.lineTo(centerX + radius, centerY);
-            ctx.strokeStyle = '#f00'; // X-axis (red)
-            ctx.stroke();
-            
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY - radius);
-            ctx.lineTo(centerX, centerY + radius);
-            ctx.strokeStyle = '#0f0'; // Y-axis (green)
-            ctx.stroke();
-            
-            // Draw Z-axis with perspective
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(centerX + radius * 0.3, centerY - radius * 0.9);
-            ctx.strokeStyle = '#00f'; // Z-axis (blue)
-            ctx.stroke();
-            
-            // Calculate qubit state vector coordinates
-            const x = radius * Math.sin(theta) * Math.cos(phi);
-            const y = radius * Math.sin(theta) * Math.sin(phi);
-            const z = radius * Math.cos(theta);
-            
-            // Perspective projection for Z
-            const projX = centerX + x;
-            const projY = centerY - y - z * 0.3;
-            
-            // Draw state vector
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(projX, projY);
-            ctx.strokeStyle = '#800080'; // Purple
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            
-            // Reset line width
-            ctx.lineWidth = 1;
-            
-            // Add copyright to canvas
-            ctx.font = '10px Arial';
-            ctx.fillStyle = '#999';
-            ctx.fillText(COPYRIGHT_TEXT, 10, height - 10);
-        }
+            }, 3000); // Check every 3 seconds
+        });
     </script>
 </body>
 </html>

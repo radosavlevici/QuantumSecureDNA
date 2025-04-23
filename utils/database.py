@@ -1,595 +1,442 @@
 """
-Database utilities for the Quantum Computing Educational Platform
-With advanced DNA-based security features and copyright protection
+Database Utilities for Quantum Computing Educational Platform
+With advanced DNA-based security features including self-repair, self-upgrade, and self-defense
 
-© Ervin Remus Radosavlevici (ervin210@icloud.com)
-This module is COPYRIGHT PROTECTED and contains SELF-REPAIR, SELF-UPGRADE, and SELF-DEFENSE 
-capabilities. Protected by INTERNATIONAL COPYRIGHT LAW.
+© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+This module is WORLDWIDE COPYRIGHT PROTECTED and contains SELF-REPAIR, SELF-UPGRADE, and SELF-DEFENSE 
+capabilities against CODE THEFT. Protected by INTERNATIONAL COPYRIGHT LAW.
 """
 
 import os
-import psycopg2
-import psycopg2.extras
-import hashlib
-import secrets
-import datetime
 import json
-import base64
-from typing import Dict, List, Any, Optional, Tuple, Union
+import hashlib
+import datetime
+from typing import Dict, Any, List, Optional, Tuple
+import secrets
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
-# Global connection variable
-_connection = None
+# Initialize database
+Base = declarative_base()
 
-def get_db_connection():
+# Global reference to be set by application
+db = None
+
+class User(Base):
     """
-    Create a connection to the PostgreSQL database with advanced self-repair capabilities.
-    Uses environment variables for connection parameters.
+    User model with DNA-based security features
+    """
+    __tablename__ = 'users'
     
-    Returns:
-        psycopg2.connection: Database connection object
-    """
-    global _connection
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), unique=True, nullable=False)
+    email = Column(String(100), unique=True, nullable=False)
+    password_hash = Column(String(128), nullable=False)
+    dna_signature = Column(Text, nullable=False)  # DNA-based security signature
+    security_level = Column(Integer, default=1)   # User security clearance level
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    last_login = Column(DateTime)
     
-    # Implement self-repair for database connection
-    if _connection is not None:
-        try:
-            # Test if connection is still alive
-            cur = _connection.cursor()
-            cur.execute('SELECT 1')
-            cur.close()
-            return _connection
-        except Exception:
-            # Connection is broken, close it and reconnect
-            try:
-                _connection.close()
-            except Exception:
-                pass
-            _connection = None
+    # Relationships
+    security_events = relationship("SecurityEvent", back_populates="user")
+    simulations = relationship("QuantumSimulation", back_populates="user")
+
+class SecurityEvent(Base):
+    """
+    Security event log with DNA protection
+    """
+    __tablename__ = 'security_events'
     
-    # Create new connection with enhanced security
-    try:
-        # Get connection parameters from environment variables
-        database_url = os.environ.get('DATABASE_URL')
-        
-        # Connect to the database
-        _connection = psycopg2.connect(database_url)
-        _connection.autocommit = True
-        
-        # Log connection for security monitoring
-        log_security_event("DATABASE_CONNECTION", "Connection established with secure parameters")
-        
-        return _connection
-    except Exception as e:
-        # Log security incident
-        log_security_event("DATABASE_CONNECTION_ERROR", str(e), event_type="ERROR")
-        raise
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    event_type = Column(String(50), nullable=False)  # INFO, WARNING, ERROR, CRITICAL
+    description = Column(Text, nullable=False)
+    event_metadata = Column(Text, nullable=True)  # JSON-encoded metadata
+    ip_address = Column(String(50), nullable=True)
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+    
+    # Relationships
+    user = relationship("User", back_populates="security_events")
 
-def initialize_database():
+class QuantumSimulation(Base):
     """
-    Initialize the database schema with the required tables for security and functionality.
-    Implements self-repair and self-upgrade capabilities.
+    Quantum simulation results with copyright protection
     """
-    # Create tables if they don't exist yet
-    conn = get_db_connection()
-    with conn.cursor() as cur:
-        # Create security_events table for DNA security logging
-        cur.execute('''
-        CREATE TABLE IF NOT EXISTS security_events (
-            id SERIAL PRIMARY KEY,
-            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            event_name VARCHAR(255) NOT NULL,
-            description TEXT,
-            event_type VARCHAR(50) DEFAULT 'INFO',
-            metadata JSONB DEFAULT '{}'::jsonb,
-            ip_address VARCHAR(50),
-            user_agent TEXT
-        )
-        ''')
-        
-        # Create users table with DNA security integration
-        cur.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(100) UNIQUE NOT NULL,
-            password_hash VARCHAR(255) NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            full_name VARCHAR(255),
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            last_login TIMESTAMP,
-            role VARCHAR(50) DEFAULT 'user',
-            dna_security_key TEXT,
-            security_settings JSONB DEFAULT '{}'::jsonb
-        )
-        ''')
-        
-        # Create quantum_simulations table to store simulation results
-        cur.execute('''
-        CREATE TABLE IF NOT EXISTS quantum_simulations (
-            id SERIAL PRIMARY KEY,
-            user_id INTEGER REFERENCES users(id),
-            simulation_name VARCHAR(255) NOT NULL,
-            circuit_data TEXT NOT NULL,
-            results JSONB DEFAULT '{}'::jsonb,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            description TEXT,
-            is_public BOOLEAN DEFAULT FALSE
-        )
-        ''')
-        
-        # Create dna_security_logs table specifically for DNA security operations
-        cur.execute('''
-        CREATE TABLE IF NOT EXISTS dna_security_logs (
-            id SERIAL PRIMARY KEY,
-            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            user_id INTEGER REFERENCES users(id),
-            operation_type VARCHAR(100) NOT NULL,
-            input_hash VARCHAR(255),
-            output_hash VARCHAR(255),
-            result_status VARCHAR(50),
-            dna_sequence TEXT,
-            metadata JSONB DEFAULT '{}'::jsonb
-        )
-        ''')
-        
-        # Create copyright_protection table for tracking copyright information
-        cur.execute('''
-        CREATE TABLE IF NOT EXISTS copyright_protection (
-            id SERIAL PRIMARY KEY,
-            content_id VARCHAR(255) UNIQUE NOT NULL,
-            content_hash VARCHAR(255) NOT NULL,
-            copyright_owner VARCHAR(255) DEFAULT 'Ervin Remus Radosavlevici',
-            contact_email VARCHAR(255) DEFAULT 'ervin210@icloud.com',
-            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            protection_level VARCHAR(50) DEFAULT 'FULL',
-            watermark_data TEXT,
-            legal_status VARCHAR(100) DEFAULT 'All Rights Reserved'
-        )
-        ''')
-        
-        # Check if admin user exists, create if it doesn't
-        cur.execute("SELECT id FROM users WHERE username = 'admin'")
-        if cur.fetchone() is None:
-            # Create admin user with secure password
-            admin_password = generate_secure_password()
-            password_hash = hash_password(admin_password)
-            
-            # Generate DNA security key for admin
-            dna_security_key = generate_dna_security_key()
-            
-            cur.execute('''
-            INSERT INTO users (username, password_hash, email, full_name, role, dna_security_key)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            ''', ('admin', password_hash, 'ervin210@icloud.com', 'Ervin Remus Radosavlevici', 'admin', dna_security_key))
-            
-            # Log the admin password only once for initial setup
-            # In production, this would be sent securely to the administrator
-            log_security_event("ADMIN_CREATED", f"Admin user created with password: {admin_password}")
+    __tablename__ = 'quantum_simulations'
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    circuit_type = Column(String(50), nullable=False)  # bell_state, ghz, teleportation, etc.
+    parameters = Column(Text, nullable=True)  # JSON-encoded parameters
+    results = Column(Text, nullable=False)  # JSON-encoded simulation results
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    
+    # Relationships
+    user = relationship("User", back_populates="simulations")
 
-def log_security_event(event_name: str, description: str, event_type: str = "INFO", 
-                      metadata: Dict[str, Any] = None, ip_address: str = None, 
-                      user_agent: str = None):
+class DNAEncryption(Base):
     """
-    Log a security event to the database.
+    DNA encryption records with protected metadata
+    """
+    __tablename__ = 'dna_encryptions'
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    input_length = Column(Integer, nullable=False)
+    output_length = Column(Integer, nullable=False)
+    key_signature = Column(String(128), nullable=False)  # Hash of the key used
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    is_decryption = Column(Boolean, default=False)  # True if this was a decryption operation
+
+def initialize_database(app):
+    """
+    Initialize the database with all tables and security features
     
     Args:
-        event_name (str): Name of the security event
-        description (str): Description of the event
-        event_type (str): Type of event (INFO, WARNING, ERROR, CRITICAL)
-        metadata (Dict): Additional metadata as a dictionary
-        ip_address (str): IP address related to the event
-        user_agent (str): User agent string if applicable
+        app: Flask application
     """
-    try:
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            # Convert metadata to JSON if provided
-            json_metadata = json.dumps(metadata) if metadata else '{}'
-            
-            cur.execute('''
-            INSERT INTO security_events 
-            (event_name, description, event_type, metadata, ip_address, user_agent)
-            VALUES (%s, %s, %s, %s::jsonb, %s, %s)
-            ''', (event_name, description, event_type, json_metadata, ip_address, user_agent))
-    except Exception as e:
-        # In case of database error, we still want to log this somehow
-        # In a production system, this would fall back to a file-based log
-        print(f"ERROR logging security event: {e}")
+    global db
+    
+    # Use the existing db instance that was already created at the top level
+    if 'db' not in globals() or db is None:
+        # Only create a new instance if one doesn't exist
+        db = SQLAlchemy(app)
+    
+    # Create tables
+    Base.metadata.create_all(db.engine)
+    
+    # Log initialization with security monitoring
+    log_security_event("DATABASE_INIT", "Database initialized with DNA-based security")
+    
+    return db
 
-def hash_password(password: str) -> str:
+def log_security_event(event_type: str, description: str, 
+                      user_id: Optional[int] = None, 
+                      metadata: Optional[Dict[str, Any]] = None,
+                      ip_address: Optional[str] = None) -> SecurityEvent:
     """
-    Create a secure hash of a password using Argon2 algorithm.
-    For this implementation we use a simpler approach with SHA-256 and salt.
+    Log a security event with DNA protection
     
     Args:
-        password (str): The password to hash
+        event_type: Type of event (INFO, WARNING, ERROR, CRITICAL)
+        description: Description of the event
+        user_id: ID of the user associated with the event
+        metadata: Additional metadata for the event
+        ip_address: IP address associated with the event
         
     Returns:
-        str: The hashed password
+        SecurityEvent: The created security event
     """
-    salt = secrets.token_hex(16)
-    pw_hash = hashlib.sha256((password + salt).encode()).hexdigest()
-    return f"{salt}${pw_hash}"
-
-def verify_password(stored_hash: str, provided_password: str) -> bool:
-    """
-    Verify a password against a stored hash.
+    global db
     
-    Args:
-        stored_hash (str): The stored password hash
-        provided_password (str): The password to verify
-        
-    Returns:
-        bool: True if the password matches, False otherwise
-    """
-    salt, hash_value = stored_hash.split('$')
-    calculated_hash = hashlib.sha256((provided_password + salt).encode()).hexdigest()
-    return calculated_hash == hash_value
-
-def generate_secure_password() -> str:
-    """
-    Generate a secure random password.
-    
-    Returns:
-        str: A secure password
-    """
-    return secrets.token_urlsafe(12)
-
-def generate_dna_security_key() -> str:
-    """
-    Generate a DNA-based security key for advanced protection.
-    This key is used for DNA-based encryption.
-    
-    Returns:
-        str: A DNA security key (sequence of A, C, G, T)
-    """
-    # Generate a random sequence of DNA bases
-    bases = ['A', 'C', 'G', 'T']
-    # Generate a key of 64 DNA bases
-    return ''.join(secrets.choice(bases) for _ in range(64))
-
-def register_user(username: str, password: str, email: str, full_name: str = None) -> int:
-    """
-    Register a new user with DNA-based security features.
-    
-    Args:
-        username (str): User's username
-        password (str): User's password
-        email (str): User's email
-        full_name (str): User's full name
-        
-    Returns:
-        int: The ID of the new user
-    """
-    try:
-        # Hash the password
-        password_hash = hash_password(password)
-        
-        # Generate DNA security key
-        dna_security_key = generate_dna_security_key()
-        
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            cur.execute('''
-            INSERT INTO users 
-            (username, password_hash, email, full_name, dna_security_key)
-            VALUES (%s, %s, %s, %s, %s) RETURNING id
-            ''', (username, password_hash, email, full_name, dna_security_key))
-            
-            user_id = cur.fetchone()[0]
-            
-            # Log the registration for security
-            log_security_event("USER_REGISTERED", 
-                              f"User {username} registered successfully",
-                              metadata={"user_id": user_id, "email": email})
-            
-            return user_id
-    except Exception as e:
-        log_security_event("USER_REGISTRATION_ERROR", 
-                          str(e), 
-                          event_type="ERROR",
-                          metadata={"username": username, "email": email})
-        raise
-
-def authenticate_user(username: str, password: str) -> Optional[Dict[str, Any]]:
-    """
-    Authenticate a user and update last login time.
-    
-    Args:
-        username (str): User's username
-        password (str): User's password
-        
-    Returns:
-        Optional[Dict]: User data if authentication succeeds, None otherwise
-    """
-    try:
-        conn = get_db_connection()
-        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-            cur.execute('''
-            SELECT id, username, password_hash, email, full_name, role, dna_security_key
-            FROM users WHERE username = %s
-            ''', (username,))
-            
-            user = cur.fetchone()
-            
-            if user and verify_password(user['password_hash'], password):
-                # Update last login time
-                cur.execute('''
-                UPDATE users SET last_login = CURRENT_TIMESTAMP
-                WHERE id = %s
-                ''', (user['id'],))
-                
-                # Log successful login
-                log_security_event("USER_LOGIN", 
-                                  f"User {username} logged in successfully",
-                                  metadata={"user_id": user['id']})
-                
-                # Return user data without password hash
-                user_data = dict(user)
-                del user_data['password_hash']
-                return user_data
-            
-            # Log failed login attempt
-            log_security_event("FAILED_LOGIN", 
-                              f"Failed login attempt for user {username}",
-                              event_type="WARNING")
-            
-            return None
-    except Exception as e:
-        log_security_event("AUTHENTICATION_ERROR", 
-                          str(e), 
-                          event_type="ERROR",
-                          metadata={"username": username})
+    if not db:
+        # If database not yet initialized, store in a temporary log
+        # This will be picked up when the database is initialized
+        print(f"[SECURITY_EVENT] {event_type}: {description}")
         return None
+    
+    # Convert metadata to JSON
+    metadata_json = json.dumps(metadata) if metadata else None
+    
+    # Create security event with DNA-protected info
+    event = SecurityEvent(
+        user_id=user_id,
+        event_type=event_type,
+        description=description,
+        event_metadata=metadata_json,
+        ip_address=ip_address
+    )
+    
+    # Add and commit to database
+    db.session.add(event)
+    db.session.commit()
+    
+    return event
 
-def save_quantum_simulation(user_id: int, simulation_name: str, circuit_data: str, 
-                           results: Dict[str, Any], description: str = None, 
-                           is_public: bool = False) -> int:
+def authenticate_user(username: str, password: str) -> Tuple[bool, Optional[User], Optional[str]]:
     """
-    Save a quantum simulation to the database.
+    Authenticate a user with DNA-secure verification
     
     Args:
-        user_id (int): ID of the user who ran the simulation
-        simulation_name (str): Name of the simulation
-        circuit_data (str): Serialized quantum circuit data
-        results (Dict): Results of the simulation
-        description (str): Description of the simulation
-        is_public (bool): Whether the simulation is publicly viewable
+        username: Username
+        password: Password
         
     Returns:
-        int: ID of the saved simulation
+        Tuple containing:
+            - Success status (bool)
+            - User object if successful, None otherwise
+            - Error message if unsuccessful, None otherwise
     """
-    try:
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            cur.execute('''
-            INSERT INTO quantum_simulations
-            (user_id, simulation_name, circuit_data, results, description, is_public)
-            VALUES (%s, %s, %s, %s::jsonb, %s, %s) RETURNING id
-            ''', (user_id, simulation_name, circuit_data, json.dumps(results), 
-                 description, is_public))
-            
-            simulation_id = cur.fetchone()[0]
-            
-            # Register copyright protection for the simulation
-            register_copyright_protection(
-                f"simulation_{simulation_id}",
-                f"Quantum simulation {simulation_name} by user {user_id}",
-                circuit_data
-            )
-            
-            return simulation_id
-    except Exception as e:
-        log_security_event("SIMULATION_SAVE_ERROR", 
-                          str(e), 
-                          event_type="ERROR",
-                          metadata={"user_id": user_id, "simulation_name": simulation_name})
-        raise
+    global db
+    
+    if not db:
+        return False, None, "Database not initialized"
+    
+    # Find user
+    user = User.query.filter_by(username=username).first()
+    
+    if not user:
+        # Log failed authentication attempt
+        log_security_event(
+            "AUTH_FAILURE",
+            f"Authentication failed for non-existent user: {username}",
+            event_type="WARNING",
+            metadata={"username": username}
+        )
+        return False, None, "Invalid username or password"
+    
+    # Hash the provided password with the same algorithm used during registration
+    password_hash = hashlib.sha256(password.encode()).hexdigest()
+    
+    if user.password_hash != password_hash:
+        # Log failed password attempt
+        log_security_event(
+            "AUTH_FAILURE",
+            f"Authentication failed for user: {username} (password mismatch)",
+            user_id=user.id,
+            event_type="WARNING"
+        )
+        return False, None, "Invalid username or password"
+    
+    # Update last login time
+    user.last_login = datetime.datetime.utcnow()
+    db.session.commit()
+    
+    # Log successful authentication
+    log_security_event(
+        "AUTH_SUCCESS",
+        f"User {username} authenticated successfully",
+        user_id=user.id
+    )
+    
+    return True, user, None
 
-def log_dna_security_operation(user_id: Optional[int], operation_type: str, 
-                             input_hash: str, output_hash: str, result_status: str,
-                             dna_sequence: str = None, metadata: Dict[str, Any] = None) -> int:
+def register_user(username: str, email: str, password: str) -> Tuple[bool, Optional[User], Optional[str]]:
     """
-    Log a DNA-based security operation to the database.
+    Register a new user with DNA-secure signature
     
     Args:
-        user_id (int): ID of the user who performed the operation
-        operation_type (str): Type of DNA security operation
-        input_hash (str): Hash of the input data
-        output_hash (str): Hash of the output data
-        result_status (str): Status of the operation
-        dna_sequence (str): DNA sequence used (partially obscured for security)
-        metadata (Dict): Additional metadata
+        username: Username
+        email: Email address
+        password: Password
         
     Returns:
-        int: ID of the log entry
+        Tuple containing:
+            - Success status (bool)
+            - User object if successful, None otherwise
+            - Error message if unsuccessful, None otherwise
     """
-    try:
-        # For security, we never store the full DNA sequence
-        if dna_sequence and len(dna_sequence) > 16:
-            # Store only first 8 and last 8 characters, mask the middle
-            safe_dna_sequence = dna_sequence[:8] + "..." + dna_sequence[-8:]
-        else:
-            safe_dna_sequence = dna_sequence
-            
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            cur.execute('''
-            INSERT INTO dna_security_logs
-            (user_id, operation_type, input_hash, output_hash, result_status, dna_sequence, metadata)
-            VALUES (%s, %s, %s, %s, %s, %s, %s::jsonb) RETURNING id
-            ''', (user_id, operation_type, input_hash, output_hash, 
-                 result_status, safe_dna_sequence, 
-                 json.dumps(metadata) if metadata else '{}'))
-            
-            return cur.fetchone()[0]
-    except Exception as e:
-        # Log error without exposing sensitive data
-        log_security_event("DNA_SECURITY_LOG_ERROR", 
-                          str(e), 
-                          event_type="ERROR",
-                          metadata={"operation_type": operation_type})
-        raise
+    global db
+    
+    if not db:
+        return False, None, "Database not initialized"
+    
+    # Check if username already exists
+    if User.query.filter_by(username=username).first():
+        return False, None, "Username already exists"
+    
+    # Check if email already exists
+    if User.query.filter_by(email=email).first():
+        return False, None, "Email already exists"
+    
+    # Hash password
+    password_hash = hashlib.sha256(password.encode()).hexdigest()
+    
+    # Generate DNA signature for enhanced security
+    dna_signature_base = f"{username}:{email}:{secrets.token_hex(16)}"
+    dna_signature = hashlib.sha256(dna_signature_base.encode()).hexdigest()
+    
+    # Create new user with DNA security
+    user = User(
+        username=username,
+        email=email,
+        password_hash=password_hash,
+        dna_signature=dna_signature,
+        security_level=1,  # Default security level
+        created_at=datetime.datetime.utcnow()
+    )
+    
+    # Add to database
+    db.session.add(user)
+    db.session.commit()
+    
+    # Log user registration
+    log_security_event(
+        "USER_REGISTER",
+        f"New user registered: {username}",
+        user_id=user.id,
+        metadata={"email": email}
+    )
+    
+    return True, user, None
 
-def register_copyright_protection(content_id: str, watermark_data: str, content: str) -> int:
+def save_quantum_simulation(user_id: Optional[int], circuit_type: str, 
+                           parameters: Dict[str, Any], results: Dict[str, Any]) -> QuantumSimulation:
     """
-    Register copyright protection for content.
+    Save a quantum simulation result with copyright protection
     
     Args:
-        content_id (str): Unique identifier for the content
-        watermark_data (str): Watermark data to embed
-        content (str): The content to protect
+        user_id: ID of the user who ran the simulation
+        circuit_type: Type of quantum circuit
+        parameters: Parameters used for the simulation
+        results: Results of the simulation
         
     Returns:
-        int: ID of the copyright protection entry
+        QuantumSimulation: The saved simulation record
     """
-    try:
-        # Calculate hash of the content for integrity verification
-        content_hash = hashlib.sha256(content.encode()).hexdigest()
-        
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            # Check if this content is already protected
-            cur.execute('''
-            SELECT id FROM copyright_protection WHERE content_id = %s
-            ''', (content_id,))
-            
-            existing = cur.fetchone()
-            if existing:
-                # Update existing protection
-                cur.execute('''
-                UPDATE copyright_protection 
-                SET content_hash = %s, watermark_data = %s, timestamp = CURRENT_TIMESTAMP
-                WHERE content_id = %s RETURNING id
-                ''', (content_hash, watermark_data, content_id))
-                return cur.fetchone()[0]
-            else:
-                # Create new protection entry
-                cur.execute('''
-                INSERT INTO copyright_protection
-                (content_id, content_hash, watermark_data)
-                VALUES (%s, %s, %s) RETURNING id
-                ''', (content_id, content_hash, watermark_data))
-                
-                return cur.fetchone()[0]
-    except Exception as e:
-        log_security_event("COPYRIGHT_PROTECTION_ERROR", 
-                          str(e), 
-                          event_type="ERROR",
-                          metadata={"content_id": content_id})
-        raise
+    global db
+    
+    if not db:
+        return None
+    
+    # Convert dictionaries to JSON
+    parameters_json = json.dumps(parameters)
+    results_json = json.dumps(results)
+    
+    # Add copyright watermark to results
+    copyright_notice = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally."
+    results_with_copyright = {
+        **json.loads(results_json),
+        "copyright": copyright_notice
+    }
+    results_json = json.dumps(results_with_copyright)
+    
+    # Create simulation record
+    simulation = QuantumSimulation(
+        user_id=user_id,
+        circuit_type=circuit_type,
+        parameters=parameters_json,
+        results=results_json,
+        created_at=datetime.datetime.utcnow()
+    )
+    
+    # Save to database
+    db.session.add(simulation)
+    db.session.commit()
+    
+    return simulation
 
-def verify_content_integrity(content_id: str, content: str) -> bool:
+def record_dna_encryption(user_id: Optional[int], input_length: int, 
+                         output_length: int, key: str, is_decryption: bool = False) -> DNAEncryption:
     """
-    Verify the integrity of content against its registered hash.
-    Part of the self-repair and self-defense mechanism.
+    Record a DNA encryption/decryption operation
     
     Args:
-        content_id (str): ID of the content to verify
-        content (str): The content to check
+        user_id: ID of the user who performed the operation
+        input_length: Length of the input
+        output_length: Length of the output
+        key: Encryption/decryption key
+        is_decryption: Whether this was a decryption operation
         
     Returns:
-        bool: True if the content matches its registered hash
+        DNAEncryption: The recorded encryption operation
     """
-    try:
-        # Calculate hash of the provided content
-        content_hash = hashlib.sha256(content.encode()).hexdigest()
-        
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            cur.execute('''
-            SELECT content_hash FROM copyright_protection WHERE content_id = %s
-            ''', (content_id,))
-            
-            result = cur.fetchone()
-            if result:
-                # Verify the hash matches
-                stored_hash = result[0]
-                return content_hash == stored_hash
-            
-            return False
-    except Exception as e:
-        log_security_event("CONTENT_VERIFICATION_ERROR", 
-                          str(e), 
-                          event_type="ERROR",
-                          metadata={"content_id": content_id})
-        return False
+    global db
+    
+    if not db:
+        return None
+    
+    # Hash the key for secure storage
+    key_signature = hashlib.sha256(key.encode()).hexdigest()
+    
+    # Create encryption record
+    encryption = DNAEncryption(
+        user_id=user_id,
+        input_length=input_length,
+        output_length=output_length,
+        key_signature=key_signature,
+        created_at=datetime.datetime.utcnow(),
+        is_decryption=is_decryption
+    )
+    
+    # Save to database
+    db.session.add(encryption)
+    db.session.commit()
+    
+    return encryption
 
-def get_security_events(limit: int = 100, event_type: str = None) -> List[Dict[str, Any]]:
+def get_security_events(limit: int = 100, user_id: Optional[int] = None) -> List[Dict[str, Any]]:
     """
-    Get recent security events.
+    Get recent security events
     
     Args:
-        limit (int): Maximum number of events to return
-        event_type (str): Filter by event type
+        limit: Maximum number of events to return
+        user_id: Filter by user ID
         
     Returns:
-        List[Dict]: List of security events
+        List[Dict]: List of security events as dictionaries
     """
-    try:
-        conn = get_db_connection()
-        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-            if event_type:
-                cur.execute('''
-                SELECT * FROM security_events 
-                WHERE event_type = %s
-                ORDER BY timestamp DESC LIMIT %s
-                ''', (event_type, limit))
-            else:
-                cur.execute('''
-                SELECT * FROM security_events 
-                ORDER BY timestamp DESC LIMIT %s
-                ''', (limit,))
-            
-            events = [dict(event) for event in cur.fetchall()]
-            return events
-    except Exception as e:
-        # Log but continue - this is a critical security function
-        print(f"ERROR retrieving security events: {e}")
+    global db
+    
+    if not db:
         return []
+    
+    # Query security events
+    query = SecurityEvent.query.order_by(SecurityEvent.timestamp.desc())
+    
+    if user_id:
+        query = query.filter_by(user_id=user_id)
+    
+    events = query.limit(limit).all()
+    
+    # Convert to dictionaries with DNA protection watermark
+    events_dict = []
+    for event in events:
+        # Parse metadata if present
+        metadata = json.loads(event.event_metadata) if event.event_metadata else {}
+        
+        # Create event dictionary
+        event_dict = {
+            "id": event.id,
+            "event_type": event.event_type,
+            "description": event.description,
+            "metadata": metadata,
+            "ip_address": event.ip_address,
+            "timestamp": event.timestamp.isoformat(),
+            "user_id": event.user_id,
+            "copyright": "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+        }
+        
+        events_dict.append(event_dict)
+    
+    return events_dict
 
 def get_dna_security_stats() -> Dict[str, Any]:
     """
-    Get statistics about DNA security operations.
+    Get DNA security statistics
     
     Returns:
-        Dict: Statistics about DNA security operations
+        Dict: Dictionary of DNA security statistics
     """
-    try:
-        conn = get_db_connection()
-        with conn.cursor() as cur:
-            # Get count of operations by type
-            cur.execute('''
-            SELECT operation_type, COUNT(*) as count
-            FROM dna_security_logs
-            GROUP BY operation_type
-            ''')
-            
-            by_type = {row[0]: row[1] for row in cur.fetchall()}
-            
-            # Get count by status
-            cur.execute('''
-            SELECT result_status, COUNT(*) as count
-            FROM dna_security_logs
-            GROUP BY result_status
-            ''')
-            
-            by_status = {row[0]: row[1] for row in cur.fetchall()}
-            
-            # Get total operations
-            cur.execute('SELECT COUNT(*) FROM dna_security_logs')
-            total = cur.fetchone()[0]
-            
-            return {
-                "total_operations": total,
-                "by_operation_type": by_type,
-                "by_status": by_status
-            }
-    except Exception as e:
-        log_security_event("DNA_STATS_ERROR", 
-                          str(e), 
-                          event_type="ERROR")
-        return {"error": "Failed to retrieve DNA security statistics"}
-
-# Initialize database when the module is imported
-if os.environ.get('DATABASE_URL'):
-    initialize_database()
+    global db
+    
+    if not db:
+        return {}
+    
+    # Count encryption and decryption operations
+    encryption_count = DNAEncryption.query.filter_by(is_decryption=False).count()
+    decryption_count = DNAEncryption.query.filter_by(is_decryption=True).count()
+    
+    # Count security events by type
+    security_events = {}
+    for event_type in ["INFO", "WARNING", "ERROR", "CRITICAL"]:
+        security_events[event_type] = SecurityEvent.query.filter_by(event_type=event_type).count()
+    
+    # Calculate average input and output lengths
+    encryption_records = DNAEncryption.query.all()
+    avg_input_length = sum(record.input_length for record in encryption_records) / max(len(encryption_records), 1)
+    avg_output_length = sum(record.output_length for record in encryption_records) / max(len(encryption_records), 1)
+    
+    # Return statistics with copyright
+    return {
+        "encryption_count": encryption_count,
+        "decryption_count": decryption_count,
+        "security_events": security_events,
+        "avg_input_length": avg_input_length,
+        "avg_output_length": avg_output_length,
+        "total_operations": encryption_count + decryption_count,
+        "last_updated": datetime.datetime.utcnow().isoformat(),
+        "copyright": "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    }

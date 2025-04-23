@@ -23,7 +23,8 @@ import base64
 import hashlib
 import secrets
 import qiskit
-from qiskit import QuantumCircuit, Aer, execute
+from qiskit import QuantumCircuit
+from qiskit_aer import Aer
 
 # Import utility modules
 from utils.database import (
@@ -491,8 +492,6 @@ def fig_to_base64(fig):
 
 # Run the application with advanced security protection
 if __name__ == '__main__':
-    # Initialize the database with self-repair and self-defense
-    initialize_database()
     
     # Log application startup for security monitoring
     log_security_event(
