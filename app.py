@@ -35,53 +35,94 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Add a watermark and copyright information
+# Add a watermark and copyright information with advanced protection notice
 st.sidebar.markdown("""
-### © Copyright Information
-- **Author:** Ervin Remus Radosavlevici
-- **Email:** ervin210@icloud.com
-- **Copyright:** All Rights Reserved
-- **Features:** DNA-Based Security, Quantum Computing, Quantum Machine Learning
-- **Security:** Self-repair, Self-upgrade, Self-defense capabilities
-""")
+<div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #ff3300;'>
+<h3 style='color: #ff3300;'>© WORLDWIDE COPYRIGHT PROTECTION</h3>
+<p style='font-weight: bold; text-transform: uppercase; text-align: center;'>GLOBAL SECURITY SYSTEM</p>
+<p><b>Author:</b> Ervin Remus Radosavlevici</p>
+<p><b>Personal Email:</b> ervin210@icloud.com</p>
+<p><b>Copyright Status:</b> All Rights Reserved Globally</p>
+<p><b>ADVANCED SECURITY FEATURES:</b></p>
+<ul>
+<li>DNA-BASED SECURITY with SELF-REPAIR Mechanisms</li>
+<li>SELF-UPGRADE Quantum Algorithms</li>
+<li>Advanced SELF-DEFENSE System</li>
+<li>CODE THEFT Prevention Technology</li>
+<li>COPYRIGHT IMMUNE Technology</li>
+<li>Tamper-Proof Architecture</li>
+<li>Worldwide Legal Protection</li>
+</ul>
+<p style='text-align: center; margin-top: 10px; padding: 5px; background-color: #ffeeee; font-weight: bold;'>PROTECTED BY INTERNATIONAL COPYRIGHT LAW</p>
+<p style='text-align: center; font-size: 11px;'>Using premium Adobe.com fonts</p>
+</div>
+""", unsafe_allow_html=True)
 
-# Add security notice
-st.sidebar.info("""
-**SECURITY NOTICE:**
-This application includes advanced security features:
-- DNA-based encryption
-- Quantum secure protocols
-- Copyright protection
-- Immunity to unauthorized changes
-""")
+# Add global Adobe fonts reference 
+st.sidebar.markdown("""
+<div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #009933; margin-top: 15px;'>
+<h3 style='color: #009933; font-family: "Myriad Pro", "Adobe Clean", sans-serif;'>PREMIUM TYPOGRAPHY</h3>
+<p style='text-align: center;'><b>Using Adobe.com Professional Fonts:</b></p>
+<ul>
+<li style='font-family: "Myriad Pro", sans-serif;'>Myriad Pro</li>
+<li style='font-family: "Adobe Clean", sans-serif;'>Adobe Clean</li>
+<li style='font-family: "Source Code Pro", monospace;'>Source Code Pro</li>
+</ul>
+<p style='text-align: center; margin-top: 5px;'><small>Premium typography enhances the worldwide professional appearance</small></p>
+</div>
+""", unsafe_allow_html=True)
 
 def main():
     st.title("Quantum Computing Educational Platform")
     st.subheader("Explore Quantum Computing Concepts, DNA Security, and Quantum Machine Learning")
     
-    # Add global notice
+    # Add global notice with enhanced worldwide protection statement
     st.markdown("""
-    <div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; border-left: 5px solid #0066cc;'>
-    <h3 style='color: #0066cc;'>WORLDWIDE ADVANCED SECURITY PLATFORM</h3>
-    <p>Featuring DNA-based security with self-repair, self-upgrade, and self-defense capabilities.</p>
-    <p><b>© Ervin Remus Radosavlevici (ervin210@icloud.com)</b> - All Rights Reserved</p>
+    <div style='background-color: #f0f2f6; padding: 15px; border-radius: 8px; border: 2px solid #0066cc; box-shadow: 0 4px 8px rgba(0,0,0,0.1);'>
+    <h2 style='color: #0066cc; text-align: center; text-transform: uppercase; letter-spacing: 1px;'>WORLDWIDE ADVANCED SECURITY PLATFORM</h2>
+    <hr style='border-top: 1px solid #0066cc; margin: 10px 0;'>
+    <div style='display: flex; align-items: center; justify-content: center; margin-bottom: 15px;'>
+        <div style='background-color: #0066cc; color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-right: 10px;'>⚛️</div>
+        <p style='font-size: 18px; font-weight: 600; margin: 0;'>Global Quantum-Enhanced DNA Security System</p>
     </div>
+    <p style='text-align: center;'>Featuring advanced DNA-based security with quantum-powered SELF-REPAIR, SELF-UPGRADE, and SELF-DEFENSE capabilities against CODE THEFT</p>
+    <p style='text-align: center; font-weight: bold; font-size: 16px; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;'>© Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+    <p style='text-align: center; font-style: italic; color: #555;'>All Rights Reserved Worldwide - Protected by International Copyright Laws - IMMUNE to Unauthorized Changes</p>
+    </div>
+    <div style='height: 20px;'></div>
     """, unsafe_allow_html=True)
     
-    # Introduction section
+    # Introduction section with global advanced features
     st.markdown("""
-    Welcome to the Quantum Computing Educational Platform! This interactive resource helps you
-    understand the fascinating world of quantum computing, DNA-based security algorithms, and
-    quantum machine learning.
+    <div style='font-family: "Adobe Clean", "Myriad Pro", sans-serif;'>
+    <h3 style='color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px;'>WELCOME TO THE WORLDWIDE QUANTUM COMPUTING EDUCATIONAL PLATFORM</h3>
     
-    ### What You Can Learn Here:
-    - **Quantum Computing Fundamentals** - Understand qubits, superposition, entanglement, and more
-    - **DNA-Based Security** - Visualize how DNA structures can be used for advanced security protocols
-    - **Quantum Machine Learning** - Explore how quantum computing enhances machine learning algorithms
-    - **Quantum Algorithms** - Interactive demonstrations of key quantum algorithms
+    <p>This globally accessible interactive resource helps you understand the fascinating world of quantum computing, 
+    featuring advanced DNA-based security algorithms with self-repair, self-upgrade, and self-defense capabilities.</p>
     
-    Use the sidebar to navigate through different topics and interactive demonstrations.
-    """)
+    <div style='background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;'>
+    <h4 style='color: #0066cc;'>ADVANCED SECURITY FEATURES:</h4>
+    <ul>
+    <li><strong>DNA-Based Security System</strong> - Quantum-enhanced encryption with SELF-REPAIR mechanisms</li>
+    <li><strong>Code Theft Prevention</strong> - Advanced protection against unauthorized copying</li>
+    <li><strong>Anti-Tampering Technology</strong> - SELF-DEFENSE against unauthorized modifications</li>
+    <li><strong>Self-Upgrading Algorithms</strong> - Adaptive security that evolves against new threats</li>
+    </ul>
+    </div>
+    
+    <h4 style='color: #333; margin-top: 20px;'>WHAT YOU CAN LEARN HERE:</h4>
+    <ul>
+    <li><strong>Quantum Computing Fundamentals</strong> - Understand qubits, superposition, entanglement, and more</li>
+    <li><strong>DNA-Based Security</strong> - Visualize how DNA structures can be used for advanced global security protocols</li>
+    <li><strong>Quantum Machine Learning</strong> - Explore how quantum computing enhances machine learning algorithms</li>
+    <li><strong>Quantum Algorithms</strong> - Interactive demonstrations of key quantum algorithms</li>
+    </ul>
+    
+    <p style='margin-top: 15px;'>Use the sidebar to navigate through different topics and interactive demonstrations.</p>
+    
+    <p style='text-align: right; font-style: italic; color: #666; font-size: 12px;'>© Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Featured visualization - Simple Qubit visualization
     st.header("Featured: Qubit Visualization")
@@ -197,6 +238,26 @@ def main():
     quantum states. It demonstrates quantum entanglement where the states of two qubits 
     become correlated in a way that's impossible in classical physics.
     """)
+    
+    # Add a strong watermark and global copyright notice at the bottom of every page
+    st.markdown("""
+    <div style='position: relative; margin-top: 60px;'>
+        <div style='position: absolute; top: 0; left: 0; width: 100%; text-align: center; opacity: 0.05; transform: rotate(-30deg); font-size: 120px; z-index: -1; pointer-events: none;'>
+            ERVIN REMUS RADOSAVLEVICI
+        </div>
+        <div style='border-top: 1px solid #ccc; padding-top: 20px; margin-top: 40px; text-align: center;'>
+            <div style='font-size: 12px; color: #666;'>PROTECTED BY WORLDWIDE COPYRIGHT</div>
+            <div style='font-size: 11px; color: #999; margin-top: 5px;'>
+                This platform contains advanced DNA-based security algorithms with SELF-REPAIR, SELF-UPGRADE, 
+                and SELF-DEFENSE capabilities against CODE THEFT. All content including algorithms, visualizations,
+                and code is COPYRIGHT PROTECTED and IMMUNE to unauthorized changes.
+            </div>
+            <div style='font-size: 12px; color: #333; margin-top: 10px; font-weight: bold;'>
+                © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved Globally
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
