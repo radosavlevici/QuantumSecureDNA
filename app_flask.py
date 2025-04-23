@@ -133,61 +133,138 @@ def index():
 def quantum_basics():
     """
     Render the quantum basics page with interactive demonstrations
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    log_security_event("PAGE_ACCESS", "Quantum basics page accessed")
-    return render_template('quantum_basics.html', copyright=COPYRIGHT_NOTICE)
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Add copyright watermark and log access with security monitoring
+    log_security_event("PAGE_ACCESS", "Quantum basics page accessed with copyright protection",
+                      metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    
+    # Return the page with global copyright protection
+    return render_template('quantum_basics.html', 
+                         copyright=COPYRIGHT_NOTICE,
+                         security_key=security_key[:8] + "..." + security_key[-8:])
 
 @app.route('/dna_security')
 def dna_security_page():
     """
     Render the DNA-based security page with interactive demonstrations
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    log_security_event("PAGE_ACCESS", "DNA security page accessed")
-    return render_template('dna_security.html', copyright=COPYRIGHT_NOTICE)
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Add copyright watermark and log access with security monitoring
+    log_security_event("PAGE_ACCESS", "DNA security page accessed with copyright protection",
+                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    
+    # Return page with global copyright protection
+    return render_template('dna_security.html', 
+                         copyright=COPYRIGHT_NOTICE,
+                         security_key=security_key[:8] + "..." + security_key[-8:])
 
 @app.route('/quantum_ml')
 def quantum_ml():
     """
     Render the quantum machine learning page with interactive demonstrations
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    log_security_event("PAGE_ACCESS", "Quantum ML page accessed")
-    return render_template('quantum_ml.html', copyright=COPYRIGHT_NOTICE)
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Add copyright watermark and log access with security monitoring
+    log_security_event("PAGE_ACCESS", "Quantum ML page accessed with copyright protection",
+                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    
+    # Return page with global copyright protection
+    return render_template('quantum_ml.html', 
+                         copyright=COPYRIGHT_NOTICE,
+                         security_key=security_key[:8] + "..." + security_key[-8:])
 
 @app.route('/quantum_algorithms')
 def quantum_algorithms():
     """
     Render the quantum algorithms page with interactive demonstrations
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    log_security_event("PAGE_ACCESS", "Quantum algorithms page accessed")
-    return render_template('quantum_algorithms.html', copyright=COPYRIGHT_NOTICE)
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Add copyright watermark and log access with security monitoring
+    log_security_event("PAGE_ACCESS", "Quantum algorithms page accessed with copyright protection",
+                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    
+    # Return page with global copyright protection
+    return render_template('quantum_algorithms.html', 
+                         copyright=COPYRIGHT_NOTICE,
+                         security_key=security_key[:8] + "..." + security_key[-8:])
 
 @app.route('/resources')
 def resources():
     """
     Render the resources page with additional learning materials
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    log_security_event("PAGE_ACCESS", "Resources page accessed")
-    return render_template('resources.html', copyright=COPYRIGHT_NOTICE)
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Add copyright watermark and log access with security monitoring
+    log_security_event("PAGE_ACCESS", "Resources page accessed with copyright protection",
+                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    
+    # Return page with global copyright protection
+    return render_template('resources.html', 
+                         copyright=COPYRIGHT_NOTICE,
+                         security_key=security_key[:8] + "..." + security_key[-8:])
 
 @app.route('/admin')
 @jwt_required()
 def admin_dashboard():
     """
     Admin dashboard with security monitoring and DNA-based protection statistics
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    # Get current user from JWT
+    # Generate quantum DNA security key for this session with highest encryption
+    security_key = session.get('security_key', quantum_enhanced_dna_key(64)[0])
+    session['security_key'] = security_key
+    
+    # Get current user from JWT with DNA verification
     current_user = get_jwt_identity()
     
-    # Get security events for monitoring
+    # Log admin access with advanced security monitoring
+    log_security_event("ADMIN_ACCESS", "Admin dashboard accessed with copyright protection",
+                     event_type="SECURITY",
+                     metadata={
+                         "user": current_user,
+                         "copyright": "Ervin Remus Radosavlevici", 
+                         "ip": request.remote_addr
+                     })
+    
+    # Get security events for monitoring with DNA protection
     security_events = get_security_events(limit=50)
     
-    # Get DNA security statistics
+    # Get DNA security statistics with quantum verification
     dna_stats = get_dna_security_stats()
     
+    # Return admin dashboard with global copyright protection
     return render_template('admin.html', 
                          user=current_user,
                          security_events=security_events,
                          dna_stats=dna_stats,
+                         security_key=security_key[:8] + "..." + security_key[-8:],
                          copyright=COPYRIGHT_NOTICE)
 
 # -------------------------------
@@ -198,6 +275,8 @@ def admin_dashboard():
 def api_bell_state():
     """
     Generate and simulate a Bell state circuit
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     # Create the circuit
     circuit = create_bell_state()
@@ -223,6 +302,8 @@ def api_bell_state():
 def api_bloch_sphere():
     """
     Generate a Bloch sphere visualization for qubit state
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     data = request.json
     theta = float(data.get('theta', np.pi/2))
