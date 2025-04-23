@@ -1,7 +1,8 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit import QuantumCircuit, execute
+from qiskit import QuantumCircuit
+from qiskit.tools.jupyter import execute
 from qiskit_aer import Aer
 from qiskit.visualization import plot_histogram, plot_bloch_multivector
 import sys

@@ -11,6 +11,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Add Adobe font integration
+st.markdown("""
+<link rel="stylesheet" href="https://use.typekit.net/uiy1pot.css">
+<style>
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'myriad-pro', sans-serif !important;
+        font-weight: 600 !important;
+    }
+    p, li, div {
+        font-family: 'adobe-clean', sans-serif !important;
+        font-weight: 400 !important;
+    }
+    .stButton>button {
+        font-family: 'adobe-clean', sans-serif !important;
+    }
+    .sidebar .sidebar-content {
+        font-family: 'adobe-clean', sans-serif !important;
+    }
+    code {
+        font-family: 'source-code-pro', monospace !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Add a watermark and copyright information
 st.sidebar.markdown("""
 ### © Copyright Information
