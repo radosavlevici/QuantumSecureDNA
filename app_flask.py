@@ -44,10 +44,46 @@ from utils.dna_security import (
     binary_to_text, text_to_binary, binary_to_dna, dna_to_binary
 )
 
-# Initialize Flask application with advanced security features
+# Initialize Flask application with DNA-based security features
 app = Flask(__name__, 
             static_folder='static',
             template_folder='templates')
+
+# Enable ultra-secure security headers
+@app.after_request
+def apply_security_headers(response):
+    """
+    Apply advanced security headers to prevent attacks and protect copyright
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Content Security Policy to prevent XSS and protect intellectual property
+    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    # Prevent content from being embedded in iframes (anti-theft)
+    response.headers['X-Frame-Options'] = 'DENY'
+    # Prevents browser from doing MIME sniffing
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    # XSS protection
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    # Add copyright and ownership headers
+    response.headers['X-Copyright'] = '© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.'
+    response.headers['X-Owner'] = 'Ervin Remus Radosavlevici (ervin210@icloud.com)'
+    # Add security verification key
+    response.headers['X-Security-Verification'] = hashlib.sha256(f"DNA-SECURITY-{request.remote_addr}".encode()).hexdigest()
+    
+    # Log unauthorized access attempts
+    if request.path.startswith('/_stcore') or 'streamlit' in request.path.lower():
+        log_security_event(
+            "SECURITY_BREACH_ATTEMPT", 
+            f"Unauthorized access attempt to legacy Streamlit routes: {request.path}",
+            metadata={
+                "ip": request.remote_addr,
+                "user_agent": request.user_agent.string,
+                "severity": "HIGH"
+            }
+        )
+    
+    return response
 
 # Configure application with security-enhanced settings
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', secrets.token_hex(32))

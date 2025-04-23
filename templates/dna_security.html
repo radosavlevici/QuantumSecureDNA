@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA-Based Security | © Ervin Remus Radosavlevici</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Meta tags for copyright protection -->
+    <meta name="author" content="Ervin Remus Radosavlevici">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.">
+    <meta name="description" content="DNA-Based Security with Self-Repair, Self-Upgrade, and Self-Defense Capabilities">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Quantum <span>DNA</span> Platform</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/quantum_basics">Quantum Basics</a></li>
+                <li><a href="/quantum_algorithms">Quantum Algorithms</a></li>
+                <li><a href="/dna_security" class="active">DNA Security</a></li>
+                <li><a href="/quantum_ml">Quantum ML</a></li>
+                <li><a href="/resources">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>DNA-Based Security</h2>
+            <p>Explore quantum-enhanced DNA encryption with self-repair capabilities</p>
+        </section>
+
+        <section class="dna-security-intro">
+            <h3>What is DNA-Based Security?</h3>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>
+                        DNA-based security is a cutting-edge approach that uses principles from genetics and quantum computing to create highly secure encryption systems. By encoding data in DNA-like sequences and applying quantum transformations, we can achieve unprecedented levels of security.
+                    </p>
+                    <p>
+                        Our platform features advanced DNA-based security with self-repair, self-upgrade, and self-defense capabilities, ensuring comprehensive protection against unauthorized access and modification.
+                    </p>
+                </div>
+                <div class="content-visual">
+                    <div class="dna-visual" id="dna-animation"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dna-encryption">
+            <h3>DNA Encryption Demo</h3>
+            <div class="interactive-demo">
+                <div class="demo-controls">
+                    <h4>Try DNA Encryption</h4>
+                    <div class="form-group">
+                        <label for="demo-input">Text to Encrypt:</label>
+                        <input type="text" id="demo-input" placeholder="Enter text to encrypt">
+                    </div>
+                    <div class="form-group">
+                        <label for="demo-key">Encryption Key (optional):</label>
+                        <input type="text" id="demo-key" placeholder="Enter encryption key or leave for auto-generation">
+                    </div>
+                    <button id="encrypt-btn" class="btn primary">Encrypt</button>
+                    <button id="decrypt-btn" class="btn secondary" disabled>Decrypt</button>
+                </div>
+                <div class="demo-results">
+                    <div class="result-container">
+                        <h4>DNA Sequence</h4>
+                        <div id="dna-result" class="result-box">
+                            <p class="placeholder">Encrypted DNA sequence will appear here</p>
+                        </div>
+                    </div>
+                    <div class="result-container">
+                        <h4>Visualized DNA</h4>
+                        <div id="dna-visual" class="result-box visual-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dna-security-features">
+            <h3>Advanced Security Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Self-Repair</h4>
+                    <p>Automatically detects and repairs any unauthorized modifications to protected content</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⬆️</div>
+                    <h4>Self-Upgrade</h4>
+                    <p>Continuously evolves security capabilities to address emerging threats</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h4>Self-Defense</h4>
+                    <p>Actively responds to intrusion attempts with countermeasures</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧬</div>
+                    <h4>DNA Watermarking</h4>
+                    <p>Embeds undetectable copyright signatures throughout content</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="technical-details">
+            <h3>Technical Details</h3>
+            <div class="accordions">
+                <div class="accordion">
+                    <div class="accordion-header">DNA Base Encoding</div>
+                    <div class="accordion-content">
+                        <p>
+                            DNA-based encryption uses the four nucleotide bases (A, T, G, C) to encode binary data. 
+                            Each base pair can represent 2 bits of information, making it an efficient encoding mechanism.
+                            Our system extends this with quantum superposition to create quantum-resistant encryption.
+                        </p>
+                        <div class="code-sample">
+                            <pre>
+A → 00
+T → 01
+G → 10
+C → 11
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">Quantum Enhancement</div>
+                    <div class="accordion-content">
+                        <p>
+                            We apply quantum transformations to the DNA-encoded data using principles from quantum 
+                            computing. This creates a security layer that is resistant to attacks from both classical 
+                            and quantum computers.
+                        </p>
+                        <div class="code-sample">
+                            <pre>
+// Simplified quantum enhancement
+function quantumEnhance(dnaSequence, key) {
+    // Apply Hadamard gates to create superposition
+    let superpositionState = applyHadamard(dnaSequence);
+    
+    // Entangle with key using CNOT gates
+    let entangledState = applyCNOT(superpositionState, key);
+    
+    // Apply phase rotation based on key
+    return applyPhaseRotation(entangledState, key);
+}
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">Self-Repair Mechanism</div>
+                    <div class="accordion-content">
+                        <p>
+                            Our self-repair system uses periodic integrity checks to detect unauthorized modifications.
+                            When a violation is detected, the system automatically restores the original copyright-protected content.
+                        </p>
+                        <div class="code-sample">
+                            <pre>
+// Self-repair system (simplified)
+function selfRepairSystem() {
+    setInterval(() => {
+        // Check critical elements
+        document.querySelectorAll('[data-copyright]').forEach(element => {
+            if (!element.textContent.includes(author)) {
+                console.warn("Copyright violation detected. Self-repairing...");
+                element.innerHTML = originalContent[element.id];
+            }
+        });
+    }, 3000); // Check every 3 seconds
+}
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="copyright-notice">
+            <h3>Copyright Protection</h3>
+            <p>{{ copyright|safe }}</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+            </div>
+            <div class="footer-security">
+                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
+                <p>Enhanced with DNA-based quantum security</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript includes for animations and interactive elements -->
+    <script src="{{ url_for('static', filename='js/security.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
+    
+    <!-- DNA encryption demo functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DNA Encryption demo
+            const demoInput = document.getElementById('demo-input');
+            const demoKey = document.getElementById('demo-key');
+            const encryptBtn = document.getElementById('encrypt-btn');
+            const decryptBtn = document.getElementById('decrypt-btn');
+            const dnaResult = document.getElementById('dna-result');
+            const dnaVisual = document.getElementById('dna-visual');
+            
+            let encryptedData = null;
+            let encryptionKey = null;
+            
+            // DNA base colors for visualization
+            const baseColors = {
+                'A': '#ff5722',
+                'T': '#03a9f4',
+                'G': '#4caf50',
+                'C': '#9c27b0'
+            };
+            
+            // Function to encrypt text to DNA
+            function encryptToDNA(text, key) {
+                if (!key) {
+                    key = generateRandomKey(16);
+                }
+                
+                // Convert text to binary
+                let binary = '';
+                for (let i = 0; i < text.length; i++) {
+                    const charCode = text.charCodeAt(i);
+                    binary += charCode.toString(2).padStart(8, '0');
+                }
+                
+                // Convert binary to DNA bases
+                let dna = '';
+                for (let i = 0; i < binary.length; i += 2) {
+                    const bits = binary.substr(i, 2);
+                    switch (bits) {
+                        case '00': dna += 'A'; break;
+                        case '01': dna += 'T'; break;
+                        case '10': dna += 'G'; break;
+                        case '11': dna += 'C'; break;
+                        default: dna += 'A';
+                    }
+                }
+                
+                // Apply the key (simplified version)
+                let encrypted = '';
+                for (let i = 0; i < dna.length; i++) {
+                    const keyChar = key.charCodeAt(i % key.length) % 4;
+                    const baseIndex = 'ATGC'.indexOf(dna[i]);
+                    const newIndex = (baseIndex + keyChar) % 4;
+                    encrypted += 'ATGC'[newIndex];
+                }
+                
+                return {
+                    dna: encrypted,
+                    key: key
+                };
+            }
+            
+            // Function to decrypt DNA to text
+            function decryptFromDNA(encrypted, key) {
+                // Reverse the key application
+                let decrypted = '';
+                for (let i = 0; i < encrypted.length; i++) {
+                    const keyChar = key.charCodeAt(i % key.length) % 4;
+                    const baseIndex = 'ATGC'.indexOf(encrypted[i]);
+                    const originalIndex = (baseIndex - keyChar + 4) % 4;
+                    decrypted += 'ATGC'[originalIndex];
+                }
+                
+                // Convert DNA to binary
+                let binary = '';
+                for (let i = 0; i < decrypted.length; i++) {
+                    switch (decrypted[i]) {
+                        case 'A': binary += '00'; break;
+                        case 'T': binary += '01'; break;
+                        case 'G': binary += '10'; break;
+                        case 'C': binary += '11'; break;
+                    }
+                }
+                
+                // Convert binary to text
+                let text = '';
+                for (let i = 0; i < binary.length; i += 8) {
+                    const byte = binary.substr(i, 8);
+                    text += String.fromCharCode(parseInt(byte, 2));
+                }
+                
+                return text;
+            }
+            
+            // Generate random key
+            function generateRandomKey(length) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let key = '';
+                for (let i = 0; i < length; i++) {
+                    key += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return key;
+            }
+            
+            // Visualize DNA sequence
+            function visualizeDNA(dna) {
+                dnaVisual.innerHTML = '';
+                
+                // Create a canvas to visualize the DNA
+                const canvas = document.createElement('canvas');
+                canvas.width = 300;
+                canvas.height = 200;
+                dnaVisual.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#f5f5f5';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw the double helix
+                const baseHeight = 10;
+                const baseWidth = 20;
+                const helix = { amplitude: 50, frequency: 0.02 };
+                
+                for (let i = 0; i < Math.min(dna.length, 30); i++) {
+                    const base = dna[i];
+                    const x = i * baseWidth;
+                    const y1 = canvas.height/2 + Math.sin(x * helix.frequency) * helix.amplitude;
+                    const y2 = canvas.height/2 - Math.sin(x * helix.frequency) * helix.amplitude;
+                    
+                    // Draw base
+                    ctx.fillStyle = baseColors[base];
+                    ctx.fillRect(x, y1 - baseHeight/2, baseWidth-1, baseHeight);
+                    
+                    // Draw complementary base
+                    let complementary;
+                    switch(base) {
+                        case 'A': complementary = 'T'; break;
+                        case 'T': complementary = 'A'; break;
+                        case 'G': complementary = 'C'; break;
+                        case 'C': complementary = 'G'; break;
+                    }
+                    ctx.fillStyle = baseColors[complementary];
+                    ctx.fillRect(x, y2 - baseHeight/2, baseWidth-1, baseHeight);
+                    
+                    // Draw connecting line
+                    ctx.strokeStyle = '#ccc';
+                    ctx.beginPath();
+                    ctx.moveTo(x + baseWidth/2, y1);
+                    ctx.lineTo(x + baseWidth/2, y2);
+                    ctx.stroke();
+                }
+            }
+            
+            // Event listeners
+            encryptBtn.addEventListener('click', function() {
+                const text = demoInput.value.trim();
+                const key = demoKey.value.trim() || null;
+                
+                if (text) {
+                    const result = encryptToDNA(text, key);
+                    encryptedData = result.dna;
+                    encryptionKey = result.key;
+                    
+                    // Display the result
+                    dnaResult.innerHTML = `
+                        <p class="dna-sequence">${encryptedData}</p>
+                        <p class="dna-key">Key: ${encryptionKey}</p>
+                    `;
+                    
+                    // Visualize the DNA
+                    visualizeDNA(encryptedData);
+                    
+                    // Enable decrypt button
+                    decryptBtn.disabled = false;
+                    
+                    // Update the key input if it was auto-generated
+                    if (!demoKey.value.trim()) {
+                        demoKey.value = encryptionKey;
+                    }
+                }
+            });
+            
+            decryptBtn.addEventListener('click', function() {
+                if (encryptedData && encryptionKey) {
+                    const decrypted = decryptFromDNA(encryptedData, encryptionKey);
+                    
+                    // Display the decrypted text
+                    dnaResult.innerHTML = `
+                        <p class="dna-sequence">${encryptedData}</p>
+                        <p class="dna-key">Key: ${encryptionKey}</p>
+                        <p class="dna-decrypted">Decrypted: ${decrypted}</p>
+                    `;
+                }
+            });
+            
+            // Initialize the DNA animation
+            const dnaAnimation = document.getElementById('dna-animation');
+            if (dnaAnimation) {
+                // Create a simple DNA animation
+                const dnaCanvas = document.createElement('canvas');
+                dnaCanvas.width = 300;
+                dnaCanvas.height = 200;
+                dnaAnimation.appendChild(dnaCanvas);
+                
+                const dnaCtx = dnaCanvas.getContext('2d');
+                let animationFrame = 0;
+                
+                function animateDNA() {
+                    dnaCtx.fillStyle = '#ffffff';
+                    dnaCtx.fillRect(0, 0, dnaCanvas.width, dnaCanvas.height);
+                    
+                    const helix = { amplitude: 50, frequency: 0.02 };
+                    const baseColors = ['#ff5722', '#03a9f4', '#4caf50', '#9c27b0'];
+                    
+                    for (let i = 0; i < 40; i++) {
+                        const x = i * 10 - (animationFrame % 10);
+                        const y1 = dnaCanvas.height/2 + Math.sin((x + animationFrame) * helix.frequency) * helix.amplitude;
+                        const y2 = dnaCanvas.height/2 - Math.sin((x + animationFrame) * helix.frequency) * helix.amplitude;
+                        
+                        dnaCtx.fillStyle = baseColors[i % 4];
+                        dnaCtx.fillRect(x, y1 - 5, 8, 10);
+                        
+                        dnaCtx.fillStyle = baseColors[(i + 2) % 4];
+                        dnaCtx.fillRect(x, y2 - 5, 8, 10);
+                        
+                        dnaCtx.strokeStyle = '#ccc';
+                        dnaCtx.beginPath();
+                        dnaCtx.moveTo(x + 4, y1);
+                        dnaCtx.lineTo(x + 4, y2);
+                        dnaCtx.stroke();
+                    }
+                    
+                    animationFrame++;
+                    requestAnimationFrame(animateDNA);
+                }
+                
+                animateDNA();
+            }
+        });
+    </script>
+    
+    <!-- Self-healing security system with copyright protection -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize security system with DNA-based protection
+            if (window.initDNASecurity) {
+                window.initDNASecurity({
+                    author: "Ervin Remus Radosavlevici",
+                    email: "ervin210@icloud.com",
+                    securityKey: "{{ security_key }}"
+                });
+            }
+        });
+    </script>
+</body>
+</html>

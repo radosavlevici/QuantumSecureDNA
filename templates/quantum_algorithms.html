@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Algorithms | © Ervin Remus Radosavlevici</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Meta tags for copyright protection -->
+    <meta name="author" content="Ervin Remus Radosavlevici">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.">
+    <meta name="description" content="Quantum Algorithms with DNA-Based Security and Self-Repair Capabilities">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Quantum <span>DNA</span> Platform</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/quantum_basics">Quantum Basics</a></li>
+                <li><a href="/quantum_algorithms" class="active">Quantum Algorithms</a></li>
+                <li><a href="/dna_security">DNA Security</a></li>
+                <li><a href="/quantum_ml">Quantum ML</a></li>
+                <li><a href="/resources">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>Quantum Algorithms</h2>
+            <p>Explore powerful quantum algorithms that provide computational advantages</p>
+        </section>
+
+        <section class="algorithm-intro">
+            <h3>Quantum Computational Advantage</h3>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p>
+                        Quantum algorithms leverage the principles of quantum mechanics to solve certain problems more efficiently than classical algorithms. These algorithms can provide exponential speedups for specific computational tasks.
+                    </p>
+                    <p>
+                        Our platform features interactive demonstrations of key quantum algorithms, including Grover's search algorithm, Shor's factoring algorithm, and quantum phase estimation.
+                    </p>
+                </div>
+                <div class="content-visual">
+                    <div class="quantum-visual" id="algorithm-visual"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="algorithm-demos">
+            <h3>Interactive Algorithm Demos</h3>
+            
+            <div class="algorithm-section">
+                <h4>Grover's Search Algorithm</h4>
+                <div class="algorithm-description">
+                    <p>
+                        Grover's algorithm provides a quadratic speedup for unstructured search problems, finding a marked item in an unsorted database of N items in approximately √N steps instead of the N steps required by classical algorithms.
+                    </p>
+                </div>
+                <div class="interactive-demo">
+                    <div class="demo-controls">
+                        <div class="form-group">
+                            <label for="grover-bits">Number of qubits:</label>
+                            <select id="grover-bits">
+                                <option value="2">2 qubits (4 items)</option>
+                                <option value="3">3 qubits (8 items)</option>
+                                <option value="4">4 qubits (16 items)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="grover-target">Target state:</label>
+                            <select id="grover-target">
+                                <option value="00">|00⟩</option>
+                                <option value="01">|01⟩</option>
+                                <option value="10">|10⟩</option>
+                                <option value="11">|11⟩</option>
+                            </select>
+                        </div>
+                        <button id="grover-run" class="btn primary">Run Algorithm</button>
+                    </div>
+                    <div class="demo-results">
+                        <div class="result-container">
+                            <h5>Circuit Diagram</h5>
+                            <div id="grover-circuit" class="circuit-display"></div>
+                        </div>
+                        <div class="result-container">
+                            <h5>Measurement Results</h5>
+                            <div id="grover-results" class="result-display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="algorithm-section">
+                <h4>Quantum Fourier Transform</h4>
+                <div class="algorithm-description">
+                    <p>
+                        The Quantum Fourier Transform (QFT) is a fundamental building block for many quantum algorithms, including Shor's algorithm and quantum phase estimation. It performs a Fourier transform on quantum amplitudes exponentially faster than classical Fast Fourier Transform.
+                    </p>
+                </div>
+                <div class="interactive-demo">
+                    <div class="demo-controls">
+                        <div class="form-group">
+                            <label for="qft-bits">Number of qubits:</label>
+                            <select id="qft-bits">
+                                <option value="2">2 qubits</option>
+                                <option value="3">3 qubits</option>
+                                <option value="4">4 qubits</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="qft-input">Input state:</label>
+                            <select id="qft-input">
+                                <option value="uniform">Uniform superposition</option>
+                                <option value="computational">|001⟩ (Computational basis)</option>
+                                <option value="custom">Custom state</option>
+                            </select>
+                        </div>
+                        <button id="qft-run" class="btn primary">Run QFT</button>
+                    </div>
+                    <div class="demo-results">
+                        <div class="result-container">
+                            <h5>QFT Circuit</h5>
+                            <div id="qft-circuit" class="circuit-display"></div>
+                        </div>
+                        <div class="result-container">
+                            <h5>State Visualization</h5>
+                            <div id="qft-state" class="state-display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="algorithm-section">
+                <h4>Quantum Phase Estimation</h4>
+                <div class="algorithm-description">
+                    <p>
+                        Quantum Phase Estimation (QPE) determines the eigenphase of a unitary operator, with applications in quantum chemistry, optimization, and factoring algorithms.
+                    </p>
+                </div>
+                <div class="interactive-demo">
+                    <div class="demo-controls">
+                        <div class="form-group">
+                            <label for="qpe-precision">Precision qubits:</label>
+                            <select id="qpe-precision">
+                                <option value="3">3 qubits</option>
+                                <option value="4">4 qubits</option>
+                                <option value="5">5 qubits</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="qpe-phase">Target phase (θ):</label>
+                            <select id="qpe-phase">
+                                <option value="0.25">θ = 0.25 (π/2)</option>
+                                <option value="0.125">θ = 0.125 (π/4)</option>
+                                <option value="0.375">θ = 0.375 (3π/4)</option>
+                            </select>
+                        </div>
+                        <button id="qpe-run" class="btn primary">Run Estimation</button>
+                    </div>
+                    <div class="demo-results">
+                        <div class="result-container">
+                            <h5>QPE Circuit</h5>
+                            <div id="qpe-circuit" class="circuit-display"></div>
+                        </div>
+                        <div class="result-container">
+                            <h5>Estimated Phase</h5>
+                            <div id="qpe-result" class="result-display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="algorithm-comparison">
+            <h3>Quantum vs. Classical Complexity</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Problem</th>
+                            <th>Classical Complexity</th>
+                            <th>Quantum Complexity</th>
+                            <th>Speedup</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unstructured Search</td>
+                            <td>O(N)</td>
+                            <td>O(√N) (Grover)</td>
+                            <td>Quadratic</td>
+                        </tr>
+                        <tr>
+                            <td>Integer Factorization</td>
+                            <td>O(e^(log N)^(1/3))</td>
+                            <td>O((log N)^3) (Shor)</td>
+                            <td>Exponential</td>
+                        </tr>
+                        <tr>
+                            <td>Discrete Logarithm</td>
+                            <td>O(√N)</td>
+                            <td>O((log N)^3) (Shor)</td>
+                            <td>Exponential</td>
+                        </tr>
+                        <tr>
+                            <td>Quantum Simulation</td>
+                            <td>O(2^N)</td>
+                            <td>O(N^k)</td>
+                            <td>Exponential</td>
+                        </tr>
+                        <tr>
+                            <td>Linear Systems</td>
+                            <td>O(N^3)</td>
+                            <td>O(log N) (HHL)</td>
+                            <td>Exponential</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="technical-details">
+            <h3>Technical Implementation Details</h3>
+            <div class="accordions">
+                <div class="accordion">
+                    <div class="accordion-header">Grover's Algorithm Implementation</div>
+                    <div class="accordion-content">
+                        <p>
+                            Grover's algorithm consists of repeated applications of the Grover operator, 
+                            which includes an oracle that marks the target state and a diffusion operator 
+                            that amplifies the amplitude of the marked state.
+                        </p>
+                        <div class="code-sample">
+                            <pre>
+# Simplified Grover implementation
+def create_grover_circuit(marked_state, n_qubits):
+    # Create circuit with n qubits
+    qc = QuantumCircuit(n_qubits)
+    
+    # Apply H-gates to put qubits in superposition
+    for qubit in range(n_qubits):
+        qc.h(qubit)
+    
+    # Number of Grover iterations
+    iterations = int(np.pi/4 * np.sqrt(2**n_qubits))
+    
+    for _ in range(iterations):
+        # Oracle - marks the target state
+        qc.append(create_oracle(marked_state, n_qubits), range(n_qubits))
+        
+        # Diffusion operator - amplifies marked state
+        qc.append(create_diffusion(n_qubits), range(n_qubits))
+    
+    # Measure all qubits
+    qc.measure_all()
+    
+    return qc
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">Quantum Fourier Transform Circuit</div>
+                    <div class="accordion-content">
+                        <p>
+                            The QFT implementation requires Hadamard gates and controlled rotation gates.
+                            For an n-qubit system, it transforms the state into a superposition of basis states
+                            with complex phases determined by the Fourier transform.
+                        </p>
+                        <div class="code-sample">
+                            <pre>
+# Simplified QFT implementation
+def create_qft_circuit(n_qubits):
+    # Create a quantum circuit with n qubits
+    qc = QuantumCircuit(n_qubits)
+    
+    # Implement QFT
+    for i in range(n_qubits):
+        qc.h(i)
+        
+        for j in range(i+1, n_qubits):
+            # Apply controlled phase rotation
+            qc.cp(2*np.pi/2**(j-i+1), j, i)
+    
+    # Reverse the order of qubits
+    for i in range(n_qubits//2):
+        qc.swap(i, n_qubits-i-1)
+        
+    return qc
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">Quantum Phase Estimation</div>
+                    <div class="accordion-content">
+                        <p>
+                            QPE uses the inverse QFT to extract the phase information from a unitary operator.
+                            It requires precision qubits (for the binary representation of the phase) and a 
+                            target qubit (eigenstate of the unitary).
+                        </p>
+                        <div class="code-sample">
+                            <pre>
+# Simplified QPE implementation
+def quantum_phase_estimation(unitary, n_precision, target_state):
+    # Create circuit with precision qubits + 1 target qubit
+    qc = QuantumCircuit(n_precision + 1, n_precision)
+    
+    # Prepare the target state
+    qc.initialize(target_state, n_precision)
+    
+    # Put precision qubits in superposition
+    for i in range(n_precision):
+        qc.h(i)
+    
+    # Apply controlled unitary operations
+    for i in range(n_precision):
+        # Apply unitary 2^i times controlled on the i-th qubit
+        qc.append(controlled_unitary(unitary, 2**i), 
+                 [i] + [n_precision])
+    
+    # Apply inverse QFT to precision qubits
+    qc.append(inverse_qft(n_precision), range(n_precision))
+    
+    # Measure precision qubits
+    qc.measure(range(n_precision), range(n_precision))
+    
+    return qc
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="copyright-notice">
+            <h3>Copyright Protection</h3>
+            <p>{{ copyright|safe }}</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+            </div>
+            <div class="footer-security">
+                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
+                <p>Enhanced with DNA-based quantum security</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript includes for animations and interactive elements -->
+    <script src="{{ url_for('static', filename='js/security.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
+    
+    <!-- Quantum algorithm specific scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize algorithm visualizations
+            initAlgorithmVisuals();
+            
+            // Set up Grover's algorithm demo
+            setupGroverDemo();
+            
+            // Set up QFT demo
+            setupQFTDemo();
+            
+            // Set up QPE demo
+            setupQPEDemo();
+            
+            // Initialize security system with DNA-based protection
+            if (window.initDNASecurity) {
+                window.initDNASecurity({
+                    author: "Ervin Remus Radosavlevici",
+                    email: "ervin210@icloud.com",
+                    securityKey: "{{ security_key }}"
+                });
+            }
+        });
+        
+        // Initialize algorithm visualizations
+        function initAlgorithmVisuals() {
+            const algorithmVisual = document.getElementById('algorithm-visual');
+            if (algorithmVisual) {
+                // Create a canvas for quantum circuit visualization
+                const canvas = document.createElement('canvas');
+                canvas.width = 300;
+                canvas.height = 200;
+                algorithmVisual.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                drawQuantumCircuit(ctx, canvas.width, canvas.height);
+            }
+        }
+        
+        // Draw a simple quantum circuit visualization
+        function drawQuantumCircuit(ctx, width, height) {
+            // Background
+            ctx.fillStyle = '#f0f8ff';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Draw qubit lines
+            const qubits = 4;
+            const lineSpacing = height / (qubits + 1);
+            
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            for (let i = 0; i < qubits; i++) {
+                const y = (i + 1) * lineSpacing;
+                
+                // Draw qubit line
+                ctx.beginPath();
+                ctx.moveTo(20, y);
+                ctx.lineTo(width - 20, y);
+                ctx.stroke();
+                
+                // Draw qubit label
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.fillText(`q${i}`, 5, y + 5);
+            }
+            
+            // Draw gates (simplified representation)
+            const gateWidth = 30;
+            const gateHeight = 30;
+            
+            // H gates at the beginning
+            for (let i = 0; i < qubits; i++) {
+                const y = (i + 1) * lineSpacing - gateHeight/2;
+                drawGate(ctx, 50, y, gateWidth, gateHeight, 'H', '#3f51b5');
+            }
+            
+            // Oracle (controlled-Z)
+            drawGate(ctx, 120, 1 * lineSpacing - gateHeight/2, gateWidth, gateHeight, 'Z', '#ff5722');
+            drawConnector(ctx, 120 + gateWidth/2, 1 * lineSpacing, 120 + gateWidth/2, 3 * lineSpacing);
+            drawControlPoint(ctx, 120 + gateWidth/2, 3 * lineSpacing);
+            
+            // Controlled-NOT gates
+            drawGate(ctx, 180, 2 * lineSpacing - gateHeight/2, gateWidth, gateHeight, 'X', '#4caf50');
+            drawConnector(ctx, 180 + gateWidth/2, 2 * lineSpacing, 180 + gateWidth/2, 4 * lineSpacing);
+            drawControlPoint(ctx, 180 + gateWidth/2, 4 * lineSpacing);
+            
+            // Phase gates
+            drawGate(ctx, 230, 1 * lineSpacing - gateHeight/2, gateWidth, gateHeight, 'P', '#9c27b0');
+            drawGate(ctx, 230, 3 * lineSpacing - gateHeight/2, gateWidth, gateHeight, 'P', '#9c27b0');
+            
+            // H gates at the end
+            for (let i = 0; i < qubits; i++) {
+                const y = (i + 1) * lineSpacing - gateHeight/2;
+                drawGate(ctx, 280, y, gateWidth, gateHeight, 'H', '#3f51b5');
+            }
+            
+            // Animate the state evolution
+            animateStateEvolution(ctx, width, height);
+        }
+        
+        // Draw a quantum gate
+        function drawGate(ctx, x, y, width, height, label, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height);
+            
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(label, x + width/2, y + height/2);
+        }
+        
+        // Draw a connector line between gates
+        function drawConnector(ctx, x1, y1, x2, y2) {
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+        
+        // Draw a control point
+        function drawControlPoint(ctx, x, y) {
+            ctx.fillStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        // Animate the state evolution (simplified)
+        function animateStateEvolution(ctx, width, height) {
+            // Add some animation of qubit state evolution using requestAnimationFrame
+            let frame = 0;
+            
+            function animate() {
+                frame++;
+                
+                // Draw animated wave representing quantum state
+                const wavesY = height - 30;
+                ctx.fillStyle = '#f0f8ff';
+                ctx.fillRect(0, wavesY - 20, width, 40);
+                
+                ctx.strokeStyle = '#2196f3';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                for (let x = 0; x < width; x++) {
+                    const y = wavesY + 10 * Math.sin((x + frame) / 15) * Math.sin(frame / 30);
+                    if (x === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                
+                ctx.stroke();
+                
+                // Continue animation
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+        
+        // Set up Grover's algorithm demo
+        function setupGroverDemo() {
+            const groverRun = document.getElementById('grover-run');
+            const groverBits = document.getElementById('grover-bits');
+            const groverTarget = document.getElementById('grover-target');
+            const groverCircuit = document.getElementById('grover-circuit');
+            const groverResults = document.getElementById('grover-results');
+            
+            if (groverRun) {
+                groverRun.addEventListener('click', function() {
+                    // Show loading state
+                    groverCircuit.innerHTML = '<div class="loading">Generating circuit...</div>';
+                    groverResults.innerHTML = '<div class="loading">Running simulation...</div>';
+                    
+                    // Simulate delay for computation
+                    setTimeout(function() {
+                        const bits = parseInt(groverBits.value);
+                        const target = groverTarget.value;
+                        
+                        // Create and display the Grover circuit visualization
+                        displayGroverCircuit(groverCircuit, bits);
+                        
+                        // Display measurement results
+                        displayGroverResults(groverResults, bits, target);
+                    }, 1000);
+                });
+                
+                // Update target selector when bits change
+                groverBits.addEventListener('change', function() {
+                    const bits = parseInt(groverBits.value);
+                    updateTargetOptions(groverTarget, bits);
+                });
+                
+                // Initial update of target options
+                updateTargetOptions(groverTarget, 2);
+            }
+        }
+        
+        // Update target state options based on number of qubits
+        function updateTargetOptions(targetSelect, bits) {
+            // Clear existing options
+            targetSelect.innerHTML = '';
+            
+            // Add options based on number of qubits
+            const states = Math.pow(2, bits);
+            for (let i = 0; i < states; i++) {
+                const binaryState = i.toString(2).padStart(bits, '0');
+                const option = document.createElement('option');
+                option.value = binaryState;
+                option.textContent = `|${binaryState}⟩`;
+                targetSelect.appendChild(option);
+            }
+        }
+        
+        // Display Grover circuit visualization
+        function displayGroverCircuit(container, bits) {
+            // Create a canvas for the circuit
+            container.innerHTML = '';
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 50 * bits + 50;
+            container.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw qubit lines
+            const lineSpacing = canvas.height / (bits + 1);
+            
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            for (let i = 0; i < bits; i++) {
+                const y = (i + 1) * lineSpacing;
+                
+                // Draw qubit line
+                ctx.beginPath();
+                ctx.moveTo(20, y);
+                ctx.lineTo(canvas.width - 20, y);
+                ctx.stroke();
+                
+                // Draw qubit label
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.fillText(`q${i}`, 5, y + 5);
+                
+                // Draw initial H gate
+                drawGate(ctx, 50, y - 15, 30, 30, 'H', '#3f51b5');
+            }
+            
+            // Draw oracle (simplified)
+            const oracleX = 120;
+            drawGate(ctx, oracleX, lineSpacing * (bits/2) - 25, 60, 50, 'Oracle', '#ff5722');
+            
+            // Draw connectors from qubits to oracle
+            for (let i = 0; i < bits; i++) {
+                const y = (i + 1) * lineSpacing;
+                drawConnector(ctx, oracleX + 30, lineSpacing * (bits/2), oracleX + 30, y);
+            }
+            
+            // Draw diffusion operator (simplified)
+            const diffusionX = 220;
+            drawGate(ctx, diffusionX, lineSpacing * (bits/2) - 25, 60, 50, 'Diffusion', '#4caf50');
+            
+            // Draw connectors from qubits to diffusion
+            for (let i = 0; i < bits; i++) {
+                const y = (i + 1) * lineSpacing;
+                drawConnector(ctx, diffusionX + 30, lineSpacing * (bits/2), diffusionX + 30, y);
+            }
+            
+            // Draw measurement
+            for (let i = 0; i < bits; i++) {
+                const y = (i + 1) * lineSpacing;
+                drawMeasurement(ctx, 320, y - 15, 40, 30, '#9e9e9e');
+            }
+        }
+        
+        // Draw a measurement box
+        function drawMeasurement(ctx, x, y, width, height, color) {
+            // Draw meter symbol
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height);
+            
+            ctx.strokeStyle = 'white';
+            ctx.beginPath();
+            ctx.moveTo(x + 10, y + height - 10);
+            ctx.lineTo(x + 10, y + 10);
+            ctx.lineTo(x + width - 10, y + height/2);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        
+        // Display Grover algorithm results
+        function displayGroverResults(container, bits, target) {
+            container.innerHTML = '';
+            
+            // Create result visualization
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 200;
+            container.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Title
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Measurement Probabilities', canvas.width/2, 30);
+            
+            // Draw probability bars
+            const states = Math.pow(2, bits);
+            const barWidth = (canvas.width - 60) / states;
+            const maxBarHeight = 120;
+            
+            // Generate a probability distribution where the target state has high probability
+            const probabilities = [];
+            for (let i = 0; i < states; i++) {
+                const binaryState = i.toString(2).padStart(bits, '0');
+                if (binaryState === target) {
+                    probabilities.push(0.8 + Math.random() * 0.15); // High probability for target
+                } else {
+                    probabilities.push(Math.random() * 0.05); // Low probability for others
+                }
+            }
+            
+            // Draw bars
+            for (let i = 0; i < states; i++) {
+                const x = 30 + i * barWidth;
+                const barHeight = probabilities[i] * maxBarHeight;
+                const y = 170 - barHeight;
+                
+                // Bar
+                ctx.fillStyle = i.toString(2).padStart(bits, '0') === target ? '#4caf50' : '#2196f3';
+                ctx.fillRect(x, y, barWidth - 2, barHeight);
+                
+                // Label
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(i.toString(2).padStart(bits, '0'), x + barWidth/2, 190);
+                
+                // Probability
+                ctx.fillStyle = '#333';
+                ctx.font = '10px Arial';
+                ctx.fillText((probabilities[i] * 100).toFixed(0) + '%', x + barWidth/2, y - 5);
+            }
+            
+            // Add explanation
+            const explanation = document.createElement('p');
+            explanation.textContent = `After running Grover's algorithm, the target state |${target}⟩ has been amplified to have the highest probability of measurement.`;
+            container.appendChild(explanation);
+            
+            // Add iteration details
+            const iterations = document.createElement('p');
+            const optimalIterations = Math.floor(Math.PI/4 * Math.sqrt(states));
+            iterations.textContent = `Optimal number of iterations: ${optimalIterations}`;
+            container.appendChild(iterations);
+        }
+        
+        // Set up QFT demo
+        function setupQFTDemo() {
+            const qftRun = document.getElementById('qft-run');
+            const qftBits = document.getElementById('qft-bits');
+            const qftInput = document.getElementById('qft-input');
+            const qftCircuit = document.getElementById('qft-circuit');
+            const qftState = document.getElementById('qft-state');
+            
+            if (qftRun) {
+                qftRun.addEventListener('click', function() {
+                    // Show loading state
+                    qftCircuit.innerHTML = '<div class="loading">Generating QFT circuit...</div>';
+                    qftState.innerHTML = '<div class="loading">Computing quantum state...</div>';
+                    
+                    // Simulate delay for computation
+                    setTimeout(function() {
+                        const bits = parseInt(qftBits.value);
+                        const input = qftInput.value;
+                        
+                        // Create and display the QFT circuit visualization
+                        displayQFTCircuit(qftCircuit, bits);
+                        
+                        // Display state visualization
+                        displayQFTState(qftState, bits, input);
+                    }, 1000);
+                });
+            }
+        }
+        
+        // Display QFT circuit visualization
+        function displayQFTCircuit(container, bits) {
+            // Create a canvas for the circuit
+            container.innerHTML = '';
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 50 * bits + 50;
+            container.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw qubit lines
+            const lineSpacing = canvas.height / (bits + 1);
+            
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            for (let i = 0; i < bits; i++) {
+                const y = (i + 1) * lineSpacing;
+                
+                // Draw qubit line
+                ctx.beginPath();
+                ctx.moveTo(20, y);
+                ctx.lineTo(canvas.width - 20, y);
+                ctx.stroke();
+                
+                // Draw qubit label
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.fillText(`q${i}`, 5, y + 5);
+            }
+            
+            // Draw QFT gates (simplified)
+            const gateWidth = 30;
+            const gateSpacing = 60;
+            
+            // H gates
+            for (let i = 0; i < bits; i++) {
+                const y = (i + 1) * lineSpacing;
+                const x = 50 + i * gateSpacing;
+                drawGate(ctx, x, y - 15, gateWidth, 30, 'H', '#3f51b5');
+            }
+            
+            // Controlled rotation gates
+            for (let i = 0; i < bits - 1; i++) {
+                for (let j = i + 1; j < bits; j++) {
+                    const controlY = (i + 1) * lineSpacing;
+                    const targetY = (j + 1) * lineSpacing;
+                    const x = 50 + (bits + i*(bits-1)/2 + j-i-1) * 30;
+                    
+                    // Draw controlled-rotation gate
+                    drawGate(ctx, x, targetY - 15, gateWidth, 30, `R${j-i+1}`, '#9c27b0');
+                    
+                    // Draw control line
+                    drawConnector(ctx, x + gateWidth/2, targetY, x + gateWidth/2, controlY);
+                    drawControlPoint(ctx, x + gateWidth/2, controlY);
+                }
+            }
+            
+            // Swap gates for bit reversal
+            const swapX = 380 - gateWidth;
+            for (let i = 0; i < Math.floor(bits/2); i++) {
+                const y1 = (i + 1) * lineSpacing;
+                const y2 = (bits - i) * lineSpacing;
+                
+                // Draw swap symbol
+                ctx.fillStyle = '#ff9800';
+                ctx.font = 'bold 16px Arial';
+                ctx.textAlign = 'center';
+                
+                ctx.fillText('⇅', swapX + gateWidth/2, (y1 + y2)/2);
+                
+                // Connect the swapped qubits
+                drawConnector(ctx, swapX + gateWidth/2, y1, swapX + gateWidth/2, y2);
+                drawControlPoint(ctx, swapX + gateWidth/2, y1);
+                drawControlPoint(ctx, swapX + gateWidth/2, y2);
+            }
+            
+            // Add explanation
+            const explanation = document.createElement('p');
+            explanation.innerHTML = 'The Quantum Fourier Transform applies Hadamard gates followed by controlled rotation gates, with a final bit reversal.';
+            container.appendChild(explanation);
+        }
+        
+        // Display QFT state visualization
+        function displayQFTState(container, bits, input) {
+            container.innerHTML = '';
+            
+            // Create state visualization
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 300;
+            container.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Title
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Quantum State Amplitudes', canvas.width/2, 30);
+            
+            // Draw state vector visualization
+            const states = Math.pow(2, bits);
+            const barWidth = (canvas.width - 60) / (states * 2); // Double for real and imaginary
+            const maxBarHeight = 120;
+            
+            // Generate amplitudes for the QFT state
+            const amplitudes = [];
+            for (let i = 0; i < states; i++) {
+                if (input === 'uniform') {
+                    // Uniform superposition -> transforms to |0⟩
+                    if (i === 0) {
+                        amplitudes.push({real: 1, imag: 0});
+                    } else {
+                        amplitudes.push({real: 0, imag: 0});
+                    }
+                } else if (input === 'computational') {
+                    // |001⟩ state -> transforms to uniform phase distribution
+                    const phase = 2 * Math.PI * i / states;
+                    const amplitude = 1 / Math.sqrt(states);
+                    amplitudes.push({
+                        real: amplitude * Math.cos(phase),
+                        imag: amplitude * Math.sin(phase)
+                    });
+                } else {
+                    // Custom state - randomly generated phases
+                    const phase = 2 * Math.PI * Math.random();
+                    const amplitude = 1 / Math.sqrt(states);
+                    amplitudes.push({
+                        real: amplitude * Math.cos(phase),
+                        imag: amplitude * Math.sin(phase)
+                    });
+                }
+            }
+            
+            // Draw bars for real and imaginary parts
+            for (let i = 0; i < states; i++) {
+                // Real part
+                const realX = 30 + i * barWidth * 2;
+                const realHeight = Math.abs(amplitudes[i].real) * maxBarHeight;
+                const realY = 170 - (amplitudes[i].real >= 0 ? realHeight : 0);
+                
+                ctx.fillStyle = '#2196f3';
+                ctx.fillRect(realX, realY, barWidth - 1, realHeight);
+                
+                // Imaginary part
+                const imagX = realX + barWidth;
+                const imagHeight = Math.abs(amplitudes[i].imag) * maxBarHeight;
+                const imagY = 170 - (amplitudes[i].imag >= 0 ? imagHeight : 0);
+                
+                ctx.fillStyle = '#f44336';
+                ctx.fillRect(imagX, imagY, barWidth - 1, imagHeight);
+                
+                // Label
+                ctx.fillStyle = '#333';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                if (states <= 8) { // Only show labels if not too many states
+                    ctx.fillText(i.toString(2).padStart(bits, '0'), realX + barWidth - 1, 190);
+                }
+            }
+            
+            // Legend
+            ctx.fillStyle = '#2196f3';
+            ctx.fillRect(50, 220, 20, 20);
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'left';
+            ctx.fillText('Real part', 80, 235);
+            
+            ctx.fillStyle = '#f44336';
+            ctx.fillRect(200, 220, 20, 20);
+            ctx.fillStyle = '#333';
+            ctx.fillText('Imaginary part', 230, 235);
+            
+            // Add explanation
+            const explanation = document.createElement('p');
+            explanation.textContent = 'The QFT transforms a computational basis state into a superposition with specific phase relationships.';
+            container.appendChild(explanation);
+        }
+        
+        // Set up QPE demo
+        function setupQPEDemo() {
+            const qpeRun = document.getElementById('qpe-run');
+            const qpePrecision = document.getElementById('qpe-precision');
+            const qpePhase = document.getElementById('qpe-phase');
+            const qpeCircuit = document.getElementById('qpe-circuit');
+            const qpeResult = document.getElementById('qpe-result');
+            
+            if (qpeRun) {
+                qpeRun.addEventListener('click', function() {
+                    // Show loading state
+                    qpeCircuit.innerHTML = '<div class="loading">Generating QPE circuit...</div>';
+                    qpeResult.innerHTML = '<div class="loading">Estimating phase...</div>';
+                    
+                    // Simulate delay for computation
+                    setTimeout(function() {
+                        const precision = parseInt(qpePrecision.value);
+                        const phase = parseFloat(qpePhase.value);
+                        
+                        // Create and display the QPE circuit visualization
+                        displayQPECircuit(qpeCircuit, precision);
+                        
+                        // Display phase estimation results
+                        displayQPEResult(qpeResult, precision, phase);
+                    }, 1000);
+                });
+            }
+        }
+        
+        // Display QPE circuit visualization
+        function displayQPECircuit(container, precision) {
+            // Create a canvas for the circuit
+            container.innerHTML = '';
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 50 * (precision + 1) + 30;
+            container.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw qubit lines
+            const lineSpacing = canvas.height / (precision + 2);
+            
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            // Precision qubits
+            for (let i = 0; i < precision; i++) {
+                const y = (i + 1) * lineSpacing;
+                
+                // Draw qubit line
+                ctx.beginPath();
+                ctx.moveTo(20, y);
+                ctx.lineTo(canvas.width - 20, y);
+                ctx.stroke();
+                
+                // Draw qubit label
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Arial';
+                ctx.fillText(`q${i}`, 5, y + 5);
+                
+                // Hadamard gates
+                drawGate(ctx, 50, y - 15, 30, 30, 'H', '#3f51b5');
+            }
+            
+            // Target qubit
+            const targetY = (precision + 1) * lineSpacing;
+            ctx.beginPath();
+            ctx.moveTo(20, targetY);
+            ctx.lineTo(canvas.width - 20, targetY);
+            ctx.stroke();
+            
+            ctx.fillStyle = '#333';
+            ctx.fillText(`q${precision}`, 5, targetY + 5);
+            
+            // Initialize target qubit
+            drawGate(ctx, 50, targetY - 15, 30, 30, '|1⟩', '#ff9800');
+            
+            // Controlled-U gates
+            for (let i = 0; i < precision; i++) {
+                const controlY = (i + 1) * lineSpacing;
+                const x = 100 + i * 40;
+                
+                // Calculate power of U
+                const power = Math.pow(2, precision - i - 1);
+                
+                // Draw controlled-U gate
+                drawGate(ctx, x, targetY - 15, 30, 30, `U^${power}`, '#009688');
+                
+                // Draw control line
+                drawConnector(ctx, x + 15, targetY, x + 15, controlY);
+                drawControlPoint(ctx, x + 15, controlY);
+            }
+            
+            // Inverse QFT on precision qubits
+            const qftX = 280;
+            drawGate(ctx, qftX, lineSpacing * (precision/2 + 0.5) - 25, 60, 50, 'QFT†', '#673ab7');
+            
+            // Connect precision qubits to QFT box
+            for (let i = 0; i < precision; i++) {
+                const y = (i + 1) * lineSpacing;
+                drawConnector(ctx, qftX + 30, lineSpacing * (precision/2 + 0.5), qftX + 30, y);
+            }
+            
+            // Measurement gates
+            for (let i = 0; i < precision; i++) {
+                const y = (i + 1) * lineSpacing;
+                drawMeasurement(ctx, 350, y - 15, 30, 30, '#9e9e9e');
+            }
+            
+            // Add explanation
+            const explanation = document.createElement('p');
+            explanation.innerHTML = 'Quantum Phase Estimation applies controlled-U operations to the target qubit, followed by an inverse QFT on the precision qubits.';
+            container.appendChild(explanation);
+        }
+        
+        // Display QPE result visualization
+        function displayQPEResult(container, precision, phase) {
+            container.innerHTML = '';
+            
+            // Create result visualization
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 220;
+            container.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Title
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Phase Estimation Results', canvas.width/2, 30);
+            
+            // Draw unit circle
+            const centerX = canvas.width / 2;
+            const centerY = 120;
+            const radius = 80;
+            
+            // Circle
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // Axes
+            ctx.strokeStyle = '#999';
+            ctx.beginPath();
+            ctx.moveTo(centerX - radius, centerY);
+            ctx.lineTo(centerX + radius, centerY);
+            ctx.moveTo(centerX, centerY - radius);
+            ctx.lineTo(centerX, centerY + radius);
+            ctx.stroke();
+            
+            // Convert phase to angle
+            const angle = phase * 2 * Math.PI;
+            
+            // Draw true phase
+            ctx.strokeStyle = '#f44336';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(
+                centerX + radius * Math.cos(angle),
+                centerY - radius * Math.sin(angle)
+            );
+            ctx.stroke();
+            
+            // Draw phase point
+            ctx.fillStyle = '#f44336';
+            ctx.beginPath();
+            ctx.arc(
+                centerX + radius * Math.cos(angle),
+                centerY - radius * Math.sin(angle),
+                5, 0, 2 * Math.PI
+            );
+            ctx.fill();
+            
+            // Add some noise to the estimated phase
+            const noise = (Math.random() - 0.5) * 0.5 / Math.pow(2, precision);
+            const estimatedPhase = phase + noise;
+            const estimatedAngle = estimatedPhase * 2 * Math.PI;
+            
+            // Draw estimated phase
+            ctx.strokeStyle = '#4caf50';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(
+                centerX + radius * Math.cos(estimatedAngle),
+                centerY - radius * Math.sin(estimatedAngle)
+            );
+            ctx.stroke();
+            
+            // Draw estimated phase point
+            ctx.fillStyle = '#4caf50';
+            ctx.beginPath();
+            ctx.arc(
+                centerX + radius * Math.cos(estimatedAngle),
+                centerY - radius * Math.sin(estimatedAngle),
+                5, 0, 2 * Math.PI
+            );
+            ctx.fill();
+            
+            // Calculate binary representation of the phase
+            const binaryEstimate = Math.round(estimatedPhase * Math.pow(2, precision))
+                .toString(2).padStart(precision, '0');
+            
+            // Phase labels
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            
+            // Legend
+            ctx.fillStyle = '#f44336';
+            ctx.fillRect(50, 180, 20, 20);
+            ctx.fillStyle = '#333';
+            ctx.fillText(`True phase: ${phase} (${phase * 360}°)`, 80, 195);
+            
+            ctx.fillStyle = '#4caf50';
+            ctx.fillRect(250, 180, 20, 20);
+            ctx.fillStyle = '#333';
+            ctx.fillText(`Estimated: 0.${binaryEstimate}`, 280, 195);
+            
+            // Add explanation
+            const explanation = document.createElement('p');
+            explanation.textContent = `With ${precision} qubits, QPE can estimate the phase with precision of approximately ${1/Math.pow(2, precision)}.`;
+            container.appendChild(explanation);
+        }
+    </script>
+</body>
+</html>
