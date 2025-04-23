@@ -529,6 +529,8 @@ def api_register():
 def circuit_to_image(circuit):
     """
     Convert a quantum circuit to a base64 image
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     fig = circuit.draw(output='mpl')
     img_data = fig_to_base64(fig)
@@ -538,6 +540,8 @@ def circuit_to_image(circuit):
 def counts_to_image(counts):
     """
     Convert measurement counts to a histogram image
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     fig, ax = plt.subplots(figsize=(8, 6))
     ax.bar(counts.keys(), counts.values())
@@ -552,6 +556,8 @@ def counts_to_image(counts):
 def statevector_to_image(result):
     """
     Convert a statevector result to a visualization
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     try:
         fig = plot_quantum_state(result.get_statevector())
@@ -564,6 +570,8 @@ def statevector_to_image(result):
 def fig_to_base64(fig):
     """
     Convert a matplotlib figure to base64 for embedding in HTML/JSON
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     buf = BytesIO()
     fig.savefig(buf, format='png', bbox_inches='tight')
