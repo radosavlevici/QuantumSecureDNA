@@ -1,7 +1,8 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit import QuantumCircuit, Aer, execute
+from qiskit import QuantumCircuit, execute
+from qiskit_aer import Aer
 from qiskit.visualization import plot_histogram
 import sys
 import os

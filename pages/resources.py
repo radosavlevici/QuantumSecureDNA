@@ -522,4 +522,5 @@ def app():
         
         # For accessing IBM Quantum hardware (optional)
         pip install qiskit-ibmq-provider
-        
+        ```
+        """)
