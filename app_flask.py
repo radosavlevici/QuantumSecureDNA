@@ -350,6 +350,7 @@ def admin_dashboard():
 # API Routes - Quantum Functions
 # -------------------------------
 
+@app.route('/api/bell_state', methods=['GET'])
 @app.route('/api/quantum/bell_state', methods=['GET'])
 def api_bell_state():
     """
@@ -377,16 +378,28 @@ def api_bell_state():
         "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
     })
 
-@app.route('/api/quantum/bloch_sphere', methods=['POST'])
+@app.route('/api/bloch_sphere', methods=['GET', 'POST'])
+@app.route('/api/quantum/bloch_sphere', methods=['GET', 'POST'])
 def api_bloch_sphere():
     """
     Generate a Bloch sphere visualization for qubit state
     © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
     WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    data = request.json
-    theta = float(data.get('theta', np.pi/2))
-    phi = float(data.get('phi', 0))
+    # Handle both GET and POST requests
+    if request.method == 'POST' and request.is_json:
+        data = request.json
+    else:
+        data = request.args
+        
+    # Get parameters with defaults
+    try:
+        theta = float(data.get('theta', np.pi/2))
+        phi = float(data.get('phi', 0))
+    except (ValueError, TypeError):
+        # Default values if conversion fails
+        theta = np.pi/2
+        phi = 0
     
     # Generate the Bloch sphere
     fig = bloch_sphere_visualization(theta, phi)
@@ -412,13 +425,27 @@ def api_bloch_sphere():
         "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
     })
 
-@app.route('/api/quantum/ghz_state', methods=['POST'])
+@app.route('/api/ghz_state', methods=['GET', 'POST'])
+@app.route('/api/quantum/ghz_state', methods=['GET', 'POST'])
 def api_ghz_state():
     """
     Generate and simulate a GHZ state with variable number of qubits
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    data = request.json
-    num_qubits = int(data.get('num_qubits', 3))
+    # Handle both GET and POST requests
+    if request.method == 'POST' and request.is_json:
+        data = request.json
+    else:
+        data = request.args
+    
+    # Get number of qubits with default
+    try:
+        num_qubits = int(data.get('num_qubits', 3))
+        # Cap number of qubits for server resource protection
+        num_qubits = min(max(num_qubits, 2), 10)  # Between 2 and 10 qubits
+    except (ValueError, TypeError):
+        num_qubits = 3  # Default if conversion fails
     
     # Create GHZ state
     circuit = create_ghz_state(num_qubits)
