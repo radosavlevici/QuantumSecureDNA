@@ -522,6 +522,60 @@ def api_apply_gate():
         "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
     })
 
+@app.route('/api/quantum_fourier_transform', methods=['GET', 'POST'])
+@app.route('/api/quantum/qft', methods=['GET', 'POST'])
+def api_quantum_fourier_transform():
+    """
+    Generate and simulate a Quantum Fourier Transform circuit with advanced optimization
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Handle both GET and POST requests
+    if request.method == 'POST' and request.is_json:
+        data = request.json
+    else:
+        data = request.args
+    
+    # Get number of qubits with default
+    try:
+        num_qubits = int(data.get('num_qubits', 5))
+        # Cap number of qubits for server resource protection
+        num_qubits = min(max(num_qubits, 3), 32)  # Between 3 and 32 qubits (maximum supported)
+    except (ValueError, TypeError):
+        num_qubits = 5  # Default if conversion fails
+    
+    # Get advanced mode and optimization level
+    advanced_mode = data.get('advanced_mode', 'false').lower() in ['true', '1', 't', 'yes', 'y']
+    optimization_level = int(data.get('optimization_level', 1)) if advanced_mode else 1
+    
+    # Create QFT circuit with appropriate optimization
+    circuit = visualize_quantum_fourier_transform(
+        num_qubits=num_qubits, 
+        optimization_level=min(max(optimization_level, 0), 3)  # Ensure between 0-3
+    )
+    
+    # Simulate circuit with advanced settings if requested
+    result = simulate_circuit(circuit, advanced_mode=advanced_mode)
+    
+    # Get circuit image
+    circuit_img = circuit_to_image(circuit)
+    
+    # Get measurement results
+    counts = result.get_counts()
+    hist_img = counts_to_image(counts)
+    
+    # Return the results
+    return jsonify({
+        "circuit_image": circuit_img,
+        "histogram_image": hist_img,
+        "counts": counts,
+        "num_qubits": num_qubits,
+        "advanced_mode": advanced_mode,
+        "optimization_level": optimization_level,
+        "max_supported_qubits": 32,
+        "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    })
+    
 @app.route('/api/quantum_teleportation', methods=['GET', 'POST'])
 @app.route('/api/quantum/teleportation', methods=['GET', 'POST'])
 def api_quantum_teleportation():

@@ -242,12 +242,17 @@ def create_quantum_teleportation_circuit(multi_qubit=False):
     
     return circuit
 
-def visualize_quantum_fourier_transform(num_qubits=3):
+def visualize_quantum_fourier_transform(num_qubits=3, optimization_level=1):
     """
-    Create and visualize a Quantum Fourier Transform circuit
+    Create and visualize a Quantum Fourier Transform circuit with enhanced optimization
     
     Args:
         num_qubits: Number of qubits in the QFT (supports up to 32 qubits)
+        optimization_level: Level of circuit optimization (0-3)
+            0: No optimization
+            1: Standard optimization (default)
+            2: Advanced optimization for large circuits
+            3: Maximum optimization (may reduce visualization clarity)
         
     Returns:
         QuantumCircuit: QFT circuit
@@ -255,6 +260,29 @@ def visualize_quantum_fourier_transform(num_qubits=3):
     # Enhanced support for larger qubit counts (up to 32, maximum supported by the simulator)
     num_qubits = min(max(num_qubits, 3), 32)  # Limit between 3 and 32 qubits for simulator compatibility
     
+    # Use built-in QFT for maximum efficiency with large qubit counts
+    if num_qubits > 15 and optimization_level > 1:
+        # For large circuits, use optimized implementation
+        from qiskit.circuit.library import QFT
+        
+        # Initialize in superposition state first
+        circuit = QuantumCircuit(num_qubits)
+        for i in range(num_qubits):
+            circuit.h(i)
+        
+        circuit.barrier()
+        
+        # Apply optimized QFT from library
+        qft = QFT(num_qubits=num_qubits, approximation_degree=(0 if optimization_level < 3 else 3))
+        circuit.append(qft, range(num_qubits))
+        
+        if optimization_level < 3:
+            # Add measurement for basic circuits
+            circuit.measure_all()
+            
+        return circuit
+        
+    # For smaller circuits or when visualization clarity is important, use manual implementation
     circuit = QuantumCircuit(num_qubits)
     
     # Create superposition state
@@ -278,6 +306,9 @@ def visualize_quantum_fourier_transform(num_qubits=3):
     # Swap qubits to get the correct output order
     for i in range(num_qubits // 2):
         circuit.swap(i, num_qubits - i - 1)
+    
+    # Add measurement for visualization
+    circuit.measure_all()
     
     return circuit
 
