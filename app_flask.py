@@ -265,6 +265,48 @@ def resources():
                          copyright=COPYRIGHT_NOTICE,
                          security_key=security_key[:8] + "..." + security_key[-8:])
 
+@app.route('/login')
+def login_page():
+    """
+    Render the login page with DNA-based security
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Login page accessed with copyright protection")
+    
+    # Return login page with global copyright protection
+    return render_template('login.html', 
+                         security_key=security_key[:8] + "..." + security_key[-8:],
+                         error=request.args.get('error'),
+                         success=request.args.get('success'),
+                         copyright=COPYRIGHT_NOTICE)
+
+@app.route('/register')
+def register_page():
+    """
+    Render the registration page with DNA-based security
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Registration page accessed with copyright protection")
+    
+    # Return registration page with global copyright protection
+    return render_template('register.html', 
+                         security_key=security_key[:8] + "..." + security_key[-8:],
+                         error=request.args.get('error'),
+                         success=request.args.get('success'),
+                         copyright=COPYRIGHT_NOTICE)
+
 @app.route('/admin')
 @jwt_required()
 def admin_dashboard():
@@ -300,6 +342,7 @@ def admin_dashboard():
                          user=current_user,
                          security_events=security_events,
                          dna_stats=dna_stats,
+                         now=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                          security_key=security_key[:8] + "..." + security_key[-8:],
                          copyright=COPYRIGHT_NOTICE)
 
@@ -502,58 +545,135 @@ def api_visualize_dna():
 # API Routes - Authentication
 # -------------------------------
 
-@app.route('/api/auth/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def api_login():
     """
     Authenticate a user and issue a JWT token
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     username = request.json.get('username', '')
     password = request.json.get('password', '')
     
-    # Authenticate the user
-    user = authenticate_user(username, password)
+    # Log login attempt with security monitoring
+    log_security_event(
+        "LOGIN_ATTEMPT", 
+        f"Login attempt for user: {username}",
+        metadata={
+            "ip": request.remote_addr
+        }
+    )
     
-    if user:
-        # Generate access token
+    # Authenticate the user with DNA verification
+    success, user, error_msg = authenticate_user(username, password)
+    
+    if success and user:
+        # Generate access token with enhanced security
         access_token = create_access_token(identity=username)
         
+        # Log successful login
+        log_security_event(
+            "LOGIN_SUCCESS", 
+            f"User {username} authenticated successfully",
+            user_id=user.id,
+            metadata={
+                "ip": request.remote_addr
+            }
+        )
+        
         return jsonify({
-            "token": access_token,
-            "user": {
-                "id": user['id'],
-                "username": user['username'],
-                "email": user['email'],
-                "role": user['role']
-            },
+            "access_token": access_token,
+            "user": username,
             "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
         })
     else:
+        # Log failed login attempt
+        log_security_event(
+            "LOGIN_FAILED", 
+            f"Authentication failed for user: {username}",
+            event_type="WARNING",
+            metadata={
+                "error": error_msg,
+                "ip": request.remote_addr
+            }
+        )
+        
         return jsonify({
-            "error": "Invalid username or password",
+            "error": error_msg or "Invalid username or password",
             "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
         }), 401
 
-@app.route('/api/auth/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def api_register():
     """
     Register a new user with DNA-based security features
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
     username = request.json.get('username', '')
     password = request.json.get('password', '')
     email = request.json.get('email', '')
-    full_name = request.json.get('full_name', '')
+    
+    # Log registration attempt
+    log_security_event(
+        "REGISTRATION_ATTEMPT", 
+        f"Registration attempt for username: {username}, email: {email}",
+        metadata={
+            "ip": request.remote_addr
+        }
+    )
     
     try:
-        # Register the user
-        user_id = register_user(username, password, email, full_name)
+        # Register the user with DNA security
+        success, user, error_msg = register_user(username, email, password)
+        
+        if success and user:
+            # Log successful registration
+            log_security_event(
+                "REGISTRATION_SUCCESS", 
+                f"User {username} registered successfully",
+                user_id=user.id if hasattr(user, 'id') else None,
+                metadata={
+                    "ip": request.remote_addr
+                }
+            )
+            
+            return jsonify({
+                "success": True,
+                "message": "User registered successfully with DNA-based security",
+                "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
+            })
+        else:
+            # Log failed registration
+            log_security_event(
+                "REGISTRATION_FAILED", 
+                f"Registration failed for username: {username}",
+                event_type="WARNING",
+                metadata={
+                    "error": error_msg,
+                    "ip": request.remote_addr
+                }
+            )
+            
+            return jsonify({
+                "success": False,
+                "error": error_msg or "Registration failed. Username or email may already be taken.",
+                "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
+            }), 400
+            
+    except Exception as e:
+        # Log exception
+        log_security_event(
+            "REGISTRATION_ERROR", 
+            f"Registration error: {str(e)}",
+            event_type="ERROR",
+            metadata={
+                "ip": request.remote_addr
+            }
+        )
         
         return jsonify({
-            "message": "User registered successfully",
-            "user_id": user_id,
-            "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
-        })
-    except Exception as e:
-        return jsonify({
+            "success": False,
             "error": str(e),
             "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
         }), 400

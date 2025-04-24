@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-copyright-protected="true" data-author="Ervin Remus Radosavlevici">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ervin Remus Radosavlevici">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally.">
+    <title>Autentificare - Quantum Computing Educational Platform</title>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    
+    <!-- Custom Login Page CSS -->
+    <style>
+        .login-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #007bff;
+        }
+        
+        .login-title {
+            margin-bottom: 20px;
+            color: #212529;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .btn-login {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-login:hover {
+            background-color: #0069d9;
+        }
+        
+        .btn-register {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-register:hover {
+            background-color: #5a6268;
+        }
+        
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .security-features {
+            margin-top: 30px;
+            border-top: 1px solid #dee2e6;
+            padding-top: 20px;
+        }
+        
+        .security-features h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .security-features ul {
+            padding-left: 20px;
+        }
+        
+        .security-features li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .dna-animation {
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+            background-color: #212529;
+            border-radius: 4px;
+        }
+        
+        .disclaimer {
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation with enhanced security and copyright protection -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand" data-copyright-protected="true">
+                <span class="brand-text">Quantum</span><span class="brand-highlight">EDU</span>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/quantum_basics" class="nav-link">Quantum Basics</a></li>
+                <li><a href="/dna_security" class="nav-link">DNA Security</a></li>
+                <li><a href="/quantum_algorithms" class="nav-link">Quantum Algorithms</a></li>
+                <li><a href="/quantum_ml" class="nav-link">Quantum ML</a></li>
+                <li><a href="/resources" class="nav-link">Resources</a></li>
+                <li><a href="/login" class="nav-link active">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hidden copyright notice with quantum-enhanced protection -->
+    <div class="hidden-copyright-watermark" style="display: none;">© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally.</div>
+    
+    <!-- Main content -->
+    <div class="container" data-copyright-protected="true" data-author="Ervin Remus Radosavlevici">
+        <header class="page-header">
+            <h1>Autentificare Securizată</h1>
+            <p class="copyright-notice">© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+            <p class="page-description">Acces la panoul de administrare cu securitate ADN-cuantică</p>
+        </header>
+        
+        <div class="login-container">
+            <h2 class="login-title">Autentificare cu Securitate ADN</h2>
+            
+            {% if error %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+            {% endif %}
+            
+            {% if success %}
+            <div class="alert alert-success">
+                {{ success }}
+            </div>
+            {% endif %}
+            
+            <div class="dna-animation" id="dna-visual"></div>
+            
+            <form id="login-form" action="/api/login" method="POST">
+                <div class="form-group">
+                    <label for="username" class="form-label">Nume de utilizator</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Parolă</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn-login">Autentificare Securizată</button>
+                <a href="/register" class="btn-register">Înregistrare Cont Nou</a>
+            </form>
+            
+            <div class="security-features">
+                <h3>Caracteristici de Securitate Avansate:</h3>
+                <ul>
+                    <li>Autentificare securizată cu criptare ADN-cuantică</li>
+                    <li>Protecție avansată împotriva atacurilor cibernetice</li>
+                    <li>Semnături ADN unice pentru fiecare sesiune</li>
+                    <li>Monitorizare în timp real a incidentelor de securitate</li>
+                    <li>Protecție integrată a drepturilor de autor</li>
+                </ul>
+            </div>
+            
+            <div class="disclaimer">
+                © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). Toate drepturile rezervate global.
+                Protejat de legislația internațională a drepturilor de autor.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer with copyright notice and security information -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
+                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+            </div>
+            <div class="footer-security">
+                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
+                <p>Enhanced with DNA-based quantum security</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Security breach detection and self-repair JavaScript -->
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/security.js') }}"></script>
+    
+    <!-- Custom JavaScript for login and DNA visualization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DNA animation for login page
+            const dnaVisual = document.getElementById('dna-visual');
+            if (!dnaVisual) return;
+            
+            // Apply copyright protection
+            dnaVisual.setAttribute('data-copyright-protected', 'true');
+            dnaVisual.setAttribute('data-author', 'Ervin Remus Radosavlevici');
+            
+            // Generate DNA helix animation
+            const strands = 20;
+            for (let i = 0; i < strands; i++) {
+                const strand = document.createElement('div');
+                strand.style.position = 'absolute';
+                strand.style.width = '80%';
+                strand.style.height = '2px';
+                strand.style.left = '10%';
+                strand.style.top = '50%';
+                strand.style.backgroundColor = i % 2 === 0 ? '#007bff' : '#28a745';
+                strand.style.transform = `rotate(${i * (360 / strands)}deg)`;
+                strand.style.transformOrigin = 'center';
+                strand.style.opacity = 0.7;
+                dnaVisual.appendChild(strand);
+            }
+            
+            // Submit form with AJAX to handle JWT auth
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        username: document.getElementById('username').value,
+                        password: document.getElementById('password').value
+                    };
+                    
+                    fetch('/api/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.access_token) {
+                            // Store token in localStorage
+                            localStorage.setItem('jwt_token', data.access_token);
+                            
+                            // Redirect to admin dashboard
+                            window.location.href = '/admin';
+                        } else {
+                            // Show error
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'alert alert-danger';
+                            errorDiv.textContent = data.error || 'Autentificare eșuată. Verificați credențialele.';
+                            
+                            const container = document.querySelector('.login-container');
+                            container.insertBefore(errorDiv, loginForm);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
