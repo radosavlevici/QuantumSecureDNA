@@ -1,308 +1,438 @@
 <!DOCTYPE html>
-<html lang="en" data-copyright-protected="true" data-author="Ervin Remus Radosavlevici">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Ervin Remus Radosavlevici">
-    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally.">
-    <title>Autentificare - Quantum Computing Educational Platform</title>
-    
-    <!-- Global CSS -->
+    <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Toate drepturile rezervate">
+    <meta name="description" content="Autentificare cu securitate ADN - Quantum Computing Academy">
+    <title>Autentificare - Quantum Computing Academy</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    
-    <!-- Custom Login Page CSS -->
-    <style>
-        .login-container {
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #007bff;
-        }
-        
-        .login-title {
-            margin-bottom: 20px;
-            color: #212529;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        .btn-login {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-login:hover {
-            background-color: #0069d9;
-        }
-        
-        .btn-register {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-register:hover {
-            background-color: #5a6268;
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        
-        .alert-danger {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-        
-        .alert-success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-        
-        .security-features {
-            margin-top: 30px;
-            border-top: 1px solid #dee2e6;
-            padding-top: 20px;
-        }
-        
-        .security-features h3 {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        .security-features ul {
-            padding-left: 20px;
-        }
-        
-        .security-features li {
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        
-        .dna-animation {
-            height: 40px;
-            position: relative;
-            overflow: hidden;
-            margin: 20px 0;
-            background-color: #212529;
-            border-radius: 4px;
-        }
-        
-        .disclaimer {
-            font-size: 12px;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 30px;
-        }
-    </style>
 </head>
 <body>
-    <!-- Navigation with enhanced security and copyright protection -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="/" class="navbar-brand" data-copyright-protected="true">
-                <span class="brand-text">Quantum</span><span class="brand-highlight">EDU</span>
-            </a>
-            <ul class="navbar-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/quantum_basics" class="nav-link">Quantum Basics</a></li>
-                <li><a href="/dna_security" class="nav-link">DNA Security</a></li>
-                <li><a href="/quantum_algorithms" class="nav-link">Quantum Algorithms</a></li>
-                <li><a href="/quantum_ml" class="nav-link">Quantum ML</a></li>
-                <li><a href="/resources" class="nav-link">Resources</a></li>
-                <li><a href="/login" class="nav-link active">Login</a></li>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <h1>Quantum Computing Academy</h1>
+                <span class="copyright-tag">© 2025 Ervin Remus Radosavlevici</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Acasă</a></li>
+                <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                <li><a href="{{ url_for('quantum_ml') }}">Cuantic & ML</a></li>
+                <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                <li><a href="{{ url_for('login_page') }}" class="btn-login active">Autentificare</a></li>
             </ul>
-        </div>
-    </nav>
-    
-    <!-- Hidden copyright notice with quantum-enhanced protection -->
-    <div class="hidden-copyright-watermark" style="display: none;">© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally.</div>
-    
-    <!-- Main content -->
-    <div class="container" data-copyright-protected="true" data-author="Ervin Remus Radosavlevici">
-        <header class="page-header">
-            <h1>Autentificare Securizată</h1>
-            <p class="copyright-notice">© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-            <p class="page-description">Acces la panoul de administrare cu securitate ADN-cuantică</p>
-        </header>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>Autentificare cu Securitate ADN</h2>
+            <p>Accesați platforma educațională securizată cu tehnologie cuantică și ADN.</p>
+            <div class="security-badge">
+                <span class="security-key">Cheie de securitate: {{ security_key }}</span>
+                <span class="security-info">Protejat prin tehnologie cuantică și ADN</span>
+            </div>
+        </section>
+
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-target="login-form">Autentificare</button>
+                    <button class="auth-tab" data-target="register-redirect">Creare cont</button>
+                </div>
+                
+                <div class="auth-content">
+                    <div id="login-form" class="auth-form visible">
+                        {% if error %}
+                        <div class="form-alert error">
+                            <p>{{ error }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        {% if success %}
+                        <div class="form-alert success">
+                            <p>{{ success }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        <form id="loginForm" action="/api/login" method="POST">
+                            <div class="form-group">
+                                <label for="username">Nume utilizator:</label>
+                                <input type="text" id="username" name="username" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Parolă:</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
+                                <p class="form-text">Parola este protejată prin criptare ADN avansată.</p>
+                            </div>
+                            <div class="form-group">
+                                <div class="dna-animation">
+                                    <div class="dna-helix"></div>
+                                    <p class="dna-text">Autentificare securizată cu ADN</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-submit">Autentificare</button>
+                            </div>
+                        </form>
+                        
+                        <div class="form-links">
+                            <p>Nu aveți cont? <a href="{{ url_for('register_page') }}">Înregistrați-vă</a></p>
+                        </div>
+                    </div>
+                    
+                    <div id="register-redirect" class="auth-form">
+                        <div class="redirect-message">
+                            <h3>Creare cont nou</h3>
+                            <p>Pentru a vă crea un cont nou, vă rugăm să accesați pagina de înregistrare unde veți putea configura un cont securizat cu ADN.</p>
+                            <div class="security-advantages">
+                                <h4>Avantajele contului securizat cu ADN:</h4>
+                                <ul>
+                                    <li>Protecție avansată împotriva atacurilor prin criptare ADN</li>
+                                    <li>Acces la simulatoarele cuantice pentru experimentare</li>
+                                    <li>Posibilitatea de a salva rezultatele simulărilor</li>
+                                    <li>Protecție integrată a proprietății intelectuale</li>
+                                </ul>
+                            </div>
+                            <a href="{{ url_for('register_page') }}" class="btn primary">Creați un cont nou</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <div class="login-container">
-            <h2 class="login-title">Autentificare cu Securitate ADN</h2>
-            
-            {% if error %}
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
-            {% endif %}
-            
-            {% if success %}
-            <div class="alert alert-success">
-                {{ success }}
-            </div>
-            {% endif %}
-            
-            <div class="dna-animation" id="dna-visual"></div>
-            
-            <form id="login-form" action="/api/login" method="POST">
-                <div class="form-group">
-                    <label for="username" class="form-label">Nume de utilizator</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
+        <section class="security-explanation">
+            <h3>Cum funcționează autentificarea cu securitate ADN?</h3>
+            <div class="security-steps">
+                <div class="security-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Generare semnătură ADN</h4>
+                        <p>Sistemul generează o semnătură ADN unică pentru fiecare utilizator bazată pe informații criptate.</p>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password" class="form-label">Parolă</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
+                <div class="security-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Criptare cuantică</h4>
+                        <p>Parola este criptată utilizând algoritmi cuantici pentru a asigura protecție maximă împotriva atacurilor.</p>
+                    </div>
                 </div>
-                
-                <button type="submit" class="btn-login">Autentificare Securizată</button>
-                <a href="/register" class="btn-register">Înregistrare Cont Nou</a>
-            </form>
-            
-            <div class="security-features">
-                <h3>Caracteristici de Securitate Avansate:</h3>
-                <ul>
-                    <li>Autentificare securizată cu criptare ADN-cuantică</li>
-                    <li>Protecție avansată împotriva atacurilor cibernetice</li>
-                    <li>Semnături ADN unice pentru fiecare sesiune</li>
-                    <li>Monitorizare în timp real a incidentelor de securitate</li>
-                    <li>Protecție integrată a drepturilor de autor</li>
-                </ul>
+                <div class="security-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Verificare semnătură</h4>
+                        <p>La autentificare, sistemul verifică semnătura ADN și decodifică informațiile utilizând chei cuantice.</p>
+                    </div>
+                </div>
+                <div class="security-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Token de securitate JWT</h4>
+                        <p>După autentificare, se generează un token JWT securizat pentru a asigura integritatea sesiunii.</p>
+                    </div>
+                </div>
             </div>
-            
-            <div class="disclaimer">
-                © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). Toate drepturile rezervate global.
-                Protejat de legislația internațională a drepturilor de autor.
-            </div>
-        </div>
-    </div>
-    
-    <!-- Footer with copyright notice and security information -->
+        </section>
+    </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-copyright">
                 <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                <p>Toate drepturile rezervate global. Protejat de legile internaționale ale drepturilor de autor.</p>
             </div>
             <div class="footer-security">
-                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                <p>Enhanced with DNA-based quantum security</p>
+                <p>Securizat cu tehnologie cuantică și ADN</p>
+                <p>Cheie de Securitate: {{ security_key }}</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                    <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                    <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                </ul>
             </div>
         </div>
     </footer>
-    
-    <!-- Security breach detection and self-repair JavaScript -->
-    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
+
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
-    
-    <!-- Custom JavaScript for login and DNA visualization -->
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // DNA animation for login page
-            const dnaVisual = document.getElementById('dna-visual');
-            if (!dnaVisual) return;
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
             
-            // Apply copyright protection
-            dnaVisual.setAttribute('data-copyright-protected', 'true');
-            dnaVisual.setAttribute('data-author', 'Ervin Remus Radosavlevici');
-            
-            // Generate DNA helix animation
-            const strands = 20;
-            for (let i = 0; i < strands; i++) {
-                const strand = document.createElement('div');
-                strand.style.position = 'absolute';
-                strand.style.width = '80%';
-                strand.style.height = '2px';
-                strand.style.left = '10%';
-                strand.style.top = '50%';
-                strand.style.backgroundColor = i % 2 === 0 ? '#007bff' : '#28a745';
-                strand.style.transform = `rotate(${i * (360 / strands)}deg)`;
-                strand.style.transformOrigin = 'center';
-                strand.style.opacity = 0.7;
-                dnaVisual.appendChild(strand);
-            }
-            
-            // Submit form with AJAX to handle JWT auth
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                loginForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
                     
-                    const formData = {
-                        username: document.getElementById('username').value,
-                        password: document.getElementById('password').value
-                    };
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
                     
-                    fetch('/api/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.access_token) {
-                            // Store token in localStorage
-                            localStorage.setItem('jwt_token', data.access_token);
-                            
-                            // Redirect to admin dashboard
-                            window.location.href = '/admin';
-                        } else {
-                            // Show error
-                            const errorDiv = document.createElement('div');
-                            errorDiv.className = 'alert alert-danger';
-                            errorDiv.textContent = data.error || 'Autentificare eșuată. Verificați credențialele.';
-                            
-                            const container = document.querySelector('.login-container');
-                            container.insertBefore(errorDiv, loginForm);
+                    // Show target form
+                    forms.forEach(form => {
+                        form.classList.remove('visible');
+                        if (form.id === target) {
+                            form.classList.add('visible');
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
                     });
                 });
-            }
+            });
+            
+            // Handle form submission with AJAX
+            const loginForm = document.getElementById('loginForm');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Animate DNA helix during authentication
+                const dnaAnimation = document.querySelector('.dna-animation');
+                dnaAnimation.classList.add('authenticating');
+                
+                // Submit form data using fetch API
+                fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    dnaAnimation.classList.remove('authenticating');
+                    
+                    if (data.access_token) {
+                        // Authentication successful
+                        localStorage.setItem('auth_token', data.access_token);
+                        localStorage.setItem('username', data.user);
+                        
+                        // Show success message
+                        const successAlert = document.createElement('div');
+                        successAlert.className = 'form-alert success';
+                        successAlert.innerHTML = '<p>Autentificare reușită! Redirecționare...</p>';
+                        
+                        // Replace form with success message
+                        loginForm.innerHTML = '';
+                        loginForm.appendChild(successAlert);
+                        
+                        // Redirect to homepage after delay
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 2000);
+                    } else {
+                        // Authentication failed
+                        const errorAlert = document.createElement('div');
+                        errorAlert.className = 'form-alert error';
+                        errorAlert.innerHTML = `<p>${data.error || 'Autentificare eșuată. Verificați numele de utilizator și parola.'}</p>`;
+                        
+                        // Insert error message at top of form
+                        loginForm.insertBefore(errorAlert, loginForm.firstChild);
+                    }
+                })
+                .catch(error => {
+                    dnaAnimation.classList.remove('authenticating');
+                    
+                    // Show error message
+                    const errorAlert = document.createElement('div');
+                    errorAlert.className = 'form-alert error';
+                    errorAlert.innerHTML = '<p>Eroare de conexiune. Încercați din nou.</p>';
+                    
+                    // Insert error message at top of form
+                    loginForm.insertBefore(errorAlert, loginForm.firstChild);
+                    
+                    console.error('Login error:', error);
+                });
+            });
         });
     </script>
+    
+    <style>
+        /* Specific styles for the login page */
+        .auth-section {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .auth-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background-color: #f9f9f9;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-tab.active {
+            background-color: white;
+            border-bottom: 2px solid #0066cc;
+            color: #0066cc;
+        }
+        
+        .auth-content {
+            padding: 2rem;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.visible {
+            display: block;
+        }
+        
+        .dna-animation {
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            height: 60px;
+        }
+        
+        .dna-helix {
+            position: relative;
+            width: 20px;
+            height: 40px;
+            margin: 0 auto;
+            perspective: 100px;
+        }
+        
+        .dna-helix::before,
+        .dna-helix::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, 
+                #ff0000 0%, #ffff00 25%, 
+                #00ff00 50%, #0000ff 75%, 
+                #ff0000 100%);
+            animation: dnaRotate 3s infinite linear;
+            background-size: 100% 400%;
+        }
+        
+        .dna-helix::before {
+            left: -20px;
+        }
+        
+        .dna-helix::after {
+            right: -20px;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes dnaRotate {
+            0% { transform: rotateY(0deg); background-position: 0 0; }
+            100% { transform: rotateY(360deg); background-position: 0 400%; }
+        }
+        
+        .dna-animation.authenticating .dna-helix::before,
+        .dna-animation.authenticating .dna-helix::after {
+            animation-duration: 0.5s;
+        }
+        
+        .dna-text {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .redirect-message {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .security-advantages {
+            text-align: left;
+            margin: 2rem 0;
+            background-color: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .security-advantages h4 {
+            margin-bottom: 1rem;
+            color: #0066cc;
+        }
+        
+        .security-advantages ul {
+            margin-left: 1.5rem;
+        }
+        
+        .security-advantages li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .security-explanation {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .security-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .security-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #0066cc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            margin-top: 0;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            margin: 0;
+            color: #555;
+        }
+    </style>
 </body>
 </html>
