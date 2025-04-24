@@ -51,6 +51,9 @@ function initializeSecurity() {
     // Add defensive metadata if not present
     ensureMetadata();
     
+    // Ensure security badge element exists on every page
+    ensureSecurityBadgeExists();
+    
     // Add copyright watermark to images
     watermarkImages();
     
@@ -59,6 +62,50 @@ function initializeSecurity() {
     
     // Check initial copyright integrity
     verifyIntegrity();
+}
+
+// Ensure security badge exists on page
+function ensureSecurityBadgeExists() {
+    if (!document.querySelector('.security-badge')) {
+        const securityBadge = document.createElement('div');
+        securityBadge.className = 'security-badge';
+        securityBadge.setAttribute('data-copyright', '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)');
+        
+        const dnaProtection = document.createElement('span');
+        dnaProtection.className = 'dna-protection';
+        dnaProtection.textContent = 'DNA-Secured Technology';
+        
+        securityBadge.appendChild(dnaProtection);
+        document.body.appendChild(securityBadge);
+        
+        // Add CSS styles if not present
+        if (!document.querySelector('#security-badge-styles')) {
+            const styleEl = document.createElement('style');
+            styleEl.id = 'security-badge-styles';
+            styleEl.textContent = `
+                .security-badge {
+                    position: fixed;
+                    bottom: 10px;
+                    right: 10px;
+                    background-color: rgba(0, 102, 204, 0.05);
+                    border: 1px solid rgba(0, 102, 204, 0.2);
+                    border-radius: 4px;
+                    padding: 4px 8px;
+                    font-size: 10px;
+                    color: #0066cc;
+                    z-index: 1000;
+                    display: flex;
+                    align-items: center;
+                    user-select: none;
+                }
+                .security-badge .dna-protection {
+                    font-family: monospace;
+                    font-weight: bold;
+                }
+            `;
+            document.head.appendChild(styleEl);
+        }
+    }
 }
 
 // Ensure all required metadata is present
