@@ -1,416 +1,749 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Machine Learning | © Ervin Remus Radosavlevici</title>
+    <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Toate drepturile rezervate">
+    <meta name="description" content="Machine Learning Cuantic - Quantum Computing Academy">
+    <title>Machine Learning Cuantic - Quantum Computing Academy</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <!-- Meta tags for copyright protection -->
-    <meta name="author" content="Ervin Remus Radosavlevici">
-    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.">
-    <meta name="description" content="Quantum Machine Learning with DNA-Based Security and Self-Repair Capabilities">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="main-nav">
             <div class="logo">
-                <h1>Quantum <span>DNA</span> Platform</h1>
+                <h1>Quantum Computing Academy</h1>
+                <span class="copyright-tag">© 2025 Ervin Remus Radosavlevici</span>
             </div>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/quantum_basics">Quantum Basics</a></li>
-                <li><a href="/quantum_algorithms">Quantum Algorithms</a></li>
-                <li><a href="/dna_security">DNA Security</a></li>
-                <li><a href="/quantum_ml" class="active">Quantum ML</a></li>
-                <li><a href="/resources">Resources</a></li>
+                <li><a href="{{ url_for('index') }}">Acasă</a></li>
+                <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                <li><a href="{{ url_for('quantum_ml') }}" class="active">Cuantic & ML</a></li>
+                <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                <li><a href="{{ url_for('login_page') }}" class="btn-login">Autentificare</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section class="page-header">
-            <h2>Quantum Machine Learning</h2>
-            <p>Discover how quantum computing enhances machine learning capabilities</p>
+            <h2>Machine Learning Cuantic</h2>
+            <p>Descoperiți intersecția revoluționară dintre computația cuantică și inteligența artificială</p>
+            <div class="security-badge">
+                <span class="security-key">Cheie de securitate: {{ security_key }}</span>
+                <span class="security-info">Protejat prin tehnologie cuantică și ADN</span>
+            </div>
         </section>
 
         <section class="qml-intro">
-            <h3>Quantum Machine Learning Fundamentals</h3>
-            <div class="content-grid">
-                <div class="content-text">
-                    <p>
-                        Quantum Machine Learning (QML) combines quantum computing with machine learning to potentially offer computational advantages for specific tasks. QML leverages quantum phenomena like superposition and entanglement to process complex data patterns more efficiently.
-                    </p>
-                    <p>
-                        Our platform demonstrates key QML algorithms including quantum support vector machines, quantum neural networks, and quantum clustering techniques with advanced security measures.
-                    </p>
+            <h3>Introducere în Quantum Machine Learning</h3>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <p>Quantum Machine Learning (QML) reprezintă o nouă frontieră la intersecția dintre computația cuantică și inteligența artificială. Această disciplină emergentă explorează cum proprietățile mecanicii cuantice - precum superpoziția, înlănțuirea și interferența - pot accelera sau îmbunătăți algoritmii de machine learning.</p>
+                    
+                    <p>Avantajele potențiale ale QML includ:</p>
+                    <ul class="qml-advantages">
+                        <li><strong>Accelerarea computațională</strong> - Anumite operații matematice esențiale pentru ML pot fi executate exponențial mai rapid pe calculatoare cuantice.</li>
+                        <li><strong>Recunoașterea tiparelor complexe</strong> - Stările cuantice pot codifica și procesa tipare complexe dincolo de capacitățile calculatoarelor clasice.</li>
+                        <li><strong>Optimizare îmbunătățită</strong> - Algoritmii cuantici pot explora eficient spații de soluții vaste pentru a găsi parametri optimali ai modelelor.</li>
+                        <li><strong>Reducerea dimensionalității</strong> - Tehnicile cuantice pot oferi abordări inovatoare pentru gestionarea datelor de dimensiuni mari.</li>
+                    </ul>
                 </div>
-                <div class="content-visual">
-                    <div class="quantum-visual" id="qml-animation"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="qml-demos">
-            <h3>Interactive QML Demonstrations</h3>
-            
-            <div class="algorithm-section">
-                <h4>Quantum Support Vector Machine</h4>
-                <div class="algorithm-description">
-                    <p>
-                        Quantum Support Vector Machines (QSVM) utilize quantum computing to potentially achieve a speedup in finding the optimal hyperplane that separates data points in high-dimensional feature spaces. This is particularly beneficial for datasets that are difficult to separate linearly in their original space.
-                    </p>
-                </div>
-                <div class="interactive-demo">
-                    <div class="demo-controls">
-                        <div class="form-group">
-                            <label for="qsvm-dataset">Dataset:</label>
-                            <select id="qsvm-dataset">
-                                <option value="circles">Circular dataset</option>
-                                <option value="moons">Two moons</option>
-                                <option value="blobs">Gaussian blobs</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="qsvm-kernel">Quantum Kernel:</label>
-                            <select id="qsvm-kernel">
-                                <option value="zz">ZZ-feature map</option>
-                                <option value="pauli">Pauli feature map</option>
-                                <option value="custom">Custom quantum kernel</option>
-                            </select>
-                        </div>
-                        <button id="qsvm-run" class="btn primary">Run QSVM</button>
-                    </div>
-                    <div class="demo-results">
-                        <div class="result-container">
-                            <h5>Data Visualization</h5>
-                            <div id="qsvm-data" class="visual-display"></div>
-                        </div>
-                        <div class="result-container">
-                            <h5>Decision Boundary</h5>
-                            <div id="qsvm-boundary" class="visual-display"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="algorithm-section">
-                <h4>Quantum Neural Network</h4>
-                <div class="algorithm-description">
-                    <p>
-                        Quantum Neural Networks (QNN) use parameterized quantum circuits as quantum analogs of classical neural networks. These circuits can learn patterns in data through optimization of the quantum gate parameters, potentially offering advantages for certain learning tasks.
-                    </p>
-                </div>
-                <div class="interactive-demo">
-                    <div class="demo-controls">
-                        <div class="form-group">
-                            <label for="qnn-layers">Number of quantum layers:</label>
-                            <select id="qnn-layers">
-                                <option value="1">1 layer</option>
-                                <option value="2">2 layers</option>
-                                <option value="3">3 layers</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="qnn-task">Learning task:</label>
-                            <select id="qnn-task">
-                                <option value="xor">XOR problem</option>
-                                <option value="iris">Iris classification</option>
-                                <option value="custom">Custom function</option>
-                            </select>
-                        </div>
-                        <button id="qnn-run" class="btn primary">Train QNN</button>
-                    </div>
-                    <div class="demo-results">
-                        <div class="result-container">
-                            <h5>Circuit Architecture</h5>
-                            <div id="qnn-circuit" class="circuit-display"></div>
-                        </div>
-                        <div class="result-container">
-                            <h5>Training Progress</h5>
-                            <div id="qnn-progress" class="result-display"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="algorithm-section">
-                <h4>Quantum Clustering</h4>
-                <div class="algorithm-description">
-                    <p>
-                        Quantum clustering algorithms leverage quantum computing to potentially identify clusters more efficiently than classical algorithms. These approaches can be particularly useful for complex, high-dimensional datasets where classical algorithms struggle to find meaningful patterns.
-                    </p>
-                </div>
-                <div class="interactive-demo">
-                    <div class="demo-controls">
-                        <div class="form-group">
-                            <label for="qcluster-dataset">Dataset:</label>
-                            <select id="qcluster-dataset">
-                                <option value="simple">Simple clusters</option>
-                                <option value="complex">Complex structure</option>
-                                <option value="highdim">High-dimensional</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="qcluster-method">Method:</label>
-                            <select id="qcluster-method">
-                                <option value="qkmeans">Quantum k-means</option>
-                                <option value="qhierarchical">Quantum hierarchical</option>
-                                <option value="qdensity">Quantum density-based</option>
-                            </select>
-                        </div>
-                        <button id="qcluster-run" class="btn primary">Run Clustering</button>
-                    </div>
-                    <div class="demo-results">
-                        <div class="result-container">
-                            <h5>Original Data</h5>
-                            <div id="qcluster-original" class="visual-display"></div>
-                        </div>
-                        <div class="result-container">
-                            <h5>Clustered Data</h5>
-                            <div id="qcluster-result" class="visual-display"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="qml-advantages">
-            <h3>Quantum Advantages in Machine Learning</h3>
-            <div class="advantage-cards">
-                <div class="advantage-card">
-                    <div class="advantage-icon">⚡</div>
-                    <h4>Exponential Speedup</h4>
-                    <p>For specific machine learning tasks, quantum algorithms may offer exponential speedups over classical algorithms, particularly for high-dimensional data.</p>
-                </div>
-                <div class="advantage-card">
-                    <div class="advantage-icon">🔄</div>
-                    <h4>Quantum Feature Maps</h4>
-                    <p>Quantum computers can efficiently implement kernels and feature maps that would be computationally expensive on classical hardware.</p>
-                </div>
-                <div class="advantage-card">
-                    <div class="advantage-icon">🧮</div>
-                    <h4>Quantum Linear Algebra</h4>
-                    <p>Quantum algorithms for linear algebra can provide significant advantages for many machine learning techniques that rely on matrix operations.</p>
-                </div>
-                <div class="advantage-card">
-                    <div class="advantage-icon">🌐</div>
-                    <h4>Complex Pattern Recognition</h4>
-                    <p>Quantum entanglement allows for capturing complex correlations and patterns in data that might be difficult to model classically.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section class="qml-comparison">
-            <h3>Classical vs. Quantum ML Comparison</h3>
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Machine Learning Task</th>
-                            <th>Classical Approach</th>
-                            <th>Quantum Approach</th>
-                            <th>Potential Advantage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Principal Component Analysis</td>
-                            <td>Eigenvalue decomposition</td>
-                            <td>Quantum PCA</td>
-                            <td>Exponential speedup for specific cases</td>
-                        </tr>
-                        <tr>
-                            <td>Support Vector Machines</td>
-                            <td>Kernel methods</td>
-                            <td>Quantum kernels</td>
-                            <td>Efficient implementation of complex kernels</td>
-                        </tr>
-                        <tr>
-                            <td>Neural Networks</td>
-                            <td>Deep learning architectures</td>
-                            <td>Quantum circuits</td>
-                            <td>Potential for handling complex function spaces</td>
-                        </tr>
-                        <tr>
-                            <td>Clustering</td>
-                            <td>K-means, hierarchical clustering</td>
-                            <td>Quantum clustering algorithms</td>
-                            <td>Better handling of complex data structures</td>
-                        </tr>
-                        <tr>
-                            <td>Recommendation Systems</td>
-                            <td>Matrix factorization</td>
-                            <td>Quantum-inspired algorithms</td>
-                            <td>Faster processing of large user-item matrices</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="technical-details">
-            <h3>Technical Implementation Details</h3>
-            <div class="accordions">
-                <div class="accordion">
-                    <div class="accordion-header">Quantum Support Vector Machine Implementation</div>
-                    <div class="accordion-content">
-                        <p>
-                            The quantum SVM implementation uses quantum feature maps to encode classical data into quantum states,
-                            followed by measurement of the overlap between these states to construct a kernel matrix.
-                        </p>
-                        <div class="code-sample">
-                            <pre>
-# Simplified Quantum SVM implementation
-def quantum_svm(X_train, y_train, X_test, feature_map, shots=1024):
-    # Number of qubits needed to encode each data point
-    num_qubits = len(X_train[0])
-    
-    # Create a quantum instance
-    quantum_instance = QuantumInstance(backend=Aer.get_backend('qasm_simulator'), 
-                                     shots=shots)
-    
-    # Create feature map circuit
-    feature_map_circuit = create_feature_map(feature_map, num_qubits)
-    
-    # Create the quantum kernel
-    kernel = QuantumKernel(feature_map=feature_map_circuit, 
-                          quantum_instance=quantum_instance)
-    
-    # Calculate the kernel matrix
-    kernel_matrix = kernel.evaluate(X_train, X_train)
-    
-    # Train classical SVM using the quantum kernel
-    svm = SVC(kernel='precomputed')
-    svm.fit(kernel_matrix, y_train)
-    
-    # Predict on test data
-    test_kernel_matrix = kernel.evaluate(X_test, X_train)
-    y_pred = svm.predict(test_kernel_matrix)
-    
-    return y_pred, kernel_matrix
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <div class="accordion-header">Quantum Neural Network Architecture</div>
-                    <div class="accordion-content">
-                        <p>
-                            Quantum Neural Networks (QNN) leverage parameterized quantum circuits to learn patterns
-                            in data. The parameters are optimized using classical optimization techniques.
-                        </p>
-                        <div class="code-sample">
-                            <pre>
-# Simplified Quantum Neural Network implementation
-def quantum_neural_network(X_train, y_train, num_qubits, num_layers):
-    # Create parameterized quantum circuit
-    qnn_circuit = create_qnn_circuit(num_qubits, num_layers)
-    
-    # Define the cost function
-    def cost_function(params):
-        # Initialize cost
-        cost = 0.0
-        
-        # Evaluate circuit on each training example
-        for x, y in zip(X_train, y_train):
-            # Encode data
-            qnn_circuit.bind_parameters(x)
-            
-            # Set parameters
-            qnn_circuit.set_parameters(params)
-            
-            # Simulate
-            result = execute(qnn_circuit, Aer.get_backend('statevector_simulator')).result()
-            statevector = result.get_statevector()
-            
-            # Compute measurement probability
-            prob = compute_measurement_probability(statevector)
-            
-            # Compute cost (e.g., MSE)
-            cost += (prob - y)**2
-            
-        return cost / len(X_train)
-    
-    # Classical optimization of parameters
-    initial_params = np.random.rand(count_parameters(qnn_circuit))
-    result = minimize(cost_function, initial_params, method='COBYLA')
-    
-    # Return optimized circuit
-    optimal_params = result.x
-    qnn_circuit.set_parameters(optimal_params)
-    
-    return qnn_circuit
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <div class="accordion-header">Quantum Clustering Algorithm</div>
-                    <div class="accordion-content">
-                        <p>
-                            Quantum clustering algorithms utilize quantum computing principles to identify
-                            clusters in data more efficiently, especially for complex, high-dimensional datasets.
-                        </p>
-                        <div class="code-sample">
-                            <pre>
-# Simplified Quantum K-means implementation
-def quantum_kmeans(data, k, max_iterations=20):
-    # Initialize centroids
-    centroids = initialize_centroids(data, k)
-    
-    for _ in range(max_iterations):
-        # Quantum subroutine to compute distances
-        # This is the part that provides quantum advantage
-        distances = quantum_distance_calculation(data, centroids)
-        
-        # Assign points to nearest centroid
-        clusters = assign_to_clusters(distances)
-        
-        # Update centroids
-        new_centroids = update_centroids(data, clusters, k)
-        
-        # Check for convergence
-        if converged(centroids, new_centroids):
-            break
-            
-        centroids = new_centroids
-    
-    return clusters, centroids
-
-# Quantum distance calculation (simplified)
-def quantum_distance_calculation(data, centroids):
-    # Prepare quantum circuit for distance calculation
-    circuit = prepare_distance_circuit()
-    
-    # Encode data points and centroids
-    distances = []
-    
-    for point in data:
-        point_distances = []
-        for centroid in centroids:
-            # Encode point and centroid
-            encoded_circuit = encode_vectors(circuit, point, centroid)
-            
-            # Execute
-            result = execute(encoded_circuit, quantum_instance).result()
-            
-            # Extract distance information
-            distance = extract_distance(result)
-            point_distances.append(distance)
-        
-        distances.append(point_distances)
-    
-    return distances
-                            </pre>
-                        </div>
-                    </div>
+                <div class="qml-diagram">
+                    <svg width="400" height="300" viewBox="0 0 400 300">
+                        <defs>
+                            <linearGradient id="gradient-ml" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#1565C0" />
+                                <stop offset="100%" stop-color="#64B5F6" />
+                            </linearGradient>
+                            <linearGradient id="gradient-quantum" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#6A1B9A" />
+                                <stop offset="100%" stop-color="#BA68C8" />
+                            </linearGradient>
+                            <linearGradient id="gradient-qml" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#00695C" />
+                                <stop offset="100%" stop-color="#4DB6AC" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Classical ML Circle -->
+                        <circle cx="125" cy="100" r="80" fill="url(#gradient-ml)" opacity="0.7" />
+                        <text x="125" y="100" font-size="14" fill="white" text-anchor="middle">Machine Learning</text>
+                        <text x="125" y="120" font-size="12" fill="white" text-anchor="middle">• Rețele neuronale</text>
+                        <text x="125" y="140" font-size="12" fill="white" text-anchor="middle">• Clustering</text>
+                        <text x="125" y="160" font-size="12" fill="white" text-anchor="middle">• Clasificare</text>
+                        
+                        <!-- Quantum Computing Circle -->
+                        <circle cx="275" cy="100" r="80" fill="url(#gradient-quantum)" opacity="0.7" />
+                        <text x="275" y="100" font-size="14" fill="white" text-anchor="middle">Computație Cuantică</text>
+                        <text x="275" y="120" font-size="12" fill="white" text-anchor="middle">• Superpoziție</text>
+                        <text x="275" y="140" font-size="12" fill="white" text-anchor="middle">• Înlănțuire</text>
+                        <text x="275" y="160" font-size="12" fill="white" text-anchor="middle">• Interferență</text>
+                        
+                        <!-- QML Intersection -->
+                        <circle cx="200" cy="200" r="70" fill="url(#gradient-qml)" opacity="0.9" />
+                        <text x="200" y="190" font-size="14" fill="white" text-anchor="middle">Quantum ML</text>
+                        <text x="200" y="210" font-size="12" fill="white" text-anchor="middle">• QNNs</text>
+                        <text x="200" y="230" font-size="12" fill="white" text-anchor="middle">• VQE</text>
+                        <text x="200" y="250" font-size="12" fill="white" text-anchor="middle">• QSVM</text>
+                        
+                        <!-- Connecting lines -->
+                        <line x1="125" y1="100" x2="200" y2="200" stroke="#333" stroke-width="1" stroke-dasharray="5,5" />
+                        <line x1="275" y1="100" x2="200" y2="200" stroke="#333" stroke-width="1" stroke-dasharray="5,5" />
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <section class="copyright-notice">
-            <h3>Copyright Protection</h3>
-            <p>{{ copyright|safe }}</p>
+        <section class="qml-algorithms">
+            <h3>Algoritmi de Machine Learning Cuantic</h3>
+            <div class="algorithms-tabs">
+                <button class="algorithm-tab active" data-algorithm="qnn">Rețele Neuronale Cuantice</button>
+                <button class="algorithm-tab" data-algorithm="qsvm">SVM Cuantic</button>
+                <button class="algorithm-tab" data-algorithm="qpca">PCA Cuantic</button>
+                <button class="algorithm-tab" data-algorithm="vqe">VQE</button>
+            </div>
+            
+            <div class="algorithms-content">
+                <!-- Quantum Neural Networks -->
+                <div class="algorithm-details active" id="qnn-content">
+                    <h3>Rețele Neuronale Cuantice (QNN)</h3>
+                    <div class="algorithm-description">
+                        <p>Rețelele Neuronale Cuantice reprezintă extensii cuantice ale rețelelor neuronale clasice, utilizând proprietățile mecanicii cuantice pentru a îmbunătăți capacitățile de învățare. În QNN, neuronii sunt înlocuiți cu qubiți, iar conexiunile dintre ei pot fi modelate utilizând porți cuantice parametrizabile.</p>
+                    </div>
+                    
+                    <div class="qml-illustration">
+                        <div class="qnn-visualization">
+                            <div class="qnn-architecture">
+                                <svg width="600" height="300" viewBox="0 0 600 300">
+                                    <!-- Input Layer -->
+                                    <g class="input-layer">
+                                        <circle cx="100" cy="80" r="20" fill="#bbdefb" stroke="#0066cc" stroke-width="2" />
+                                        <text x="100" y="85" text-anchor="middle" font-size="12">|0⟩</text>
+                                        
+                                        <circle cx="100" cy="150" r="20" fill="#bbdefb" stroke="#0066cc" stroke-width="2" />
+                                        <text x="100" y="155" text-anchor="middle" font-size="12">|0⟩</text>
+                                        
+                                        <circle cx="100" cy="220" r="20" fill="#bbdefb" stroke="#0066cc" stroke-width="2" />
+                                        <text x="100" y="225" text-anchor="middle" font-size="12">|0⟩</text>
+                                    </g>
+                                    
+                                    <!-- Hidden Layer 1: Encoding -->
+                                    <g class="hidden-layer">
+                                        <rect x="180" y="60" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="200" y="85" text-anchor="middle" font-size="12">Rx</text>
+                                        
+                                        <rect x="180" y="130" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="200" y="155" text-anchor="middle" font-size="12">Ry</text>
+                                        
+                                        <rect x="180" y="200" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="200" y="225" text-anchor="middle" font-size="12">Rz</text>
+                                        
+                                        <!-- Connections -->
+                                        <line x1="120" y1="80" x2="180" y2="80" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="120" y1="150" x2="180" y2="150" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="120" y1="220" x2="180" y2="220" stroke="#0066cc" stroke-width="2" />
+                                    </g>
+                                    
+                                    <!-- Entanglement Layer -->
+                                    <g class="entanglement-layer">
+                                        <line x1="220" y1="80" x2="280" y2="80" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="220" y1="150" x2="280" y2="150" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="220" y1="220" x2="280" y2="220" stroke="#0066cc" stroke-width="2" />
+                                        
+                                        <line x1="250" y1="80" x2="250" y2="150" stroke="#0066cc" stroke-width="2" stroke-dasharray="5,5" />
+                                        <line x1="250" y1="150" x2="250" y2="220" stroke="#0066cc" stroke-width="2" stroke-dasharray="5,5" />
+                                        
+                                        <circle cx="250" cy="80" r="5" fill="#f44336" />
+                                        <circle cx="250" cy="150" r="5" fill="#0066cc" />
+                                        <text x="265" cy="80" font-size="10">CNOT</text>
+                                    </g>
+                                    
+                                    <!-- Hidden Layer 2: Parameterized -->
+                                    <g class="hidden-layer">
+                                        <rect x="280" y="60" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="300" y="85" text-anchor="middle" font-size="12">Rθ₁</text>
+                                        
+                                        <rect x="280" y="130" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="300" y="155" text-anchor="middle" font-size="12">Rθ₂</text>
+                                        
+                                        <rect x="280" y="200" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="300" y="225" text-anchor="middle" font-size="12">Rθ₃</text>
+                                    </g>
+                                    
+                                    <!-- Entanglement Layer 2 -->
+                                    <g class="entanglement-layer">
+                                        <line x1="320" y1="80" x2="380" y2="80" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="320" y1="150" x2="380" y2="150" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="320" y1="220" x2="380" y2="220" stroke="#0066cc" stroke-width="2" />
+                                        
+                                        <line x1="350" y1="80" x2="350" y2="220" stroke="#0066cc" stroke-width="2" stroke-dasharray="5,5" />
+                                        
+                                        <circle cx="350" cy="220" r="5" fill="#f44336" />
+                                        <circle cx="350" cy="80" r="5" fill="#0066cc" />
+                                        <text x="365" cy="150" font-size="10">SWAP</text>
+                                    </g>
+                                    
+                                    <!-- Hidden Layer 3: Parameterized -->
+                                    <g class="hidden-layer">
+                                        <rect x="380" y="60" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="400" y="85" text-anchor="middle" font-size="12">Rφ₁</text>
+                                        
+                                        <rect x="380" y="130" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="400" y="155" text-anchor="middle" font-size="12">Rφ₂</text>
+                                        
+                                        <rect x="380" y="200" width="40" height="40" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="400" y="225" text-anchor="middle" font-size="12">Rφ₃</text>
+                                    </g>
+                                    
+                                    <!-- Measurement Layer -->
+                                    <g class="measurement-layer">
+                                        <line x1="420" y1="80" x2="480" y2="80" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="420" y1="150" x2="480" y2="150" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="420" y1="220" x2="480" y2="220" stroke="#0066cc" stroke-width="2" />
+                                        
+                                        <rect x="480" y="60" width="40" height="40" fill="#e0e0e0" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="500" y="85" text-anchor="middle" font-size="12">M</text>
+                                        
+                                        <rect x="480" y="130" width="40" height="40" fill="#e0e0e0" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="500" y="155" text-anchor="middle" font-size="12">M</text>
+                                        
+                                        <rect x="480" y="200" width="40" height="40" fill="#e0e0e0" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="500" y="225" text-anchor="middle" font-size="12">M</text>
+                                    </g>
+                                    
+                                    <!-- Output -->
+                                    <g class="output-layer">
+                                        <line x1="520" y1="80" x2="570" y2="80" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="520" y1="150" x2="570" y2="150" stroke="#0066cc" stroke-width="2" />
+                                        <line x1="520" y1="220" x2="570" y2="220" stroke="#0066cc" stroke-width="2" />
+                                        
+                                        <circle cx="570" cy="80" r="20" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2" />
+                                        <text x="570" y="85" text-anchor="middle" font-size="12">y₁</text>
+                                        
+                                        <circle cx="570" cy="150" r="20" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2" />
+                                        <text x="570" y="155" text-anchor="middle" font-size="12">y₂</text>
+                                        
+                                        <circle cx="570" cy="220" r="20" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2" />
+                                        <text x="570" y="225" text-anchor="middle" font-size="12">y₃</text>
+                                    </g>
+                                    
+                                    <!-- Layer Labels -->
+                                    <text x="100" y="270" text-anchor="middle" font-size="12" fill="#666">Input</text>
+                                    <text x="200" y="270" text-anchor="middle" font-size="12" fill="#666">Encoding</text>
+                                    <text x="330" y="270" text-anchor="middle" font-size="12" fill="#666">Variațional</text>
+                                    <text x="500" y="270" text-anchor="middle" font-size="12" fill="#666">Măsurare</text>
+                                    <text x="570" y="270" text-anchor="middle" font-size="12" fill="#666">Output</text>
+                                </svg>
+                            </div>
+                            <div class="qnn-description">
+                                <h4>Structura unei Rețele Neuronale Cuantice Tipice</h4>
+                                <ol class="architecture-description">
+                                    <li><strong>Strat de intrare:</strong> Inițializare qubiți în starea |0⟩</li>
+                                    <li><strong>Strat de codificare:</strong> Datele de intrare sunt codificate în stări cuantice</li>
+                                    <li><strong>Strat de înlănțuire:</strong> Creează corelații între qubiți</li>
+                                    <li><strong>Straturi variaționale:</strong> Porți cuantice parametrizabile care pot fi optimizate</li>
+                                    <li><strong>Strat de măsurare:</strong> Convertește starea cuantică în probabilități clasice</li>
+                                </ol>
+                                <p>Această arhitectură permite combinarea avantajelor computației cuantice cu puterea învățării automate clasice.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="qml-applications">
+                        <h4>Aplicații ale QNN</h4>
+                        <div class="applications-grid">
+                            <div class="application-card">
+                                <h5>Recunoașterea Imaginilor</h5>
+                                <p>QNN poate fi utilizată pentru a clasifica imagini cu mai puțini parametri decât echivalentul clasic, utilizând tehnici de codificare eficiente ale informației.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Procesare Limbaj Natural</h5>
+                                <p>Algoritmii bazați pe QNN pot identifica tipare complexe în text, oferind reprezentări vectoriale îmbunătățite pentru analiza semantică.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Descoperire Medicamente</h5>
+                                <p>QNN pot accelera identificarea potențialelor medicamente prin modelarea eficientă a interacțiunilor moleculare complexe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantum SVM -->
+                <div class="algorithm-details" id="qsvm-content">
+                    <h3>Support Vector Machine Cuantic (QSVM)</h3>
+                    <div class="algorithm-description">
+                        <p>Support Vector Machine Cuantic (QSVM) reprezintă versiunea cuantică a algoritmului clasic SVM, utilizat pentru clasificare și regresie. QSVM exploatează avantajele calculului cuantic pentru a îmbunătăți calculul funcțiilor kernel, permițând identificarea mai eficientă a hiperplanelor optime de separare.</p>
+                    </div>
+                    
+                    <div class="qml-illustration">
+                        <div class="qsvm-visualization">
+                            <div class="qsvm-diagram">
+                                <svg width="600" height="300" viewBox="0 0 600 300">
+                                    <!-- Classical Space -->
+                                    <g class="classical-space">
+                                        <rect x="50" y="50" width="150" height="150" fill="none" stroke="#aaa" stroke-width="1" />
+                                        <text x="125" y="30" text-anchor="middle" font-size="14">Spațiu clasic</text>
+                                        
+                                        <!-- Data points -->
+                                        <circle cx="80" cy="90" r="5" fill="#f44336" />
+                                        <circle cx="100" cy="80" r="5" fill="#f44336" />
+                                        <circle cx="120" cy="100" r="5" fill="#f44336" />
+                                        <circle cx="90" cy="120" r="5" fill="#f44336" />
+                                        
+                                        <circle cx="150" cy="130" r="5" fill="#4CAF50" />
+                                        <circle cx="160" cy="150" r="5" fill="#4CAF50" />
+                                        <circle cx="140" cy="170" r="5" fill="#4CAF50" />
+                                        <circle cx="170" cy="160" r="5" fill="#4CAF50" />
+                                        
+                                        <!-- Linear boundary (non-separable) -->
+                                        <line x1="50" y1="180" x2="170" y2="60" stroke="#aaa" stroke-width="1" stroke-dasharray="5,5" />
+                                    </g>
+                                    
+                                    <!-- Quantum Feature Map -->
+                                    <g class="feature-map">
+                                        <path d="M200,125 C250,125 250,150 300,150" stroke="#0066cc" stroke-width="2" fill="none" />
+                                        <rect x="240" y="110" width="70" height="30" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="15" />
+                                        <text x="275" y="130" text-anchor="middle" font-size="12">Hartă Cuantică</text>
+                                    </g>
+                                    
+                                    <!-- Hilbert Space -->
+                                    <g class="hilbert-space">
+                                        <ellipse cx="400" cy="150" rx="100" ry="120" fill="none" stroke="#aaa" stroke-width="1" />
+                                        <text x="400" y="30" text-anchor="middle" font-size="14">Spațiu Hilbert</text>
+                                        
+                                        <!-- Transformed data points -->
+                                        <circle cx="350" cy="90" r="5" fill="#f44336" />
+                                        <circle cx="370" cy="110" r="5" fill="#f44336" />
+                                        <circle cx="330" cy="130" r="5" fill="#f44336" />
+                                        <circle cx="350" cy="150" r="5" fill="#f44336" />
+                                        
+                                        <circle cx="430" cy="170" r="5" fill="#4CAF50" />
+                                        <circle cx="450" cy="150" r="5" fill="#4CAF50" />
+                                        <circle cx="470" cy="190" r="5" fill="#4CAF50" />
+                                        <circle cx="440" cy="210" r="5" fill="#4CAF50" />
+                                        
+                                        <!-- Hyperplane -->
+                                        <path d="M320,120 Q350,150 370,150 Q390,150 410,140 Q430,130 480,180" stroke="#0066cc" stroke-width="2" fill="none" />
+                                    </g>
+                                    
+                                    <!-- Process Labels -->
+                                    <text x="80" y="230" text-anchor="middle" font-size="12">1. Date neseparabile</text>
+                                    <text x="80" y="250" text-anchor="middle" font-size="12">în spațiul original</text>
+                                    
+                                    <text x="275" y="230" text-anchor="middle" font-size="12">2. Transformare în</text>
+                                    <text x="275" y="250" text-anchor="middle" font-size="12">spațiu cuantic</text>
+                                    
+                                    <text x="450" y="230" text-anchor="middle" font-size="12">3. Separare liniară</text>
+                                    <text x="450" y="250" text-anchor="middle" font-size="12">în spațiu de dimensiune înaltă</text>
+                                </svg>
+                            </div>
+                            <div class="qsvm-description">
+                                <h4>Principalele Componente QSVM</h4>
+                                <ol class="qsvm-components">
+                                    <li><strong>Harta de caracteristici cuantice:</strong> Transformă datele clasice în stări cuantice</li>
+                                    <li><strong>Kernel cuantic:</strong> Calculează suprapunerea între stările cuantice, oferind o măsură de similaritate</li>
+                                    <li><strong>Optimizare:</strong> Determină marginea optimă de separare utilizând informația din spațiul Hilbert</li>
+                                </ol>
+                                <p>Avantajul principal al QSVM constă în capacitatea de a realiza implicit transformări în spații de caracteristici de dimensiuni exponențial mai mari decât în cazul SVM clasic, fără a suferi de blestemul dimensionalității.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="qml-applications">
+                        <h4>Aplicații ale QSVM</h4>
+                        <div class="applications-grid">
+                            <div class="application-card">
+                                <h5>Genomică</h5>
+                                <p>QSVM poate clasifica secvențe ADN și proteine cu o precizie îmbunătățită, utilizând funcții kernel care captează mai bine relațiile complexe.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Detectarea Fraudelor</h5>
+                                <p>Algoritmul poate identifica tipare subtile în tranzacții financiare care ar putea indica activități frauduloase.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Diagnosticare Medicală</h5>
+                                <p>QSVM poate fi utilizat pentru a analiza date medicale complexe și a oferi clasificări mai precise pentru diagnostic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantum PCA -->
+                <div class="algorithm-details" id="qpca-content">
+                    <h3>Analiza Componentelor Principale Cuantică (QPCA)</h3>
+                    <div class="algorithm-description">
+                        <p>Analiza Componentelor Principale Cuantică reprezintă o implementare cuantică a tehnicii clasice de reducere a dimensionalității. QPCA poate oferi o accelerare exponențială pentru anumite tipuri de date, permițând identificarea mai eficientă a caracteristicilor principale într-un set de date complex.</p>
+                    </div>
+                    
+                    <div class="qml-illustration">
+                        <div class="qpca-visualization">
+                            <div class="qpca-diagram">
+                                <svg width="600" height="300" viewBox="0 0 600 300">
+                                    <!-- High-dimensional data -->
+                                    <g class="high-dim-data">
+                                        <text x="75" y="30" text-anchor="middle" font-size="14">Date multi-dimensionale</text>
+                                        
+                                        <rect x="25" y="50" width="100" height="180" fill="#f5f5f5" stroke="#ddd" stroke-width="1" />
+                                        
+                                        <!-- Data matrix representation -->
+                                        <g transform="translate(35, 70)">
+                                            <rect width="80" height="140" fill="none" />
+                                            
+                                            <!-- Matrix elements visualization -->
+                                            <g class="matrix-elements">
+                                                <rect x="0" y="0" width="10" height="10" fill="#bbdefb" />
+                                                <rect x="15" y="0" width="10" height="10" fill="#90caf9" />
+                                                <rect x="30" y="0" width="10" height="10" fill="#64b5f6" />
+                                                <rect x="45" y="0" width="10" height="10" fill="#42a5f5" />
+                                                <rect x="60" y="0" width="10" height="10" fill="#2196f3" />
+                                                
+                                                <rect x="0" y="15" width="10" height="10" fill="#42a5f5" />
+                                                <rect x="15" y="15" width="10" height="10" fill="#2196f3" />
+                                                <rect x="30" y="15" width="10" height="10" fill="#1e88e5" />
+                                                <rect x="45" y="15" width="10" height="10" fill="#1976d2" />
+                                                <rect x="60" y="15" width="10" height="10" fill="#1565c0" />
+                                                
+                                                <!-- More matrix rows -->
+                                                <rect x="0" y="30" width="10" height="10" fill="#90caf9" />
+                                                <rect x="15" y="30" width="10" height="10" fill="#64b5f6" />
+                                                <rect x="30" y="30" width="10" height="10" fill="#bbdefb" />
+                                                <rect x="45" y="30" width="10" height="10" fill="#90caf9" />
+                                                <rect x="60" y="30" width="10" height="10" fill="#42a5f5" />
+                                                
+                                                <rect x="0" y="45" width="10" height="10" fill="#1976d2" />
+                                                <rect x="15" y="45" width="10" height="10" fill="#1565c0" />
+                                                <rect x="30" y="45" width="10" height="10" fill="#0d47a1" />
+                                                <rect x="45" y="45" width="10" height="10" fill="#1976d2" />
+                                                <rect x="60" y="45" width="10" height="10" fill="#1565c0" />
+                                                
+                                                <rect x="0" y="60" width="10" height="10" fill="#0d47a1" />
+                                                <rect x="15" y="60" width="10" height="10" fill="#1565c0" />
+                                                <rect x="30" y="60" width="10" height="10" fill="#1976d2" />
+                                                <rect x="45" y="60" width="10" height="10" fill="#1e88e5" />
+                                                <rect x="60" y="60" width="10" height="10" fill="#42a5f5" />
+                                                
+                                                <!-- More rows -->
+                                                <rect x="0" y="75" width="10" height="10" fill="#90caf9" />
+                                                <rect x="15" y="75" width="10" height="10" fill="#42a5f5" />
+                                                <rect x="30" y="75" width="10" height="10" fill="#1976d2" />
+                                                <rect x="45" y="75" width="10" height="10" fill="#0d47a1" />
+                                                <rect x="60" y="75" width="10" height="10" fill="#1565c0" />
+                                                
+                                                <rect x="0" y="90" width="10" height="10" fill="#bbdefb" />
+                                                <rect x="15" y="90" width="10" height="10" fill="#90caf9" />
+                                                <rect x="30" y="90" width="10" height="10" fill="#42a5f5" />
+                                                <rect x="45" y="90" width="10" height="10" fill="#1976d2" />
+                                                <rect x="60" y="90" width="10" height="10" fill="#0d47a1" />
+                                                
+                                                <rect x="0" y="105" width="10" height="10" fill="#64b5f6" />
+                                                <rect x="15" y="105" width="10" height="10" fill="#2196f3" />
+                                                <rect x="30" y="105" width="10" height="10" fill="#1e88e5" />
+                                                <rect x="45" y="105" width="10" height="10" fill="#64b5f6" />
+                                                <rect x="60" y="105" width="10" height="10" fill="#90caf9" />
+                                                
+                                                <rect x="0" y="120" width="10" height="10" fill="#bbdefb" />
+                                                <rect x="15" y="120" width="10" height="10" fill="#64b5f6" />
+                                                <rect x="30" y="120" width="10" height="10" fill="#2196f3" />
+                                                <rect x="45" y="120" width="10" height="10" fill="#0d47a1" />
+                                                <rect x="60" y="120" width="10" height="10" fill="#42a5f5" />
+                                            </g>
+                                        </g>
+                                        
+                                        <text x="75" y="250" text-anchor="middle" font-size="12">Matrice de date</text>
+                                    </g>
+                                    
+                                    <!-- Quantum Processor -->
+                                    <g class="quantum-processor">
+                                        <path d="M125,140 C175,140 175,140 225,140" stroke="#0066cc" stroke-width="2" fill="none" />
+                                        
+                                        <rect x="225" y="70" width="150" height="140" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="10" />
+                                        <text x="300" y="30" text-anchor="middle" font-size="14">Procesor Cuantic</text>
+                                        
+                                        <!-- Quantum circuit representation -->
+                                        <g transform="translate(250, 100)">
+                                            <!-- Qubits -->
+                                            <line x1="0" y1="0" x2="100" y2="0" stroke="#0066cc" stroke-width="1" />
+                                            <line x1="0" y1="20" x2="100" y2="20" stroke="#0066cc" stroke-width="1" />
+                                            <line x1="0" y1="40" x2="100" y2="40" stroke="#0066cc" stroke-width="1" />
+                                            <line x1="0" y1="60" x2="100" y2="60" stroke="#0066cc" stroke-width="1" />
+                                            
+                                            <!-- Gates -->
+                                            <rect x="10" y="-10" width="20" height="20" fill="#bbdefb" stroke="#0066cc" stroke-width="1" />
+                                            <text x="20" y="5" text-anchor="middle" font-size="10">H</text>
+                                            
+                                            <rect x="10" y="10" width="20" height="20" fill="#bbdefb" stroke="#0066cc" stroke-width="1" />
+                                            <text x="20" y="25" text-anchor="middle" font-size="10">H</text>
+                                            
+                                            <rect x="10" y="30" width="20" height="20" fill="#bbdefb" stroke="#0066cc" stroke-width="1" />
+                                            <text x="20" y="45" text-anchor="middle" font-size="10">H</text>
+                                            
+                                            <rect x="10" y="50" width="20" height="20" fill="#bbdefb" stroke="#0066cc" stroke-width="1" />
+                                            <text x="20" y="65" text-anchor="middle" font-size="10">H</text>
+                                            
+                                            <!-- CNOT gates -->
+                                            <circle cx="50" cy="0" r="4" fill="#0066cc" />
+                                            <line x1="50" y1="0" x2="50" y2="20" stroke="#0066cc" stroke-width="1" />
+                                            <line x1="46" y1="20" x2="54" y2="20" stroke="#0066cc" stroke-width="1" />
+                                            <circle cx="50" cy="20" r="4" stroke="#0066cc" stroke-width="1" fill="none" />
+                                            
+                                            <circle cx="70" cy="20" r="4" fill="#0066cc" />
+                                            <line x1="70" y1="20" x2="70" y2="40" stroke="#0066cc" stroke-width="1" />
+                                            <line x1="66" y1="40" x2="74" y2="40" stroke="#0066cc" stroke-width="1" />
+                                            <circle cx="70" cy="40" r="4" stroke="#0066cc" stroke-width="1" fill="none" />
+                                            
+                                            <circle cx="50" cy="40" r="4" fill="#0066cc" />
+                                            <line x1="50" y1="40" x2="50" y2="60" stroke="#0066cc" stroke-width="1" />
+                                            <line x1="46" y1="60" x2="54" y2="60" stroke="#0066cc" stroke-width="1" />
+                                            <circle cx="50" cy="60" r="4" stroke="#0066cc" stroke-width="1" fill="none" />
+                                        </g>
+                                        
+                                        <text x="300" y="190" text-anchor="middle" font-size="12">Diagonalizare cuantică</text>
+                                    </g>
+                                    
+                                    <!-- Reduced dimension output -->
+                                    <g class="reduced-output">
+                                        <path d="M375,140 C425,140 425,140 475,140" stroke="#0066cc" stroke-width="2" fill="none" />
+                                        
+                                        <text x="525" y="30" text-anchor="middle" font-size="14">Spațiu redus</text>
+                                        <rect x="475" y="50" width="100" height="180" fill="#f5f5f5" stroke="#ddd" stroke-width="1" />
+                                        
+                                        <!-- Principal components visualization -->
+                                        <g transform="translate(495, 100)">
+                                            <!-- Scatter plot of reduced dimensions -->
+                                            <circle cx="10" cy="10" r="5" fill="#f44336" />
+                                            <circle cx="15" cy="25" r="5" fill="#f44336" />
+                                            <circle cx="25" cy="15" r="5" fill="#f44336" />
+                                            <circle cx="20" cy="30" r="5" fill="#f44336" />
+                                            
+                                            <circle cx="40" cy="60" r="5" fill="#4CAF50" />
+                                            <circle cx="45" cy="70" r="5" fill="#4CAF50" />
+                                            <circle cx="55" cy="65" r="5" fill="#4CAF50" />
+                                            <circle cx="60" cy="75" r="5" fill="#4CAF50" />
+                                            
+                                            <!-- Principal directions -->
+                                            <line x1="0" y1="0" x2="60" y2="60" stroke="#0066cc" stroke-width="2" stroke-dasharray="5,5" />
+                                            <line x1="60" y1="0" x2="0" y2="60" stroke="#0066cc" stroke-width="1" stroke-dasharray="5,5" />
+                                            
+                                            <text x="65" y="60" font-size="10">PC1</text>
+                                            <text x="0" y="65" font-size="10">PC2</text>
+                                        </g>
+                                        
+                                        <text x="525" y="250" text-anchor="middle" font-size="12">Componente Principale</text>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="qpca-description">
+                                <h4>Avantajele QPCA</h4>
+                                <ul class="qpca-advantages">
+                                    <li><strong>Accelerare exponențială:</strong> Pentru anumite tipuri de date, QPCA poate oferi o accelerare exponențială față de PCA clasic</li>
+                                    <li><strong>Manipulare eficientă a datelor de dimensiuni mari:</strong> QPCA poate gestiona eficient matrici de densitate de dimensiuni mari</li>
+                                    <li><strong>Diagonalizare cuantică:</strong> Utilizează tehnici cuantice pentru a determina valorile și vectorii proprii ai matricei de covarianță</li>
+                                </ul>
+                                <p>Spre deosebire de PCA clasic, care are complexitate O(N²D + D³) pentru N puncte în D dimensiuni, QPCA poate atinge complexitate logaritmică în anumite condiții.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="qml-applications">
+                        <h4>Aplicații ale QPCA</h4>
+                        <div class="applications-grid">
+                            <div class="application-card">
+                                <h5>Prelucrare Imagini</h5>
+                                <p>QPCA poate fi utilizat pentru compresia și reconstrucția eficientă a imaginilor de dimensiuni mari.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Genomică</h5>
+                                <p>Reducerea dimensionalității seturilor de date genomice vaste pentru a identifica patternuri relevante biologic.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Finanțe</h5>
+                                <p>Analiza seriilor de timp multidimensionale pentru identificarea factorilor principali care influențează piețele.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VQE Algorithm -->
+                <div class="algorithm-details" id="vqe-content">
+                    <h3>Algoritm Variațional de Eigensolver Cuantic (VQE)</h3>
+                    <div class="algorithm-description">
+                        <p>Variational Quantum Eigensolver (VQE) este un algoritm hibrid cuantic-clasic conceput pentru a găsi starea de energie minimă (eigenvaloarea minimă) a unui hamiltonian, cu aplicații importante în chimie cuantică, fizică și optimizare.</p>
+                    </div>
+                    
+                    <div class="qml-illustration">
+                        <div class="vqe-visualization">
+                            <div class="vqe-diagram">
+                                <svg width="600" height="350" viewBox="0 0 600 350">
+                                    <!-- Classical Optimizer -->
+                                    <g class="classical-optimizer">
+                                        <rect x="250" y="20" width="100" height="50" fill="#f5f5f5" stroke="#666" stroke-width="2" rx="5" />
+                                        <text x="300" y="50" text-anchor="middle" font-size="12">Optimizer Clasic</text>
+                                    </g>
+                                    
+                                    <!-- Parameters flow -->
+                                    <path d="M300,70 L300,100" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+                                    
+                                    <!-- Quantum Circuit -->
+                                    <g class="quantum-circuit">
+                                        <rect x="200" y="100" width="200" height="80" fill="#e3f2fd" stroke="#0066cc" stroke-width="2" rx="5" />
+                                        <text x="300" y="125" text-anchor="middle" font-size="14">Circuit Cuantic Parametrizat</text>
+                                        <text x="300" y="145" text-anchor="middle" font-size="12" fill="#666">|ψ(θ)⟩ = U(θ)|0⟩</text>
+                                        <text x="300" y="165" text-anchor="middle" font-size="12" fill="#666">θ = {θ₁, θ₂, ..., θₙ}</text>
+                                    </g>
+                                    
+                                    <!-- Energy Measurement -->
+                                    <g class="energy-measurement">
+                                        <rect x="200" y="220" width="200" height="60" fill="#e8f5e9" stroke="#4CAF50" stroke-width="2" rx="5" />
+                                        <text x="300" y="250" text-anchor="middle" font-size="14">Măsurare Energie</text>
+                                        <text x="300" y="270" text-anchor="middle" font-size="12" fill="#666">E(θ) = ⟨ψ(θ)|H|ψ(θ)⟩</text>
+                                    </g>
+                                    
+                                    <!-- Flow arrows -->
+                                    <path d="M300,180 L300,220" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+                                    <path d="M200,250 C150,250 150,150 200,150" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+                                    <text x="150" y="200" text-anchor="middle" font-size="12" fill="#666" transform="rotate(-90 150 200)">Iterație</text>
+                                    
+                                    <path d="M400,250 C450,250 450,50 350,50" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+                                    <text x="450" y="150" text-anchor="middle" font-size="12" fill="#666" transform="rotate(90 450 150)">Actualizare Parametri</text>
+                                    
+                                    <!-- Energy landscape -->
+                                    <g class="energy-landscape" transform="translate(450, 250)">
+                                        <rect x="0" y="0" width="100" height="80" fill="#f5f5f5" stroke="#666" stroke-width="1" />
+                                        <text x="50" y="-10" text-anchor="middle" font-size="12">Peisaj energetic</text>
+                                        
+                                        <!-- Energy function visualization -->
+                                        <path d="M10,70 Q20,60 30,65 Q40,70 50,20 Q60,10 70,30 Q80,45 90,40" stroke="#f44336" stroke-width="2" fill="none" />
+                                        
+                                        <!-- Optimization trajectory -->
+                                        <circle cx="30" cy="65" r="3" fill="#0066cc" />
+                                        <circle cx="40" cy="45" r="3" fill="#0066cc" />
+                                        <circle cx="45" cy="30" r="3" fill="#0066cc" />
+                                        <circle cx="50" cy="20" r="3" fill="#0066cc" />
+                                        
+                                        <path d="M30,65 L40,45 L45,30 L50,20" stroke="#0066cc" stroke-width="1" stroke-dasharray="2,2" />
+                                    </g>
+                                    
+                                    <!-- Final result -->
+                                    <g class="final-result">
+                                        <rect x="50" y="250" width="100" height="80" fill="#e8f5e9" stroke="#4CAF50" stroke-width="1" />
+                                        <text x="100" y="240" text-anchor="middle" font-size="12">Rezultat Final</text>
+                                        
+                                        <text x="100" y="270" text-anchor="middle" font-size="12">Eigenvaloare:</text>
+                                        <text x="100" y="290" text-anchor="middle" font-size="14" font-family="monospace">E₀ = -1.137 eV</text>
+                                        
+                                        <text x="100" y="310" text-anchor="middle" font-size="12">Stare:</text>
+                                        <text x="100" y="330" text-anchor="middle" font-size="12" font-family="monospace">|ψ₀⟩ = |ψ(θ*)⟩</text>
+                                    </g>
+                                    
+                                    <!-- Arrow definitions -->
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                                            refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+                                        </marker>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div class="vqe-description">
+                                <h4>Cum funcționează VQE</h4>
+                                <ol class="vqe-steps">
+                                    <li><strong>Ansatz cuantic:</strong> Se definește un circuit cuantic parametrizat care generează o stare |ψ(θ)⟩</li>
+                                    <li><strong>Măsurare energie:</strong> Se calculează valoarea așteptată a hamiltonianului ⟨ψ(θ)|H|ψ(θ)⟩</li>
+                                    <li><strong>Optimizare clasică:</strong> Un optimizator clasic actualizează parametrii θ pentru a minimiza energia</li>
+                                    <li><strong>Iterare:</strong> Procesul se repetă până când energia converge la o valoare minimă</li>
+                                </ol>
+                                <p>VQE este un exemplu excelent de algoritm hibrid care combină puterea calculatoarelor cuantice pentru pregătirea și manipularea stărilor cuantice cu optimizatorii clasici robuști.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="qml-applications">
+                        <h4>Aplicații ale VQE</h4>
+                        <div class="applications-grid">
+                            <div class="application-card">
+                                <h5>Chimie Computațională</h5>
+                                <p>Calcularea energiilor moleculare și proprietăților electronice pentru molecule complexe cu precizie ridicată.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Știința Materialelor</h5>
+                                <p>Modelarea structurii și proprietăților materialelor cuantice complexe precum supraconductorii.</p>
+                            </div>
+                            <div class="application-card">
+                                <h5>Optimizare Combinatorială</h5>
+                                <p>Rezolvarea problemelor de optimizare NP-hard prin maparea la probleme de minimizare a energiei.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="qml-challenges">
+            <h3>Provocări și Perspective de Viitor</h3>
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <h4>Zgomot Cuantic</h4>
+                    <p>Calculatoarele cuantice actuale sunt afectate de zgomot și decoerență, limitând dimensiunea și complexitatea modelelor QML care pot fi implementate. Cercetările în domeniul corectării erorilor cuantice și algoritmilor robuști la zgomot sunt esențiale pentru a depăși această limitare.</p>
+                </div>
+                <div class="challenge-card">
+                    <h4>Transferabilitate</h4>
+                    <p>Transferarea eficientă a datelor clasice în stări cuantice (și invers) reprezintă un obstacol major. Sunt necesare tehnici mai eficiente de codificare a datelor pentru a exploata pe deplin avantajul cuantic.</p>
+                </div>
+                <div class="challenge-card">
+                    <h4>Scalabilitate</h4>
+                    <p>O provocare majoră este scalarea algoritmilor QML pentru seturi de date din lumea reală. Abordările hibride, care combină prelucrarea clasică cu cea cuantică, par a fi cele mai promițătoare pe termen scurt și mediu.</p>
+                </div>
+                <div class="challenge-card">
+                    <h4>Avantaj Cuantic Demonstrabil</h4>
+                    <p>Identificarea aplicațiilor specifice unde QML oferă un avantaj clar și demonstrabil față de ML clasic rămâne un domeniu activ de cercetare. Provocarea constă în dezvoltarea de algoritmi QML care nu pot fi simulați eficient pe calculatoare clasice.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="qml-resources">
+            <h3>Resurse pentru Machine Learning Cuantic</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h4>Biblioteci Software</h4>
+                    <ul class="resource-list">
+                        <li><strong>PennyLane</strong> - Framework pentru machine learning cuantic diferențiabil</li>
+                        <li><strong>TensorFlow Quantum</strong> - Extensie a TensorFlow pentru QML</li>
+                        <li><strong>Qiskit Machine Learning</strong> - Modul pentru algoritmi QML pe platforme IBM Quantum</li>
+                        <li><strong>Cirq</strong> - Framework pentru circuite cuantice de la Google</li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h4>Cursuri și Tutoriale</h4>
+                    <ul class="resource-list">
+                        <li>"Quantum Machine Learning" - edX, Universitatea din Toronto</li>
+                        <li>"Introduction to Quantum Computing for Computer Scientists" - Coursera</li>
+                        <li>"QML Demos" - Tutoriale interactive de la Xanadu</li>
+                        <li>"Quantum Kernel Methods" - Tutoriale IBM Quantum</li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h4>Materiale Academice</h4>
+                    <ul class="resource-list">
+                        <li>"Quantum Machine Learning: What Quantum Computing Means to Data Mining" - Peter Wittek</li>
+                        <li>"Supervised Learning with Quantum Computers" - Schuld & Petruccione</li>
+                        <li>"Quantum Computing for Computer Scientists" - Yanofsky & Mannucci</li>
+                        <li>"Machine Learning with Quantum Computers" - Schuld & Killoran</li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h4>Comunități Online</h4>
+                    <ul class="resource-list">
+                        <li>Qiskit Slack Community - Canal #qml</li>
+                        <li>PennyLane Forum - Discuții despre QML diferențiabil</li>
+                        <li>Stack Exchange Quantum Computing</li>
+                        <li>GitHub - Depozite de cod open-source pentru QML</li>
+                    </ul>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -418,1267 +751,423 @@ def quantum_distance_calculation(data, centroids):
         <div class="footer-content">
             <div class="footer-copyright">
                 <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                <p>Toate drepturile rezervate global. Protejat de legile internaționale ale drepturilor de autor.</p>
             </div>
             <div class="footer-security">
-                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                <p>Enhanced with DNA-based quantum security</p>
+                <p>Securizat cu tehnologie cuantică și ADN</p>
+                <p>Cheie de Securitate: {{ security_key }}</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                    <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                    <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                </ul>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript includes for animations and interactive elements -->
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
-    
-    <!-- Quantum ML specific scripts -->
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize QML visualizations
-            initQMLVisuals();
+            // Algorithm tabs functionality
+            const algorithmTabs = document.querySelectorAll('.algorithm-tab');
+            const algorithmContents = document.querySelectorAll('.algorithm-details');
             
-            // Set up QSVM demo
-            setupQSVMDemo();
+            algorithmTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const algorithm = this.getAttribute('data-algorithm');
+                    
+                    // Update active tab
+                    algorithmTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    algorithmContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(`${algorithm}-content`).classList.add('active');
+                });
+            });
             
-            // Set up QNN demo
-            setupQNNDemo();
-            
-            // Set up quantum clustering demo
-            setupQClusteringDemo();
-            
-            // Initialize security system with DNA-based protection
-            if (window.initDNASecurity) {
-                window.initDNASecurity({
-                    author: "Ervin Remus Radosavlevici",
-                    email: "ervin210@icloud.com",
-                    securityKey: "{{ security_key }}"
+            // Add animation to diagrams
+            const qnnArchitecture = document.querySelector('.qnn-architecture');
+            if (qnnArchitecture) {
+                // Highlight layers sequentially
+                const layers = qnnArchitecture.querySelectorAll('g');
+                let delay = 0;
+                layers.forEach(layer => {
+                    setTimeout(() => {
+                        layer.classList.add('highlight');
+                        setTimeout(() => {
+                            layer.classList.remove('highlight');
+                        }, 1000);
+                    }, delay);
+                    delay += 1500;
                 });
             }
         });
-        
-        // Initialize QML visualizations
-        function initQMLVisuals() {
-            const qmlAnimation = document.getElementById('qml-animation');
-            if (qmlAnimation) {
-                // Create a canvas for QML animation
-                const canvas = document.createElement('canvas');
-                canvas.width = 300;
-                canvas.height = 200;
-                qmlAnimation.appendChild(canvas);
-                
-                const ctx = canvas.getContext('2d');
-                animateQMLNetwork(ctx, canvas.width, canvas.height);
-            }
-        }
-        
-        // Animate a quantum neural network
-        function animateQMLNetwork(ctx, width, height) {
-            // Create a simplified quantum neural network visualization
-            const nodes = [];
-            
-            // Input layer
-            for (let i = 0; i < 3; i++) {
-                nodes.push({
-                    x: 50,
-                    y: 60 + i * 40,
-                    layer: 0,
-                    value: Math.random(),
-                    connections: [3, 4, 5]
-                });
-            }
-            
-            // Hidden layer (quantum)
-            for (let i = 0; i < 3; i++) {
-                nodes.push({
-                    x: 150,
-                    y: 60 + i * 40,
-                    layer: 1,
-                    value: Math.random(),
-                    connections: [6, 7]
-                });
-            }
-            
-            // Output layer
-            for (let i = 0; i < 2; i++) {
-                nodes.push({
-                    x: 250,
-                    y: 80 + i * 40,
-                    layer: 2,
-                    value: Math.random(),
-                    connections: []
-                });
-            }
-            
-            // Animation loop
-            let frame = 0;
-            function animate() {
-                // Clear canvas
-                ctx.fillStyle = '#f5f5f5';
-                ctx.fillRect(0, 0, width, height);
-                
-                // Update node values
-                if (frame % 15 === 0) {
-                    for (let i = 0; i < nodes.length; i++) {
-                        // Randomly update values
-                        if (nodes[i].layer === 0) {
-                            nodes[i].value = 0.3 + Math.random() * 0.7; // Input values
-                        }
-                    }
-                    
-                    // Propagate values
-                    for (let layer = 0; layer < 2; layer++) {
-                        for (let i = 0; i < nodes.length; i++) {
-                            if (nodes[i].layer === layer) {
-                                for (let j = 0; j < nodes[i].connections.length; j++) {
-                                    const targetIdx = nodes[i].connections[j];
-                                    // Quantum-inspired update
-                                    const phase = Math.sin((frame + i * 10) / 30);
-                                    nodes[targetIdx].value = 0.3 + 0.7 * Math.abs(Math.sin(nodes[i].value * Math.PI * phase));
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                // Draw connections
-                for (let i = 0; i < nodes.length; i++) {
-                    const node = nodes[i];
-                    
-                    for (let j = 0; j < node.connections.length; j++) {
-                        const targetIdx = node.connections[j];
-                        const target = nodes[targetIdx];
-                        
-                        // Draw quantum-inspired connection
-                        const gradient = ctx.createLinearGradient(node.x, node.y, target.x, target.y);
-                        gradient.addColorStop(0, `rgba(33, 150, 243, ${node.value})`);
-                        gradient.addColorStop(1, `rgba(156, 39, 176, ${target.value})`);
-                        
-                        ctx.strokeStyle = gradient;
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        
-                        // Wavy connection for quantum effect
-                        const waviness = 10;
-                        const segments = 10;
-                        
-                        ctx.moveTo(node.x, node.y);
-                        
-                        for (let s = 1; s <= segments; s++) {
-                            const t = s / segments;
-                            const x = node.x + (target.x - node.x) * t;
-                            const y = node.y + (target.y - node.y) * t + 
-                                    Math.sin((t * Math.PI * 2) + frame / 10) * 
-                                    waviness * (node.layer === 0 ? 1 : 2);
-                            
-                            ctx.lineTo(x, y);
-                        }
-                        
-                        ctx.stroke();
-                    }
-                }
-                
-                // Draw nodes
-                for (let i = 0; i < nodes.length; i++) {
-                    const node = nodes[i];
-                    
-                    // Different styling based on layer
-                    if (node.layer === 0) {
-                        // Input nodes
-                        ctx.fillStyle = `rgba(33, 150, 243, ${node.value})`;
-                    } else if (node.layer === 1) {
-                        // Quantum layer
-                        ctx.fillStyle = `rgba(156, 39, 176, ${node.value})`;
-                    } else {
-                        // Output layer
-                        ctx.fillStyle = `rgba(76, 175, 80, ${node.value})`;
-                    }
-                    
-                    ctx.beginPath();
-                    ctx.arc(node.x, node.y, 10, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    // For quantum layer, add bloch sphere effect
-                    if (node.layer === 1) {
-                        ctx.strokeStyle = '#ffffff';
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.arc(node.x, node.y, 10, 0, Math.PI * 2);
-                        ctx.stroke();
-                        
-                        // Quantum state indicator
-                        const stateAngle = (frame / 20 + i * Math.PI / 2) % (Math.PI * 2);
-                        ctx.strokeStyle = '#ffffff';
-                        ctx.beginPath();
-                        ctx.moveTo(node.x, node.y);
-                        ctx.lineTo(
-                            node.x + 8 * Math.cos(stateAngle),
-                            node.y + 8 * Math.sin(stateAngle)
-                        );
-                        ctx.stroke();
-                    }
-                }
-                
-                // Draw layer labels
-                ctx.fillStyle = '#333333';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'center';
-                
-                ctx.fillText('Input', 50, 25);
-                ctx.fillText('Quantum Layer', 150, 25);
-                ctx.fillText('Output', 250, 25);
-                
-                // Continue animation
-                frame++;
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-        }
-        
-        // Set up QSVM demo
-        function setupQSVMDemo() {
-            const qsvmRun = document.getElementById('qsvm-run');
-            const qsvmDataset = document.getElementById('qsvm-dataset');
-            const qsvmKernel = document.getElementById('qsvm-kernel');
-            const qsvmData = document.getElementById('qsvm-data');
-            const qsvmBoundary = document.getElementById('qsvm-boundary');
-            
-            if (qsvmRun) {
-                qsvmRun.addEventListener('click', function() {
-                    // Show loading states
-                    qsvmData.innerHTML = '<div class="loading">Generating dataset...</div>';
-                    qsvmBoundary.innerHTML = '<div class="loading">Training QSVM...</div>';
-                    
-                    // Simulate delay for computation
-                    setTimeout(function() {
-                        const dataset = qsvmDataset.value;
-                        const kernel = qsvmKernel.value;
-                        
-                        // Generate and display dataset
-                        generateQSVMDataset(qsvmData, dataset);
-                        
-                        // Simulate quantum SVM training and display decision boundary
-                        setTimeout(function() {
-                            showQSVMResults(qsvmBoundary, dataset, kernel);
-                        }, 1500);
-                    }, 1000);
-                });
-            }
-        }
-        
-        // Generate and display QSVM dataset
-        function generateQSVMDataset(container, datasetType) {
-            container.innerHTML = '';
-            
-            // Create canvas for dataset visualization
-            const canvas = document.createElement('canvas');
-            canvas.width = 300;
-            canvas.height = 300;
-            container.appendChild(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Title
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Training Dataset', canvas.width / 2, 20);
-            
-            // Draw axes
-            ctx.strokeStyle = '#cccccc';
-            ctx.lineWidth = 1;
-            
-            // x-axis
-            ctx.beginPath();
-            ctx.moveTo(50, canvas.height - 50);
-            ctx.lineTo(canvas.width - 50, canvas.height - 50);
-            ctx.stroke();
-            
-            // y-axis
-            ctx.beginPath();
-            ctx.moveTo(50, 50);
-            ctx.lineTo(50, canvas.height - 50);
-            ctx.stroke();
-            
-            // Generate datapoints
-            const points = generateDataPoints(datasetType, 50);
-            
-            // Plot datapoints
-            for (let i = 0; i < points.length; i++) {
-                const x = 50 + (canvas.width - 100) * (points[i].x * 0.5 + 0.5);
-                const y = (canvas.height - 50) - (canvas.height - 100) * (points[i].y * 0.5 + 0.5);
-                
-                ctx.fillStyle = points[i].label === 1 ? '#4caf50' : '#f44336';
-                ctx.beginPath();
-                ctx.arc(x, y, 5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            
-            // Add labels
-            ctx.fillStyle = '#333333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            
-            // x-axis label
-            ctx.fillText('Feature 1', canvas.width / 2, canvas.height - 20);
-            
-            // y-axis label
-            ctx.save();
-            ctx.translate(20, canvas.height / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText('Feature 2', 0, 0);
-            ctx.restore();
-            
-            // Legend
-            ctx.fillStyle = '#4caf50';
-            ctx.beginPath();
-            ctx.arc(60, 30, 5, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.fillStyle = '#f44336';
-            ctx.beginPath();
-            ctx.arc(130, 30, 5, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.fillStyle = '#333333';
-            ctx.textAlign = 'left';
-            ctx.fillText('Class 1', 70, 35);
-            ctx.fillText('Class 2', 140, 35);
-        }
-        
-        // Generate dataset points
-        function generateDataPoints(datasetType, numPoints) {
-            const points = [];
-            
-            switch (datasetType) {
-                case 'circles':
-                    // Generate circular dataset
-                    for (let i = 0; i < numPoints; i++) {
-                        const angle = Math.random() * Math.PI * 2;
-                        const radius1 = 0.3 + Math.random() * 0.1;
-                        const radius2 = 0.7 + Math.random() * 0.1;
-                        
-                        // Inner circle (class 1)
-                        points.push({
-                            x: Math.cos(angle) * radius1,
-                            y: Math.sin(angle) * radius1,
-                            label: 1
-                        });
-                        
-                        // Outer circle (class 2)
-                        points.push({
-                            x: Math.cos(angle + Math.PI / 4) * radius2,
-                            y: Math.sin(angle + Math.PI / 4) * radius2,
-                            label: -1
-                        });
-                    }
-                    break;
-                    
-                case 'moons':
-                    // Generate two moons dataset
-                    for (let i = 0; i < numPoints; i++) {
-                        const angle1 = Math.PI - Math.random() * Math.PI;
-                        const angle2 = Math.random() * Math.PI;
-                        const noise = (Math.random() - 0.5) * 0.2;
-                        
-                        // Upper moon (class 1)
-                        points.push({
-                            x: Math.cos(angle1) * 0.5,
-                            y: Math.sin(angle1) * 0.5 + 0.2 + noise,
-                            label: 1
-                        });
-                        
-                        // Lower moon (class 2)
-                        points.push({
-                            x: 0.5 + Math.cos(angle2) * 0.5,
-                            y: -0.2 + Math.sin(angle2) * 0.5 + noise,
-                            label: -1
-                        });
-                    }
-                    break;
-                    
-                case 'blobs':
-                default:
-                    // Generate Gaussian blobs
-                    const centers = [
-                        {x: -0.5, y: -0.5, label: 1},
-                        {x: 0.5, y: 0.5, label: 1},
-                        {x: -0.5, y: 0.5, label: -1},
-                        {x: 0.5, y: -0.5, label: -1}
-                    ];
-                    
-                    for (let i = 0; i < numPoints; i++) {
-                        const centerIdx = Math.floor(Math.random() * centers.length);
-                        const center = centers[centerIdx];
-                        
-                        points.push({
-                            x: center.x + (Math.random() - 0.5) * 0.3,
-                            y: center.y + (Math.random() - 0.5) * 0.3,
-                            label: center.label
-                        });
-                    }
-                    break;
-            }
-            
-            return points;
-        }
-        
-        // Show QSVM results with decision boundary
-        function showQSVMResults(container, datasetType, kernelType) {
-            container.innerHTML = '';
-            
-            // Create canvas for QSVM decision boundary
-            const canvas = document.createElement('canvas');
-            canvas.width = 300;
-            canvas.height = 300;
-            container.appendChild(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Title
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('QSVM Decision Boundary', canvas.width / 2, 20);
-            
-            // Draw decision boundary background
-            const imageData = ctx.createImageData(canvas.width - 100, canvas.height - 100);
-            
-            // Generate a decision boundary based on dataset and kernel
-            for (let y = 0; y < canvas.height - 100; y++) {
-                for (let x = 0; x < canvas.width - 100; x++) {
-                    const realX = (x / (canvas.width - 100) - 0.5) * 2;
-                    const realY = ((canvas.height - 100 - y) / (canvas.height - 100) - 0.5) * 2;
-                    
-                    // Compute decision function (simplified)
-                    let decision = 0;
-                    
-                    switch (datasetType) {
-                        case 'circles':
-                            // Circular boundary
-                            decision = Math.sqrt(realX*realX + realY*realY) - 0.5;
-                            break;
-                            
-                        case 'moons':
-                            // Two moons boundary
-                            if (realY > 0) {
-                                decision = Math.sqrt((realX - 0.25)*(realX - 0.25) + (realY - 0.5)*(realY - 0.5)) - 0.5;
-                            } else {
-                                decision = Math.sqrt((realX + 0.25)*(realX + 0.25) + (realY + 0.5)*(realY + 0.5)) - 0.5;
-                            }
-                            break;
-                            
-                        case 'blobs':
-                        default:
-                            // XOR-like boundary for blobs
-                            decision = realX * realY;
-                            break;
-                    }
-                    
-                    // Apply quantum kernel effect
-                    if (kernelType === 'zz') {
-                        decision = Math.tanh(decision * 2) * 0.8;
-                    } else if (kernelType === 'pauli') {
-                        decision = Math.sin(decision * Math.PI * 2) * 0.8;
-                    } else {
-                        // Custom kernel - more complex boundary
-                        decision = Math.sin(realX * 5) * Math.cos(realY * 5) * 0.3 + decision * 0.7;
-                    }
-                    
-                    // Set pixel color based on decision value
-                    const idx = (y * (canvas.width - 100) + x) * 4;
-                    
-                    if (decision > 0.05) {
-                        // Class 1 region (light green)
-                        imageData.data[idx] = 220;
-                        imageData.data[idx + 1] = 237;
-                        imageData.data[idx + 2] = 220;
-                        imageData.data[idx + 3] = 255;
-                    } else if (decision < -0.05) {
-                        // Class 2 region (light red)
-                        imageData.data[idx] = 237;
-                        imageData.data[idx + 1] = 220;
-                        imageData.data[idx + 2] = 220;
-                        imageData.data[idx + 3] = 255;
-                    } else {
-                        // Decision boundary (yellow)
-                        imageData.data[idx] = 255;
-                        imageData.data[idx + 1] = 249;
-                        imageData.data[idx + 2] = 196;
-                        imageData.data[idx + 3] = 255;
-                    }
-                }
-            }
-            
-            // Put the image data
-            ctx.putImageData(imageData, 50, 50);
-            
-            // Draw axes
-            ctx.strokeStyle = '#cccccc';
-            ctx.lineWidth = 1;
-            
-            // x-axis
-            ctx.beginPath();
-            ctx.moveTo(50, canvas.height - 50);
-            ctx.lineTo(canvas.width - 50, canvas.height - 50);
-            ctx.stroke();
-            
-            // y-axis
-            ctx.beginPath();
-            ctx.moveTo(50, 50);
-            ctx.lineTo(50, canvas.height - 50);
-            ctx.stroke();
-            
-            // Generate datapoints
-            const points = generateDataPoints(datasetType, 25);
-            
-            // Plot datapoints
-            for (let i = 0; i < points.length; i++) {
-                const x = 50 + (canvas.width - 100) * (points[i].x * 0.5 + 0.5);
-                const y = (canvas.height - 50) - (canvas.height - 100) * (points[i].y * 0.5 + 0.5);
-                
-                ctx.fillStyle = points[i].label === 1 ? '#4caf50' : '#f44336';
-                ctx.beginPath();
-                ctx.arc(x, y, 5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            
-            // Add labels
-            ctx.fillStyle = '#333333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            
-            // x-axis label
-            ctx.fillText('Feature 1', canvas.width / 2, canvas.height - 20);
-            
-            // y-axis label
-            ctx.save();
-            ctx.translate(20, canvas.height / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText('Feature 2', 0, 0);
-            ctx.restore();
-            
-            // Quantum kernel info
-            const kernelName = kernelType === 'zz' ? 'ZZ Feature Map' : 
-                             (kernelType === 'pauli' ? 'Pauli Feature Map' : 'Custom Quantum Kernel');
-            
-            const explanation = document.createElement('p');
-            explanation.textContent = `Kernel: ${kernelName} - The quantum kernel allows the SVM to find complex decision boundaries by implicitly mapping data to a higher-dimensional Hilbert space.`;
-            container.appendChild(explanation);
-        }
-        
-        // Set up QNN demo
-        function setupQNNDemo() {
-            const qnnRun = document.getElementById('qnn-run');
-            const qnnLayers = document.getElementById('qnn-layers');
-            const qnnTask = document.getElementById('qnn-task');
-            const qnnCircuit = document.getElementById('qnn-circuit');
-            const qnnProgress = document.getElementById('qnn-progress');
-            
-            if (qnnRun) {
-                qnnRun.addEventListener('click', function() {
-                    // Show loading states
-                    qnnCircuit.innerHTML = '<div class="loading">Generating QNN circuit...</div>';
-                    qnnProgress.innerHTML = '<div class="loading">Training QNN...</div>';
-                    
-                    // Simulate delay for computation
-                    setTimeout(function() {
-                        const layers = parseInt(qnnLayers.value);
-                        const task = qnnTask.value;
-                        
-                        // Generate and display QNN circuit
-                        displayQNNCircuit(qnnCircuit, layers);
-                        
-                        // Simulate QNN training and display progress
-                        setTimeout(function() {
-                            displayQNNTraining(qnnProgress, layers, task);
-                        }, 1500);
-                    }, 1000);
-                });
-            }
-        }
-        
-        // Display QNN circuit
-        function displayQNNCircuit(container, layers) {
-            container.innerHTML = '';
-            
-            // Create canvas for QNN circuit
-            const canvas = document.createElement('canvas');
-            canvas.width = 400;
-            canvas.height = 200;
-            container.appendChild(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Title
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Quantum Neural Network Circuit', canvas.width / 2, 20);
-            
-            // Number of qubits for this demo
-            const qubits = 3;
-            
-            // Draw qubit lines
-            ctx.strokeStyle = '#333333';
-            ctx.lineWidth = 1;
-            
-            for (let i = 0; i < qubits; i++) {
-                ctx.beginPath();
-                ctx.moveTo(50, 50 + i * 40);
-                ctx.lineTo(canvas.width - 50, 50 + i * 40);
-                ctx.stroke();
-                
-                // Qubit labels
-                ctx.fillStyle = '#333333';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'right';
-                ctx.fillText(`q${i}:`, 45, 55 + i * 40);
-            }
-            
-            // Data encoding block
-            const encodingX = 70;
-            const blockWidth = 40;
-            
-            ctx.fillStyle = '#2196f3';
-            ctx.fillRect(encodingX, 30, blockWidth, qubits * 40 + 20);
-            
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Data', encodingX + blockWidth/2, 50 + (qubits-1) * 20);
-            ctx.fillText('Encoding', encodingX + blockWidth/2, 65 + (qubits-1) * 20);
-            
-            // Variational layers
-            for (let layer = 0; layer < layers; layer++) {
-                const layerX = 140 + layer * 60;
-                
-                // Layer block
-                ctx.fillStyle = '#9c27b0';
-                ctx.fillRect(layerX, 30, blockWidth, qubits * 40 + 20);
-                
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('Var.', layerX + blockWidth/2, 50 + (qubits-1) * 20);
-                ctx.fillText(`Layer ${layer+1}`, layerX + blockWidth/2, 65 + (qubits-1) * 20);
-                
-                // Entanglement lines
-                if (layer < layers - 1) {
-                    const entangleX = layerX + blockWidth + 10;
-                    
-                    ctx.strokeStyle = '#9c27b0';
-                    ctx.lineWidth = 1;
-                    
-                    for (let i = 0; i < qubits - 1; i++) {
-                        ctx.beginPath();
-                        ctx.moveTo(entangleX, 50 + i * 40);
-                        ctx.lineTo(entangleX, 50 + (i+1) * 40);
-                        ctx.stroke();
-                        
-                        // Control point
-                        ctx.fillStyle = '#9c27b0';
-                        ctx.beginPath();
-                        ctx.arc(entangleX, 50 + i * 40, 3, 0, Math.PI * 2);
-                        ctx.fill();
-                        
-                        // Target point
-                        ctx.strokeStyle = '#9c27b0';
-                        ctx.beginPath();
-                        ctx.arc(entangleX, 50 + (i+1) * 40, 5, 0, Math.PI * 2);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            // Measurement block
-            const measureX = 140 + layers * 60 + 20;
-            
-            ctx.fillStyle = '#4caf50';
-            ctx.fillRect(measureX, 30, blockWidth, qubits * 40 + 20);
-            
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Meas.', measureX + blockWidth/2, 50 + (qubits-1) * 20);
-            
-            // Add explanation
-            const explanation = document.createElement('p');
-            explanation.innerHTML = `This QNN has ${qubits} qubits and ${layers} variational layers with trainable parameters.
-                                   Data is encoded using amplitude encoding, followed by parameterized rotation and entangling gates.`;
-            container.appendChild(explanation);
-        }
-        
-        // Display QNN training progress
-        function displayQNNTraining(container, layers, task) {
-            container.innerHTML = '';
-            
-            // Create canvas for training progress
-            const canvas = document.createElement('canvas');
-            canvas.width = 400;
-            canvas.height = 250;
-            container.appendChild(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Title
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Training Progress', canvas.width / 2, 20);
-            
-            // Generate training data based on the task
-            let epochs = 20;
-            let losses = [];
-            let accuracies = [];
-            
-            // Starting loss depends on task complexity and number of layers
-            let initialLoss = 0.8;
-            if (task === 'xor') {
-                initialLoss = 0.9 - layers * 0.1; // XOR is hard, more layers help
-            } else if (task === 'iris') {
-                initialLoss = 0.7 - layers * 0.05; // Iris is moderate
-            } else {
-                initialLoss = 0.6 - layers * 0.05; // Custom function is easier
-            }
-            
-            // Generate loss curve
-            for (let i = 0; i < epochs; i++) {
-                // Exponential decay with noise
-                const progress = i / (epochs - 1);
-                const smoothFactor = layers * 0.2; // More layers converge faster
-                const baseLoss = initialLoss * Math.exp(-progress * (3 + smoothFactor));
-                const noise = (Math.random() - 0.5) * 0.05 * (1 - progress); // Noise reduces over time
-                
-                losses.push(Math.max(0.05, baseLoss + noise));
-                
-                // Accuracy is inverse of loss with some randomness
-                const baseAccuracy = 1 - losses[i] * 0.8; // Not perfect inverse
-                const accNoise = (Math.random()) * 0.05 * (1 - progress);
-                accuracies.push(Math.min(0.99, baseAccuracy + accNoise));
-            }
-            
-            // Draw axes
-            ctx.strokeStyle = '#cccccc';
-            ctx.lineWidth = 1;
-            
-            // x-axis
-            ctx.beginPath();
-            ctx.moveTo(50, canvas.height - 50);
-            ctx.lineTo(canvas.width - 50, canvas.height - 50);
-            ctx.stroke();
-            
-            // y-axis
-            ctx.beginPath();
-            ctx.moveTo(50, 50);
-            ctx.lineTo(50, canvas.height - 50);
-            ctx.stroke();
-            
-            // Draw loss curve
-            ctx.strokeStyle = '#f44336';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            
-            for (let i = 0; i < epochs; i++) {
-                const x = 50 + (canvas.width - 100) * (i / (epochs - 1));
-                const y = 50 + (canvas.height - 100) * (1 - losses[i]);
-                
-                if (i === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-            
-            ctx.stroke();
-            
-            // Draw accuracy curve
-            ctx.strokeStyle = '#4caf50';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            
-            for (let i = 0; i < epochs; i++) {
-                const x = 50 + (canvas.width - 100) * (i / (epochs - 1));
-                const y = 50 + (canvas.height - 100) * (1 - accuracies[i]);
-                
-                if (i === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-            
-            ctx.stroke();
-            
-            // Add epoch markers
-            ctx.fillStyle = '#333333';
-            ctx.font = '10px Arial';
-            ctx.textAlign = 'center';
-            
-            for (let i = 0; i < epochs; i += 4) {
-                const x = 50 + (canvas.width - 100) * (i / (epochs - 1));
-                ctx.fillText(i.toString(), x, canvas.height - 35);
-            }
-            
-            // Add y-axis labels
-            ctx.textAlign = 'right';
-            for (let i = 0; i <= 10; i += 2) {
-                const y = 50 + (canvas.height - 100) * (1 - i/10);
-                ctx.fillText((i/10).toFixed(1), 45, y + 5);
-            }
-            
-            // Add axes labels
-            ctx.fillStyle = '#333333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            
-            // x-axis label
-            ctx.fillText('Epochs', canvas.width / 2, canvas.height - 15);
-            
-            // y-axis label
-            ctx.save();
-            ctx.translate(15, canvas.height / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText('Value', 0, 0);
-            ctx.restore();
-            
-            // Add legend
-            ctx.fillStyle = '#f44336';
-            ctx.fillRect(canvas.width - 100, 60, 15, 15);
-            
-            ctx.fillStyle = '#4caf50';
-            ctx.fillRect(canvas.width - 100, 85, 15, 15);
-            
-            ctx.fillStyle = '#333333';
-            ctx.textAlign = 'left';
-            ctx.fillText('Loss', canvas.width - 80, 72);
-            ctx.fillText('Accuracy', canvas.width - 80, 97);
-            
-            // Add final metrics
-            const finalLoss = losses[losses.length - 1].toFixed(3);
-            const finalAccuracy = accuracies[accuracies.length - 1].toFixed(3);
-            
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 12px Arial';
-            ctx.textAlign = 'left';
-            ctx.fillText(`Final Loss: ${finalLoss}`, 60, 190);
-            ctx.fillText(`Final Accuracy: ${finalAccuracy}`, 60, 210);
-            
-            // Add task-specific explanation
-            const taskName = task === 'xor' ? 'XOR Problem' : 
-                          (task === 'iris' ? 'Iris Classification' : 'Custom Function');
-            
-            const explanation = document.createElement('p');
-            explanation.textContent = `Task: ${taskName} - The QNN with ${layers} variational layers achieved ${(accuracies[accuracies.length - 1] * 100).toFixed(1)}% accuracy after ${epochs} training epochs.`;
-            container.appendChild(explanation);
-        }
-        
-        // Set up quantum clustering demo
-        function setupQClusteringDemo() {
-            const qclusterRun = document.getElementById('qcluster-run');
-            const qclusterDataset = document.getElementById('qcluster-dataset');
-            const qclusterMethod = document.getElementById('qcluster-method');
-            const qclusterOriginal = document.getElementById('qcluster-original');
-            const qclusterResult = document.getElementById('qcluster-result');
-            
-            if (qclusterRun) {
-                qclusterRun.addEventListener('click', function() {
-                    // Show loading states
-                    qclusterOriginal.innerHTML = '<div class="loading">Generating dataset...</div>';
-                    qclusterResult.innerHTML = '<div class="loading">Performing quantum clustering...</div>';
-                    
-                    // Simulate delay for computation
-                    setTimeout(function() {
-                        const dataset = qclusterDataset.value;
-                        const method = qclusterMethod.value;
-                        
-                        // Generate and display dataset
-                        const points = generateClusteringDataset(qclusterOriginal, dataset);
-                        
-                        // Simulate quantum clustering and display results
-                        setTimeout(function() {
-                            displayClusteringResults(qclusterResult, points, dataset, method);
-                        }, 1500);
-                    }, 1000);
-                });
-            }
-        }
-        
-        // Generate clustering dataset
-        function generateClusteringDataset(container, datasetType) {
-            container.innerHTML = '';
-            
-            // Create canvas for dataset visualization
-            const canvas = document.createElement('canvas');
-            canvas.width = 300;
-            canvas.height = 300;
-            container.appendChild(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Title
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Original Dataset', canvas.width / 2, 20);
-            
-            // Draw axes
-            ctx.strokeStyle = '#cccccc';
-            ctx.lineWidth = 1;
-            
-            // x-axis
-            ctx.beginPath();
-            ctx.moveTo(50, canvas.height - 50);
-            ctx.lineTo(canvas.width - 50, canvas.height - 50);
-            ctx.stroke();
-            
-            // y-axis
-            ctx.beginPath();
-            ctx.moveTo(50, 50);
-            ctx.lineTo(50, canvas.height - 50);
-            ctx.stroke();
-            
-            // Generate data points based on dataset type
-            const points = [];
-            
-            switch (datasetType) {
-                case 'simple':
-                    // Generate simple clusters
-                    const centers = [
-                        {x: -0.6, y: -0.6},
-                        {x: 0.6, y: 0.6},
-                        {x: -0.6, y: 0.6},
-                        {x: 0.6, y: -0.6}
-                    ];
-                    
-                    for (let i = 0; i < 100; i++) {
-                        const centerIdx = Math.floor(Math.random() * centers.length);
-                        const center = centers[centerIdx];
-                        
-                        points.push({
-                            x: center.x + (Math.random() - 0.5) * 0.3,
-                            y: center.y + (Math.random() - 0.5) * 0.3,
-                            cluster: -1 // Unassigned initially
-                        });
-                    }
-                    break;
-                    
-                case 'complex':
-                    // Generate spiral structure
-                    for (let i = 0; i < 150; i++) {
-                        const t = 4 * Math.PI * (i / 150);
-                        const noise = (Math.random() - 0.5) * 0.1;
-                        
-                        // First spiral
-                        const r1 = 0.05 + 0.7 * (i / 150);
-                        points.push({
-                            x: r1 * Math.cos(t) + noise,
-                            y: r1 * Math.sin(t) + noise,
-                            cluster: -1
-                        });
-                        
-                        // Second spiral
-                        const r2 = 0.05 + 0.7 * (i / 150);
-                        points.push({
-                            x: r2 * Math.cos(t + Math.PI) + noise,
-                            y: r2 * Math.sin(t + Math.PI) + noise,
-                            cluster: -1
-                        });
-                    }
-                    break;
-                    
-                case 'highdim':
-                default:
-                    // Generate high-dimensional projection
-                    for (let i = 0; i < 150; i++) {
-                        // Simulate projection from higher dimensions
-                        const angle1 = Math.random() * Math.PI * 2;
-                        const angle2 = Math.random() * Math.PI * 2;
-                        const angle3 = Math.random() * Math.PI * 2;
-                        
-                        // Project using sine and cosine combinations
-                        const x = 0.7 * (Math.sin(angle1) * Math.cos(angle2) + 
-                                      Math.cos(angle1) * Math.sin(angle3));
-                        const y = 0.7 * (Math.cos(angle1) * Math.sin(angle2) + 
-                                      Math.sin(angle1) * Math.cos(angle3));
-                        
-                        points.push({
-                            x: x,
-                            y: y,
-                            cluster: -1
-                        });
-                    }
-                    break;
-            }
-            
-            // Plot points
-            for (let i = 0; i < points.length; i++) {
-                const x = 50 + (canvas.width - 100) * (points[i].x + 0.7) / 1.4;
-                const y = (canvas.height - 50) - (canvas.height - 100) * (points[i].y + 0.7) / 1.4;
-                
-                ctx.fillStyle = '#2196f3';
-                ctx.beginPath();
-                ctx.arc(x, y, 3, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            
-            // Add axes labels
-            ctx.fillStyle = '#333333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            
-            // x-axis label
-            ctx.fillText('Feature 1', canvas.width / 2, canvas.height - 20);
-            
-            // y-axis label
-            ctx.save();
-            ctx.translate(20, canvas.height / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText('Feature 2', 0, 0);
-            ctx.restore();
-            
-            // Add explanation based on dataset type
-            let datasetName = '';
-            switch (datasetType) {
-                case 'simple':
-                    datasetName = 'Simple Clusters';
-                    break;
-                case 'complex':
-                    datasetName = 'Complex Structure (Spirals)';
-                    break;
-                case 'highdim':
-                    datasetName = 'High-Dimensional Projection';
-                    break;
-            }
-            
-            const explanation = document.createElement('p');
-            explanation.textContent = `Dataset: ${datasetName}`;
-            container.appendChild(explanation);
-            
-            return points;
-        }
-        
-        // Display clustering results
-        function displayClusteringResults(container, points, datasetType, methodType) {
-            container.innerHTML = '';
-            
-            // Create canvas for clustering results
-            const canvas = document.createElement('canvas');
-            canvas.width = 300;
-            canvas.height = 300;
-            container.appendChild(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Title
-            ctx.fillStyle = '#333333';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Clustered Data', canvas.width / 2, 20);
-            
-            // Draw axes
-            ctx.strokeStyle = '#cccccc';
-            ctx.lineWidth = 1;
-            
-            // x-axis
-            ctx.beginPath();
-            ctx.moveTo(50, canvas.height - 50);
-            ctx.lineTo(canvas.width - 50, canvas.height - 50);
-            ctx.stroke();
-            
-            // y-axis
-            ctx.beginPath();
-            ctx.moveTo(50, 50);
-            ctx.lineTo(50, canvas.height - 50);
-            ctx.stroke();
-            
-            // Determine number of clusters based on dataset and method
-            let numClusters = 4;
-            
-            if (datasetType === 'complex') {
-                numClusters = methodType === 'qdensity' ? 6 : 2;
-            } else if (datasetType === 'highdim') {
-                numClusters = methodType === 'qhierarchical' ? 5 : 3;
-            }
-            
-            // Assign clusters based on method
-            // This is a simplified clustering simulation
-            const clusterPoints = JSON.parse(JSON.stringify(points)); // Deep copy
-            
-            switch (methodType) {
-                case 'qkmeans':
-                    // Quantum k-means - distance based
-                    // Initialize centroids
-                    const centroids = [];
-                    for (let i = 0; i < numClusters; i++) {
-                        centroids.push({
-                            x: (Math.random() - 0.5) * 1.4,
-                            y: (Math.random() - 0.5) * 1.4
-                        });
-                    }
-                    
-                    // Assign points to nearest centroid
-                    for (let i = 0; i < clusterPoints.length; i++) {
-                        let minDist = Number.MAX_VALUE;
-                        let cluster = 0;
-                        
-                        for (let j = 0; j < centroids.length; j++) {
-                            const dx = clusterPoints[i].x - centroids[j].x;
-                            const dy = clusterPoints[i].y - centroids[j].y;
-                            const dist = dx*dx + dy*dy;
-                            
-                            if (dist < minDist) {
-                                minDist = dist;
-                                cluster = j;
-                            }
-                        }
-                        
-                        clusterPoints[i].cluster = cluster;
-                    }
-                    break;
-                    
-                case 'qhierarchical':
-                    // Quantum hierarchical - neighbor based
-                    // For spirals, use angle-based clustering
-                    if (datasetType === 'complex') {
-                        for (let i = 0; i < clusterPoints.length; i++) {
-                            const angle = Math.atan2(clusterPoints[i].y, clusterPoints[i].x);
-                            const normalizedAngle = (angle + Math.PI) / (2 * Math.PI);
-                            clusterPoints[i].cluster = Math.floor(normalizedAngle * numClusters);
-                        }
-                    } else {
-                        // For other datasets, use distance hierarchies (simplified)
-                        for (let i = 0; i < clusterPoints.length; i++) {
-                            const dist = Math.sqrt(clusterPoints[i].x*clusterPoints[i].x + clusterPoints[i].y*clusterPoints[i].y);
-                            
-                            // Add some randomness to make it interesting
-                            const angleOffset = Math.atan2(clusterPoints[i].y, clusterPoints[i].x) * 0.318;
-                            
-                            clusterPoints[i].cluster = Math.floor((dist * 2 + angleOffset) * numClusters) % numClusters;
-                        }
-                    }
-                    break;
-                    
-                case 'qdensity':
-                default:
-                    // Quantum density-based
-                    if (datasetType === 'complex') {
-                        // For spirals, use radius and angle
-                        for (let i = 0; i < clusterPoints.length; i++) {
-                            const r = Math.sqrt(clusterPoints[i].x*clusterPoints[i].x + clusterPoints[i].y*clusterPoints[i].y);
-                            const angle = Math.atan2(clusterPoints[i].y, clusterPoints[i].x);
-                            
-                            // For spirals, use both radius and angle
-                            const rBin = Math.floor(r * 3);
-                            const angleBin = angle > 0 ? 1 : 0;
-                            
-                            clusterPoints[i].cluster = rBin + angleBin * 3;
-                        }
-                    } else {
-                        // Use quantum-inspired density estimation
-                        for (let i = 0; i < clusterPoints.length; i++) {
-                            const x = clusterPoints[i].x;
-                            const y = clusterPoints[i].y;
-                            
-                            // Use sine functions to create interesting density boundaries
-                            const density = Math.sin(x * 5) * Math.cos(y * 5);
-                            
-                            // Assign cluster based on density
-                            clusterPoints[i].cluster = Math.floor((density + 1) * numClusters / 2) % numClusters;
-                        }
-                    }
-                    break;
-            }
-            
-            // Cluster colors
-            const clusterColors = [
-                '#4caf50', // Green
-                '#f44336', // Red
-                '#2196f3', // Blue
-                '#ff9800', // Orange
-                '#9c27b0', // Purple
-                '#ffeb3b'  // Yellow
-            ];
-            
-            // Plot clustered points
-            for (let i = 0; i < clusterPoints.length; i++) {
-                const x = 50 + (canvas.width - 100) * (clusterPoints[i].x + 0.7) / 1.4;
-                const y = (canvas.height - 50) - (canvas.height - 100) * (clusterPoints[i].y + 0.7) / 1.4;
-                
-                const colorIndex = clusterPoints[i].cluster % clusterColors.length;
-                ctx.fillStyle = clusterColors[colorIndex];
-                ctx.beginPath();
-                ctx.arc(x, y, 4, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            
-            // Add axes labels
-            ctx.fillStyle = '#333333';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            
-            // x-axis label
-            ctx.fillText('Feature 1', canvas.width / 2, canvas.height - 20);
-            
-            // y-axis label
-            ctx.save();
-            ctx.translate(20, canvas.height / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText('Feature 2', 0, 0);
-            ctx.restore();
-            
-            // Add legend
-            ctx.textAlign = 'left';
-            for (let i = 0; i < Math.min(numClusters, clusterColors.length); i++) {
-                ctx.fillStyle = clusterColors[i];
-                ctx.fillRect(60 + (i % 3) * 80, 255 + Math.floor(i / 3) * 20, 10, 10);
-                
-                ctx.fillStyle = '#333333';
-                ctx.fillText(`Cluster ${i+1}`, 75 + (i % 3) * 80, 265 + Math.floor(i / 3) * 20);
-            }
-            
-            // Add explanation based on method type
-            let methodName = '';
-            switch (methodType) {
-                case 'qkmeans':
-                    methodName = 'Quantum K-means';
-                    break;
-                case 'qhierarchical':
-                    methodName = 'Quantum Hierarchical';
-                    break;
-                case 'qdensity':
-                    methodName = 'Quantum Density-based';
-                    break;
-            }
-            
-            const explanation = document.createElement('p');
-            explanation.textContent = `Method: ${methodName} - Found ${numClusters} clusters using quantum-enhanced distance calculations.`;
-            container.appendChild(explanation);
-        }
     </script>
+    
+    <style>
+        /* Quantum ML page specific styles */
+        .qml-intro {
+            margin-bottom: 3rem;
+        }
+        
+        .intro-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .qml-advantages {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+        }
+        
+        .qml-advantages li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .qml-advantages li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: #0066cc;
+            border-radius: 50%;
+        }
+        
+        .qml-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Tabs for algorithms */
+        .algorithms-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .algorithm-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .algorithm-tab:hover {
+            color: #0066cc;
+        }
+        
+        .algorithm-tab.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+        
+        .algorithm-details {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .algorithm-details.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .algorithm-description {
+            margin-bottom: 2rem;
+        }
+        
+        /* QNN Styles */
+        .qnn-visualization {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .qnn-architecture {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        .qnn-description {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .architecture-description {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .architecture-description li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* QSVM Styles */
+        .qsvm-visualization {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .qsvm-diagram {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        .qsvm-description {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .qsvm-components {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .qsvm-components li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* QPCA Styles */
+        .qpca-visualization {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .qpca-diagram {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        .qpca-description {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .qpca-advantages {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .qpca-advantages li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* VQE Styles */
+        .vqe-visualization {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .vqe-diagram {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        .vqe-description {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .vqe-steps {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .vqe-steps li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Applications Section */
+        .qml-applications {
+            margin-top: 2rem;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .application-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .application-card h5 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        /* Challenges Section */
+        .qml-challenges {
+            margin-top: 3rem;
+            padding: 3rem 0;
+            background-color: #f8f9fa;
+            border-radius: 16px;
+        }
+        
+        .qml-challenges h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .challenge-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .challenge-card h4 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        /* Resources Section */
+        .qml-resources {
+            margin-top: 3rem;
+        }
+        
+        .qml-resources h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .resource-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .resource-card h4 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-list {
+            padding-left: 1.5rem;
+        }
+        
+        .resource-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Animation */
+        .highlight {
+            animation: pulse 1s ease;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .intro-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .qml-diagram {
+                margin-top: 2rem;
+            }
+            
+            .qml-diagram svg {
+                width: 100%;
+                height: auto;
+            }
+            
+            .algorithms-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .algorithm-tab {
+                padding: 0.8rem 1.2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </body>
 </html>
