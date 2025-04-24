@@ -8,21 +8,22 @@ capabilities against CODE THEFT. Protected by INTERNATIONAL COPYRIGHT LAW.
 """
 
 import os
-import json
-import hashlib
 import datetime
-from typing import Dict, Any, List, Optional, Tuple
+import hashlib
+import json
 import secrets
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from typing import List, Dict, Any, Tuple, Optional
 
-# Initialize database
+from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, ForeignKey, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, sessionmaker, scoped_session
+from flask_sqlalchemy import SQLAlchemy
+
+# Initialize SQLAlchemy base class
 Base = declarative_base()
 
-# Global reference to be set by application
-db = None
+# Global database connection
+db = SQLAlchemy()
 
 class User(Base):
     """
@@ -97,25 +98,29 @@ def initialize_database(app):
     Args:
         app: Flask application
     """
-    global db
+    # Configure SQLAlchemy
+    db.init_app(app)
     
-    # Use the existing db instance that was already created at the top level
-    if 'db' not in globals() or db is None:
-        # Only create a new instance if one doesn't exist
-        db = SQLAlchemy(app)
-    
-    # Create tables
-    Base.metadata.create_all(db.engine)
-    
-    # Log initialization with security monitoring
-    log_security_event("DATABASE_INIT", "Database initialized with DNA-based security")
-    
-    return db
+    # Create tables within app context
+    with app.app_context():
+        # Create all tables
+        Base.metadata.create_all(db.engine)
+        
+        # Log database initialization
+        log_security_event(
+            "DATABASE_INIT",
+            "Database initialized with copyright protection",
+            metadata={
+                "tables": [table.__tablename__ for table in 
+                          [User, SecurityEvent, QuantumSimulation, DNAEncryption]],
+                "copyright": "Ervin Remus Radosavlevici (ervin210@icloud.com)"
+            }
+        )
 
 def log_security_event(event_type: str, description: str, 
                       user_id: Optional[int] = None, 
                       metadata: Optional[Dict[str, Any]] = None,
-                      ip_address: Optional[str] = None) -> SecurityEvent:
+                      ip_address: Optional[str] = None) -> Optional[SecurityEvent]:
     """
     Log a security event with DNA protection
     
@@ -129,31 +134,39 @@ def log_security_event(event_type: str, description: str,
     Returns:
         SecurityEvent: The created security event
     """
-    global db
-    
-    if not db:
-        # If database not yet initialized, store in a temporary log
-        # This will be picked up when the database is initialized
+    try:
+        # Create a new security event
+        from flask import current_app
+        
+        # Add console output for basic debugging
         print(f"[SECURITY_EVENT] {event_type}: {description}")
+        
+        # Skip database operations if app is not initialized yet
+        if not current_app:
+            return None
+            
+        with current_app.app_context():
+            # Convert metadata to JSON
+            metadata_json = json.dumps(metadata) if metadata else None
+            
+            # Create a new security event
+            event = SecurityEvent(
+                user_id=user_id,
+                event_type=event_type,
+                description=description,
+                event_metadata=metadata_json,
+                ip_address=ip_address
+            )
+            
+            # Add to database
+            db.session.add(event)
+            db.session.commit()
+            
+            return event
+    except Exception as e:
+        # Don't crash on logging errors
+        print(f"[ERROR] Could not log security event: {str(e)}")
         return None
-    
-    # Convert metadata to JSON
-    metadata_json = json.dumps(metadata) if metadata else None
-    
-    # Create security event with DNA-protected info
-    event = SecurityEvent(
-        user_id=user_id,
-        event_type=event_type,
-        description=description,
-        event_metadata=metadata_json,
-        ip_address=ip_address
-    )
-    
-    # Add and commit to database
-    db.session.add(event)
-    db.session.commit()
-    
-    return event
 
 def authenticate_user(username: str, password: str) -> Tuple[bool, Optional[User], Optional[str]]:
     """
@@ -169,49 +182,50 @@ def authenticate_user(username: str, password: str) -> Tuple[bool, Optional[User
             - User object if successful, None otherwise
             - Error message if unsuccessful, None otherwise
     """
-    global db
-    
-    if not db:
-        return False, None, "Database not initialized"
-    
-    # Find user
-    user = User.query.filter_by(username=username).first()
-    
-    if not user:
-        # Log failed authentication attempt
+    try:
+        # Find the user
+        user = User.query.filter_by(username=username).first()
+        
+        if not user:
+            # Log failed authentication
+            log_security_event(
+                "AUTH_FAILED",
+                f"Authentication failed for non-existent user: {username}"
+            )
+            return False, None, "User not found"
+        
+        # Verify password with DNA signature protection
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        
+        if user.password_hash != password_hash:
+            # Log failed authentication
+            log_security_event(
+                "AUTH_FAILED",
+                f"Authentication failed for user: {username} (invalid password)",
+                user_id=user.id
+            )
+            return False, None, "Invalid password"
+        
+        # Update last login time
+        user.last_login = datetime.datetime.utcnow()
+        db.session.commit()
+        
+        # Log successful authentication
         log_security_event(
-            "AUTH_FAILURE",
-            f"Authentication failed for non-existent user: {username}",
-            event_type="WARNING",
-            metadata={"username": username}
+            "AUTH_SUCCESS",
+            f"User {username} authenticated successfully",
+            user_id=user.id
         )
-        return False, None, "Invalid username or password"
-    
-    # Hash the provided password with the same algorithm used during registration
-    password_hash = hashlib.sha256(password.encode()).hexdigest()
-    
-    if user.password_hash != password_hash:
-        # Log failed password attempt
+        
+        return True, user, None
+        
+    except Exception as e:
+        # Log error
         log_security_event(
-            "AUTH_FAILURE",
-            f"Authentication failed for user: {username} (password mismatch)",
-            user_id=user.id,
-            event_type="WARNING"
+            "AUTH_ERROR",
+            f"Authentication error: {str(e)}"
         )
-        return False, None, "Invalid username or password"
-    
-    # Update last login time
-    user.last_login = datetime.datetime.utcnow()
-    db.session.commit()
-    
-    # Log successful authentication
-    log_security_event(
-        "AUTH_SUCCESS",
-        f"User {username} authenticated successfully",
-        user_id=user.id
-    )
-    
-    return True, user, None
+        return False, None, f"Authentication error: {str(e)}"
 
 def register_user(username: str, email: str, password: str) -> Tuple[bool, Optional[User], Optional[str]]:
     """
@@ -228,52 +242,53 @@ def register_user(username: str, email: str, password: str) -> Tuple[bool, Optio
             - User object if successful, None otherwise
             - Error message if unsuccessful, None otherwise
     """
-    global db
-    
-    if not db:
-        return False, None, "Database not initialized"
-    
-    # Check if username already exists
-    if User.query.filter_by(username=username).first():
-        return False, None, "Username already exists"
-    
-    # Check if email already exists
-    if User.query.filter_by(email=email).first():
-        return False, None, "Email already exists"
-    
-    # Hash password
-    password_hash = hashlib.sha256(password.encode()).hexdigest()
-    
-    # Generate DNA signature for enhanced security
-    dna_signature_base = f"{username}:{email}:{secrets.token_hex(16)}"
-    dna_signature = hashlib.sha256(dna_signature_base.encode()).hexdigest()
-    
-    # Create new user with DNA security
-    user = User(
-        username=username,
-        email=email,
-        password_hash=password_hash,
-        dna_signature=dna_signature,
-        security_level=1,  # Default security level
-        created_at=datetime.datetime.utcnow()
-    )
-    
-    # Add to database
-    db.session.add(user)
-    db.session.commit()
-    
-    # Log user registration
-    log_security_event(
-        "USER_REGISTER",
-        f"New user registered: {username}",
-        user_id=user.id,
-        metadata={"email": email}
-    )
-    
-    return True, user, None
+    try:
+        # Check if username already exists
+        if User.query.filter_by(username=username).first():
+            return False, None, "Username already exists"
+        
+        # Check if email already exists
+        if User.query.filter_by(email=email).first():
+            return False, None, "Email address already exists"
+        
+        # Create password hash
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        
+        # Generate DNA signature for security
+        dna_signature = generate_dna_signature(username, email, password)
+        
+        # Create new user
+        user = User(
+            username=username,
+            email=email,
+            password_hash=password_hash,
+            dna_signature=dna_signature,
+            security_level=1  # Default security level
+        )
+        
+        # Add to database
+        db.session.add(user)
+        db.session.commit()
+        
+        # Log user registration
+        log_security_event(
+            "USER_REGISTERED",
+            f"User {username} registered successfully",
+            user_id=user.id
+        )
+        
+        return True, user, None
+        
+    except Exception as e:
+        # Log error
+        log_security_event(
+            "REGISTRATION_ERROR",
+            f"Registration error: {str(e)}"
+        )
+        return False, None, f"Registration error: {str(e)}"
 
 def save_quantum_simulation(user_id: Optional[int], circuit_type: str, 
-                           parameters: Dict[str, Any], results: Dict[str, Any]) -> QuantumSimulation:
+                           parameters: Dict[str, Any], results: Dict[str, Any]) -> Optional[QuantumSimulation]:
     """
     Save a quantum simulation result with copyright protection
     
@@ -286,40 +301,47 @@ def save_quantum_simulation(user_id: Optional[int], circuit_type: str,
     Returns:
         QuantumSimulation: The saved simulation record
     """
-    global db
-    
-    if not db:
+    try:
+        # Convert parameters and results to JSON
+        parameters_json = json.dumps(parameters)
+        results_json = json.dumps(results)
+        
+        # Create simulation record
+        simulation = QuantumSimulation(
+            user_id=user_id,
+            circuit_type=circuit_type,
+            parameters=parameters_json,
+            results=results_json
+        )
+        
+        # Add to database
+        db.session.add(simulation)
+        db.session.commit()
+        
+        # Log simulation
+        log_security_event(
+            "QUANTUM_SIMULATION",
+            f"Quantum simulation of type {circuit_type} saved",
+            user_id=user_id,
+            metadata={
+                "circuit_type": circuit_type,
+                "simulation_id": simulation.id
+            }
+        )
+        
+        return simulation
+        
+    except Exception as e:
+        # Log error
+        log_security_event(
+            "SIMULATION_ERROR",
+            f"Error saving simulation: {str(e)}",
+            user_id=user_id
+        )
         return None
-    
-    # Convert dictionaries to JSON
-    parameters_json = json.dumps(parameters)
-    results_json = json.dumps(results)
-    
-    # Add copyright watermark to results
-    copyright_notice = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally."
-    results_with_copyright = {
-        **json.loads(results_json),
-        "copyright": copyright_notice
-    }
-    results_json = json.dumps(results_with_copyright)
-    
-    # Create simulation record
-    simulation = QuantumSimulation(
-        user_id=user_id,
-        circuit_type=circuit_type,
-        parameters=parameters_json,
-        results=results_json,
-        created_at=datetime.datetime.utcnow()
-    )
-    
-    # Save to database
-    db.session.add(simulation)
-    db.session.commit()
-    
-    return simulation
 
 def record_dna_encryption(user_id: Optional[int], input_length: int, 
-                         output_length: int, key: str, is_decryption: bool = False) -> DNAEncryption:
+                         output_length: int, key: str, is_decryption: bool = False) -> Optional[DNAEncryption]:
     """
     Record a DNA encryption/decryption operation
     
@@ -333,29 +355,46 @@ def record_dna_encryption(user_id: Optional[int], input_length: int,
     Returns:
         DNAEncryption: The recorded encryption operation
     """
-    global db
-    
-    if not db:
+    try:
+        # Calculate key signature (hash) for security
+        key_signature = hashlib.sha256(key.encode()).hexdigest()
+        
+        # Create encryption record
+        encryption = DNAEncryption(
+            user_id=user_id,
+            input_length=input_length,
+            output_length=output_length,
+            key_signature=key_signature,
+            is_decryption=is_decryption
+        )
+        
+        # Add to database
+        db.session.add(encryption)
+        db.session.commit()
+        
+        # Log encryption
+        operation_type = "decryption" if is_decryption else "encryption"
+        log_security_event(
+            "DNA_OPERATION",
+            f"DNA {operation_type} operation recorded",
+            user_id=user_id,
+            metadata={
+                "operation": operation_type,
+                "input_length": input_length,
+                "output_length": output_length
+            }
+        )
+        
+        return encryption
+        
+    except Exception as e:
+        # Log error
+        log_security_event(
+            "DNA_OPERATION_ERROR",
+            f"Error recording DNA operation: {str(e)}",
+            user_id=user_id
+        )
         return None
-    
-    # Hash the key for secure storage
-    key_signature = hashlib.sha256(key.encode()).hexdigest()
-    
-    # Create encryption record
-    encryption = DNAEncryption(
-        user_id=user_id,
-        input_length=input_length,
-        output_length=output_length,
-        key_signature=key_signature,
-        created_at=datetime.datetime.utcnow(),
-        is_decryption=is_decryption
-    )
-    
-    # Save to database
-    db.session.add(encryption)
-    db.session.commit()
-    
-    return encryption
 
 def get_security_events(limit: int = 100, user_id: Optional[int] = None) -> List[Dict[str, Any]]:
     """
@@ -368,40 +407,46 @@ def get_security_events(limit: int = 100, user_id: Optional[int] = None) -> List
     Returns:
         List[Dict]: List of security events as dictionaries
     """
-    global db
-    
-    if not db:
+    try:
+        # Start query
+        query = SecurityEvent.query
+        
+        # Apply filters
+        if user_id is not None:
+            query = query.filter_by(user_id=user_id)
+        
+        # Order by timestamp descending
+        query = query.order_by(SecurityEvent.timestamp.desc())
+        
+        # Apply limit
+        query = query.limit(limit)
+        
+        # Execute query
+        events = query.all()
+        
+        # Convert to dictionaries
+        result = []
+        for event in events:
+            event_dict = {
+                "id": event.id,
+                "user_id": event.user_id,
+                "event_type": event.event_type,
+                "description": event.description,
+                "ip_address": event.ip_address,
+                "timestamp": event.timestamp.isoformat(),
+                "metadata": json.loads(event.event_metadata) if event.event_metadata else None
+            }
+            result.append(event_dict)
+        
+        return result
+        
+    except Exception as e:
+        # Log error
+        log_security_event(
+            "EVENT_QUERY_ERROR",
+            f"Error querying security events: {str(e)}"
+        )
         return []
-    
-    # Query security events
-    query = SecurityEvent.query.order_by(SecurityEvent.timestamp.desc())
-    
-    if user_id:
-        query = query.filter_by(user_id=user_id)
-    
-    events = query.limit(limit).all()
-    
-    # Convert to dictionaries with DNA protection watermark
-    events_dict = []
-    for event in events:
-        # Parse metadata if present
-        metadata = json.loads(event.event_metadata) if event.event_metadata else {}
-        
-        # Create event dictionary
-        event_dict = {
-            "id": event.id,
-            "event_type": event.event_type,
-            "description": event.description,
-            "metadata": metadata,
-            "ip_address": event.ip_address,
-            "timestamp": event.timestamp.isoformat(),
-            "user_id": event.user_id,
-            "copyright": "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
-        }
-        
-        events_dict.append(event_dict)
-    
-    return events_dict
 
 def get_dna_security_stats() -> Dict[str, Any]:
     """
@@ -410,33 +455,86 @@ def get_dna_security_stats() -> Dict[str, Any]:
     Returns:
         Dict: Dictionary of DNA security statistics
     """
-    global db
+    try:
+        # Get counts
+        user_count = User.query.count()
+        event_count = SecurityEvent.query.count()
+        simulation_count = QuantumSimulation.query.count()
+        encryption_count = DNAEncryption.query.count()
+        
+        # Get recent events by type
+        info_events = SecurityEvent.query.filter(SecurityEvent.event_type.like("INFO%")).count()
+        warning_events = SecurityEvent.query.filter(SecurityEvent.event_type.like("WARNING%")).count()
+        error_events = SecurityEvent.query.filter(SecurityEvent.event_type.like("ERROR%")).count()
+        critical_events = SecurityEvent.query.filter(SecurityEvent.event_type.like("CRITICAL%")).count()
+        
+        # Get encryption stats
+        avg_encryption_ratio = db.session.query(
+            db.func.avg(DNAEncryption.output_length / DNAEncryption.input_length)
+        ).scalar() or 0
+        
+        # Compile statistics
+        stats = {
+            "user_count": user_count,
+            "event_count": event_count,
+            "simulation_count": simulation_count,
+            "encryption_count": encryption_count,
+            "event_breakdown": {
+                "info": info_events,
+                "warning": warning_events,
+                "error": error_events,
+                "critical": critical_events
+            },
+            "encryption_stats": {
+                "avg_ratio": float(avg_encryption_ratio),
+                "total_operations": encryption_count
+            },
+            "system_status": "operational",
+            "last_updated": datetime.datetime.utcnow().isoformat(),
+            "copyright": "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+        }
+        
+        return stats
+        
+    except Exception as e:
+        # Log error
+        log_security_event(
+            "STATS_ERROR",
+            f"Error generating DNA security stats: {str(e)}"
+        )
+        
+        # Return minimal stats on error
+        return {
+            "system_status": "degraded",
+            "error": str(e),
+            "last_updated": datetime.datetime.utcnow().isoformat(),
+            "copyright": "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+        }
+
+# Helper functions with built-in security
+def generate_dna_signature(username: str, email: str, password: str) -> str:
+    """
+    Generate a DNA-based security signature for a user
     
-    if not db:
-        return {}
+    Args:
+        username: Username
+        email: Email address
+        password: Password
+        
+    Returns:
+        str: DNA signature
+    """
+    # Create base signature from user data
+    base_signature = f"{username}:{email}:{hashlib.sha256(password.encode()).hexdigest()}"
     
-    # Count encryption and decryption operations
-    encryption_count = DNAEncryption.query.filter_by(is_decryption=False).count()
-    decryption_count = DNAEncryption.query.filter_by(is_decryption=True).count()
+    # Add timestamp and random salt
+    timestamp = datetime.datetime.utcnow().isoformat()
+    salt = secrets.token_hex(16)
     
-    # Count security events by type
-    security_events = {}
-    for event_type in ["INFO", "WARNING", "ERROR", "CRITICAL"]:
-        security_events[event_type] = SecurityEvent.query.filter_by(event_type=event_type).count()
+    # Combine all elements
+    combined = f"{base_signature}:{timestamp}:{salt}"
     
-    # Calculate average input and output lengths
-    encryption_records = DNAEncryption.query.all()
-    avg_input_length = sum(record.input_length for record in encryption_records) / max(len(encryption_records), 1)
-    avg_output_length = sum(record.output_length for record in encryption_records) / max(len(encryption_records), 1)
+    # Generate final signature
+    final_signature = hashlib.sha512(combined.encode()).hexdigest()
     
-    # Return statistics with copyright
-    return {
-        "encryption_count": encryption_count,
-        "decryption_count": decryption_count,
-        "security_events": security_events,
-        "avg_input_length": avg_input_length,
-        "avg_output_length": avg_output_length,
-        "total_operations": encryption_count + decryption_count,
-        "last_updated": datetime.datetime.utcnow().isoformat(),
-        "copyright": "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
-    }
+    return final_signature
