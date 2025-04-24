@@ -412,9 +412,9 @@ def api_ghz_state():
     try:
         num_qubits = int(data.get('num_qubits', 3))
         # Cap number of qubits for server resource protection
-        num_qubits = min(max(num_qubits, 2), 20)  # Between 2 and 20 qubits
+        num_qubits = min(max(num_qubits, 2), 32)  # Between 2 and 32 qubits (maximum supported)
     except (ValueError, TypeError):
-        num_qubits = 7  # Default if conversion fails, increased from 5
+        num_qubits = 7  # Default if conversion fails
     
     # Get advanced options parameter
     advanced_mode = data.get('advanced_mode', 'false').lower() in ['true', '1', 't', 'yes', 'y']
@@ -422,11 +422,8 @@ def api_ghz_state():
     # Create GHZ state with enhanced capabilities
     circuit = create_ghz_state(num_qubits)
     
-    # Simulate with higher shot count for better accuracy
-    shots = 4096 if advanced_mode else 1024
-    
-    # Use statevector for advanced visualization
-    result = simulate_circuit(circuit, get_statevector=True)
+    # Use advanced simulation with optimized settings
+    result = simulate_circuit(circuit, get_statevector=True, advanced_mode=advanced_mode)
     
     # Get images with enhanced quality
     circuit_img = circuit_to_image(circuit)
@@ -456,6 +453,9 @@ def api_apply_gate():
     # Get parameters with defaults
     gate = data.get('gate', 'hadamard').lower()
     
+    # Get advanced mode for better visualization
+    advanced_mode = data.get('advanced_mode', 'false').lower() in ['true', '1', 't', 'yes', 'y']
+    
     # Parse initial state - support both array and string representations
     try:
         initial_state_param = data.get('initial_state', None)
@@ -470,6 +470,12 @@ def api_apply_gate():
                 initial_state = [1/np.sqrt(2), 1/np.sqrt(2)]
             elif initial_state_param == '-':
                 initial_state = [1/np.sqrt(2), -1/np.sqrt(2)]
+            elif initial_state_param == 'i+':
+                # |i+⟩ state
+                initial_state = [1/np.sqrt(2), 1j/np.sqrt(2)]
+            elif initial_state_param == 'i-':
+                # |i-⟩ state
+                initial_state = [1/np.sqrt(2), -1j/np.sqrt(2)]
             else:
                 # Try to parse as JSON array
                 try:
@@ -496,8 +502,8 @@ def api_apply_gate():
             "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
         }), 400
     
-    # Simulate the circuit
-    result = simulate_circuit(circuit)
+    # Simulate the circuit with enhanced settings
+    result = simulate_circuit(circuit, advanced_mode=advanced_mode)
     
     # Get circuit image
     circuit_img = circuit_to_image(circuit)
@@ -536,9 +542,8 @@ def api_quantum_teleportation():
     # Create teleportation circuit with enhanced capabilities
     circuit = create_quantum_teleportation_circuit(multi_qubit=multi_qubit)
     
-    # Simulate with higher shot count for better accuracy
-    shots = 4096 if multi_qubit else 1024
-    result = simulate_circuit(circuit, shots=shots)
+    # Use advanced simulation settings for complex circuits
+    result = simulate_circuit(circuit, advanced_mode=multi_qubit)
     
     # Get circuit image
     circuit_img = circuit_to_image(circuit)

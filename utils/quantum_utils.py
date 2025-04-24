@@ -34,13 +34,13 @@ def create_ghz_state(num_qubits=3):
     Create a GHZ state (generalized Bell state) with n qubits
     
     Args:
-        num_qubits: Number of qubits in the GHZ state (supports up to 20 qubits)
+        num_qubits: Number of qubits in the GHZ state (supports up to 32 qubits)
         
     Returns:
         QuantumCircuit: GHZ state circuit
     """
-    # Enhanced support for larger qubit counts (up to 20)
-    num_qubits = min(max(num_qubits, 3), 20)  # Limit between 3 and 20 qubits for stability
+    # Enhanced support for larger qubit counts (up to 32, maximum supported by the simulator)
+    num_qubits = min(max(num_qubits, 3), 32)  # Limit between 3 and 32 qubits for simulator compatibility
     
     circuit = QuantumCircuit(num_qubits, num_qubits)
     circuit.h(0)  # Apply Hadamard gate to first qubit
@@ -247,13 +247,13 @@ def visualize_quantum_fourier_transform(num_qubits=3):
     Create and visualize a Quantum Fourier Transform circuit
     
     Args:
-        num_qubits: Number of qubits in the QFT (supports up to 20 qubits)
+        num_qubits: Number of qubits in the QFT (supports up to 32 qubits)
         
     Returns:
         QuantumCircuit: QFT circuit
     """
-    # Enhanced support for larger qubit counts (up to 20)
-    num_qubits = min(max(num_qubits, 3), 20)  # Limit between 3 and 20 qubits for stability
+    # Enhanced support for larger qubit counts (up to 32, maximum supported by the simulator)
+    num_qubits = min(max(num_qubits, 3), 32)  # Limit between 3 and 32 qubits for simulator compatibility
     
     circuit = QuantumCircuit(num_qubits)
     
@@ -281,28 +281,44 @@ def visualize_quantum_fourier_transform(num_qubits=3):
     
     return circuit
 
-def simulate_circuit(circuit, get_statevector=False, shots=1024):
+def simulate_circuit(circuit, get_statevector=False, shots=1024, advanced_mode=False):
     """
-    Simulate a quantum circuit
+    Simulate a quantum circuit with enhanced capabilities
     
     Args:
         circuit: The quantum circuit to simulate
         get_statevector: Whether to return the statevector
-        shots: Number of shots for measurement (if not getting statevector)
+        shots: Base number of shots for measurement
+        advanced_mode: Whether to use advanced simulation settings
         
     Returns:
         Result: Simulation result
     """
+    # Increase shots for advanced mode
+    if advanced_mode:
+        shots = 8192  # Much higher shot count for advanced simulations
+        
     if get_statevector:
-        # Statevector simulation
+        # Statevector simulation with enhanced precision
         simulator = Aer.get_backend('statevector_simulator')
-        transpiled_circuit = transpile(circuit, simulator)
+        # Optimize transpilation for statevector sim
+        transpiled_circuit = transpile(circuit, simulator, optimization_level=3)
         return simulator.run(transpiled_circuit).result()
     else:
-        # Measurement simulation
+        # Measurement simulation with enhanced capabilities
         simulator = Aer.get_backend('qasm_simulator')
-        transpiled_circuit = transpile(circuit, simulator)
-        return simulator.run(transpiled_circuit, shots=shots).result()
+        # Use higher optimization for complex circuits
+        transpiled_circuit = transpile(circuit, simulator, optimization_level=3)
+        # Configure advanced simulation parameters
+        sim_config = {}
+        if advanced_mode and circuit.num_qubits > 10:
+            # Advanced settings for large circuit simulation
+            sim_config = {
+                'method': 'statevector',  # Use statevector method for accuracy
+                'max_parallel_threads': 8,  # Utilize more threads
+                'max_parallel_experiments': 4  # Run multiple circuits in parallel
+            }
+        return simulator.run(transpiled_circuit, shots=shots, **sim_config).result()
 
 def plot_quantum_state(statevector):
     """
