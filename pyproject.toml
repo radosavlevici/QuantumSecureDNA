@@ -19,4 +19,5 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "flask-jwt-extended>=4.7.1",
     "sqlalchemy>=2.0.40",
+    "trafilatura>=2.0.0",
 ]

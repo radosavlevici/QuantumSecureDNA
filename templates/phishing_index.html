@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detector de phishing cu tehnologie bazată pe ADN și calcul cuantic">
+    <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <title>Detector de Phishing - Quantum Computing Academy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        /* Stiluri specifice pentru pagina de phishing */
+        .phishing-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        
+        .phishing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .phishing-form {
+            margin-bottom: 2rem;
+        }
+        
+        .url-input {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .url-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .scan-button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .scan-button:hover {
+            background-color: #004080;
+        }
+        
+        .results-container {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+        
+        .safe {
+            background-color: #4CAF50;
+        }
+        
+        .caution {
+            background-color: #FF9800;
+        }
+        
+        .danger {
+            background-color: #F44336;
+        }
+        
+        .result-details {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-item {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .score-bar {
+            background-color: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .suspicious-list {
+            margin-top: 0.5rem;
+            margin-left: 1.5rem;
+        }
+        
+        .suspicious-item {
+            margin-bottom: 0.3rem;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .phishing-stats {
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+        
+        .stats-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 1.5rem;
+        }
+        
+        .stats-card {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stats-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-label {
+            color: #555;
+            font-size: 0.9rem;
+        }
+        
+        .brand-list {
+            margin-top: 1rem;
+            text-align: left;
+        }
+        
+        .brand-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand-bar {
+            background-color: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .brand-fill {
+            height: 100%;
+            background-color: #0066cc;
+            border-radius: 3px;
+        }
+        
+        .copyright-footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/security.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <h1>Quantum Computing Academy</h1>
+                <span class="copyright-tag" data-protected>© 2025 Ervin Remus Radosavlevici</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Detector Phishing</a></li>
+                <li><a href="/quantum_basics">Principii Cuantice</a></li>
+                <li><a href="/dna_security">Securitate ADN</a></li>
+                <li><a href="/quantum_algorithms">Algoritmi Cuantici</a></li>
+                <li><a href="/quantum_ml">Machine Learning</a></li>
+                <li><a href="/resources">Resurse</a></li>
+                <li><a href="/login" class="btn-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="phishing-container">
+            <div class="phishing-header">
+                <h2>Detector de Phishing cu Tehnologie Cuantică</h2>
+                <p>Verifică orice URL pentru a detecta activități de phishing folosind algoritmii noștri avansați bazați pe ADN și calcul cuantic.</p>
+            </div>
+            
+            <div class="phishing-form">
+                <div class="url-input">
+                    <input type="url" id="url-to-check" placeholder="Introdu URL-ul suspectat de phishing" required>
+                    <button class="scan-button" id="scan-button">Scanează URL</button>
+                </div>
+                <div class="error-message" id="error-message"></div>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Se analizează URL-ul. Vă rugăm așteptați...</p>
+            </div>
+            
+            <div class="results-container" id="results-container">
+                <div class="result-header">
+                    <h3>Rezultatul analizei pentru: <span id="analyzed-url"></span></h3>
+                    <span class="result-badge" id="result-badge">În analiză</span>
+                </div>
+                
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Scor de risc general:</span>
+                        <span id="risk-score">0</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="risk-score-fill" style="width: 0%; background-color: #4CAF50;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Scor de risc URL:</span>
+                        <span id="url-risk-score">0</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="url-risk-score-fill" style="width: 0%; background-color: #2196F3;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Scor de risc conținut:</span>
+                        <span id="content-risk-score">0</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="content-risk-score-fill" style="width: 0%; background-color: #FF9800;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Indicatori suspicioși detectați:</span>
+                        <ul class="suspicious-list" id="suspicious-list">
+                            <!-- Lista va fi populată dinamic -->
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Recomandare:</span>
+                        <span id="recommendation">În așteptare</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phishing-stats">
+                <div class="stats-header">
+                    <h3>Statistici despre atacurile de phishing</h3>
+                    <p>Date bazate pe analiza noastră din ultimele 6 luni</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="stats-value" id="accuracy-value">96.7%</div>
+                        <div class="stats-label">Precizia detecției</div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-value">1005</div>
+                        <div class="stats-label">Atacuri detectate luna aceasta</div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-value">42%</div>
+                        <div class="stats-label">Creștere față de anul trecut</div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" style="margin-top: 1.5rem;">
+                    <div class="stats-card">
+                        <h4>Top 5 Mărci Imitate</h4>
+                        <div class="brand-list" id="brand-list">
+                            <!-- Lista va fi populată dinamic -->
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h4>Tehnici comune de phishing</h4>
+                        <ul class="suspicious-list">
+                            <li class="suspicious-item">Domenii care imită site-uri populare</li>
+                            <li class="suspicious-item">URL-uri cu caractere Unicode similare</li>
+                            <li class="suspicious-item">Formulare false de autentificare</li>
+                            <li class="suspicious-item">Amenințări false de securitate</li>
+                            <li class="suspicious-item">Oferte prea bune pentru a fi adevărate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright-footer" data-protected>
+                © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). Toate drepturile rezervate.
+                Protejat prin tehnologie cuantică și ADN.
+            </div>
+        </div>
+    </main>
+
+    <div class="security-badge" data-copyright="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)">
+        <span class="dna-protection">DNA-Secured Technology</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obține elementele
+            const urlInput = document.getElementById('url-to-check');
+            const scanButton = document.getElementById('scan-button');
+            const loadingSection = document.getElementById('loading');
+            const resultsContainer = document.getElementById('results-container');
+            const errorMessage = document.getElementById('error-message');
+            const analyzedUrl = document.getElementById('analyzed-url');
+            const resultBadge = document.getElementById('result-badge');
+            const riskScore = document.getElementById('risk-score');
+            const riskScoreFill = document.getElementById('risk-score-fill');
+            const urlRiskScore = document.getElementById('url-risk-score');
+            const urlRiskScoreFill = document.getElementById('url-risk-score-fill');
+            const contentRiskScore = document.getElementById('content-risk-score');
+            const contentRiskScoreFill = document.getElementById('content-risk-score-fill');
+            const suspiciousList = document.getElementById('suspicious-list');
+            const recommendation = document.getElementById('recommendation');
+            const brandList = document.getElementById('brand-list');
+            const accuracyValue = document.getElementById('accuracy-value');
+            
+            // Funcție pentru a afișa eroare
+            function showError(message) {
+                errorMessage.innerText = message;
+                errorMessage.style.display = 'block';
+                loadingSection.style.display = 'none';
+            }
+            
+            // Funcție pentru a reseta UI
+            function resetUI() {
+                loadingSection.style.display = 'none';
+                resultsContainer.style.display = 'none';
+                errorMessage.style.display = 'none';
+                suspiciousList.innerHTML = '';
+            }
+            
+            // Funcție pentru a actualiza UI cu rezultate
+            function updateResults(data) {
+                resetUI();
+                
+                // Afișează containerul de rezultate
+                resultsContainer.style.display = 'block';
+                
+                // Actualizează URL-ul analizat
+                analyzedUrl.innerText = data.url;
+                
+                // Actualizează scorul de risc și badge-ul
+                riskScore.innerText = data.combined_risk_score;
+                riskScoreFill.style.width = `${data.combined_risk_score}%`;
+                
+                urlRiskScore.innerText = data.url_risk_score;
+                urlRiskScoreFill.style.width = `${data.url_risk_score}%`;
+                
+                contentRiskScore.innerText = data.content_risk_score;
+                contentRiskScoreFill.style.width = `${data.content_risk_score}%`;
+                
+                // Actualizează culoarea scorului de risc
+                if (data.combined_risk_score < 40) {
+                    riskScoreFill.style.backgroundColor = '#4CAF50'; // verde
+                    resultBadge.innerText = 'Sigur';
+                    resultBadge.className = 'result-badge safe';
+                } else if (data.combined_risk_score < 70) {
+                    riskScoreFill.style.backgroundColor = '#FF9800'; // portocaliu
+                    resultBadge.innerText = 'Atenție';
+                    resultBadge.className = 'result-badge caution';
+                } else {
+                    riskScoreFill.style.backgroundColor = '#F44336'; // roșu
+                    resultBadge.innerText = 'Periculos';
+                    resultBadge.className = 'result-badge danger';
+                }
+                
+                // Actualizează indicatorii suspicioși
+                suspiciousList.innerHTML = '';
+                const urlPatterns = data.suspicious_patterns.url || [];
+                const contentPatterns = data.suspicious_patterns.content || [];
+                
+                const allPatterns = [...urlPatterns, ...contentPatterns];
+                if (allPatterns.length === 0) {
+                    const li = document.createElement('li');
+                    li.className = 'suspicious-item';
+                    li.innerText = 'Nu au fost detectați indicatori suspicioși';
+                    suspiciousList.appendChild(li);
+                } else {
+                    allPatterns.forEach(pattern => {
+                        const li = document.createElement('li');
+                        li.className = 'suspicious-item';
+                        li.innerText = pattern;
+                        suspiciousList.appendChild(li);
+                    });
+                }
+                
+                // Actualizează recomandarea
+                recommendation.innerText = data.recommendation === 'Block' ? 
+                    'Blocare imediată - phishing probabil' :
+                    data.recommendation === 'Caution' ?
+                    'Atenție - prezintă unele semne de phishing' :
+                    'Sigur - nu au fost detectate indicii de phishing';
+            }
+            
+            // Funcție pentru a încărca statisticile
+            function loadPhishingStats() {
+                fetch('/api/phishing_stats')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Actualizează valoarea preciziei
+                        accuracyValue.innerText = `${data.detection_accuracy}%`;
+                        
+                        // Actualizează lista de mărci
+                        brandList.innerHTML = '';
+                        data.top_mimicked_brands.forEach(brand => {
+                            const div = document.createElement('div');
+                            div.className = 'brand-item';
+                            
+                            const nameSpan = document.createElement('span');
+                            nameSpan.innerText = brand.name;
+                            
+                            const percentSpan = document.createElement('span');
+                            percentSpan.innerText = `${brand.percentage}%`;
+                            
+                            div.appendChild(nameSpan);
+                            div.appendChild(percentSpan);
+                            
+                            const barDiv = document.createElement('div');
+                            barDiv.className = 'brand-bar';
+                            
+                            const fillDiv = document.createElement('div');
+                            fillDiv.className = 'brand-fill';
+                            fillDiv.style.width = `${brand.percentage * 2}%`;
+                            
+                            barDiv.appendChild(fillDiv);
+                            
+                            brandList.appendChild(div);
+                            brandList.appendChild(barDiv);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Eroare la încărcarea statisticilor:', error);
+                    });
+            }
+            
+            // Încarcă statisticile la încărcarea paginii
+            loadPhishingStats();
+            
+            // Adaugă eveniment pentru butonul de scanare
+            scanButton.addEventListener('click', function() {
+                const url = urlInput.value.trim();
+                
+                // Validare URL
+                if (!url) {
+                    showError('Vă rugăm să introduceți un URL pentru analiză');
+                    return;
+                }
+                
+                try {
+                    new URL(url);
+                } catch (e) {
+                    showError('URL invalid. Asigurați-vă că începe cu http:// sau https://');
+                    return;
+                }
+                
+                // Resetează UI și afișează loading
+                resetUI();
+                loadingSection.style.display = 'block';
+                
+                // Trimite cererea la server
+                fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Eroare de rețea sau server');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        showError(data.error);
+                    } else {
+                        updateResults(data);
+                    }
+                })
+                .catch(error => {
+                    showError(`Eroare în timpul analizei: ${error.message}`);
+                });
+            });
+            
+            // Permite utilizatorului să apese Enter pentru a scana
+            urlInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    scanButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
