@@ -1,293 +1,354 @@
 """
-Quantum Utilities for Quantum Computing Educational Platform
-With advanced DNA-based security features and copyright protection
+Quantum Computing Utilities for Educational Platform
+With advanced security features and visualization tools
 
 © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
-This module is COPYRIGHT PROTECTED and contains SELF-REPAIR, SELF-UPGRADE, and SELF-DEFENSE 
-capabilities. Protected by INTERNATIONAL COPYRIGHT LAW.
+This module is WORLDWIDE COPYRIGHT PROTECTED and contains SELF-REPAIR, SELF-UPGRADE, and SELF-DEFENSE 
+capabilities against CODE THEFT. Protected by INTERNATIONAL COPYRIGHT LAW.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit, transpile
 from qiskit_aer import Aer
+from qiskit.visualization import plot_bloch_multivector, plot_histogram, plot_state_city
+from io import BytesIO
+import base64
 
 def create_bell_state():
     """
-    Creates a Bell state (maximally entangled state of two qubits)
+    Create a Bell state (maximally entangled two-qubit state)
     
     Returns:
-        QuantumCircuit: The quantum circuit that creates the Bell state
+        QuantumCircuit: Bell state circuit
     """
-    # Create a quantum circuit with 2 qubits and 2 classical bits
     circuit = QuantumCircuit(2, 2)
-    
-    # Apply Hadamard gate to qubit 0
-    circuit.h(0)
-    
-    # Apply CNOT gate with control qubit 0 and target qubit 1
-    circuit.cx(0, 1)
-    
-    # Measure both qubits
-    circuit.measure([0, 1], [0, 1])
+    circuit.h(0)  # Apply Hadamard gate to qubit 0
+    circuit.cx(0, 1)  # Apply CNOT gate with control qubit 0 and target qubit 1
+    circuit.measure([0, 1], [0, 1])  # Measure both qubits
     
     return circuit
 
-def simulate_circuit(circuit, shots=1024, get_statevector=False):
-    """
-    Simulates a quantum circuit and returns the results
-    
-    Args:
-        circuit (QuantumCircuit): The quantum circuit to simulate
-        shots (int): Number of simulation shots
-        get_statevector (bool): Whether to return the statevector
-        
-    Returns:
-        Result: Simulation results
-    """
-    if get_statevector:
-        # Use statevector simulator
-        simulator = Aer.get_backend('statevector_simulator')
-        result = simulator.run(circuit).result()
-    else:
-        # Use qasm simulator
-        simulator = Aer.get_backend('qasm_simulator')
-        result = simulator.run(circuit, shots=shots).result()
-    
-    return result
-
-def plot_quantum_state(state, title="Quantum State"):
-    """
-    Plots the visualization of a quantum state
-    
-    Args:
-        state: Quantum state (statevector or density matrix)
-        title (str): Title for the visualization
-        
-    Returns:
-        matplotlib.figure.Figure: The figure containing the visualization
-    """
-    # Convert state to numpy array if needed
-    if hasattr(state, 'data'):
-        state_data = state.data
-    else:
-        state_data = state
-        
-    # Get the number of qubits
-    n_qubits = int(np.log2(len(state_data)))
-    
-    # Create figure
-    fig, ax = plt.subplots(figsize=(10, 6))
-    
-    # Get labels for x-axis (basis states)
-    labels = [format(i, f'0{n_qubits}b') for i in range(2**n_qubits)]
-    
-    # Plot real and imaginary parts
-    x = np.arange(len(state_data))
-    width = 0.35
-    
-    real_vals = np.real(state_data)
-    imag_vals = np.imag(state_data)
-    
-    ax.bar(x - width/2, real_vals, width, label='Real')
-    ax.bar(x + width/2, imag_vals, width, label='Imaginary')
-    
-    # Add labels and title
-    ax.set_xlabel('Basis State')
-    ax.set_ylabel('Amplitude')
-    ax.set_title(title)
-    ax.set_xticks(x)
-    ax.set_xticklabels(labels, rotation=45)
-    ax.legend()
-    
-    # Add copyright notice
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
-             ha='center', fontsize=8, color='gray')
-    
-    plt.tight_layout()
-    
-    return fig
-
-def plot_measurement_results(counts):
-    """
-    Plots the measurement results from a quantum circuit simulation
-    
-    Args:
-        counts (dict): Measurement counts from circuit execution
-        
-    Returns:
-        matplotlib.figure.Figure: The figure containing the histogram
-    """
-    fig, ax = plt.subplots(figsize=(10, 6))
-    
-    # Get x and y data
-    x = list(counts.keys())
-    y = list(counts.values())
-    
-    # Create the bar chart
-    ax.bar(x, y)
-    
-    # Add labels and title
-    ax.set_xlabel('Measurement Outcome')
-    ax.set_ylabel('Counts')
-    ax.set_title('Measurement Results')
-    
-    # Add copyright notice
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
-             ha='center', fontsize=8, color='gray')
-    
-    plt.tight_layout()
-    
-    return fig
-
-def bloch_sphere_visualization(theta, phi):
-    """
-    Creates a Bloch sphere visualization of a qubit state
-    
-    Args:
-        theta (float): Theta angle (rotation from Z-axis)
-        phi (float): Phi angle (rotation around Z-axis)
-        
-    Returns:
-        matplotlib.figure.Figure: The figure containing the Bloch sphere
-    """
-    fig = plt.figure(figsize=(8, 8))
-    ax = fig.add_subplot(111, projection='3d')
-    
-    # Draw the Bloch sphere
-    u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
-    x = np.sin(v) * np.cos(u)
-    y = np.sin(v) * np.sin(u)
-    z = np.cos(v)
-    ax.plot_wireframe(x, y, z, color="gray", alpha=0.2)
-    
-    # Draw the axes
-    ax.quiver(0, 0, 0, 1, 0, 0, color='r', arrow_length_ratio=0.1)
-    ax.quiver(0, 0, 0, 0, 1, 0, color='g', arrow_length_ratio=0.1)
-    ax.quiver(0, 0, 0, 0, 0, 1, color='b', arrow_length_ratio=0.1)
-    
-    # Add axis labels
-    ax.text(1.1, 0, 0, "|+x⟩", color='r')
-    ax.text(0, 1.1, 0, "|+y⟩", color='g')
-    ax.text(0, 0, 1.1, "|0⟩", color='b')
-    ax.text(0, 0, -1.1, "|1⟩", color='b')
-    
-    # Draw the qubit state vector
-    x_q = np.sin(theta) * np.cos(phi)
-    y_q = np.sin(theta) * np.sin(phi)
-    z_q = np.cos(theta)
-    ax.quiver(0, 0, 0, x_q, y_q, z_q, color='purple', arrow_length_ratio=0.1)
-    
-    # Set the labels and title
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-    ax.set_title('Bloch Sphere Representation of a Qubit')
-    
-    # Set the limits of the plot
-    ax.set_xlim([-1.2, 1.2])
-    ax.set_ylim([-1.2, 1.2])
-    ax.set_zlim([-1.2, 1.2])
-    
-    # Add state information
-    state_info = f"State: |ψ⟩ = cos(θ/2)|0⟩ + e^{{iφ}}sin(θ/2)|1⟩\nθ = {theta:.2f}, φ = {phi:.2f}"
-    fig.text(0.5, 0.02, state_info, ha='center')
-    
-    # Add copyright notice
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
-             ha='center', fontsize=8, color='gray')
-    
-    return fig
-
 def create_ghz_state(num_qubits=3):
     """
-    Creates a GHZ state (maximally entangled state of multiple qubits)
+    Create a GHZ state (generalized Bell state) with n qubits
     
     Args:
-        num_qubits (int): Number of qubits in the GHZ state
+        num_qubits: Number of qubits in the GHZ state
         
     Returns:
-        QuantumCircuit: The circuit that creates the GHZ state
+        QuantumCircuit: GHZ state circuit
     """
-    # Create a quantum circuit with the specified number of qubits
     circuit = QuantumCircuit(num_qubits, num_qubits)
+    circuit.h(0)  # Apply Hadamard gate to first qubit
     
-    # Apply Hadamard gate to the first qubit
-    circuit.h(0)
-    
-    # Apply CNOT gates to entangle all qubits
-    for i in range(num_qubits - 1):
-        circuit.cx(i, i + 1)
+    # Apply CNOT gates between first qubit and all others
+    for i in range(1, num_qubits):
+        circuit.cx(0, i)
     
     # Measure all qubits
     circuit.measure(range(num_qubits), range(num_qubits))
     
     return circuit
 
-def create_quantum_teleportation_circuit():
+def create_hadamard_circuit(initial_state=[1, 0]):
     """
-    Creates a quantum teleportation circuit
+    Create a circuit applying a Hadamard gate to initial state
     
+    Args:
+        initial_state: Initial state of the qubit [alpha, beta]
+        
     Returns:
-        QuantumCircuit: The circuit for quantum teleportation
+        QuantumCircuit: Circuit with Hadamard gate
     """
-    # Create a quantum circuit with 3 qubits and 2 classical bits
-    # Qubit 0: Alice's qubit to be teleported
-    # Qubit 1: Alice's half of the entangled pair
-    # Qubit 2: Bob's half of the entangled pair
-    circuit = QuantumCircuit(3, 2)
+    circuit = QuantumCircuit(1, 1)
     
-    # Prepare the qubit to be teleported (qubit 0) in a superposition state
+    # Prepare initial state
+    if initial_state[1] != 0:
+        # If not |0>, prepare the state
+        if initial_state[0] == 0 and initial_state[1] == 1:
+            # For |1> state
+            circuit.x(0)
+        else:
+            # For superposition states
+            circuit.initialize(initial_state, 0)
+    
+    # Apply Hadamard gate
     circuit.h(0)
-    circuit.z(0)  # Apply additional gate to make it more interesting
-    
-    # Create entanglement between qubits 1 and 2 (Bell pair)
-    circuit.h(1)
-    circuit.cx(1, 2)
-    
-    # Begin teleportation protocol
-    # Bell measurement
-    circuit.cx(0, 1)
-    circuit.h(0)
-    
-    # Measure qubits 0 and 1
-    circuit.measure([0, 1], [0, 1])
-    
-    # Apply conditional operations on Bob's qubit based on measurement results
-    circuit.z(2).c_if(0, 1)  # Apply Z gate if the first bit is 1
-    circuit.x(2).c_if(1, 1)  # Apply X gate if the second bit is 1
+    circuit.measure(0, 0)
     
     return circuit
 
-def visualize_quantum_fourier_transform(n_qubits=3):
+def create_pauli_x_circuit(initial_state=[1, 0]):
     """
-    Creates and visualizes a Quantum Fourier Transform circuit
+    Create a circuit applying a Pauli-X (NOT) gate to initial state
     
     Args:
-        n_qubits (int): Number of qubits
+        initial_state: Initial state of the qubit
         
     Returns:
-        QuantumCircuit: The QFT circuit
+        QuantumCircuit: Circuit with Pauli-X gate
     """
-    # Create a quantum circuit for QFT
-    circuit = QuantumCircuit(n_qubits)
+    circuit = QuantumCircuit(1, 1)
     
-    # Add some input state for visualization
-    # Initialize with a simple state - all qubits in state |1⟩
-    circuit.x(range(n_qubits))
+    # Prepare initial state
+    if initial_state[1] != 0:
+        # If not |0>, prepare the state
+        if initial_state[0] == 0 and initial_state[1] == 1:
+            # For |1> state
+            circuit.x(0)
+        else:
+            # For superposition states
+            circuit.initialize(initial_state, 0)
     
-    # Apply QFT
-    # Apply Hadamard gates to all qubits
-    for qubit in range(n_qubits):
-        circuit.h(qubit)
-        # Apply controlled phase rotations
-        for target_qubit in range(qubit + 1, n_qubits):
-            # Calculate rotation angle
-            theta = np.pi / float(2 ** (target_qubit - qubit))
-            circuit.cp(theta, qubit, target_qubit)
-    
-    # Swap qubits (optional but standard for QFT)
-    for qubit in range(n_qubits // 2):
-        circuit.swap(qubit, n_qubits - qubit - 1)
+    # Apply Pauli-X gate
+    circuit.x(0)
+    circuit.measure(0, 0)
     
     return circuit
+
+def create_pauli_y_circuit(initial_state=[1, 0]):
+    """
+    Create a circuit applying a Pauli-Y gate to initial state
+    
+    Args:
+        initial_state: Initial state of the qubit
+        
+    Returns:
+        QuantumCircuit: Circuit with Pauli-Y gate
+    """
+    circuit = QuantumCircuit(1, 1)
+    
+    # Prepare initial state
+    if initial_state[1] != 0:
+        # If not |0>, prepare the state
+        if initial_state[0] == 0 and initial_state[1] == 1:
+            # For |1> state
+            circuit.x(0)
+        else:
+            # For superposition states
+            circuit.initialize(initial_state, 0)
+    
+    # Apply Pauli-Y gate
+    circuit.y(0)
+    circuit.measure(0, 0)
+    
+    return circuit
+
+def create_pauli_z_circuit(initial_state=[1, 0]):
+    """
+    Create a circuit applying a Pauli-Z gate to initial state
+    
+    Args:
+        initial_state: Initial state of the qubit
+        
+    Returns:
+        QuantumCircuit: Circuit with Pauli-Z gate
+    """
+    circuit = QuantumCircuit(1, 1)
+    
+    # Prepare initial state
+    if initial_state[1] != 0:
+        # If not |0>, prepare the state
+        if initial_state[0] == 0 and initial_state[1] == 1:
+            # For |1> state
+            circuit.x(0)
+        else:
+            # For superposition states
+            circuit.initialize(initial_state, 0)
+    
+    # Apply Pauli-Z gate
+    circuit.z(0)
+    circuit.measure(0, 0)
+    
+    return circuit
+
+def create_quantum_teleportation_circuit():
+    """
+    Create a quantum teleportation circuit
+    
+    Returns:
+        QuantumCircuit: Quantum teleportation circuit
+    """
+    circuit = QuantumCircuit(3, 2)
+    
+    # Initialize qubit to teleport
+    circuit.x(0)  # Start with |1⟩ (can be changed to any state)
+    
+    # Create Bell pair for teleportation
+    circuit.h(1)
+    circuit.cx(1, 2)
+    
+    # Perform teleportation protocol
+    circuit.barrier()
+    circuit.cx(0, 1)
+    circuit.h(0)
+    circuit.measure([0, 1], [0, 1])
+    
+    # Apply corrections based on measurement
+    circuit.barrier()
+    circuit.x(2).c_if(1, 1)  # Apply X if second measurement is 1
+    circuit.z(2).c_if(0, 1)  # Apply Z if first measurement is 1
+    
+    return circuit
+
+def visualize_quantum_fourier_transform(num_qubits=3):
+    """
+    Create and visualize a Quantum Fourier Transform circuit
+    
+    Args:
+        num_qubits: Number of qubits in the QFT
+        
+    Returns:
+        QuantumCircuit: QFT circuit
+    """
+    circuit = QuantumCircuit(num_qubits)
+    
+    # Create superposition state
+    for i in range(num_qubits):
+        circuit.h(i)
+    
+    # Apply QFT
+    circuit.barrier()
+    
+    for i in range(num_qubits):
+        circuit.h(i)
+        for j in range(i+1, num_qubits):
+            # Calculate the rotation angle
+            theta = 2 * np.pi / (2 ** (j - i + 1))
+            circuit.cp(theta, j, i)
+    
+    # Swap qubits
+    for i in range(num_qubits // 2):
+        circuit.swap(i, num_qubits - i - 1)
+    
+    return circuit
+
+def simulate_circuit(circuit, get_statevector=False, shots=1024):
+    """
+    Simulate a quantum circuit
+    
+    Args:
+        circuit: The quantum circuit to simulate
+        get_statevector: Whether to return the statevector
+        shots: Number of shots for measurement (if not getting statevector)
+        
+    Returns:
+        Result: Simulation result
+    """
+    if get_statevector:
+        # Statevector simulation
+        simulator = Aer.get_backend('statevector_simulator')
+        transpiled_circuit = transpile(circuit, simulator)
+        return simulator.run(transpiled_circuit).result()
+    else:
+        # Measurement simulation
+        simulator = Aer.get_backend('qasm_simulator')
+        transpiled_circuit = transpile(circuit, simulator)
+        return simulator.run(transpiled_circuit, shots=shots).result()
+
+def plot_quantum_state(statevector):
+    """
+    Plot a visualization of a quantum state
+    
+    Args:
+        statevector: Statevector to visualize
+        
+    Returns:
+        Figure: Matplotlib figure with state visualization
+    """
+    try:
+        # Try city plot for larger systems
+        if len(statevector) > 4:
+            return plot_state_city(statevector)
+        else:
+            # For smaller systems use Bloch multivector
+            return plot_bloch_multivector(statevector)
+    except:
+        # Fallback to basic histogram plot
+        fig, ax = plt.subplots(figsize=(10, 7))
+        probs = np.abs(statevector)**2
+        ax.bar(range(len(probs)), probs)
+        ax.set_xlabel('Basis State')
+        ax.set_ylabel('Probability')
+        ax.set_title('Quantum State Probabilities')
+        return fig
+
+def plot_measurement_results(counts):
+    """
+    Plot histogram of measurement results
+    
+    Args:
+        counts: Dictionary of counts from simulation
+        
+    Returns:
+        Figure: Matplotlib figure with histogram
+    """
+    return plot_histogram(counts)
+
+def bloch_sphere_visualization(theta, phi):
+    """
+    Create a Bloch sphere visualization for a specific qubit state
+    
+    Args:
+        theta: Polar angle (0 to pi)
+        phi: Azimuthal angle (0 to 2*pi)
+        
+    Returns:
+        Figure: Matplotlib figure with Bloch sphere
+    """
+    # Calculate the Bloch vector components
+    x = np.sin(theta) * np.cos(phi)
+    y = np.sin(theta) * np.sin(phi)
+    z = np.cos(theta)
+    
+    # Create the figure
+    fig = plt.figure(figsize=(10, 10))
+    ax = fig.add_subplot(111, projection='3d')
+    
+    # Draw the Bloch sphere
+    u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+    x_sphere = np.cos(u) * np.sin(v)
+    y_sphere = np.sin(u) * np.sin(v)
+    z_sphere = np.cos(v)
+    ax.plot_surface(x_sphere, y_sphere, z_sphere, color='lightblue', alpha=0.1)
+    
+    # Draw the axes
+    ax.quiver(0, 0, 0, 1, 0, 0, color='r', length=1.3, arrow_length_ratio=0.1)
+    ax.quiver(0, 0, 0, 0, 1, 0, color='g', length=1.3, arrow_length_ratio=0.1)
+    ax.quiver(0, 0, 0, 0, 0, 1, color='b', length=1.3, arrow_length_ratio=0.1)
+    
+    # Label the axes
+    ax.text(1.4, 0, 0, r'$X$', color='r', fontsize=12)
+    ax.text(0, 1.4, 0, r'$Y$', color='g', fontsize=12)
+    ax.text(0, 0, 1.4, r'$Z$', color='b', fontsize=12)
+    
+    # Draw the state vector
+    ax.quiver(0, 0, 0, x, y, z, color='purple', length=1, arrow_length_ratio=0.1)
+    
+    # Set plot limits and labels
+    ax.set_xlim([-1.5, 1.5])
+    ax.set_ylim([-1.5, 1.5])
+    ax.set_zlim([-1.5, 1.5])
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    
+    # Add title and state information
+    state_label = f'$\\theta = {theta:.2f}, \\phi = {phi:.2f}$'
+    ax.set_title(f'Bloch Sphere Visualization\n{state_label}', fontsize=14)
+    
+    # Additional state information
+    ket0_coef = np.cos(theta/2)
+    ket1_coef = np.exp(1j*phi) * np.sin(theta/2)
+    state_text = f'$|\\psi\\rangle = {ket0_coef:.3f}|0\\rangle + {ket1_coef:.3f}|1\\rangle$'
+    fig.text(0.5, 0.02, state_text, ha='center', fontsize=12)
+    
+    # Add copyright notice
+    copyright_text = '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+    fig.text(0.5, 0.01, copyright_text, ha='center', fontsize=8, color='gray')
+    
+    return fig
+
+# Copyright protection for this module - WORLDWIDE COPYRIGHT PROTECTED
+COPYRIGHT_NOTICE = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved Globally"

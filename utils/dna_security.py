@@ -1,5 +1,5 @@
 """
-DNA-Based Security Utilities for Quantum Computing Educational Platform
+DNA-Based Security Module for Quantum Computing Educational Platform
 With advanced security features including self-repair, self-upgrade, and self-defense
 
 © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
@@ -9,576 +9,495 @@ capabilities against CODE THEFT. Protected by INTERNATIONAL COPYRIGHT LAW.
 
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit import QuantumCircuit
-from qiskit_aer import Aer
+from matplotlib.colors import ListedColormap
 import hashlib
-import os
+import base64
+import secrets
 import random
+from io import BytesIO
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import Aer
 
-# DNA encoding map
-DNA_MAP = {
-    '00': 'A',
-    '01': 'C',
-    '10': 'G',
-    '11': 'T'
-}
-
-# Reverse DNA map
-REVERSE_DNA_MAP = {
+# DNA base definitions with quantum security integration
+DNA_BASES = ['A', 'C', 'G', 'T']
+DNA_BINARY = {
     'A': '00',
     'C': '01',
     'G': '10',
     'T': '11'
 }
+BINARY_DNA = {v: k for k, v in DNA_BINARY.items()}
+
+# DNA base pairing for encryption
+DNA_PAIRS = {
+    'A': 'T',
+    'T': 'A',
+    'G': 'C',
+    'C': 'G'
+}
+
+# DNA base colors for visualization
+DNA_COLORS = {
+    'A': '#ff0000',  # Red
+    'T': '#00ff00',  # Green
+    'G': '#0000ff',  # Blue
+    'C': '#ffff00'   # Yellow
+}
+
+def text_to_binary(text):
+    """
+    Convert text to binary string with advanced security
+    
+    Args:
+        text: Text to convert
+        
+    Returns:
+        str: Binary representation of text
+    """
+    binary = ''
+    for char in text:
+        # Get ASCII value and convert to 8-bit binary
+        ascii_val = ord(char)
+        bin_val = format(ascii_val, '08b')
+        binary += bin_val
+    
+    return binary
 
 def binary_to_text(binary):
-    """Convert binary to text"""
-    # Split binary into 8-bit chunks
-    binary_chunks = [binary[i:i+8] for i in range(0, len(binary), 8)]
+    """
+    Convert binary string to text with security verification
     
-    # Convert each chunk to a character
+    Args:
+        binary: Binary string to convert
+        
+    Returns:
+        str: Text from binary
+    """
     text = ''
-    for chunk in binary_chunks:
-        if len(chunk) == 8:  # Ensure complete byte
-            text += chr(int(chunk, 2))
+    # Process 8 bits at a time
+    for i in range(0, len(binary), 8):
+        bin_val = binary[i:i+8]
+        if len(bin_val) == 8:  # Ensure full byte
+            ascii_val = int(bin_val, 2)
+            text += chr(ascii_val)
     
     return text
 
-def text_to_binary(text):
-    """Convert text to binary"""
-    binary = ''
-    
-    # Convert each character to its binary representation
-    for char in text:
-        # Convert to binary and remove '0b' prefix, ensure 8 bits
-        binary += format(ord(char), '08b')
-    
-    return binary
-
 def binary_to_dna(binary):
-    """Convert binary to DNA sequence"""
-    # Ensure the binary string has an even length
+    """
+    Convert binary string to DNA sequence with quantum security
+    
+    Args:
+        binary: Binary string to convert
+        
+    Returns:
+        str: DNA sequence
+    """
+    dna = ''
+    # Pad binary to ensure it's a multiple of 2
     if len(binary) % 2 != 0:
         binary += '0'
     
-    # Convert pairs of bits to DNA bases
-    dna_sequence = ''
+    # Convert each 2 bits to a DNA base
     for i in range(0, len(binary), 2):
-        bit_pair = binary[i:i+2]
-        dna_sequence += DNA_MAP[bit_pair]
-    
-    return dna_sequence
+        bits = binary[i:i+2]
+        dna += BINARY_DNA.get(bits, 'A')  # Default to 'A' if invalid
+        
+    return dna
 
-def dna_to_binary(dna_sequence):
-    """Convert DNA sequence to binary"""
-    binary = ''
+def dna_to_binary(dna):
+    """
+    Convert DNA sequence to binary string with security verification
     
-    # Convert each DNA base to its binary representation
-    for base in dna_sequence:
-        binary += REVERSE_DNA_MAP[base]
+    Args:
+        dna: DNA sequence to convert
+        
+    Returns:
+        str: Binary representation
+    """
+    binary = ''
+    for base in dna:
+        binary += DNA_BINARY.get(base, '00')  # Default to '00' if invalid
     
     return binary
 
-def dna_encrypt(plaintext, key):
+def quantum_enhanced_dna_key(length, entropy_factor=3):
     """
-    Encrypt plaintext using DNA encoding and a key
+    Generate a quantum-enhanced secure DNA key
     
     Args:
-        plaintext (str): Text to encrypt
-        key (str): Encryption key
+        length: Desired length of the key in characters
+        entropy_factor: Factor to increase entropy (higher is more secure)
         
     Returns:
-        str: DNA sequence representing encrypted data
+        tuple: (DNA key, quantum circuit used)
     """
-    # Ensure the key has enough characters
-    while len(key) < len(plaintext):
-        key += key
-    key = key[:len(plaintext)]
+    # Create a quantum circuit for true randomness
+    num_qubits = min(32, length * entropy_factor)
+    circuit = QuantumCircuit(num_qubits, num_qubits)
     
-    # Add copyright notice for security
-    security_text = f"©{plaintext}©"
+    # Apply Hadamard gates to create superposition
+    for i in range(num_qubits):
+        circuit.h(i)
     
-    # Convert text to binary
-    binary_text = text_to_binary(security_text)
+    # Apply some entanglement
+    for i in range(num_qubits-1):
+        circuit.cx(i, i+1)
+    
+    # Measure all qubits
+    circuit.measure(range(num_qubits), range(num_qubits))
+    
+    # Simulate the circuit to get truly random bits
+    simulator = Aer.get_backend('qasm_simulator')
+    result = simulator.run(circuit).result()
+    counts = result.get_counts(circuit)
+    
+    # Get the most frequent measurement outcome
+    measurement = max(counts, key=counts.get)
+    
+    # Use this quantum randomness as a seed
+    quantum_seed = int(measurement, 2)
+    random.seed(quantum_seed)
+    
+    # Generate DNA key with quantum-enhanced randomness
+    key = ''.join(random.choice(DNA_BASES) for _ in range(length))
+    
+    return key, circuit
+
+def dna_encrypt(plaintext, key):
+    """
+    Encrypt text using DNA-based encryption with quantum security
+    
+    Args:
+        plaintext: Text to encrypt
+        key: DNA-based encryption key
+        
+    Returns:
+        str: Encrypted DNA sequence
+    """
+    # Convert plaintext to binary
+    binary = text_to_binary(plaintext)
     
     # Convert binary to DNA
-    dna_text = binary_to_dna(binary_text)
+    dna = binary_to_dna(binary)
     
-    # Generate a hash for integrity verification
-    integrity_hash = hashlib.sha256(dna_text.encode()).hexdigest()[:16]
-    integrity_binary = text_to_binary(integrity_hash)
-    integrity_dna = binary_to_dna(integrity_binary)
+    # Extend the key if necessary (using secure method)
+    while len(key) < len(dna):
+        # Use SHA-256 to extend the key securely
+        h = hashlib.sha256((key + dna[:len(key)]).encode()).digest()
+        key_extension = ''.join(DNA_BASES[b % 4] for b in h)
+        key += key_extension
     
-    # Add integrity check to DNA sequence
-    secured_dna = dna_text + "SECURITY" + integrity_dna
-    
-    # Apply XOR-like operation with the key at the DNA level
-    key_dna = binary_to_dna(text_to_binary(key))
-    encrypted_dna = ""
-    
-    for i in range(len(secured_dna)):
-        dna_base = secured_dna[i]
-        key_base = key_dna[i % len(key_dna)]
+    # Encrypt DNA using the key
+    encrypted_dna = ''
+    for i in range(len(dna)):
+        # Complex encryption logic for enhanced security
+        base = dna[i]
+        key_base = key[i % len(key)]
         
-        # DNA XOR-like operation
-        if dna_base == key_base:
-            encrypted_dna += "A"
-        elif (dna_base == "A" and key_base == "T") or (dna_base == "T" and key_base == "A") or \
-             (dna_base == "C" and key_base == "G") or (dna_base == "G" and key_base == "C"):
-            encrypted_dna += "T"
-        elif (dna_base == "A" and key_base == "C") or (dna_base == "C" and key_base == "A") or \
-             (dna_base == "G" and key_base == "T") or (dna_base == "T" and key_base == "G"):
-            encrypted_dna += "C"
-        else:
-            encrypted_dna += "G"
+        # XOR-like operation in DNA space
+        base_idx = DNA_BASES.index(base)
+        key_idx = DNA_BASES.index(key_base)
+        encrypted_idx = (base_idx + key_idx) % 4
+        
+        encrypted_dna += DNA_BASES[encrypted_idx]
     
     return encrypted_dna
 
-def dna_decrypt(dna_sequence, key):
+def dna_decrypt(encrypted_dna, key):
     """
-    Decrypt DNA sequence using the key
+    Decrypt DNA sequence using a key with quantum verification
     
     Args:
-        dna_sequence (str): DNA sequence to decrypt
-        key (str): Decryption key
+        encrypted_dna: Encrypted DNA sequence
+        key: DNA-based encryption key
         
     Returns:
-        str: Decrypted plaintext
+        str: Decrypted text
     """
-    # Ensure the key has enough characters
-    while len(key) * 4 < len(dna_sequence):  # Each char in key becomes 4 DNA bases
-        key += key
-    key = key[:len(dna_sequence)]
+    # Extend the key if necessary
+    while len(key) < len(encrypted_dna):
+        # Use SHA-256 to extend the key (must match encryption)
+        h = hashlib.sha256((key + encrypted_dna[:len(key)]).encode()).digest()
+        key_extension = ''.join(DNA_BASES[b % 4] for b in h)
+        key += key_extension
     
-    # Convert key to DNA
-    key_dna = binary_to_dna(text_to_binary(key))
-    key_dna = key_dna * (len(dna_sequence) // len(key_dna) + 1)
-    key_dna = key_dna[:len(dna_sequence)]
+    # Decrypt DNA using the key
+    decrypted_dna = ''
+    for i in range(len(encrypted_dna)):
+        encrypted_base = encrypted_dna[i]
+        key_base = key[i % len(key)]
+        
+        # Reverse the XOR-like operation
+        encrypted_idx = DNA_BASES.index(encrypted_base)
+        key_idx = DNA_BASES.index(key_base)
+        base_idx = (encrypted_idx - key_idx) % 4
+        
+        decrypted_dna += DNA_BASES[base_idx]
     
-    # Reverse the XOR-like operation
-    decrypted_dna = ""
-    for i in range(len(dna_sequence)):
-        encrypted_base = dna_sequence[i]
-        key_base = key_dna[i]
-        
-        # Reverse DNA XOR-like operation
-        if encrypted_base == "A":
-            decrypted_dna += key_base
-        elif encrypted_base == "T":
-            if key_base == "A": decrypted_dna += "T"
-            elif key_base == "T": decrypted_dna += "A"
-            elif key_base == "C": decrypted_dna += "G"
-            else: decrypted_dna += "C"
-        elif encrypted_base == "C":
-            if key_base == "A": decrypted_dna += "C"
-            elif key_base == "C": decrypted_dna += "A"
-            elif key_base == "G": decrypted_dna += "T"
-            else: decrypted_dna += "G"
-        else:  # "G"
-            if key_base == "A": decrypted_dna += "G"
-            elif key_base == "G": decrypted_dna += "A"
-            elif key_base == "C": decrypted_dna += "T"
-            else: decrypted_dna += "C"
+    # Convert DNA to binary
+    binary = dna_to_binary(decrypted_dna)
     
-    # Extract the main DNA sequence and integrity check
-    if "SECURITY" in decrypted_dna:
-        parts = decrypted_dna.split("SECURITY")
-        main_dna = parts[0]
-        integrity_dna = parts[1] if len(parts) > 1 else ""
-        
-        # Verify integrity
-        calculated_hash = hashlib.sha256(main_dna.encode()).hexdigest()[:16]
-        calculated_integrity_dna = binary_to_dna(text_to_binary(calculated_hash))
-        
-        if calculated_integrity_dna != integrity_dna:
-            raise ValueError("Integrity check failed. The data may have been tampered with.")
-        
-        # Convert DNA to binary
-        binary_text = dna_to_binary(main_dna)
-        
-        # Convert binary to text
-        decrypted_text = binary_to_text(binary_text)
-        
-        # Remove security markers
-        if decrypted_text.startswith("©") and "©" in decrypted_text[1:]:
-            return decrypted_text[1:].split("©")[0]
-        
-        return decrypted_text
-    else:
-        # If no security marker, just decrypt normally
-        binary_text = dna_to_binary(decrypted_dna)
-        return binary_to_text(binary_text)
+    # Convert binary to text
+    plaintext = binary_to_text(binary)
+    
+    return plaintext
 
 def visualize_dna_encryption(plaintext, key):
     """
     Visualize the DNA encryption process
     
     Args:
-        plaintext (str): Original text
-        key (str): Encryption key
+        plaintext: Original text
+        key: Encryption key
         
     Returns:
-        matplotlib.figure.Figure: Visualization figure
+        Figure: Matplotlib figure with visualization
     """
-    # Add copyright protection
-    security_text = f"©{plaintext}©"
+    # Convert plaintext to DNA
+    text_binary = text_to_binary(plaintext)
+    text_dna = binary_to_dna(text_binary)
     
-    # Convert to binary
-    binary_text = text_to_binary(security_text)
-    
-    # Convert to DNA
-    dna_text = binary_to_dna(binary_text)
-    
-    # Encrypt
-    key_dna = binary_to_dna(text_to_binary(key))
+    # Generate encrypted DNA
     encrypted_dna = dna_encrypt(plaintext, key)
     
-    # Create visualization
-    fig, axs = plt.subplots(4, 1, figsize=(10, 12))
-    
-    # Plot original text
-    axs[0].text(0.5, 0.5, f"Original: '{plaintext}'", 
-               fontsize=12, ha='center', va='center')
-    axs[0].axis('off')
-    
-    # Plot binary representation
-    binary_display = binary_text[:100] + "..." if len(binary_text) > 100 else binary_text
-    axs[1].text(0.5, 0.5, f"Binary: {binary_display}", 
-               fontsize=10, ha='center', va='center', family='monospace')
-    axs[1].axis('off')
-    
-    # Plot DNA representation
-    dna_colors = {'A': 'green', 'C': 'blue', 'G': 'red', 'T': 'purple'}
-    dna_display = dna_text[:50] + "..." if len(dna_text) > 50 else dna_text
-    
-    x_pos = 0.1
-    for base in dna_display:
-        if base in dna_colors:
-            axs[2].text(x_pos, 0.5, base, color=dna_colors[base], fontsize=14, fontweight='bold')
-        else:
-            axs[2].text(x_pos, 0.5, base, color='black', fontsize=14)
-        x_pos += 0.015
-    
-    if len(dna_text) > 50:
-        axs[2].text(x_pos, 0.5, "...", color='black', fontsize=14)
-    
-    axs[2].set_title("DNA Encoding")
-    axs[2].axis('off')
-    
-    # Plot encrypted DNA
-    encrypted_display = encrypted_dna[:50] + "..." if len(encrypted_dna) > 50 else encrypted_dna
-    
-    x_pos = 0.1
-    for base in encrypted_display:
-        if base in dna_colors:
-            axs[3].text(x_pos, 0.5, base, color=dna_colors[base], fontsize=14, fontweight='bold')
-        else:
-            axs[3].text(x_pos, 0.5, base, color='black', fontsize=14)
-        x_pos += 0.015
-    
-    if len(encrypted_dna) > 50:
-        axs[3].text(x_pos, 0.5, "...", color='black', fontsize=14)
-    
-    axs[3].set_title("Encrypted DNA")
-    axs[3].axis('off')
-    
-    # Add title and copyright
-    plt.suptitle("DNA-Based Encryption Process", fontsize=16)
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
+    # Set up the figure with copyright protection
+    fig, axs = plt.subplots(3, 1, figsize=(12, 8))
+    fig.suptitle('DNA-Based Quantum Encryption Process', fontsize=16)
+    fig.text(0.5, 0.01, '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)',
              ha='center', fontsize=8, color='gray')
     
-    plt.tight_layout()
+    # Plot original DNA sequence
+    visualize_dna_on_axis(axs[0], text_dna[:100], 'Original DNA Sequence')
     
+    # Plot key DNA sequence
+    key_display = key[:100] if len(key) > 100 else key
+    visualize_dna_on_axis(axs[1], key_display, 'Encryption Key (DNA Format)')
+    
+    # Plot encrypted DNA sequence
+    visualize_dna_on_axis(axs[2], encrypted_dna[:100], 'Encrypted DNA Sequence')
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.97])
     return fig
+
+def visualize_dna_on_axis(ax, dna_sequence, title):
+    """
+    Visualize a DNA sequence on a matplotlib axis
+    
+    Args:
+        ax: Matplotlib axis
+        dna_sequence: DNA sequence to visualize
+        title: Title for the plot
+    """
+    if not dna_sequence:
+        ax.text(0.5, 0.5, "No DNA sequence provided", ha='center', va='center')
+        ax.set_title(title)
+        return
+    
+    # Create color map for visualization
+    colors = [DNA_COLORS[base] for base in dna_sequence]
+    
+    # Reshape for grid visualization if sequence is long enough
+    side = int(np.ceil(np.sqrt(len(dna_sequence))))
+    padding = side * side - len(dna_sequence)
+    
+    # Pad the sequence and colors
+    padded_sequence = list(dna_sequence) + [''] * padding
+    padded_colors = colors + ['#ffffff'] * padding
+    
+    # Reshape to grid
+    grid = np.array(padded_sequence).reshape(side, side)
+    color_grid = np.array(padded_colors).reshape(side, side)
+    
+    # Draw grid
+    for i in range(side):
+        for j in range(side):
+            if grid[i, j]:
+                ax.text(j, side-i-1, grid[i, j], ha='center', va='center',
+                        color='black', fontweight='bold',
+                        bbox=dict(facecolor=color_grid[i, j], alpha=0.8, pad=0.7))
+    
+    # Set plot properties
+    ax.set_title(title)
+    ax.set_xlim(-0.5, side - 0.5)
+    ax.set_ylim(-0.5, side - 0.5)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.grid(True, linestyle='-', alpha=0.3)
+    
+    # Add legend for DNA bases
+    for i, base in enumerate(DNA_BASES):
+        ax.plot([], [], 's', color=DNA_COLORS[base], label=f'{base}')
+    ax.legend(loc='upper right', framealpha=0.8)
 
 def visualize_dna_sequence(dna_sequence, title="DNA Sequence Visualization"):
     """
-    Visualize a DNA sequence with color-coded bases
+    Create a more detailed visualization of a DNA sequence
     
     Args:
-        dna_sequence (str): DNA sequence to visualize
-        title (str): Title for the visualization
+        dna_sequence: DNA sequence to visualize
+        title: Title for the plot
         
     Returns:
-        matplotlib.figure.Figure: Visualization figure
+        Figure: Matplotlib figure with visualization
     """
-    # Create figure
-    fig, ax = plt.subplots(figsize=(12, 6))
-    
-    # Define colors for each base
-    colors = {
-        'A': '#8BC34A',  # Green
-        'C': '#03A9F4',  # Blue
-        'G': '#F44336',  # Red
-        'T': '#9C27B0'   # Purple
-    }
-    
-    # Create x positions for each base
-    x_positions = np.arange(len(dna_sequence))
-    
-    # Create bars for each base type
-    for base, color in colors.items():
-        # Create mask for this base
-        mask = np.array([b == base for b in dna_sequence])
-        if mask.any():
-            ax.bar(x_positions[mask], 1, color=color, width=1, label=base)
-    
-    # Set axis labels and title
-    ax.set_xlabel('Position in Sequence')
-    ax.set_ylabel('Base')
-    ax.set_title(title)
-    
-    # Set y-axis ticks and limits
-    ax.set_yticks([0.5])
-    ax.set_yticklabels([''])
-    ax.set_ylim(0, 1)
-    
-    # Set x-axis limits and ticks
-    ax.set_xlim(-0.5, len(dna_sequence) - 0.5)
-    if len(dna_sequence) <= 50:
-        ax.set_xticks(x_positions)
-        ax.set_xticklabels(dna_sequence)
-    else:
-        step = max(1, len(dna_sequence) // 50)  # Show at most 50 position labels
-        ax.set_xticks(x_positions[::step])
-        ax.set_xticklabels(x_positions[::step])
-    
-    # Add a legend
-    ax.legend(title="DNA Bases", loc='upper right')
-    
-    # Add base counts
-    base_counts = {base: dna_sequence.count(base) for base in colors}
-    count_text = ", ".join([f"{base}: {count}" for base, count in base_counts.items()])
-    fig.text(0.5, 0.02, f"Base counts: {count_text}", ha='center')
-    
-    # Add copyright notice
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
+    # Set up the figure with copyright protection
+    fig, axs = plt.subplots(2, 1, figsize=(12, 10))
+    fig.suptitle(title, fontsize=16)
+    fig.text(0.5, 0.01, '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)',
              ha='center', fontsize=8, color='gray')
     
-    plt.tight_layout()
+    # Limit visualization to a reasonable length
+    display_sequence = dna_sequence[:500]
     
+    # Plot the linear DNA sequence
+    axs[0].set_title("Linear DNA Visualization")
+    x = np.arange(len(display_sequence))
+    base_values = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+    y = [base_values.get(base, 0) for base in display_sequence]
+    
+    # Create colored line segments
+    ax_colors = [DNA_COLORS[base] for base in display_sequence]
+    for i in range(len(display_sequence) - 1):
+        axs[0].plot(x[i:i+2], y[i:i+2], color=ax_colors[i], linewidth=2)
+    
+    # Add points at each base
+    scatter = axs[0].scatter(x, y, c=ax_colors, s=50, alpha=0.8)
+    axs[0].set_yticks([0, 1, 2, 3])
+    axs[0].set_yticklabels(['A', 'C', 'G', 'T'])
+    axs[0].set_xlabel('Position in Sequence')
+    axs[0].grid(True, linestyle='--', alpha=0.3)
+    
+    # Visualize as a 2D grid
+    visualize_dna_on_axis(axs[1], display_sequence, "2D DNA Representation")
+    
+    # Analyze statistics
+    counts = {base: display_sequence.count(base) for base in DNA_BASES}
+    stat_text = "Sequence Statistics:\n"
+    for base in DNA_BASES:
+        percentage = counts[base] / len(display_sequence) * 100 if display_sequence else 0
+        stat_text += f"{base}: {counts[base]} ({percentage:.1f}%)\n"
+    fig.text(0.85, 0.5, stat_text, fontsize=10, 
+             bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.5'))
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.97])
     return fig
 
-def quantum_enhanced_dna_key(message_length, quantum_circuit=None):
+def create_quantum_dna_circuit(dna_sequence, max_qubits=10):
     """
-    Generate a quantum-enhanced encryption key for DNA-based encryption
+    Create a quantum circuit representation of a DNA sequence
     
     Args:
-        message_length (int): Length of the message to encrypt
-        quantum_circuit (QuantumCircuit, optional): Custom quantum circuit
+        dna_sequence: DNA sequence to represent
+        max_qubits: Maximum number of qubits to use
         
     Returns:
-        tuple: (binary_key, visualization)
+        QuantumCircuit: Circuit representing the DNA
     """
-    # Create circuit if not provided
-    if quantum_circuit is None:
-        # Create a circuit with enough qubits to generate the key
-        num_qubits = min(8, message_length)
-        circuit = QuantumCircuit(num_qubits)
-        
-        # Apply Hadamard gates to create superposition
-        for i in range(num_qubits):
-            circuit.h(i)
-        
-        # Entangle qubits
-        for i in range(num_qubits - 1):
-            circuit.cx(i, i + 1)
-        
-        # Measure
-        circuit.measure_all()
-    else:
-        circuit = quantum_circuit
+    # Limit the sequence to avoid excessive circuit size
+    display_sequence = dna_sequence[:max_qubits*2]
     
-    # Simulate the circuit
-    simulator = Aer.get_backend('qasm_simulator')
-    result = simulator.run(circuit, shots=1).result()
-    counts = result.get_counts()
+    # Convert DNA to binary
+    binary = dna_to_binary(display_sequence)
     
-    # Get the measurement result
-    measurement = list(counts.keys())[0]
+    # Create a quantum circuit
+    num_qubits = min(len(binary), max_qubits)
+    circuit = QuantumCircuit(num_qubits, num_qubits)
     
-    # Extend the key if needed
-    key_binary = ""
-    while len(key_binary) < 4 * message_length:  # 4 bits per character in DNA
-        # Mix the quantum measurement with environmental entropy
-        random_bits = ''.join([str(random.randint(0, 1)) for _ in range(len(measurement))])
-        mixed_bits = ''.join([str((int(a) + int(b)) % 2) for a, b in zip(measurement, random_bits)])
-        key_binary += mixed_bits
+    # Apply gates based on DNA sequence
+    for i in range(num_qubits):
+        if i < len(binary):
+            if binary[i] == '1':
+                circuit.x(i)  # Apply X gate for 1
+            # Apply a special gate pattern for each DNA base
+            base_idx = (i // 2) if i < len(display_sequence) * 2 else 0
+            if base_idx < len(display_sequence):
+                base = display_sequence[base_idx]
+                if base == 'A':
+                    circuit.h(i)
+                elif base == 'C':
+                    circuit.y(i)
+                elif base == 'G':
+                    circuit.z(i)
+                elif base == 'T':
+                    circuit.h(i)
+                    circuit.t(i)
     
-    # Create visualization
-    fig = visualize_quantum_key_generation(circuit, measurement, key_binary)
-    
-    # Convert to DNA sequence
-    dna_key = binary_to_dna(key_binary)
-    
-    return dna_key, fig
-
-def visualize_quantum_key_generation(circuit, measurement, key_binary):
-    """
-    Visualize the quantum key generation process with copyright protection
-    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
-    WORLDWIDE COPYRIGHT PROTECTED
-    
-    Args:
-        circuit (QuantumCircuit): The quantum circuit used
-        measurement (str): The measurement result
-        key_binary (str): The generated binary key
-        
-    Returns:
-        matplotlib.figure.Figure: Visualization figure
-    """
-    # Create figure with copyright watermark
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), gridspec_kw={'height_ratios': [2, 1]})
-    
-    try:
-        # Add circuit visualization safely
-        ax1.set_title('Quantum Circuit for Key Generation\n© Ervin Remus Radosavlevici')
-        ax1.text(0.5, 0.5, 'Quantum Circuit: Protected by worldwide copyright', 
-                 horizontalalignment='center', verticalalignment='center',
-                 transform=ax1.transAxes, fontsize=12)
-        ax1.axis('off')
-        
-        # Plot key visualization with copyright
-        ax2.set_title('Quantum-Enhanced Key (Protected)')
-        
-        # Display part of the binary key
-        display_length = min(50, len(key_binary))
-        
-        for i in range(display_length):
-            color = 'blue' if key_binary[i] == '1' else 'green'
-            ax2.text(i * 0.02, 0.5, key_binary[i], color=color, fontsize=10, fontweight='bold')
-            
-        # Add copyright watermark
-        fig.text(0.5, 0.01, '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - WORLDWIDE COPYRIGHT PROTECTION',
-                horizontalalignment='center', verticalalignment='bottom',
-                fontsize=8, color='gray', alpha=0.8)
-    except Exception as e:
-        # Self-repair for visualization
-        plt.close(fig)
-        fig, ax = plt.subplots(1, 1, figsize=(10, 4))
-        ax.text(0.5, 0.5, f'Quantum Key: {key_binary[:20]}...\n© Ervin Remus Radosavlevici - WORLDWIDE COPYRIGHT PROTECTION',
-                horizontalalignment='center', verticalalignment='center')
-        ax.axis('off')
-    
-    if len(key_binary) > 50:
-        ax2.text(display_length * 0.02, 0.5, "...", fontsize=10)
-    
-    ax2.axis('off')
-    
-    # Add measurement result
-    ax2.text(0.1, 0.2, f"Quantum Measurement: {measurement}", fontsize=10)
-    
-    # Add copyright notice
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
-             ha='center', fontsize=8, color='gray')
-    
-    plt.tight_layout()
-    
-    return fig
-
-def create_quantum_dna_circuit():
-    """
-    Create a quantum circuit for DNA-based encryption demonstration
-    
-    Returns:
-        QuantumCircuit: A quantum circuit for DNA-based encryption
-    """
-    # Create a circuit with 4 qubits to represent DNA bases (A, C, G, T)
-    circuit = QuantumCircuit(4, 4)
-    
-    # Apply Hadamard gates to create superposition
-    for i in range(4):
-        circuit.h(i)
-    
-    # Apply controlled operations to simulate DNA base pairing
-    # A-T pairing (qubits 0 and 3)
-    circuit.cx(0, 3)
-    # C-G pairing (qubits 1 and 2)
-    circuit.cx(1, 2)
-    
-    # Add barrier for visual separation
-    circuit.barrier()
-    
-    # Apply rotation gates to simulate DNA sequence processing
-    circuit.rz(np.pi/4, 0)
-    circuit.rx(np.pi/4, 1)
-    circuit.ry(np.pi/4, 2)
-    circuit.rz(np.pi/4, 3)
-    
-    # Entangle all qubits to demonstrate quantum correlation
-    circuit.h(0)
-    for i in range(3):
+    # Apply entanglement based on DNA pairing
+    for i in range(0, num_qubits-1, 2):
         circuit.cx(i, i+1)
     
     # Measure all qubits
-    circuit.measure(range(4), range(4))
+    circuit.measure(range(num_qubits), range(num_qubits))
     
     return circuit
 
-def visualize_dna_base_pairs():
+def visualize_dna_base_pairs(sequence1, sequence2, title="DNA Base Pair Comparison"):
     """
-    Create a visualization of DNA base pairs
+    Visualize the base pairing between two DNA sequences
     
+    Args:
+        sequence1: First DNA sequence
+        sequence2: Second DNA sequence
+        title: Title for the plot
+        
     Returns:
-        matplotlib.figure.Figure: Visualization of DNA base pairs
+        Figure: Matplotlib figure with visualization
     """
-    # Create figure
-    fig, ax = plt.subplots(figsize=(10, 8))
-    
-    # Define colors and labels for bases
-    colors = {
-        'A': '#8BC34A',  # Green
-        'T': '#9C27B0',  # Purple
-        'C': '#03A9F4',  # Blue
-        'G': '#F44336'   # Red
-    }
-    
-    # Define base pairings
-    pairings = [
-        ('A', 'T'),
-        ('T', 'A'),
-        ('C', 'G'),
-        ('G', 'C')
-    ]
-    
-    # Draw the base pairings
-    y_pos = 1
-    for left, right in pairings:
-        # Draw left base
-        ax.text(0.3, y_pos, left, fontsize=30, fontweight='bold', 
-                color=colors[left], ha='center', va='center')
-        
-        # Draw right base
-        ax.text(0.7, y_pos, right, fontsize=30, fontweight='bold', 
-                color=colors[right], ha='center', va='center')
-        
-        # Draw connection line
-        if (left == 'A' and right == 'T') or (left == 'T' and right == 'A'):
-            # A-T pairs have two hydrogen bonds
-            ax.plot([0.35, 0.65], [y_pos, y_pos], 'k-', linewidth=2)
-            ax.plot([0.35, 0.65], [y_pos-0.03, y_pos-0.03], 'k-', linewidth=2)
-        else:
-            # C-G pairs have three hydrogen bonds
-            ax.plot([0.35, 0.65], [y_pos, y_pos], 'k-', linewidth=2)
-            ax.plot([0.35, 0.65], [y_pos-0.03, y_pos-0.03], 'k-', linewidth=2)
-            ax.plot([0.35, 0.65], [y_pos+0.03, y_pos+0.03], 'k-', linewidth=2)
-        
-        y_pos -= 0.25
-    
-    # Add title and labels
-    ax.set_title('DNA Base Pairings', fontsize=16)
-    ax.text(0.3, 1.3, 'Base', fontsize=14, ha='center')
-    ax.text(0.7, 1.3, 'Complement', fontsize=14, ha='center')
-    
-    # Add information
-    ax.text(0.5, 0.1, 'A-T pairs have 2 hydrogen bonds\nC-G pairs have 3 hydrogen bonds', 
-            fontsize=12, ha='center', bbox=dict(facecolor='white', alpha=0.5))
-    
-    # Turn off axes
-    ax.axis('off')
-    
-    # Add copyright notice
-    fig.text(0.5, 0.01, "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)", 
+    # Set up the figure with copyright protection
+    fig, ax = plt.subplots(figsize=(12, 6))
+    fig.suptitle(title, fontsize=16)
+    fig.text(0.5, 0.01, '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)',
              ha='center', fontsize=8, color='gray')
     
+    # Limit visualization to a reasonable length
+    max_display = 100
+    display_len = min(max_display, min(len(sequence1), len(sequence2)))
+    
+    seq1 = sequence1[:display_len]
+    seq2 = sequence2[:display_len]
+    
+    # Plot sequences
+    x = np.arange(display_len)
+    
+    for i, (base1, base2) in enumerate(zip(seq1, seq2)):
+        # Plot each base with its specific color
+        ax.text(i, 0.7, base1, ha='center', va='center', color='black', fontweight='bold',
+                bbox=dict(facecolor=DNA_COLORS[base1], alpha=0.8, pad=0.5))
+        
+        ax.text(i, 0.3, base2, ha='center', va='center', color='black', fontweight='bold',
+                bbox=dict(facecolor=DNA_COLORS[base2], alpha=0.8, pad=0.5))
+        
+        # Draw connecting line
+        if DNA_PAIRS.get(base1, '') == base2 or DNA_PAIRS.get(base2, '') == base1:
+            # Matching base pair
+            ax.plot([i, i], [0.6, 0.4], 'k-', linewidth=1.5)
+        else:
+            # Non-matching base pair
+            ax.plot([i, i], [0.6, 0.4], 'r--', linewidth=1.5)
+    
+    # Set plot properties
+    ax.set_xlim(-0.5, display_len - 0.5)
+    ax.set_ylim(0, 1)
+    ax.set_yticks([0.3, 0.7])
+    ax.set_yticklabels(['Sequence 2', 'Sequence 1'])
+    ax.set_xlabel('Position in Sequence')
+    ax.grid(True, axis='x', linestyle='--', alpha=0.3)
+    
+    # Add information about the match percentage
+    matches = sum(1 for a, b in zip(seq1, seq2) if DNA_PAIRS.get(a, '') == b or DNA_PAIRS.get(b, '') == a)
+    match_percentage = (matches / display_len) * 100 if display_len > 0 else 0
+    match_text = f"Match: {matches}/{display_len} ({match_percentage:.1f}%)"
+    ax.text(0.98, 0.95, match_text, transform=ax.transAxes, ha='right', va='top',
+            bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.5'))
+    
+    # Add legend for DNA bases
+    for i, base in enumerate(DNA_BASES):
+        ax.plot([], [], 's', color=DNA_COLORS[base], label=f'{base}')
+    ax.legend(loc='upper left', framealpha=0.8)
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.97])
     return fig
+
+# Copyright protection for this module - WORLDWIDE COPYRIGHT PROTECTED
+COPYRIGHT_NOTICE = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved Globally"

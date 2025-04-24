@@ -35,7 +35,8 @@ from utils.quantum_utils import (
     create_bell_state, simulate_circuit, plot_quantum_state,
     plot_measurement_results, bloch_sphere_visualization,
     create_ghz_state, create_quantum_teleportation_circuit,
-    visualize_quantum_fourier_transform
+    visualize_quantum_fourier_transform, create_hadamard_circuit,
+    create_pauli_x_circuit, create_pauli_y_circuit, create_pauli_z_circuit
 )
 from utils.dna_security import (
     dna_encrypt, dna_decrypt, visualize_dna_encryption,
@@ -49,7 +50,28 @@ app = Flask(__name__,
             static_folder='static',
             template_folder='templates')
 
-# Enable ultra-secure security headers
+# Add advanced security configurations
+app.config['SECRET_KEY'] = secrets.token_hex(32)  # Strong secret key
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(hours=4)  # Session duration
+app.config['JWT_SECRET_KEY'] = secrets.token_hex(32)  # JWT secret key
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(hours=2)  # JWT token expiration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///quantum_edu.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize Flask extensions with quantum security enhancements
+CORS(app)  # Enable Cross-Origin Resource Sharing
+jwt = JWTManager(app)  # Initialize JWT for secure authentication
+
+# Initialize database with DNA security
+initialize_database(app)
+
+# Global copyright notice for application protection
+COPYRIGHT_NOTICE = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Worldwide Rights Reserved"
+
+# ------------------------------
+# Middleware for Security
+# ------------------------------
+
 @app.after_request
 def apply_security_headers(response):
     """
@@ -57,110 +79,63 @@ def apply_security_headers(response):
     © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
     WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
     """
-    # Content Security Policy to prevent XSS and protect intellectual property
-    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
-    # Prevent content from being embedded in iframes (anti-theft)
-    response.headers['X-Frame-Options'] = 'DENY'
-    # Prevents browser from doing MIME sniffing
+    # Security headers to prevent attacks and protect copyright
     response.headers['X-Content-Type-Options'] = 'nosniff'
-    # XSS protection
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['X-XSS-Protection'] = '1; mode=block'
-    # Add copyright and ownership headers
-    response.headers['X-Copyright'] = '© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.'
-    response.headers['X-Owner'] = 'Ervin Remus Radosavlevici (ervin210@icloud.com)'
-    # Add security verification key
-    response.headers['X-Security-Verification'] = hashlib.sha256(f"DNA-SECURITY-{request.remote_addr}".encode()).hexdigest()
+    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     
-    # Log unauthorized access attempts
-    if request.path.startswith('/_stcore') or 'streamlit' in request.path.lower():
-        log_security_event(
-            "SECURITY_BREACH_ATTEMPT", 
-            f"Unauthorized access attempt to legacy Streamlit routes: {request.path}",
-            metadata={
-                "ip": request.remote_addr,
-                "user_agent": request.user_agent.string,
-                "severity": "HIGH"
-            }
-        )
+    # Copyright protection headers
+    response.headers['X-Copyright'] = COPYRIGHT_NOTICE
+    response.headers['X-Protected'] = 'DNA-Based Quantum Security'
+    
+    # Log request for security monitoring
+    log_security_event("HTTP_REQUEST", f"Access to {request.path}")
     
     return response
 
-# Configure application with security-enhanced settings
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', secrets.token_hex(32))
-app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', secrets.token_hex(32))
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(hours=1)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Enable CORS with security protections
-CORS(app, resources={r"/*": {"origins": "*"}})
-
-# Initialize JWT for secure token-based authentication
-jwt = JWTManager(app)
-
-# Initialize database
-db = SQLAlchemy(app)
-
-# Global security watermark with copyright notice
-COPYRIGHT_NOTICE = """
-© WORLDWIDE COPYRIGHT PROTECTION
-Author: Ervin Remus Radosavlevici
-Email: ervin210@icloud.com
-Copyright Status: All Rights Reserved Globally
-Protected by international copyright law with advanced DNA-based security
-"""
-
-# Register security middleware for request monitoring
 @app.before_request
 def before_request():
-    # Log access for security monitoring
-    if not request.path.startswith('/static'):
-        log_security_event(
-            "HTTP_REQUEST", 
-            f"Access to {request.path}",
-            metadata={
-                "method": request.method,
-                "ip": request.remote_addr,
-                "user_agent": request.user_agent.string
-            }
-        )
+    """
+    Security checks before processing requests
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Initialize session with quantum-enhanced security if not already done
+    if 'security_key' not in session:
+        security_key, _ = quantum_enhanced_dna_key(32)
+        session['security_key'] = security_key
     
-    # Verify client security token for protection against unauthorized access
-    if request.path.startswith('/api/') and not request.path.startswith('/api/auth'):
-        # Check for client security token in headers
-        client_token = request.headers.get('X-Security-Token')
-        
-        if not client_token:
-            # Allow JWT-based access to continue without this token
-            return None
-            
-        # Verify token with DNA-based security
-        token_hash = hashlib.sha256(client_token.encode()).hexdigest()
-        # Log verification for security auditing
-        log_security_event(
-            "TOKEN_VERIFICATION", 
-            "Client security token verified",
-            metadata={"token_hash": token_hash[:10] + "..." + token_hash[-10:]}
-        )
+    # Regenerate session periodically for security
+    if not session.get('created_at'):
+        session['created_at'] = datetime.datetime.now().isoformat()
+    else:
+        created_time = datetime.datetime.fromisoformat(session.get('created_at'))
+        if (datetime.datetime.now() - created_time).total_seconds() > 3600:  # 1 hour
+            # Regenerate security key for enhanced protection
+            security_key, _ = quantum_enhanced_dna_key(32)
+            session['security_key'] = security_key
+            session['created_at'] = datetime.datetime.now().isoformat()
 
-# -------------------------------
-# HTML Routes - Main Application
-# -------------------------------
+# ------------------------------
+# Main Application Routes
+# ------------------------------
 
 @app.route('/')
 def index():
     """
     Render the main application homepage with copyright-protected content
     """
-    # DNA-based security initialization for homepage
+    # Generate quantum DNA security key for this session
     security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
     session['security_key'] = security_key
     
-    # Log access with security monitoring
-    log_security_event("PAGE_ACCESS", "Homepage accessed", 
-                     metadata={"ip": request.remote_addr})
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Homepage accessed")
     
-    # Return the main homepage with copyright information
+    # Return homepage with global copyright protection
     return render_template('index.html', 
                          copyright=COPYRIGHT_NOTICE,
                          security_key=security_key[:8] + "..." + security_key[-8:])
@@ -176,11 +151,10 @@ def quantum_basics():
     security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
     session['security_key'] = security_key
     
-    # Add copyright watermark and log access with security monitoring
-    log_security_event("PAGE_ACCESS", "Quantum basics page accessed with copyright protection",
-                      metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Quantum basics page accessed with copyright protection")
     
-    # Return the page with global copyright protection
+    # Return quantum basics page with global copyright protection
     return render_template('quantum_basics.html', 
                          copyright=COPYRIGHT_NOTICE,
                          security_key=security_key[:8] + "..." + security_key[-8:])
@@ -196,32 +170,11 @@ def dna_security_page():
     security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
     session['security_key'] = security_key
     
-    # Add copyright watermark and log access with security monitoring
-    log_security_event("PAGE_ACCESS", "DNA security page accessed with copyright protection",
-                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "DNA security page accessed with copyright protection")
     
-    # Return page with global copyright protection
+    # Return DNA security page with global copyright protection
     return render_template('dna_security.html', 
-                         copyright=COPYRIGHT_NOTICE,
-                         security_key=security_key[:8] + "..." + security_key[-8:])
-
-@app.route('/quantum_ml')
-def quantum_ml():
-    """
-    Render the quantum machine learning page with interactive demonstrations
-    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
-    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
-    """
-    # Generate quantum DNA security key for this session
-    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
-    session['security_key'] = security_key
-    
-    # Add copyright watermark and log access with security monitoring
-    log_security_event("PAGE_ACCESS", "Quantum ML page accessed with copyright protection",
-                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
-    
-    # Return page with global copyright protection
-    return render_template('quantum_ml.html', 
                          copyright=COPYRIGHT_NOTICE,
                          security_key=security_key[:8] + "..." + security_key[-8:])
 
@@ -236,12 +189,30 @@ def quantum_algorithms():
     security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
     session['security_key'] = security_key
     
-    # Add copyright watermark and log access with security monitoring
-    log_security_event("PAGE_ACCESS", "Quantum algorithms page accessed with copyright protection",
-                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Quantum algorithms page accessed with copyright protection")
     
-    # Return page with global copyright protection
+    # Return quantum algorithms page with global copyright protection
     return render_template('quantum_algorithms.html', 
+                         copyright=COPYRIGHT_NOTICE,
+                         security_key=security_key[:8] + "..." + security_key[-8:])
+
+@app.route('/quantum_ml')
+def quantum_ml():
+    """
+    Render the quantum machine learning page with interactive demonstrations
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Generate quantum DNA security key for this session
+    security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
+    session['security_key'] = security_key
+    
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Quantum ML page accessed with copyright protection")
+    
+    # Return quantum ML page with global copyright protection
+    return render_template('quantum_ml.html', 
                          copyright=COPYRIGHT_NOTICE,
                          security_key=security_key[:8] + "..." + security_key[-8:])
 
@@ -256,11 +227,10 @@ def resources():
     security_key = session.get('security_key', quantum_enhanced_dna_key(32)[0])
     session['security_key'] = security_key
     
-    # Add copyright watermark and log access with security monitoring
-    log_security_event("PAGE_ACCESS", "Resources page accessed with copyright protection",
-                     metadata={"copyright": "Ervin Remus Radosavlevici", "ip": request.remote_addr})
+    # Log page access with security monitoring
+    log_security_event("PAGE_ACCESS", "Resources page accessed with copyright protection")
     
-    # Return page with global copyright protection
+    # Return resources page with global copyright protection
     return render_template('resources.html', 
                          copyright=COPYRIGHT_NOTICE,
                          security_key=security_key[:8] + "..." + security_key[-8:])
@@ -324,7 +294,6 @@ def admin_dashboard():
     
     # Log admin access with advanced security monitoring
     log_security_event("ADMIN_ACCESS", "Admin dashboard accessed with copyright protection",
-                     event_type="SECURITY",
                      metadata={
                          "user": current_user,
                          "copyright": "Ervin Remus Radosavlevici", 
@@ -443,9 +412,9 @@ def api_ghz_state():
     try:
         num_qubits = int(data.get('num_qubits', 3))
         # Cap number of qubits for server resource protection
-        num_qubits = min(max(num_qubits, 2), 10)  # Between 2 and 10 qubits
+        num_qubits = min(max(num_qubits, 2), 20)  # Between 2 and 20 qubits, increased from 10
     except (ValueError, TypeError):
-        num_qubits = 3  # Default if conversion fails
+        num_qubits = 5  # Default if conversion fails, increased from 3
     
     # Create GHZ state
     circuit = create_ghz_state(num_qubits)
@@ -461,6 +430,83 @@ def api_ghz_state():
         "circuit_image": circuit_img,
         "state_image": state_img,
         "num_qubits": num_qubits,
+        "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    })
+
+@app.route('/api/apply_gate', methods=['GET', 'POST'])
+@app.route('/api/quantum/apply_gate', methods=['GET', 'POST'])
+def api_apply_gate():
+    """
+    Apply a quantum gate to a qubit and visualize the effect
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Handle both GET and POST requests
+    if request.method == 'POST' and request.is_json:
+        data = request.json
+    else:
+        data = request.args
+
+    # Get parameters with defaults
+    gate = data.get('gate', 'hadamard').lower()
+    
+    # Parse initial state - support both array and string representations
+    try:
+        initial_state_param = data.get('initial_state', None)
+        if initial_state_param is None:
+            initial_state = [1, 0]  # |0⟩ by default
+        elif isinstance(initial_state_param, str):
+            if initial_state_param == '0' or initial_state_param == '|0>':
+                initial_state = [1, 0]
+            elif initial_state_param == '1' or initial_state_param == '|1>':
+                initial_state = [0, 1]
+            elif initial_state_param == '+':
+                initial_state = [1/np.sqrt(2), 1/np.sqrt(2)]
+            elif initial_state_param == '-':
+                initial_state = [1/np.sqrt(2), -1/np.sqrt(2)]
+            else:
+                # Try to parse as JSON array
+                try:
+                    initial_state = json.loads(initial_state_param)
+                except:
+                    initial_state = [1, 0]
+        else:
+            initial_state = [1, 0]
+    except:
+        initial_state = [1, 0]
+    
+    # Apply the gate
+    if gate == 'hadamard' or gate == 'h':
+        circuit = create_hadamard_circuit(initial_state)
+    elif gate == 'pauli_x' or gate == 'x':
+        circuit = create_pauli_x_circuit(initial_state)
+    elif gate == 'pauli_y' or gate == 'y':
+        circuit = create_pauli_y_circuit(initial_state)
+    elif gate == 'pauli_z' or gate == 'z':
+        circuit = create_pauli_z_circuit(initial_state)
+    else:
+        return jsonify({
+            "error": f"Unsupported gate: {gate}. Supported gates: hadamard/h, pauli_x/x, pauli_y/y, pauli_z/z",
+            "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
+        }), 400
+    
+    # Simulate the circuit
+    result = simulate_circuit(circuit)
+    
+    # Get circuit image
+    circuit_img = circuit_to_image(circuit)
+    
+    # Get measurement results
+    counts = result.get_counts()
+    hist_img = counts_to_image(counts)
+    
+    # Return the results
+    return jsonify({
+        "gate": gate,
+        "initial_state": initial_state,
+        "circuit_image": circuit_img,
+        "histogram_image": hist_img,
+        "counts": counts,
         "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
     })
 
@@ -536,7 +582,6 @@ def api_dna_decrypt():
         log_security_event(
             "DNA_DECRYPTION_ERROR", 
             str(e),
-            event_type="WARNING",
             metadata={
                 "input_length": len(dna_sequence)
             }
@@ -618,7 +663,6 @@ def api_login():
         log_security_event(
             "LOGIN_FAILED", 
             f"Authentication failed for user: {username}",
-            event_type="WARNING",
             metadata={
                 "error": error_msg,
                 "ip": request.remote_addr
@@ -675,7 +719,6 @@ def api_register():
             log_security_event(
                 "REGISTRATION_FAILED", 
                 f"Registration failed for username: {username}",
-                event_type="WARNING",
                 metadata={
                     "error": error_msg,
                     "ip": request.remote_addr
@@ -693,7 +736,6 @@ def api_register():
         log_security_event(
             "REGISTRATION_ERROR", 
             f"Registration error: {str(e)}",
-            event_type="ERROR",
             metadata={
                 "ip": request.remote_addr
             }
