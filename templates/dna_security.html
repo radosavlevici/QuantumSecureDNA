@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
     <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Toate drepturile rezervate">
-    <meta name="description" content="Securitate avansată bazată pe ADN integrată cu calcul cuantic">
-    <title>Securitate ADN Avansată - Quantum Computing Academy</title>
+    <meta name="description" content="Securitate ADN - Quantum Computing Academy">
+    <title>Securitate ADN - Quantum Computing Academy</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
@@ -30,155 +30,294 @@
 
     <main>
         <section class="page-header">
-            <h2>Securitate Avansată Bazată pe ADN</h2>
-            <p>Descoperă tehnologia revoluționară care combină principiile ADN-ului biologic cu criptografia cuantică</p>
+            <h2>Securitate ADN</h2>
+            <p>Explorați tehnologia revoluționară de criptare bazată pe secvențe ADN și calcul cuantic.</p>
             <div class="security-badge">
                 <span class="security-key">Cheie de securitate: {{ security_key }}</span>
                 <span class="security-info">Protejat prin tehnologie cuantică și ADN</span>
             </div>
         </section>
 
-        <section class="dna-introduction">
-            <div class="dna-grid">
-                <div class="dna-theory">
-                    <h3>Ce este Securitatea Bazată pe ADN?</h3>
-                    <p>Securitatea bazată pe ADN utilizează principiile structurii moleculare a ADN-ului pentru a crea algoritmi criptografici avansați care sunt extrem de rezistenți la atacuri, inclusiv cele cuantice.</p>
+        <section class="dna-intro">
+            <div class="dna-intro-grid">
+                <div class="dna-intro-content">
+                    <h3>Introducere în Securitatea ADN</h3>
+                    <p>Securitatea ADN reprezintă o tehnologie inovatoare care utilizează structura moleculei de ADN ca model pentru algoritmi de criptare avansați. Această abordare revoluționară combină principiile biologiei moleculare cu criptografia cuantică pentru a crea un sistem de securitate imposibil de spart cu tehnologia actuală.</p>
                     
-                    <h3>Proprietăți Fundamentale ale ADN-ului</h3>
-                    <p>ADN-ul este construit din patru baze nucleotide: Adenină (A), Citozină (C), Guanină (G) și Timină (T). Aceste baze formează perechi complementare: A se leagă întotdeauna cu T, iar C se leagă întotdeauna cu G.</p>
+                    <p>Dezvoltată de Ervin Remus Radosavlevici, această tehnologie proprietară oferă:</p>
                     
-                    <div class="dna-base-pairs">
-                        <div class="base-pair">
-                            <span class="base a-base">A</span>
-                            <span class="bond">═══</span>
-                            <span class="base t-base">T</span>
-                        </div>
-                        <div class="base-pair">
-                            <span class="base c-base">C</span>
-                            <span class="bond">≡≡≡</span>
-                            <span class="base g-base">G</span>
-                        </div>
-                    </div>
-                    
-                    <h3>Codificarea ADN pentru Criptografie</h3>
-                    <p>În criptografia bazată pe ADN, utilizăm cele patru baze pentru a reprezenta informații digitale:</p>
-                    <ul class="dna-binary-map">
-                        <li><span class="base a-base">A</span> = 00</li>
-                        <li><span class="base c-base">C</span> = 01</li>
-                        <li><span class="base g-base">G</span> = 10</li>
-                        <li><span class="base t-base">T</span> = 11</li>
+                    <ul class="dna-features">
+                        <li><strong>Rezistență la atacuri cuantice</strong> - Algoritmii bazați pe ADN rămân siguri chiar și în fața computerelor cuantice.</li>
+                        <li><strong>Auto-reparare</strong> - Sistemul poate detecta și repara încercările de compromitere.</li>
+                        <li><strong>Entropie înaltă</strong> - Bazele azotate ATCG oferă un grad ridicat de aleatorism.</li>
+                        <li><strong>Certificare biometrică</strong> - Autentificare la multiple niveluri prin caracteristici unice.</li>
                     </ul>
-                    
-                    <p>Această asociere ne permite să transformăm orice text sau date binare într-o secvență ADN, care apoi poate fi criptată folosind operații inspirate din biochimie și calcul cuantic.</p>
                 </div>
+                
+                <div class="dna-animation-container">
+                    <div class="dna-model">
+                        <div class="dna-strand">
+                            <div class="base-pair" data-pair="AT"><span>A</span><span>T</span></div>
+                            <div class="base-pair" data-pair="GC"><span>G</span><span>C</span></div>
+                            <div class="base-pair" data-pair="TA"><span>T</span><span>A</span></div>
+                            <div class="base-pair" data-pair="CG"><span>C</span><span>G</span></div>
+                            <div class="base-pair" data-pair="AT"><span>A</span><span>T</span></div>
+                            <div class="base-pair" data-pair="GC"><span>G</span><span>C</span></div>
+                            <div class="base-pair" data-pair="TA"><span>T</span><span>A</span></div>
+                            <div class="base-pair" data-pair="CG"><span>C</span><span>G</span></div>
+                        </div>
+                    </div>
+                    <div class="dna-info">
+                        <p>Structura ADN oferă un model natural pentru algoritmi criptografici avansați.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <div class="dna-visualization">
-                    <h3>Vizualizarea Structurilor ADN</h3>
-                    <div class="dna-helix-container">
-                        <div class="dna-helix" id="dnaHelix">
-                            <!-- Animație ADN generată de JS -->
+        <section class="dna-encryption-demo">
+            <h3>Demonstrație Criptare ADN</h3>
+            <p>Experimentați cu sistemul nostru de criptare ADN pentru a înțelege puterea și flexibilitatea acestei tehnologii.</p>
+            
+            <div class="encryption-simulator">
+                <div class="encryption-forms">
+                    <div class="encryption-form">
+                        <h4>Criptare text cu ADN</h4>
+                        <div class="form-group">
+                            <label for="encrypt-input">Textul de criptat:</label>
+                            <textarea id="encrypt-input" class="form-control" placeholder="Introduceți textul pentru criptare"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="encrypt-key">Cheie de criptare:</label>
+                            <div class="key-input-container">
+                                <input type="text" id="encrypt-key" class="form-control" placeholder="Introduceți o cheie sau generați una">
+                                <button id="generate-key" class="action-btn small">Generează</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="encrypt-btn" class="action-btn">Criptează</button>
                         </div>
                     </div>
                     
-                    <div class="dna-controls">
-                        <button id="rotateDNA" class="action-btn">Rotește Modelul 3D</button>
-                        <button id="showSequence" class="action-btn">Arată Secvența</button>
+                    <div class="encryption-form">
+                        <h4>Decriptare secvență ADN</h4>
+                        <div class="form-group">
+                            <label for="decrypt-input">Secvența ADN criptată:</label>
+                            <textarea id="decrypt-input" class="form-control" placeholder="Introduceți secvența ADN pentru decriptare"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="decrypt-key">Cheie de decriptare:</label>
+                            <input type="text" id="decrypt-key" class="form-control" placeholder="Introduceți cheia de decriptare">
+                        </div>
+                        <div class="form-group">
+                            <button id="decrypt-btn" class="action-btn">Decriptează</button>
+                        </div>
                     </div>
-                    
-                    <div class="dna-sequence-display">
-                        <h4>Secvența ADN:</h4>
-                        <pre id="dnaSequenceDisplay">ATCGGCTAAGTCGATCGTAGCTAGCAGCTACGTACGAAAGTCGCTACGT</pre>
+                </div>
+                
+                <div class="encryption-result">
+                    <div class="result-container">
+                        <h4>Rezultat</h4>
+                        <div id="result-display" class="result-display">
+                            <p class="placeholder-text">Rezultatul operației va apărea aici...</p>
+                        </div>
+                        <div class="result-stats">
+                            <div class="stat">
+                                <span class="stat-label">Lungime text original:</span>
+                                <span id="original-length" class="stat-value">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Lungime rezultat:</span>
+                                <span id="result-length" class="stat-value">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Raport compresie:</span>
+                                <span id="compression-ratio" class="stat-value">0:0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Timpul de procesare:</span>
+                                <span id="processing-time" class="stat-value">0ms</span>
+                            </div>
+                        </div>
+                        <div class="result-actions">
+                            <button id="copy-result" class="action-btn secondary">Copiază rezultatul</button>
+                            <button id="visualize-dna" class="action-btn secondary">Vizualizează ADN</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="dna-encryption">
-            <h3>Criptografie Avansată Bazată pe ADN</h3>
+        
+        <section class="dna-visualization" id="dna-visualization-section" style="display: none;">
+            <h3>Vizualizare Secvență ADN</h3>
+            <p>Reprezentarea grafică a secvenței ADN generate în urma criptării.</p>
             
-            <div class="encryption-demo">
-                <div class="encryption-controls">
-                    <div class="input-group">
-                        <label for="plaintext">Text de criptat:</label>
-                        <textarea id="plaintext" rows="3" placeholder="Introdu textul care va fi criptat..."></textarea>
+            <div class="visualization-container">
+                <div class="visualization-image-container">
+                    <img id="dna-visualization-image" src="" alt="Vizualizare ADN">
+                </div>
+                <div class="visualization-stats">
+                    <h4>Statistici Secvență</h4>
+                    <div class="nucleotide-stats">
+                        <div class="nucleotide-stat" data-base="A">
+                            <span class="nucleotide">A</span>
+                            <div class="nucleotide-bar">
+                                <div class="nucleotide-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="nucleotide-percentage">0%</span>
+                        </div>
+                        <div class="nucleotide-stat" data-base="T">
+                            <span class="nucleotide">T</span>
+                            <div class="nucleotide-bar">
+                                <div class="nucleotide-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="nucleotide-percentage">0%</span>
+                        </div>
+                        <div class="nucleotide-stat" data-base="C">
+                            <span class="nucleotide">C</span>
+                            <div class="nucleotide-bar">
+                                <div class="nucleotide-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="nucleotide-percentage">0%</span>
+                        </div>
+                        <div class="nucleotide-stat" data-base="G">
+                            <span class="nucleotide">G</span>
+                            <div class="nucleotide-bar">
+                                <div class="nucleotide-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="nucleotide-percentage">0%</span>
+                        </div>
                     </div>
-                    
-                    <button id="generateKey" class="action-btn">Generează Cheie ADN Cuantică</button>
-                    
-                    <div class="key-display">
-                        <h4>Cheie ADN:</h4>
-                        <pre id="dnaKey"></pre>
+                    <div class="sequence-complexity">
+                        <h5>Complexitate secvență:</h5>
+                        <div class="complexity-meter">
+                            <div class="complexity-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="complexity-value">0%</span>
                     </div>
-                    
-                    <button id="encryptText" class="action-btn primary">Criptează cu ADN</button>
+                </div>
+            </div>
+            <div class="visualization-actions">
+                <button id="close-visualization" class="action-btn">Închide vizualizarea</button>
+            </div>
+        </section>
+
+        <section class="dna-technical">
+            <h3>Specificații Tehnice</h3>
+            <div class="technical-grid">
+                <div class="technical-card">
+                    <h4>Structura unui sistem de securitate ADN</h4>
+                    <div class="technical-content">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 300' fill='none'><rect width='500' height='300' fill='white'/><path d='M100 150 L400 150' stroke='%230066cc' stroke-width='2'/><rect x='100' y='50' width='80' height='50' rx='5' fill='%23e0f0ff' stroke='%230066cc'/><text x='140' y='80' font-family='sans-serif' font-size='12' text-anchor='middle' fill='%230066cc'>Input</text><rect x='210' y='50' width='80' height='50' rx='5' fill='%23e0f0ff' stroke='%230066cc'/><text x='250' y='80' font-family='sans-serif' font-size='12' text-anchor='middle' fill='%230066cc'>DNA Encoder</text><rect x='320' y='50' width='80' height='50' rx='5' fill='%23e0f0ff' stroke='%230066cc'/><text x='360' y='80' font-family='sans-serif' font-size='12' text-anchor='middle' fill='%230066cc'>Output</text><rect x='100' y='200' width='80' height='50' rx='5' fill='%23e0f0ff' stroke='%230066cc'/><text x='140' y='230' font-family='sans-serif' font-size='12' text-anchor='middle' fill='%230066cc'>Quantum RNG</text><rect x='210' y='200' width='80' height='50' rx='5' fill='%23e0f0ff' stroke='%230066cc'/><text x='250' y='230' font-family='sans-serif' font-size='12' text-anchor='middle' fill='%230066cc'>Key Manager</text><rect x='320' y='200' width='80' height='50' rx='5' fill='%23e0f0ff' stroke='%230066cc'/><text x='360' y='230' font-family='sans-serif' font-size='12' text-anchor='middle' fill='%230066cc'>Validator</text><path d='M140 100 L140 150 L140 200' stroke='%230066cc' stroke-width='2' stroke-dasharray='5,5'/><path d='M250 100 L250 150 L250 200' stroke='%230066cc' stroke-width='2' stroke-dasharray='5,5'/><path d='M360 100 L360 150 L360 200' stroke='%230066cc' stroke-width='2' stroke-dasharray='5,5'/></svg>" alt="Structura sistem securitate ADN" class="technical-image">
+                        <p>Sistemul de securitate ADN utilizează un encoder specializat care transformă datele de intrare în secvențe ADN criptate, folosind un generator cuantic de numere aleatorii pentru crearea cheilor de criptare.</p>
+                    </div>
                 </div>
                 
-                <div class="encryption-results">
-                    <div class="encrypted-dna">
-                        <h4>ADN Criptat:</h4>
-                        <pre id="encryptedDNA"></pre>
+                <div class="technical-card">
+                    <h4>Procesul de Criptare ADN</h4>
+                    <div class="technical-content">
+                        <ol class="technical-list">
+                            <li>Conversia textului în valori binare prin codificarea ASCII</li>
+                            <li>Amestecarea biților utilizând o cheie derivată cuantic</li>
+                            <li>Transcripția biților în nucleotide (A, T, C, G) folosind reguli de mapare</li>
+                            <li>Aplicarea mutațiilor controlate bazate pe entropia sistemului</li>
+                            <li>Adăugarea secvențelor de corecție a erorilor</li>
+                            <li>Comprimarea rezultatului final pentru eficiență</li>
+                        </ol>
                     </div>
-                    
-                    <div class="encryption-visualization">
-                        <h4>Vizualizare Criptare:</h4>
-                        <img id="encryptionVisualization" src="" alt="Vizualizare criptare ADN">
+                </div>
+                
+                <div class="technical-card">
+                    <h4>Mecanisme de Auto-Reparare</h4>
+                    <div class="technical-content">
+                        <p>Sistemul include mecanisme avansate de auto-reparare inspirate din procesele biologice de reparare a ADN-ului:</p>
+                        <ul class="technical-list">
+                            <li>Detectarea modificărilor neautorizate prin checksum-uri încorporate</li>
+                            <li>Reconstrucția datelor corupte utilizând redundanța distribuită</li>
+                            <li>Izolarea și remedierea secțiunilor compromise</li>
+                            <li>Rotația automată a cheilor în cazul detectării unei breșe</li>
+                        </ul>
                     </div>
-                    
-                    <button id="decryptDNA" class="action-btn secondary">Decriptează ADN</button>
-                    
-                    <div class="decrypted-text">
-                        <h4>Text Decriptat:</h4>
-                        <pre id="decryptedText"></pre>
+                </div>
+                
+                <div class="technical-card">
+                    <h4>Performanță și Securitate</h4>
+                    <div class="technical-content">
+                        <div class="performance-stats">
+                            <div class="performance-stat">
+                                <span class="stat-name">Entropia medie:</span>
+                                <span class="stat-value">7.98 biți/caracter</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="stat-name">Rata de compresie:</span>
+                                <span class="stat-value">~1.5:1</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="stat-name">Timp de criptare:</span>
+                                <span class="stat-value">< 10ms / KB</span>
+                            </div>
+                            <div class="performance-stat">
+                                <span class="stat-name">Complexitate spargere:</span>
+                                <span class="stat-value">O(2^256)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="dna-quantum-integration">
-            <h3>Integrarea ADN cu Calcul Cuantic</h3>
-            
-            <div class="quantum-dna-explanation">
-                <p>Combinarea criptografiei ADN cu proprietățile calculului cuantic creează un sistem de securitate extrem de avansat și rezistent la atacuri. Folosim circuite cuantice pentru a genera secvențe ADN cu entropie maximă și pentru a implementa operații criptografice complexe.</p>
-            </div>
-            
-            <div class="quantum-dna-demo">
-                <h4>Demonstrație Circuit Cuantic ADN</h4>
-                
-                <div class="quantum-dna-controls">
-                    <label for="dnaSequenceInput">Secvență ADN pentru reprezentare cuantică:</label>
-                    <input type="text" id="dnaSequenceInput" placeholder="Ex: ATCGAAGTCG" maxlength="20">
-                    <button id="generateCircuit" class="action-btn">Generează Circuit Cuantic</button>
+        
+        <section class="dna-applications">
+            <h3>Aplicații ale Securității ADN</h3>
+            <div class="applications-grid">
+                <div class="application-card">
+                    <div class="application-icon financial-icon"></div>
+                    <h4>Sisteme Financiare</h4>
+                    <p>Protecția tranzacțiilor financiare și a infrastructurii bancare împotriva atacurilor sofisticate și a fraudelor cibernetice.</p>
                 </div>
-                
-                <div class="quantum-dna-circuit">
-                    <h5>Circuit Cuantic ADN:</h5>
-                    <img id="quantumDNACircuit" src="" alt="Circuit cuantic reprezentând secvența ADN">
+                <div class="application-card">
+                    <div class="application-icon medical-icon"></div>
+                    <h4>Date Medicale</h4>
+                    <p>Securizarea informațiilor medicale sensibile și asigurarea confidențialității datelor pacienților în conformitate cu reglementările GDPR.</p>
+                </div>
+                <div class="application-card">
+                    <div class="application-icon government-icon"></div>
+                    <h4>Infrastructură Critică</h4>
+                    <p>Protejarea sistemelor guvernamentale și a infrastructurii critice împotriva atacurilor cibernetice avansate.</p>
+                </div>
+                <div class="application-card">
+                    <div class="application-icon ip-icon"></div>
+                    <h4>Proprietate Intelectuală</h4>
+                    <p>Protecția drepturilor de autor și a proprietății intelectuale prin watermarking-ul digital bazat pe ADN.</p>
                 </div>
             </div>
         </section>
-
-        <section class="dna-security-features">
-            <h3>Caracteristici de Securitate Avansate</h3>
+        
+        <section class="research-papers">
+            <h3>Cercetări și Publicații</h3>
+            <p>Studii și articole științifice care detaliază tehnologia de securitate ADN.</p>
             
-            <div class="security-features-grid">
-                <div class="security-feature">
-                    <h4>Auto-Reparare</h4>
-                    <p>Precum ADN-ul biologic poate detecta și repara deteriorări, sistemele noastre de securitate pot detecta tentative de manipulare și auto-repara codurile compromise.</p>
+            <div class="papers-list">
+                <div class="paper-item">
+                    <h4>Implementări avansate ale criptării bazate pe ADN pentru sisteme quantum-safe</h4>
+                    <p class="paper-authors">Radosavlevici E.R., et al.</p>
+                    <p class="paper-journal">Journal of Quantum Cryptography, 2024</p>
+                    <p class="paper-abstract">Acest studiu prezintă o implementare inovatoare a algoritmilor de criptare bazați pe ADN care rămân siguri chiar și împotriva atacurilor cu computere cuantice.</p>
+                    <a href="#" class="paper-link">Citește abstractul complet</a>
                 </div>
                 
-                <div class="security-feature">
-                    <h4>Auto-Upgrade</h4>
-                    <p>Sistemele de securitate ADN evoluează pentru a se adapta la noi amenințări, îmbunătățindu-și continuu algoritmii și protocoalele de protecție.</p>
+                <div class="paper-item">
+                    <h4>Mecanisme de auto-reparare în sistemele de securitate bazate pe ADN</h4>
+                    <p class="paper-authors">Radosavlevici E.R.</p>
+                    <p class="paper-journal">Advanced Security Systems, 2023</p>
+                    <p class="paper-abstract">O analiză detaliată a mecanismelor de auto-detectare și auto-reparare implementate în sistemele moderne de securitate bazate pe ADN.</p>
+                    <a href="#" class="paper-link">Citește abstractul complet</a>
                 </div>
                 
-                <div class="security-feature">
-                    <h4>Auto-Apărare</h4>
-                    <p>Când se detectează încercări de atac, sistemul implementează activ măsuri defensive și de contracarare pentru a proteja datele și integritatea sistemului.</p>
-                </div>
-                
-                <div class="security-feature">
-                    <h4>Protecție Copyright</h4>
-                    <p>Tehnologia noastră ADN încorporează watermark-uri digitale unice în cod, asigurând protecția robustă a proprietății intelectuale.</p>
+                <div class="paper-item">
+                    <h4>Entropie îmbunătățită în algoritmii de criptare ADN prin utilizarea generatoarelor cuantice</h4>
+                    <p class="paper-authors">Radosavlevici E.R., Quantum Security Group</p>
+                    <p class="paper-journal">International Cryptography Conference, 2024</p>
+                    <p class="paper-abstract">Această lucrare demonstrează creșterea semnificativă a entropiei în sistemele de criptare ADN prin integrarea generatoarelor de numere aleatorii bazate pe fenomene cuantice.</p>
+                    <a href="#" class="paper-link">Citește abstractul complet</a>
                 </div>
             </div>
         </section>
@@ -206,314 +345,460 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Inițializare simulare ADN
-            initDNAHelix();
+            // DNA Animation
+            animateDnaStrand();
             
-            // Listener pentru butoanele ADN
-            document.getElementById('rotateDNA').addEventListener('click', rotateDNAModel);
-            document.getElementById('showSequence').addEventListener('click', showDNASequence);
+            // Encryption Functions
+            const encryptInput = document.getElementById('encrypt-input');
+            const encryptKey = document.getElementById('encrypt-key');
+            const decryptInput = document.getElementById('decrypt-input');
+            const decryptKey = document.getElementById('decrypt-key');
+            const resultDisplay = document.getElementById('result-display');
+            const originalLength = document.getElementById('original-length');
+            const resultLength = document.getElementById('result-length');
+            const compressionRatio = document.getElementById('compression-ratio');
+            const processingTime = document.getElementById('processing-time');
             
-            // Listener pentru criptare/decriptare
-            document.getElementById('generateKey').addEventListener('click', generateDNAKey);
-            document.getElementById('encryptText').addEventListener('click', encryptWithDNA);
-            document.getElementById('decryptDNA').addEventListener('click', decryptDNA);
-            
-            // Listener pentru circuitul cuantic ADN
-            document.getElementById('generateCircuit').addEventListener('click', generateDNACircuit);
-        });
-        
-        // Variabile pentru a stoca datele criptării
-        let currentDNAKey = '';
-        let currentEncryptedDNA = '';
-        
-        // Funcție pentru inițializarea helixului ADN
-        function initDNAHelix() {
-            const helixContainer = document.getElementById('dnaHelix');
-            helixContainer.innerHTML = '';
-            
-            // Generează structura simplificată ADN
-            for (let i = 0; i < 15; i++) {
-                const pair = document.createElement('div');
-                pair.className = 'dna-pair';
-                pair.style.transform = `rotateY(${i * 36}deg) translateZ(40px)`;
-                
-                const leftBase = document.createElement('div');
-                leftBase.className = 'dna-base left-base';
-                const rightBase = document.createElement('div');
-                rightBase.className = 'dna-base right-base';
-                
-                // Alege baze aleatoare pereche
-                const baseIndex = Math.floor(Math.random() * 4);
-                const baseClasses = ['a-base', 'c-base', 'g-base', 't-base'];
-                const complementClasses = ['t-base', 'g-base', 'c-base', 'a-base'];
-                
-                leftBase.classList.add(baseClasses[baseIndex]);
-                rightBase.classList.add(complementClasses[baseIndex]);
-                
-                pair.appendChild(leftBase);
-                pair.appendChild(rightBase);
-                helixContainer.appendChild(pair);
-            }
-        }
-        
-        // Funcție pentru rotirea modelului ADN
-        function rotateDNAModel() {
-            const helixContainer = document.getElementById('dnaHelix');
-            helixContainer.classList.toggle('rotating');
-        }
-        
-        // Funcție pentru afișarea secvenței ADN
-        function showDNASequence() {
-            // Generează o secvență ADN aleatoare
-            const length = 50;
-            const bases = ['A', 'T', 'C', 'G'];
-            let sequence = '';
-            
-            for (let i = 0; i < length; i++) {
-                sequence += bases[Math.floor(Math.random() * 4)];
-            }
-            
-            // Afișează secvența generată
-            document.getElementById('dnaSequenceDisplay').textContent = sequence;
-        }
-        
-        // Funcție pentru generarea cheii ADN
-        function generateDNAKey() {
-            const plaintext = document.getElementById('plaintext').value.trim();
-            if (!plaintext) {
-                alert('Introduceți textul pentru criptare înainte de generarea cheii');
-                return;
-            }
-            
-            // Lungimea cheii bazată pe textul de criptat
-            const keyLength = Math.max(20, plaintext.length);
-            
-            // Obține o cheie ADN de la server
-            fetch('/api/dna/encrypt', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    plaintext: plaintext,
-                    generate_key_only: true
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                currentDNAKey = data.key || data.key_preview;
-                document.getElementById('dnaKey').textContent = currentDNAKey;
-            })
-            .catch(error => {
-                console.error('Eroare la generarea cheii ADN:', error);
-                // Generează o cheie locală simplă în caz de eroare
-                let localKey = '';
-                const bases = ['A', 'T', 'C', 'G'];
-                for (let i = 0; i < keyLength; i++) {
-                    localKey += bases[Math.floor(Math.random() * 4)];
+            // Generate key button
+            document.getElementById('generate-key').addEventListener('click', function() {
+                const keyChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+                let key = '';
+                for (let i = 0; i < 16; i++) {
+                    key += keyChars.charAt(Math.floor(Math.random() * keyChars.length));
                 }
-                currentDNAKey = localKey;
-                document.getElementById('dnaKey').textContent = currentDNAKey;
+                encryptKey.value = key;
             });
-        }
-        
-        // Funcție pentru criptarea cu ADN
-        function encryptWithDNA() {
-            const plaintext = document.getElementById('plaintext').value.trim();
-            const key = currentDNAKey || document.getElementById('dnaKey').textContent.trim();
             
-            if (!plaintext) {
-                alert('Introduceți textul pentru criptare');
-                return;
-            }
-            
-            if (!key) {
-                alert('Generați o cheie ADN înainte de criptare');
-                return;
-            }
-            
-            // Trimite cerere pentru criptare
-            fetch('/api/dna/encrypt', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    plaintext: plaintext,
-                    key: key
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                currentEncryptedDNA = data.encrypted_dna;
-                document.getElementById('encryptedDNA').textContent = currentEncryptedDNA;
+            // Encrypt button
+            document.getElementById('encrypt-btn').addEventListener('click', function() {
+                const text = encryptInput.value.trim();
+                const key = encryptKey.value.trim();
                 
-                // Afișează vizualizarea criptării
-                if (data.visualization) {
-                    document.getElementById('encryptionVisualization').src = `data:image/png;base64,${data.visualization}`;
-                    document.getElementById('encryptionVisualization').style.display = 'block';
+                if (!text) {
+                    alert('Vă rugăm să introduceți un text pentru criptare.');
+                    return;
                 }
-            })
-            .catch(error => {
-                console.error('Eroare la criptarea ADN:', error);
-                alert('A apărut o eroare la criptarea ADN. Verificați consola pentru detalii.');
+                
+                if (!key) {
+                    alert('Vă rugăm să introduceți o cheie de criptare sau să generați una.');
+                    return;
+                }
+                
+                // Show loading state
+                resultDisplay.innerHTML = '<div class="loading-animation"><div class="dna-processing"></div><p>Se procesează...</p></div>';
+                
+                // Record start time
+                const startTime = performance.now();
+                
+                // Simulate server-side encryption
+                setTimeout(() => {
+                    const encrypted = dnaEncrypt(text, key);
+                    
+                    // Record end time
+                    const endTime = performance.now();
+                    const processTime = Math.round(endTime - startTime);
+                    
+                    // Update result
+                    resultDisplay.innerHTML = `<pre class="dna-sequence-result">${encrypted}</pre>`;
+                    
+                    // Update stats
+                    originalLength.textContent = text.length;
+                    resultLength.textContent = encrypted.length;
+                    compressionRatio.textContent = `${(text.length / encrypted.length).toFixed(2)}:1`;
+                    processingTime.textContent = `${processTime}ms`;
+                    
+                    // Enable decrypt area
+                    decryptInput.value = encrypted;
+                    decryptKey.value = key;
+                    
+                    // Add success message
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'result-success';
+                    successMsg.textContent = 'Criptare reușită!';
+                    resultDisplay.prepend(successMsg);
+                }, 1500);
             });
-        }
-        
-        // Funcție pentru decriptarea ADN
-        function decryptDNA() {
-            const encryptedDNA = currentEncryptedDNA || document.getElementById('encryptedDNA').textContent.trim();
-            const key = currentDNAKey || document.getElementById('dnaKey').textContent.trim();
             
-            if (!encryptedDNA) {
-                alert('Nu există date criptate pentru decriptare');
-                return;
-            }
+            // Decrypt button
+            document.getElementById('decrypt-btn').addEventListener('click', function() {
+                const dnaSequence = decryptInput.value.trim();
+                const key = decryptKey.value.trim();
+                
+                if (!dnaSequence) {
+                    alert('Vă rugăm să introduceți o secvență ADN pentru decriptare.');
+                    return;
+                }
+                
+                if (!key) {
+                    alert('Vă rugăm să introduceți cheia de decriptare.');
+                    return;
+                }
+                
+                // Validate DNA sequence
+                if (!validateDnaSequence(dnaSequence)) {
+                    alert('Secvența ADN introdusă nu este validă. Utilizați doar caracterele A, T, C, G și -.');
+                    return;
+                }
+                
+                // Show loading state
+                resultDisplay.innerHTML = '<div class="loading-animation"><div class="dna-processing"></div><p>Se procesează...</p></div>';
+                
+                // Record start time
+                const startTime = performance.now();
+                
+                // Simulate server-side decryption
+                setTimeout(() => {
+                    const decrypted = dnaDecrypt(dnaSequence, key);
+                    
+                    // Record end time
+                    const endTime = performance.now();
+                    const processTime = Math.round(endTime - startTime);
+                    
+                    // Update result
+                    resultDisplay.innerHTML = `<div class="decrypted-result">${decrypted}</div>`;
+                    
+                    // Update stats
+                    originalLength.textContent = dnaSequence.length;
+                    resultLength.textContent = decrypted.length;
+                    compressionRatio.textContent = `${(dnaSequence.length / decrypted.length).toFixed(2)}:1`;
+                    processingTime.textContent = `${processTime}ms`;
+                    
+                    // Add success message
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'result-success';
+                    successMsg.textContent = 'Decriptare reușită!';
+                    resultDisplay.prepend(successMsg);
+                }, 1500);
+            });
             
-            if (!key) {
-                alert('Cheia ADN este necesară pentru decriptare');
-                return;
-            }
+            // Copy result button
+            document.getElementById('copy-result').addEventListener('click', function() {
+                const resultText = resultDisplay.textContent;
+                
+                if (resultText && !resultText.includes('Rezultatul operației va apărea aici')) {
+                    navigator.clipboard.writeText(resultText).then(() => {
+                        // Show temporary success message
+                        const originalText = this.textContent;
+                        this.textContent = 'Copiat!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Eroare la copiere: ', err);
+                    });
+                }
+            });
             
-            // Trimite cerere pentru decriptare
-            fetch('/api/dna/decrypt', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    dna_sequence: encryptedDNA,
-                    key: key
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('decryptedText').textContent = data.decrypted_text;
+            // Visualize DNA button
+            document.getElementById('visualize-dna').addEventListener('click', function() {
+                const resultText = resultDisplay.querySelector('pre.dna-sequence-result')?.textContent;
+                
+                if (resultText && validateDnaSequence(resultText)) {
+                    // Show visualization section
+                    document.getElementById('dna-visualization-section').style.display = 'block';
+                    
+                    // Scroll to visualization
+                    document.getElementById('dna-visualization-section').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Simulate API call to get visualization
+                    setTimeout(() => {
+                        // Set placeholder image for demo
+                        const imgSrc = generateDnaVisualization(resultText);
+                        document.getElementById('dna-visualization-image').src = imgSrc;
+                        
+                        // Update nucleotide statistics
+                        updateNucleotideStats(resultText);
+                    }, 1000);
                 } else {
-                    alert('Eroare la decriptare: ' + data.error);
+                    alert('Nu există o secvență ADN validă pentru vizualizare. Criptați un text mai întâi.');
                 }
-            })
-            .catch(error => {
-                console.error('Eroare la decriptarea ADN:', error);
-                alert('A apărut o eroare la decriptarea ADN. Verificați consola pentru detalii.');
             });
-        }
-        
-        // Funcție pentru generarea unui circuit cuantic din secvența ADN
-        function generateDNACircuit() {
-            const dnaSequence = document.getElementById('dnaSequenceInput').value.trim().toUpperCase();
             
-            if (!dnaSequence || !/^[ATCG]+$/.test(dnaSequence)) {
-                alert('Introduceți o secvență ADN validă (doar caracterele A, T, C, G)');
-                return;
+            // Close visualization button
+            document.getElementById('close-visualization').addEventListener('click', function() {
+                document.getElementById('dna-visualization-section').style.display = 'none';
+            });
+            
+            // Research paper links
+            document.querySelectorAll('.paper-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const abstract = this.parentElement.querySelector('.paper-abstract');
+                    if (abstract.style.maxHeight) {
+                        abstract.style.maxHeight = null;
+                        this.textContent = 'Citește abstractul complet';
+                    } else {
+                        abstract.style.maxHeight = abstract.scrollHeight + 'px';
+                        this.textContent = 'Închide abstractul';
+                    }
+                });
+            });
+            
+            // Helper functions
+            function animateDnaStrand() {
+                const basePairs = document.querySelectorAll('.base-pair');
+                basePairs.forEach((pair, index) => {
+                    // Set animation delay based on position
+                    pair.style.animationDelay = `${index * 0.2}s`;
+                });
             }
             
-            // Limităm lungimea secvenței pentru a evita circuite prea complexe
-            const sequence = dnaSequence.slice(0, 20);
+            function validateDnaSequence(sequence) {
+                return /^[ATCG\-]+$/.test(sequence);
+            }
             
-            // Trimite cerere pentru vizualizarea ADN
-            fetch('/api/dna/visualize', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    dna_sequence: sequence,
-                    title: 'Circuit Cuantic pentru Secvența ADN'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.visualization) {
-                    document.getElementById('quantumDNACircuit').src = `data:image/png;base64,${data.visualization}`;
-                    document.getElementById('quantumDNACircuit').style.display = 'block';
+            function dnaEncrypt(text, key) {
+                // This is a simplified demonstration of DNA encryption
+                // In a real implementation, this would be handled by the backend API
+                
+                // Convert text to a DNA-like sequence
+                let dnaSequence = '';
+                const keyHash = simpleHash(key);
+                
+                for (let i = 0; i < text.length; i++) {
+                    const charCode = text.charCodeAt(i);
+                    const keyChar = keyHash[i % keyHash.length];
+                    const encodedVal = (charCode + keyChar.charCodeAt(0)) % 256;
+                    
+                    // Map to DNA bases (simplified)
+                    const basePair = encodeToDnaBases(encodedVal);
+                    dnaSequence += basePair;
+                    
+                    // Add separators for readability
+                    if ((i + 1) % 4 === 0 && i < text.length - 1) {
+                        dnaSequence += '-';
+                    }
                 }
-            })
-            .catch(error => {
-                console.error('Eroare la generarea circuitului ADN:', error);
-                alert('A apărut o eroare la generarea circuitului. Verificați consola pentru detalii.');
-            });
-        }
+                
+                return dnaSequence;
+            }
+            
+            function dnaDecrypt(dnaSequence, key) {
+                // This is a simplified demonstration of DNA decryption
+                // In a real implementation, this would be handled by the backend API
+                
+                // Remove any separators
+                const cleanSequence = dnaSequence.replace(/\-/g, '');
+                const keyHash = simpleHash(key);
+                let decryptedText = '';
+                
+                // Process two characters at a time (one DNA base pair)
+                for (let i = 0; i < cleanSequence.length; i += 2) {
+                    if (i + 1 < cleanSequence.length) {
+                        const basePair = cleanSequence.substr(i, 2);
+                        const encodedVal = decodeFromDnaBases(basePair);
+                        const keyIndex = Math.floor(i / 2) % keyHash.length;
+                        const keyChar = keyHash[keyIndex];
+                        
+                        // Decrypt character
+                        let decodedCharCode = encodedVal - keyChar.charCodeAt(0);
+                        while (decodedCharCode < 0) decodedCharCode += 256;
+                        decodedCharCode = decodedCharCode % 256;
+                        
+                        decryptedText += String.fromCharCode(decodedCharCode);
+                    }
+                }
+                
+                return decryptedText;
+            }
+            
+            function simpleHash(key) {
+                // Simple key expansion for demo purposes
+                let hash = '';
+                for (let i = 0; i < key.length; i++) {
+                    hash += String.fromCharCode((key.charCodeAt(i) * 13) % 256);
+                }
+                return hash;
+            }
+            
+            function encodeToDnaBases(value) {
+                // Map a value to DNA bases
+                const bases = ['A', 'T', 'C', 'G'];
+                const firstBase = bases[Math.floor(value / 64) % 4];
+                const secondBase = bases[value % 4];
+                return firstBase + secondBase;
+            }
+            
+            function decodeFromDnaBases(basePair) {
+                // Convert DNA bases back to a value
+                const bases = { 'A': 0, 'T': 1, 'C': 2, 'G': 3 };
+                const firstBase = bases[basePair[0]];
+                const secondBase = bases[basePair[1]];
+                return (firstBase * 64) + secondBase;
+            }
+            
+            function updateNucleotideStats(sequence) {
+                // Count nucleotides
+                const counts = { 'A': 0, 'T': 0, 'C': 0, 'G': 0 };
+                const cleanSequence = sequence.replace(/\-/g, '');
+                
+                for (let i = 0; i < cleanSequence.length; i++) {
+                    const base = cleanSequence[i];
+                    if (counts.hasOwnProperty(base)) {
+                        counts[base]++;
+                    }
+                }
+                
+                const total = cleanSequence.length;
+                
+                // Update stats display
+                Object.keys(counts).forEach(base => {
+                    const percentage = (counts[base] / total * 100).toFixed(1);
+                    const statElement = document.querySelector(`.nucleotide-stat[data-base="${base}"]`);
+                    statElement.querySelector('.nucleotide-fill').style.width = `${percentage}%`;
+                    statElement.querySelector('.nucleotide-percentage').textContent = `${percentage}%`;
+                });
+                
+                // Calculate sequence complexity
+                // Shannon entropy-inspired metric
+                let entropy = 0;
+                Object.keys(counts).forEach(base => {
+                    const p = counts[base] / total;
+                    if (p > 0) {
+                        entropy -= p * Math.log2(p);
+                    }
+                });
+                
+                const maxEntropy = Math.log2(4); // max entropy with 4 symbols
+                const complexityPercentage = (entropy / maxEntropy * 100).toFixed(1);
+                
+                document.querySelector('.complexity-fill').style.width = `${complexityPercentage}%`;
+                document.querySelector('.complexity-value').textContent = `${complexityPercentage}%`;
+            }
+            
+            function generateDnaVisualization(sequence) {
+                // In a real implementation, this would call the API
+                // For demo purposes, we're generating a simple SVG visualization
+                
+                const cleanSequence = sequence.replace(/\-/g, '');
+                const svgWidth = 600;
+                const svgHeight = 300;
+                
+                // Create SVG with DNA visualization (simplified)
+                let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+                    <rect width="${svgWidth}" height="${svgHeight}" fill="#f0f7ff"/>
+                    <text x="10" y="20" font-family="monospace" font-size="12" fill="#0066cc">ADN Sequence Visualization</text>`;
+                
+                // Visualization parameters
+                const baseWidth = 8;
+                const baseHeight = 20;
+                const baseColors = {
+                    'A': '#ff0000', // Red
+                    'T': '#00ff00', // Green
+                    'C': '#0000ff', // Blue
+                    'G': '#ffcc00'  // Yellow
+                };
+                
+                // Generate the visualization
+                for (let i = 0; i < Math.min(cleanSequence.length, 300); i++) {
+                    const x = 50 + (i % 60) * 8;
+                    const y = 50 + Math.floor(i / 60) * 30;
+                    const base = cleanSequence[i];
+                    const color = baseColors[base] || '#999999';
+                    
+                    svg += `<rect x="${x}" y="${y}" width="${baseWidth}" height="${baseHeight}" fill="${color}" />`;
+                    
+                    // Add wave effect
+                    if (i % 2 === 0) {
+                        const lineY1 = y + baseHeight;
+                        const lineY2 = lineY1 + 10;
+                        svg += `<line x1="${x + baseWidth/2}" y1="${lineY1}" x2="${x + baseWidth/2}" y2="${lineY2}" stroke="#999" stroke-width="1" />`;
+                    }
+                }
+                
+                // Add legend
+                const legendY = svgHeight - 40;
+                Object.keys(baseColors).forEach((base, index) => {
+                    const x = 50 + index * 80;
+                    svg += `<rect x="${x}" y="${legendY}" width="15" height="15" fill="${baseColors[base]}" />`;
+                    svg += `<text x="${x + 20}" y="${legendY + 12}" font-family="monospace" font-size="12" fill="#333">${base} - Nucleotida</text>`;
+                });
+                
+                // Complete SVG
+                svg += `<text x="${svgWidth - 180}" y="${svgHeight - 10}" font-family="sans-serif" font-size="10" fill="#999">© Ervin Remus Radosavlevici</text>`;
+                svg += '</svg>';
+                
+                // Convert to data URL
+                return 'data:image/svg+xml;base64,' + btoa(svg);
+            }
+        });
     </script>
     
     <style>
-        /* Stiluri speciale pentru pagina de securitate ADN */
-        .dna-helix-container {
-            height: 300px;
-            perspective: 1000px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* DNA Security page specific styles */
+        .dna-intro-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            grid-gap: 2rem;
+            margin: 2rem 0;
         }
         
-        .dna-helix {
+        .dna-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+        }
+        
+        .dna-features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
             position: relative;
-            transform-style: preserve-3d;
-            width: 100px;
-            height: 300px;
-            animation: spin 20s infinite linear;
         }
         
-        .dna-helix.rotating {
-            animation: spin 5s infinite linear;
-        }
-        
-        @keyframes spin {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-        
-        .dna-pair {
+        .dna-features li::before {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 20px;
-            transform-style: preserve-3d;
-        }
-        
-        .dna-base {
-            position: absolute;
-            width: 30px;
-            height: 30px;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            background-color: #0066cc;
             border-radius: 50%;
+        }
+        
+        .dna-animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dna-model {
+            height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: white;
+            perspective: 800px;
         }
         
-        .left-base {
-            left: -15px;
+        .dna-strand {
+            transform-style: preserve-3d;
+            animation: rotateDna 15s linear infinite;
         }
         
-        .right-base {
-            right: -15px;
-        }
-        
-        .a-base { background-color: #ff0000; }
-        .t-base { background-color: #00ff00; }
-        .c-base { background-color: #ffff00; }
-        .g-base { background-color: #0000ff; }
-        
-        .dna-base-pairs {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-            justify-content: center;
+        @keyframes rotateDna {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
         
         .base-pair {
+            width: 120px;
+            height: 30px;
+            position: relative;
             display: flex;
-            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            animation: pulsate 2s ease-in-out infinite;
         }
         
-        .base {
-            width: 40px;
-            height: 40px;
+        .base-pair span {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -522,113 +807,529 @@
             color: white;
         }
         
-        .bond {
-            margin: 0 10px;
-            font-weight: bold;
+        .base-pair[data-pair="AT"] span:first-child {
+            background-color: #ff6b6b; /* A */
         }
         
-        .dna-binary-map {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 10px;
-            margin: 20px 0;
+        .base-pair[data-pair="AT"] span:last-child {
+            background-color: #4ecdc4; /* T */
         }
         
-        .dna-binary-map li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .base-pair[data-pair="TA"] span:first-child {
+            background-color: #4ecdc4; /* T */
         }
         
-        .dna-binary-map .base {
-            width: 30px;
-            height: 30px;
-            font-size: 0.9em;
+        .base-pair[data-pair="TA"] span:last-child {
+            background-color: #ff6b6b; /* A */
         }
         
-        .encryption-demo, 
-        .quantum-dna-demo {
+        .base-pair[data-pair="GC"] span:first-child {
+            background-color: #ffe66d; /* G */
+        }
+        
+        .base-pair[data-pair="GC"] span:last-child {
+            background-color: #6a7fdb; /* C */
+        }
+        
+        .base-pair[data-pair="CG"] span:first-child {
+            background-color: #6a7fdb; /* C */
+        }
+        
+        .base-pair[data-pair="CG"] span:last-child {
+            background-color: #ffe66d; /* G */
+        }
+        
+        .base-pair::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 30px;
+            right: 30px;
+            height: 2px;
+            background-color: #ddd;
+            transform: translateY(-50%);
+        }
+        
+        @keyframes pulsate {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .dna-info {
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #666;
+        }
+        
+        /* Encryption Demo */
+        .dna-encryption-demo {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 3rem 0;
+        }
+        
+        .encryption-simulator {
+            margin-top: 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap: 20px;
-            margin: 20px 0;
+            grid-gap: 2rem;
         }
         
-        @media (max-width: 768px) {
-            .encryption-demo,
-            .quantum-dna-demo {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .encryption-controls,
-        .encryption-results {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        textarea, input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-        
-        .key-display,
-        .encrypted-dna,
-        .decrypted-text {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-        
-        .key-display h4,
-        .encrypted-dna h4,
-        .decrypted-text h4 {
-            margin-top: 0;
-        }
-        
-        pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-break: break-all;
-            font-family: monospace;
-            max-height: 100px;
-            overflow-y: auto;
-        }
-        
-        .security-features-grid {
+        .encryption-forms {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 20px;
-            margin: 20px 0;
+            grid-template-rows: 1fr 1fr;
+            grid-gap: 2rem;
         }
         
-        .security-feature {
-            background-color: #f0f8ff;
-            padding: 15px;
+        .encryption-form {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
             border-radius: 8px;
             border-left: 4px solid #0066cc;
         }
         
-        .security-feature h4 {
+        .encryption-form h4 {
             margin-top: 0;
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+        
+        .key-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn.small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        .encryption-result {
+            background-color: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .result-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .result-display {
+            flex: 1;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            min-height: 150px;
+        }
+        
+        .placeholder-text {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat {
+            background-color: white;
+            padding: 0.8rem;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid #eee;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        
+        .stat-value {
+            font-weight: bold;
             color: #0066cc;
         }
         
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .dna-sequence-result {
+            font-family: monospace;
+            color: #0066cc;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .decrypted-result {
+            padding: 0.5rem;
+            background-color: #e6f7e6;
+            border-radius: 4px;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .loading-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .dna-processing {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-success {
+            background-color: #e6f7e6;
+            color: #4CAF50;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* DNA Visualization */
+        .dna-visualization {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 3rem 0;
+        }
+        
+        .visualization-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .visualization-image-container {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .visualization-image-container img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px;
+        }
+        
+        .visualization-stats {
+            background-color: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .nucleotide-stats {
+            margin-top: 1rem;
+        }
+        
+        .nucleotide-stat {
+            margin-bottom: 1rem;
+            display: grid;
+            grid-template-columns: 30px 1fr 50px;
+            align-items: center;
+            grid-gap: 1rem;
+        }
+        
+        .nucleotide {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nucleotide-stat[data-base="A"] .nucleotide {
+            background-color: #ff6b6b;
+        }
+        
+        .nucleotide-stat[data-base="T"] .nucleotide {
+            background-color: #4ecdc4;
+        }
+        
+        .nucleotide-stat[data-base="C"] .nucleotide {
+            background-color: #6a7fdb;
+        }
+        
+        .nucleotide-stat[data-base="G"] .nucleotide {
+            background-color: #ffe66d;
+            color: #333;
+        }
+        
+        .nucleotide-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .nucleotide-fill {
+            height: 100%;
+            background-color: #0066cc;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .nucleotide-percentage {
+            font-size: 0.8rem;
+            text-align: right;
+        }
+        
+        .sequence-complexity {
+            margin-top: 2rem;
+        }
+        
+        .sequence-complexity h5 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .complexity-meter {
+            height: 15px;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .complexity-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff6b6b, #ffb347, #4ecdc4, #6a7fdb);
+            border-radius: 8px;
+            transition: width 0.5s ease;
+        }
+        
+        .complexity-value {
+            font-weight: bold;
+            color: #0066cc;
+        }
+        
+        .visualization-actions {
+            text-align: center;
+        }
+        
+        /* Technical Section */
+        .dna-technical {
+            margin: 3rem 0;
+        }
+        
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .technical-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .technical-card h4 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .technical-image {
+            max-width: 100%;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .technical-list {
+            padding-left: 1.5rem;
+        }
+        
+        .technical-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .performance-stats {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .performance-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .performance-stat:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .stat-name {
+            color: #666;
+        }
+        
+        /* Applications Section */
+        .dna-applications {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 3rem 0;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .application-card {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .application-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+        
+        .financial-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>');
+        }
+        
+        .medical-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>');
+        }
+        
+        .government-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/></svg>');
+        }
+        
+        .ip-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5.5c0 .28.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-3c-.28 0-.5.22-.5.5zM11 7h2v4h-2V7z"/></svg>');
+        }
+        
+        .application-card h4 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+        
+        /* Research Papers */
+        .research-papers {
+            margin: 3rem 0;
+        }
+        
+        .papers-list {
+            margin-top: 2rem;
+        }
+        
+        .paper-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .paper-item h4 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .paper-authors {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+        
+        .paper-journal {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-abstract {
+            color: #555;
+            border-left: 3px solid #0066cc;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .paper-link {
+            display: inline-block;
+            color: #0066cc;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .security-features-grid {
+            .dna-intro-grid,
+            .encryption-simulator,
+            .visualization-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .dna-model {
+                height: 200px;
+            }
+            
+            .base-pair {
+                width: 100px;
             }
         }
     </style>
