@@ -34,17 +34,23 @@ def create_ghz_state(num_qubits=3):
     Create a GHZ state (generalized Bell state) with n qubits
     
     Args:
-        num_qubits: Number of qubits in the GHZ state
+        num_qubits: Number of qubits in the GHZ state (supports up to 20 qubits)
         
     Returns:
         QuantumCircuit: GHZ state circuit
     """
+    # Enhanced support for larger qubit counts (up to 20)
+    num_qubits = min(max(num_qubits, 3), 20)  # Limit between 3 and 20 qubits for stability
+    
     circuit = QuantumCircuit(num_qubits, num_qubits)
     circuit.h(0)  # Apply Hadamard gate to first qubit
     
     # Apply CNOT gates between first qubit and all others
     for i in range(1, num_qubits):
         circuit.cx(0, i)
+    
+    # Add barrier for visual separation
+    circuit.barrier()
     
     # Measure all qubits
     circuit.measure(range(num_qubits), range(num_qubits))
@@ -163,32 +169,76 @@ def create_pauli_z_circuit(initial_state=[1, 0]):
     
     return circuit
 
-def create_quantum_teleportation_circuit():
+def create_quantum_teleportation_circuit(multi_qubit=False):
     """
     Create a quantum teleportation circuit
     
+    Args:
+        multi_qubit: If True, creates an enhanced version with additional qubits
+        
     Returns:
         QuantumCircuit: Quantum teleportation circuit
     """
-    circuit = QuantumCircuit(3, 2)
-    
-    # Initialize qubit to teleport
-    circuit.x(0)  # Start with |1⟩ (can be changed to any state)
-    
-    # Create Bell pair for teleportation
-    circuit.h(1)
-    circuit.cx(1, 2)
-    
-    # Perform teleportation protocol
-    circuit.barrier()
-    circuit.cx(0, 1)
-    circuit.h(0)
-    circuit.measure([0, 1], [0, 1])
-    
-    # Apply corrections based on measurement
-    circuit.barrier()
-    circuit.x(2).c_if(1, 1)  # Apply X if second measurement is 1
-    circuit.z(2).c_if(0, 1)  # Apply Z if first measurement is 1
+    if not multi_qubit:
+        # Standard 3-qubit teleportation circuit
+        circuit = QuantumCircuit(3, 2)
+        
+        # Initialize qubit to teleport
+        circuit.x(0)  # Start with |1⟩ (can be changed to any state)
+        
+        # Create Bell pair for teleportation
+        circuit.h(1)
+        circuit.cx(1, 2)
+        
+        # Perform teleportation protocol
+        circuit.barrier()
+        circuit.cx(0, 1)
+        circuit.h(0)
+        circuit.measure([0, 1], [0, 1])
+        
+        # Apply corrections based on measurement
+        circuit.barrier()
+        circuit.x(2).c_if(1, 1)  # Apply X if second measurement is 1
+        circuit.z(2).c_if(0, 1)  # Apply Z if first measurement is 1
+    else:
+        # Enhanced multi-qubit teleportation (teleporting 2 qubits using 6 qubits total)
+        circuit = QuantumCircuit(6, 4)
+        
+        # Initialize qubits to teleport (qubits 0 and 1)
+        circuit.x(0)  # Prepare |1⟩ state
+        circuit.h(1)  # Prepare |+⟩ state
+        
+        # Create two Bell pairs for teleportation (qubits 2,3 and 4,5)
+        circuit.h(2)
+        circuit.cx(2, 3)
+        circuit.h(4)
+        circuit.cx(4, 5)
+        
+        # Add barrier for clarity
+        circuit.barrier()
+        
+        # Perform teleportation protocol for first qubit
+        circuit.cx(0, 2)
+        circuit.h(0)
+        
+        # Perform teleportation protocol for second qubit
+        circuit.cx(1, 4)
+        circuit.h(1)
+        
+        # Measure control qubits
+        circuit.measure([0, 2], [0, 1])
+        circuit.measure([1, 4], [2, 3])
+        
+        # Add barrier before corrections
+        circuit.barrier()
+        
+        # Apply corrections for first teleported qubit
+        circuit.x(3).c_if(1, 1)  # Apply X if second measurement is 1
+        circuit.z(3).c_if(0, 1)  # Apply Z if first measurement is 1
+        
+        # Apply corrections for second teleported qubit
+        circuit.x(5).c_if(3, 1)  # Apply X if fourth measurement is 1
+        circuit.z(5).c_if(2, 1)  # Apply Z if third measurement is 1
     
     return circuit
 
@@ -197,11 +247,14 @@ def visualize_quantum_fourier_transform(num_qubits=3):
     Create and visualize a Quantum Fourier Transform circuit
     
     Args:
-        num_qubits: Number of qubits in the QFT
+        num_qubits: Number of qubits in the QFT (supports up to 20 qubits)
         
     Returns:
         QuantumCircuit: QFT circuit
     """
+    # Enhanced support for larger qubit counts (up to 20)
+    num_qubits = min(max(num_qubits, 3), 20)  # Limit between 3 and 20 qubits for stability
+    
     circuit = QuantumCircuit(num_qubits)
     
     # Create superposition state
@@ -213,12 +266,16 @@ def visualize_quantum_fourier_transform(num_qubits=3):
     
     for i in range(num_qubits):
         circuit.h(i)
+        # Apply controlled phase rotations with increasing phase precision
         for j in range(i+1, num_qubits):
             # Calculate the rotation angle
             theta = 2 * np.pi / (2 ** (j - i + 1))
             circuit.cp(theta, j, i)
     
-    # Swap qubits
+    # Improve circuit efficiency with barrier visualization
+    circuit.barrier()
+    
+    # Swap qubits to get the correct output order
     for i in range(num_qubits // 2):
         circuit.swap(i, num_qubits - i - 1)
     

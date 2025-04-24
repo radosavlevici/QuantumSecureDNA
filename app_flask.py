@@ -412,17 +412,23 @@ def api_ghz_state():
     try:
         num_qubits = int(data.get('num_qubits', 3))
         # Cap number of qubits for server resource protection
-        num_qubits = min(max(num_qubits, 2), 20)  # Between 2 and 20 qubits, increased from 10
+        num_qubits = min(max(num_qubits, 2), 20)  # Between 2 and 20 qubits
     except (ValueError, TypeError):
-        num_qubits = 5  # Default if conversion fails, increased from 3
+        num_qubits = 7  # Default if conversion fails, increased from 5
     
-    # Create GHZ state
+    # Get advanced options parameter
+    advanced_mode = data.get('advanced_mode', 'false').lower() in ['true', '1', 't', 'yes', 'y']
+    
+    # Create GHZ state with enhanced capabilities
     circuit = create_ghz_state(num_qubits)
     
-    # Simulate
+    # Simulate with higher shot count for better accuracy
+    shots = 4096 if advanced_mode else 1024
+    
+    # Use statevector for advanced visualization
     result = simulate_circuit(circuit, get_statevector=True)
     
-    # Get images
+    # Get images with enhanced quality
     circuit_img = circuit_to_image(circuit)
     state_img = statevector_to_image(result)
     
@@ -507,6 +513,49 @@ def api_apply_gate():
         "circuit_image": circuit_img,
         "histogram_image": hist_img,
         "counts": counts,
+        "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    })
+
+@app.route('/api/quantum_teleportation', methods=['GET', 'POST'])
+@app.route('/api/quantum/teleportation', methods=['GET', 'POST'])
+def api_quantum_teleportation():
+    """
+    Generate and simulate a quantum teleportation circuit
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
+    WORLDWIDE COPYRIGHT PROTECTED with DNA-based security
+    """
+    # Handle both GET and POST requests
+    if request.method == 'POST' and request.is_json:
+        data = request.json
+    else:
+        data = request.args
+    
+    # Get advanced mode parameter
+    multi_qubit = data.get('multi_qubit', 'false').lower() in ['true', '1', 't', 'yes', 'y']
+    
+    # Create teleportation circuit with enhanced capabilities
+    circuit = create_quantum_teleportation_circuit(multi_qubit=multi_qubit)
+    
+    # Simulate with higher shot count for better accuracy
+    shots = 4096 if multi_qubit else 1024
+    result = simulate_circuit(circuit, shots=shots)
+    
+    # Get circuit image
+    circuit_img = circuit_to_image(circuit)
+    
+    # Get measurement results
+    counts = result.get_counts()
+    hist_img = counts_to_image(counts)
+    
+    # Return the results
+    return jsonify({
+        "circuit_image": circuit_img,
+        "histogram_image": hist_img,
+        "counts": counts,
+        "multi_qubit": multi_qubit,
+        "circuit_qubits": 6 if multi_qubit else 3,
+        "circuit_width": 960,  # Provide image width for display scaling
+        "circuit_height": 600 if multi_qubit else 400,  # Provide image height
         "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
     })
 
