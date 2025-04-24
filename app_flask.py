@@ -419,20 +419,34 @@ def api_ghz_state():
     # Get advanced options parameter
     advanced_mode = data.get('advanced_mode', 'false').lower() in ['true', '1', 't', 'yes', 'y']
     
-    # Create GHZ state with enhanced capabilities
-    circuit = create_ghz_state(num_qubits)
+    # Create optimized GHZ state with enhanced capabilities
+    # Use logarithmic depth implementation for large qubit counts
+    circuit = create_ghz_state(num_qubits, advanced_mode=advanced_mode)
     
     # Use advanced simulation with optimized settings
+    # For large qubit counts, we need more shots and enhanced simulation
     result = simulate_circuit(circuit, get_statevector=True, advanced_mode=advanced_mode)
     
     # Get images with enhanced quality
     circuit_img = circuit_to_image(circuit)
     state_img = statevector_to_image(result)
     
+    # Calculate the theoretical probability amplitudes
+    # In a perfect GHZ state, only |00...0⟩ and |11...1⟩ should have non-zero amplitudes
+    theoretical_prob = {
+        '0'*num_qubits: 0.5,
+        '1'*num_qubits: 0.5
+    }
+    
     return jsonify({
         "circuit_image": circuit_img,
         "state_image": state_img,
         "num_qubits": num_qubits,
+        "advanced_mode": advanced_mode,
+        "theoretical_amplitudes": theoretical_prob,
+        "max_supported_qubits": 32,
+        "circuit_depth": circuit.depth(),  # Provide circuit depth for optimization info
+        "gate_counts": circuit.count_ops(),  # Count of gate operations used
         "copyright": "© Ervin Remus Radosavlevici (ervin210@icloud.com)"
     })
 
