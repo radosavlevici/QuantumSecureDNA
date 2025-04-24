@@ -6,6 +6,27 @@
  * Toate drepturile rezervate global. Protejat prin legile internaționale de copyright.
  */
 
+/* Stiluri pentru security badge - adăugat pentru protecție copyright */
+.security-badge {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 102, 204, 0.05);
+    border: 1px solid rgba(0, 102, 204, 0.2);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 10px;
+    color: #0066cc;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+.security-badge .dna-protection {
+    font-family: monospace;
+    font-weight: bold;
+}
+
 /* Resetare și bază */
 * {
     margin: 0;
