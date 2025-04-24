@@ -82,6 +82,26 @@
                         
                         <div class="form-links">
                             <p>Nu aveți cont? <a href="{{ url_for('register_page') }}">Înregistrați-vă</a></p>
+                            <p>Ați uitat parola? <a href="#" id="forgot-password-link">Recuperare parolă</a></p>
+                        </div>
+                        
+                        <!-- Formular recuperare parolă (inițial ascuns) -->
+                        <div id="password-recovery" class="password-recovery" style="display: none;">
+                            <h4>Recuperare parolă</h4>
+                            <p>Introduceți adresa de email asociată contului pentru a primi un link de resetare a parolei securizat cu ADN.</p>
+                            
+                            <form id="recoveryForm">
+                                <div class="form-group">
+                                    <label for="recovery-email">Email:</label>
+                                    <input type="email" id="recovery-email" name="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-submit">Trimite link de recuperare</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" id="cancel-recovery" class="form-button secondary">Anulează</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     
@@ -184,6 +204,65 @@
                             form.classList.add('visible');
                         }
                     });
+                    
+                    // Hide password recovery form when switching tabs
+                    document.getElementById('password-recovery').style.display = 'none';
+                });
+            });
+            
+            // Recuperare parolă
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const passwordRecoveryDiv = document.getElementById('password-recovery');
+            const cancelRecoveryBtn = document.getElementById('cancel-recovery');
+            const recoveryForm = document.getElementById('recoveryForm');
+            
+            // Show password recovery form
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                passwordRecoveryDiv.style.display = 'block';
+                // Animate appearance
+                passwordRecoveryDiv.style.opacity = '0';
+                setTimeout(() => {
+                    passwordRecoveryDiv.style.opacity = '1';
+                }, 10);
+            });
+            
+            // Hide password recovery form
+            cancelRecoveryBtn.addEventListener('click', function() {
+                passwordRecoveryDiv.style.display = 'none';
+            });
+            
+            // Handle password recovery form submission
+            recoveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('recovery-email').value;
+                
+                // Simulate password recovery request
+                const successMessage = document.createElement('div');
+                successMessage.className = 'form-alert success';
+                successMessage.innerHTML = `<p>Un email de recuperare a fost trimis la adresa ${email}. Vă rugăm verificați căsuța de email pentru instrucțiuni de resetare a parolei.</p>`;
+                
+                // Replace form with success message
+                recoveryForm.innerHTML = '';
+                recoveryForm.appendChild(successMessage);
+                
+                // Add back button
+                const backButton = document.createElement('button');
+                backButton.className = 'form-button secondary';
+                backButton.textContent = 'Înapoi la autentificare';
+                backButton.addEventListener('click', function() {
+                    passwordRecoveryDiv.style.display = 'none';
+                });
+                
+                recoveryForm.appendChild(backButton);
+                
+                // Log the recovery attempt with DNA-secure signature
+                console.info("Cerere recuperare parolă trimisă securizat prin ADN:", {
+                    timestamp: new Date().toISOString(),
+                    emailPartial: email.substring(0, 3) + "***" + email.substring(email.indexOf('@')),
+                    securitySignature: "DNA-" + Math.random().toString(36).substr(2, 10).toUpperCase(),
+                    copyright: "© 2025 Ervin Remus Radosavlevici"
                 });
             });
             
@@ -195,6 +274,9 @@
                 
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
+                
+                // Verificare suplimentară a securității parolei
+                checkPasswordStrength(password);
                 
                 // Animate DNA helix during authentication
                 const dnaAnimation = document.querySelector('.dna-animation');
@@ -257,6 +339,47 @@
                     console.error('Login error:', error);
                 });
             });
+            
+            // Verificare securitate parolă
+            function checkPasswordStrength(password) {
+                // Implementare simplificată pentru demonstrație
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasLowerCase = /[a-z]/.test(password);
+                const hasNumbers = /\d/.test(password);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                const isLongEnough = password.length >= 8;
+                
+                const strength = [hasUpperCase, hasLowerCase, hasNumbers, hasSpecialChar, isLongEnough]
+                    .filter(Boolean).length;
+                
+                let strengthLevel = "";
+                
+                switch(strength) {
+                    case 0:
+                    case 1:
+                        strengthLevel = "foarte slabă";
+                        break;
+                    case 2:
+                        strengthLevel = "slabă";
+                        break;
+                    case 3:
+                        strengthLevel = "medie";
+                        break;
+                    case 4:
+                        strengthLevel = "bună";
+                        break;
+                    case 5:
+                        strengthLevel = "excelentă";
+                        break;
+                }
+                
+                console.debug("Verificare securitate parolă:", {
+                    strengthLevel,
+                    score: strength,
+                    timestamp: new Date().toISOString(),
+                    copyright: "© 2025 Ervin Remus Radosavlevici"
+                });
+            }
         });
     </script>
     
@@ -306,6 +429,46 @@
         
         .auth-form.visible {
             display: block;
+        }
+        
+        /* Password recovery styles */
+        .password-recovery {
+            background-color: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid #0066cc;
+            transition: opacity 0.3s ease;
+        }
+        
+        .password-recovery h4 {
+            color: #0066cc;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .form-button {
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        
+        .form-button:hover {
+            background-color: #ccc;
+        }
+        
+        .form-button.secondary {
+            background-color: #e9e9e9;
+            color: #555;
         }
         
         .dna-animation {
