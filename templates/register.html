@@ -1,430 +1,793 @@
 <!DOCTYPE html>
-<html lang="en" data-copyright-protected="true" data-author="Ervin Remus Radosavlevici">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Ervin Remus Radosavlevici">
-    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally.">
-    <title>Înregistrare - Quantum Computing Educational Platform</title>
-    
-    <!-- Global CSS -->
+    <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Toate drepturile rezervate">
+    <meta name="description" content="Înregistrare cu securitate ADN - Quantum Computing Academy">
+    <title>Înregistrare - Quantum Computing Academy</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    
-    <!-- Custom Registration Page CSS -->
-    <style>
-        .register-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #28a745; /* Green for registration */
-        }
-        
-        .register-title {
-            margin-bottom: 20px;
-            color: #212529;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group-inline {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .form-group-inline .form-group {
-            flex: 1;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        .form-hint {
-            font-size: 12px;
-            margin-top: 5px;
-            color: #6c757d;
-        }
-        
-        .btn-register {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-register:hover {
-            background-color: #218838;
-        }
-        
-        .btn-login {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        .btn-login:hover {
-            background-color: #5a6268;
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        
-        .alert-danger {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-        
-        .alert-success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-        
-        .dna-security-section {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-            border-left: 4px solid #17a2b8;
-        }
-        
-        .dna-security-section h3 {
-            margin-bottom: 10px;
-            color: #17a2b8;
-        }
-        
-        .checkbox-consent {
-            display: flex;
-            align-items: flex-start;
-            margin-top: 20px;
-        }
-        
-        .checkbox-consent input {
-            margin-top: 5px;
-            margin-right: 10px;
-        }
-        
-        .password-strength {
-            height: 5px;
-            width: 100%;
-            background-color: #e9ecef;
-            margin-top: 5px;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        
-        .password-strength-meter {
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s, background-color 0.3s;
-        }
-        
-        .disclaimer {
-            font-size: 12px;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 30px;
-        }
-    </style>
 </head>
 <body>
-    <!-- Navigation with enhanced security and copyright protection -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="/" class="navbar-brand" data-copyright-protected="true">
-                <span class="brand-text">Quantum</span><span class="brand-highlight">EDU</span>
-            </a>
-            <ul class="navbar-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/quantum_basics" class="nav-link">Quantum Basics</a></li>
-                <li><a href="/dna_security" class="nav-link">DNA Security</a></li>
-                <li><a href="/quantum_algorithms" class="nav-link">Quantum Algorithms</a></li>
-                <li><a href="/quantum_ml" class="nav-link">Quantum ML</a></li>
-                <li><a href="/resources" class="nav-link">Resources</a></li>
-                <li><a href="/register" class="nav-link active">Register</a></li>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <h1>Quantum Computing Academy</h1>
+                <span class="copyright-tag">© 2025 Ervin Remus Radosavlevici</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Acasă</a></li>
+                <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                <li><a href="{{ url_for('quantum_ml') }}">Cuantic & ML</a></li>
+                <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                <li><a href="{{ url_for('login_page') }}" class="btn-login">Autentificare</a></li>
             </ul>
-        </div>
-    </nav>
-    
-    <!-- Hidden copyright notice with quantum-enhanced protection -->
-    <div class="hidden-copyright-watermark" style="display: none;">© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). All Rights Reserved Globally.</div>
-    
-    <!-- Main content -->
-    <div class="container" data-copyright-protected="true" data-author="Ervin Remus Radosavlevici">
-        <header class="page-header">
-            <h1>Înregistrare Utilizator</h1>
-            <p class="copyright-notice">© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-            <p class="page-description">Creare cont cu protecție ADN-cuantică</p>
-        </header>
-        
-        <div class="register-container">
-            <h2 class="register-title">Înregistrare cu Securitate ADN</h2>
-            
-            {% if error %}
-            <div class="alert alert-danger">
-                {{ error }}
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>Înregistrare cu Securitate ADN</h2>
+            <p>Creați un cont securizat cu tehnologie cuantică și ADN pentru a accesa toate funcționalitățile platformei.</p>
+            <div class="security-badge">
+                <span class="security-key">Cheie de securitate: {{ security_key }}</span>
+                <span class="security-info">Protejat prin tehnologie cuantică și ADN</span>
             </div>
-            {% endif %}
-            
-            {% if success %}
-            <div class="alert alert-success">
-                {{ success }}
-            </div>
-            {% endif %}
-            
-            <form id="register-form" action="/api/register" method="POST">
-                <div class="form-group">
-                    <label for="username" class="form-label">Nume de utilizator</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
-                    <div class="form-hint">Alegeți un nume de utilizator unic, fără caractere speciale</div>
+        </section>
+
+        <section class="register-section">
+            <div class="register-container">
+                <div class="register-tabs">
+                    <button class="auth-tab" data-target="login-redirect">Autentificare</button>
+                    <button class="auth-tab active" data-target="register-form">Creare cont</button>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                    <div class="form-hint">Va fi folosit doar pentru recuperarea contului</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password" class="form-label">Parolă</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                    <div class="password-strength">
-                        <div class="password-strength-meter" id="password-meter"></div>
+                <div class="auth-content">
+                    <div id="login-redirect" class="auth-form">
+                        <div class="redirect-message">
+                            <h3>Autentificare cont existent</h3>
+                            <p>Pentru a vă autentifica la un cont existent, vă rugăm să accesați pagina de autentificare unde vă puteți conecta securizat cu ADN.</p>
+                            <div class="security-advantages">
+                                <h4>Avantajele contului securizat cu ADN:</h4>
+                                <ul>
+                                    <li>Protecție avansată împotriva atacurilor prin criptare ADN</li>
+                                    <li>Acces la simulatoarele cuantice pentru experimentare</li>
+                                    <li>Posibilitatea de a salva rezultatele simulărilor</li>
+                                    <li>Protecție integrată a proprietății intelectuale</li>
+                                </ul>
+                            </div>
+                            <a href="{{ url_for('login_page') }}" class="btn primary">Autentificare cont existent</a>
+                        </div>
                     </div>
-                    <div class="form-hint">Minim 8 caractere, incluzând litere mari, mici și cifre</div>
+                    
+                    <div id="register-form" class="auth-form visible">
+                        {% if error %}
+                        <div class="form-alert error">
+                            <p>{{ error }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        {% if success %}
+                        <div class="form-alert success">
+                            <p>{{ success }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        <form id="registerForm" action="/api/register" method="POST">
+                            <div class="form-group">
+                                <label for="username">Nume utilizator:</label>
+                                <input type="text" id="username" name="username" class="form-control" required minlength="4" maxlength="50">
+                                <p class="form-text">Minim 4 caractere, fără spații.</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Adresă email:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Parolă:</label>
+                                <input type="password" id="password" name="password" class="form-control" required minlength="8">
+                                <div id="password-strength" class="password-strength">
+                                    <div class="strength-meter">
+                                        <div class="strength-meter-fill" style="width: 0%;"></div>
+                                    </div>
+                                    <span class="strength-text">Introduceți o parolă puternică</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirm-password">Confirmare parolă:</label>
+                                <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
+                                <p id="password-match" class="form-text">Parolele trebuie să coincidă.</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="dna-security-info">
+                                    <h4>Protecție securitate ADN</h4>
+                                    <p>Contul dvs. va fi protejat printr-o semnătură ADN unică, generată prin algoritmi cuantici. Aceasta va asigura autenticitatea și integritatea contului dvs.</p>
+                                    <div class="dna-generation-animation">
+                                        <div class="dna-helix extended"></div>
+                                        <div class="dna-sequence">
+                                            <span id="dna-sequence-text">ATCG-TACG-CTAG-GCTA-TAGC</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="terms-agreement">
+                                    <input type="checkbox" id="terms-agreement" name="terms-agreement" required>
+                                    <label for="terms-agreement">Sunt de acord cu <a href="#" id="terms-link">Termenii și Condițiile</a> și <a href="#" id="privacy-link">Politica de Confidențialitate</a>.</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button id="register-submit" type="submit" class="form-submit" disabled>Creare cont securizat</button>
+                            </div>
+                        </form>
+                        
+                        <div class="form-links">
+                            <p>Aveți deja un cont? <a href="{{ url_for('login_page') }}">Autentificați-vă</a></p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password_confirm" class="form-label">Confirmare parolă</label>
-                    <input type="password" id="password_confirm" name="password_confirm" class="form-control" required>
+            </div>
+        </section>
+        
+        <section class="registration-benefits">
+            <h3>Beneficiile înregistrării cu securitate ADN</h3>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon secure-icon"></div>
+                    <h4>Securitate Avansată</h4>
+                    <p>Protejează identitatea dvs. digitală împotriva atacurilor sofisticate utilizând criptare bazată pe ADN.</p>
                 </div>
-                
-                <div class="dna-security-section">
-                    <h3>Securitate Avansată ADN-Cuantică</h3>
-                    <p>Contul dumneavoastră va fi protejat cu tehnologie de securitate ADN-cuantică de ultimă generație. Aceasta oferă:</p>
-                    <ul>
-                        <li>Protecție împotriva atacurilor cibernetice avansate</li>
-                        <li>Semnătură ADN unică pentru autentificare</li>
-                        <li>Criptare cuantică pentru datele sensibile</li>
-                        <li>Monitorizare continuă a activității suspecte</li>
-                    </ul>
+                <div class="benefit-card">
+                    <div class="benefit-icon personal-icon"></div>
+                    <h4>Experiență Personalizată</h4>
+                    <p>Salvați și personalizați simulările cuantice și experimentele pentru a continua învățarea.</p>
                 </div>
-                
-                <div class="checkbox-consent">
-                    <input type="checkbox" id="consent_terms" name="consent_terms" required>
-                    <label for="consent_terms">
-                        Sunt de acord cu Termenii și Condițiile platformei, inclusiv protecția 
-                        drepturilor de autor pentru tot conținutul marcat cu 
-                        "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)".
-                    </label>
+                <div class="benefit-card">
+                    <div class="benefit-icon access-icon"></div>
+                    <h4>Acces Premium</h4>
+                    <p>Deblocați acces la simulatoare avansate cu suport pentru până la 20 qubiți și algoritmi specializați.</p>
                 </div>
-                
-                <button type="submit" class="btn-register">Înregistrare Securizată</button>
-                <a href="/login" class="btn-login">Ai deja cont? Autentifică-te</a>
-            </form>
-            
-            <div class="disclaimer">
-                © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com). Toate drepturile rezervate global.
-                Protejat de legislația internațională a drepturilor de autor.
+                <div class="benefit-card">
+                    <div class="benefit-icon community-icon"></div>
+                    <h4>Comunitate Cuantică</h4>
+                    <p>Conectați-vă cu alți entuziaști și experți în domeniul calculului cuantic și securității ADN.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal Termeni și Condiții -->
+        <div id="terms-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Termeni și Condiții</h3>
+                <div class="modal-body">
+                    <h4>1. Acceptarea Termenilor</h4>
+                    <p>Prin crearea unui cont și utilizarea platformei Quantum Computing Academy, acceptați acești termeni și condiții în întregime.</p>
+                    
+                    <h4>2. Proprietate Intelectuală</h4>
+                    <p>Tot conținutul platformei, inclusiv textele, imaginile, codul, simulările și materialele educaționale sunt proprietatea exclusivă a lui Ervin Remus Radosavlevici (ervin210@icloud.com) și sunt protejate prin legi internaționale de copyright.</p>
+                    
+                    <h4>3. Utilizarea Contului</h4>
+                    <p>Sunteți responsabil pentru menținerea confidențialității informațiilor de autentificare și pentru toate activitățile desfășurate sub contul dvs.</p>
+                    
+                    <h4>4. Securitate ADN</h4>
+                    <p>Tehnologia de securitate ADN utilizată pe platformă este protejată prin brevete internaționale și nu poate fi reprodusă, modificată sau utilizată în alte scopuri.</p>
+                    
+                    <h4>5. Limitarea Răspunderii</h4>
+                    <p>Quantum Computing Academy nu își asumă răspunderea pentru eventualele daune directe sau indirecte rezultate din utilizarea platformei sau a informațiilor furnizate.</p>
+                </div>
+                <button class="modal-button">Am înțeles și accept</button>
             </div>
         </div>
-    </div>
-    
-    <!-- Footer with copyright notice and security information -->
+        
+        <!-- Modal Politică de Confidențialitate -->
+        <div id="privacy-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Politică de Confidențialitate</h3>
+                <div class="modal-body">
+                    <h4>1. Informații Colectate</h4>
+                    <p>Colectăm numele de utilizator, adresa de email și datele generate de simulările cuantice efectuate pe platformă.</p>
+                    
+                    <h4>2. Utilizarea Informațiilor</h4>
+                    <p>Informațiile sunt utilizate exclusiv pentru furnizarea serviciilor platformei, îmbunătățirea experienței utilizatorilor și asigurarea securității conturilor.</p>
+                    
+                    <h4>3. Semnătura ADN</h4>
+                    <p>Semnătura ADN generată pentru contul dvs. este utilizată exclusiv în scopuri de autentificare și securitate. Aceasta nu conține informații personale și nu poate fi utilizată pentru a vă identifica în afara platformei.</p>
+                    
+                    <h4>4. Stocare și Protecție</h4>
+                    <p>Toate datele sunt stocate cu criptare de nivel înalt și protejate prin tehnologii cuantice avansate împotriva accesului neautorizat.</p>
+                    
+                    <h4>5. Drepturi de Confidențialitate</h4>
+                    <p>Aveți dreptul de a solicita accesul, corectarea sau ștergerea datelor personale asociate contului dvs. în orice moment.</p>
+                </div>
+                <button class="modal-button">Am înțeles și accept</button>
+            </div>
+        </div>
+    </main>
+
     <footer>
         <div class="footer-content">
             <div class="footer-copyright">
                 <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                <p>Toate drepturile rezervate global. Protejat de legile internaționale ale drepturilor de autor.</p>
             </div>
             <div class="footer-security">
-                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                <p>Enhanced with DNA-based quantum security</p>
+                <p>Securizat cu tehnologie cuantică și ADN</p>
+                <p>Cheie de Securitate: {{ security_key }}</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                    <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                    <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                </ul>
             </div>
         </div>
     </footer>
-    
-    <!-- Security breach detection and self-repair JavaScript -->
-    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
+
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
-    
-    <!-- Custom JavaScript for registration and security -->
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Password strength meter
-            const passwordInput = document.getElementById('password');
-            const passwordMeter = document.getElementById('password-meter');
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
             
-            if (passwordInput && passwordMeter) {
-                passwordInput.addEventListener('input', function() {
-                    const password = this.value;
-                    let strength = 0;
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
                     
-                    // Calculate password strength
-                    if (password.length > 0) {
-                        // Start with 1 point for any input
-                        strength += 1;
-                        
-                        // Length check
-                        if (password.length >= 8) strength += 1;
-                        if (password.length >= 12) strength += 1;
-                        
-                        // Complexity checks
-                        if (/[A-Z]/.test(password)) strength += 1;
-                        if (/[a-z]/.test(password)) strength += 1;
-                        if (/[0-9]/.test(password)) strength += 1;
-                        if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-                    }
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
                     
-                    // Calculate percentage
-                    const percentage = Math.min(100, (strength / 7) * 100);
-                    
-                    // Set width
-                    passwordMeter.style.width = percentage + '%';
-                    
-                    // Set color based on strength
-                    if (percentage < 30) {
-                        passwordMeter.style.backgroundColor = '#dc3545'; // Red (weak)
-                    } else if (percentage < 70) {
-                        passwordMeter.style.backgroundColor = '#ffc107'; // Yellow (medium)
-                    } else {
-                        passwordMeter.style.backgroundColor = '#28a745'; // Green (strong)
-                    }
-                });
-            }
-            
-            // Form validation for registration
-            const registerForm = document.getElementById('register-form');
-            if (registerForm) {
-                registerForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const password = document.getElementById('password').value;
-                    const passwordConfirm = document.getElementById('password_confirm').value;
-                    
-                    // Check if passwords match
-                    if (password !== passwordConfirm) {
-                        const errorDiv = document.createElement('div');
-                        errorDiv.className = 'alert alert-danger';
-                        errorDiv.textContent = 'Parolele nu coincid. Vă rugăm să încercați din nou.';
-                        
-                        const container = document.querySelector('.register-container');
-                        const existingAlert = container.querySelector('.alert');
-                        if (existingAlert) {
-                            container.removeChild(existingAlert);
+                    // Show target form
+                    forms.forEach(form => {
+                        form.classList.remove('visible');
+                        if (form.id === target) {
+                            form.classList.add('visible');
                         }
-                        container.insertBefore(errorDiv, registerForm);
-                        return;
-                    }
-                    
-                    // Collate form data
-                    const formData = {
-                        username: document.getElementById('username').value,
-                        email: document.getElementById('email').value,
-                        password: password
-                    };
-                    
-                    // Submit registration via API
-                    fetch('/api/register', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Show success and redirect
-                            const successDiv = document.createElement('div');
-                            successDiv.className = 'alert alert-success';
-                            successDiv.textContent = data.message || 'Înregistrare realizată cu succes! Veți fi redirecționat către pagina de autentificare.';
-                            
-                            const container = document.querySelector('.register-container');
-                            const existingAlert = container.querySelector('.alert');
-                            if (existingAlert) {
-                                container.removeChild(existingAlert);
-                            }
-                            container.insertBefore(successDiv, registerForm);
-                            
-                            // Redirect after a delay
-                            setTimeout(() => {
-                                window.location.href = '/login';
-                            }, 3000);
-                        } else {
-                            // Show error
-                            const errorDiv = document.createElement('div');
-                            errorDiv.className = 'alert alert-danger';
-                            errorDiv.textContent = data.error || 'Înregistrare eșuată. Verificați datele introduse.';
-                            
-                            const container = document.querySelector('.register-container');
-                            const existingAlert = container.querySelector('.alert');
-                            if (existingAlert) {
-                                container.removeChild(existingAlert);
-                            }
-                            container.insertBefore(errorDiv, registerForm);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        
-                        // Show generic error
-                        const errorDiv = document.createElement('div');
-                        errorDiv.className = 'alert alert-danger';
-                        errorDiv.textContent = 'A apărut o eroare la înregistrare. Vă rugăm să încercați din nou.';
-                        
-                        const container = document.querySelector('.register-container');
-                        const existingAlert = container.querySelector('.alert');
-                        if (existingAlert) {
-                            container.removeChild(existingAlert);
-                        }
-                        container.insertBefore(errorDiv, registerForm);
                     });
                 });
-            }
-            
-            // Apply copyright protection to all elements
-            document.querySelectorAll('form, .dna-security-section, .register-container').forEach(element => {
-                element.setAttribute('data-copyright-protected', 'true');
-                element.setAttribute('data-author', 'Ervin Remus Radosavlevici');
             });
+            
+            // Password strength meter
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const strengthMeterFill = document.querySelector('.strength-meter-fill');
+            const strengthText = document.querySelector('.strength-text');
+            const passwordMatch = document.getElementById('password-match');
+            const termsCheckbox = document.getElementById('terms-agreement');
+            const registerButton = document.getElementById('register-submit');
+            
+            const updatePasswordStrength = () => {
+                const password = passwordInput.value;
+                
+                // Check for password strength
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasLowerCase = /[a-z]/.test(password);
+                const hasNumbers = /\d/.test(password);
+                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                const isLongEnough = password.length >= 8;
+                
+                // Calculate strength as a percentage
+                const checks = [hasUpperCase, hasLowerCase, hasNumbers, hasSpecialChar, isLongEnough];
+                const passedChecks = checks.filter(Boolean).length;
+                const strengthPercentage = (passedChecks / checks.length) * 100;
+                
+                // Update meter
+                strengthMeterFill.style.width = `${strengthPercentage}%`;
+                
+                // Set color based on strength
+                if (strengthPercentage < 40) {
+                    strengthMeterFill.style.backgroundColor = '#ff4d4d'; // red
+                    strengthText.textContent = 'Parolă slabă';
+                    strengthText.style.color = '#ff4d4d';
+                } else if (strengthPercentage < 80) {
+                    strengthMeterFill.style.backgroundColor = '#ffa64d'; // orange
+                    strengthText.textContent = 'Parolă medie';
+                    strengthText.style.color = '#ffa64d';
+                } else {
+                    strengthMeterFill.style.backgroundColor = '#4CAF50'; // green
+                    strengthText.textContent = 'Parolă puternică';
+                    strengthText.style.color = '#4CAF50';
+                }
+                
+                updateFormValidity();
+                updateDnaSequence(password);
+            };
+            
+            // Verify password match
+            const checkPasswordMatch = () => {
+                if (confirmPasswordInput.value === '') {
+                    passwordMatch.textContent = 'Parolele trebuie să coincidă.';
+                    passwordMatch.style.color = '#666';
+                } else if (confirmPasswordInput.value === passwordInput.value) {
+                    passwordMatch.textContent = 'Parolele coincid.';
+                    passwordMatch.style.color = '#4CAF50';
+                } else {
+                    passwordMatch.textContent = 'Parolele nu coincid!';
+                    passwordMatch.style.color = '#ff4d4d';
+                }
+                
+                updateFormValidity();
+            };
+            
+            // Update DNA sequence based on form data
+            const updateDnaSequence = (password) => {
+                const username = document.getElementById('username').value || 'utilizator';
+                const email = document.getElementById('email').value || 'email@example.com';
+                
+                // Generate a pseudo-unique DNA sequence based on form inputs
+                let dnaBase = '';
+                
+                // Mix username, email domain and password strength
+                const domain = email.split('@')[1] || 'domain.com';
+                const strength = (password || '').length;
+                
+                // Create a pattern
+                for (let i = 0; i < username.length && i < 8; i++) {
+                    const char = username.charCodeAt(i) % 4;
+                    dnaBase += 'ATCG'[char];
+                }
+                
+                dnaBase += '-';
+                
+                for (let i = 0; i < domain.length && i < 8; i++) {
+                    const char = domain.charCodeAt(i) % 4;
+                    dnaBase += 'ATCG'[char];
+                }
+                
+                dnaBase += '-';
+                
+                // Add strength indicators
+                const strengthChars = Math.min(8, strength);
+                for (let i = 0; i < strengthChars; i++) {
+                    const char = (password.charCodeAt(i % password.length) + i) % 4;
+                    dnaBase += 'ATCG'[char];
+                }
+                
+                // Fill the rest with pseudo-random DNA
+                while (dnaBase.length < 24) {
+                    dnaBase += 'ATCG'[Math.floor(Math.random() * 4)];
+                    if ((dnaBase.length) % 5 === 4 && dnaBase.length < 23) {
+                        dnaBase += '-';
+                    }
+                }
+                
+                // Update DNA sequence display
+                document.getElementById('dna-sequence-text').textContent = dnaBase;
+                
+                // Animate DNA sequence updating
+                const dnaSequence = document.querySelector('.dna-sequence');
+                dnaSequence.classList.add('updating');
+                setTimeout(() => {
+                    dnaSequence.classList.remove('updating');
+                }, 500);
+            };
+            
+            // Enable or disable submit button based on form validity
+            const updateFormValidity = () => {
+                const isPasswordStrong = passwordInput.value.length >= 8;
+                const passwordsMatch = passwordInput.value === confirmPasswordInput.value;
+                const termsAccepted = termsCheckbox.checked;
+                const usernameValid = document.getElementById('username').value.length >= 4;
+                const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value);
+                
+                if (isPasswordStrong && passwordsMatch && termsAccepted && usernameValid && emailValid) {
+                    registerButton.removeAttribute('disabled');
+                } else {
+                    registerButton.setAttribute('disabled', 'disabled');
+                }
+            };
+            
+            // Event listeners
+            passwordInput.addEventListener('input', updatePasswordStrength);
+            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+            termsCheckbox.addEventListener('change', updateFormValidity);
+            document.getElementById('username').addEventListener('input', function() {
+                updateFormValidity();
+                updateDnaSequence(passwordInput.value);
+            });
+            document.getElementById('email').addEventListener('input', function() {
+                updateFormValidity();
+                updateDnaSequence(passwordInput.value);
+            });
+            
+            // Handle form submission with AJAX
+            const registerForm = document.getElementById('registerForm');
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = passwordInput.value;
+                
+                // Perform DNA signature animation
+                document.querySelector('.dna-helix').classList.add('processing');
+                
+                // Submit form data
+                fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('.dna-helix').classList.remove('processing');
+                    
+                    if (data.success) {
+                        // Registration successful
+                        const successAlert = document.createElement('div');
+                        successAlert.className = 'form-alert success';
+                        successAlert.innerHTML = '<p>Înregistrare reușită! Veți fi redirecționat către pagina de autentificare...</p>';
+                        
+                        // Replace form with success message
+                        registerForm.innerHTML = '';
+                        registerForm.appendChild(successAlert);
+                        
+                        // Redirect to login after delay
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 3000);
+                    } else {
+                        // Registration failed
+                        const errorAlert = document.createElement('div');
+                        errorAlert.className = 'form-alert error';
+                        errorAlert.innerHTML = `<p>${data.error || 'Înregistrare eșuată. Verificați datele introduse.'}</p>`;
+                        
+                        // Insert error message at top of form
+                        registerForm.insertBefore(errorAlert, registerForm.firstChild);
+                    }
+                })
+                .catch(error => {
+                    document.querySelector('.dna-helix').classList.remove('processing');
+                    
+                    // Show error message
+                    const errorAlert = document.createElement('div');
+                    errorAlert.className = 'form-alert error';
+                    errorAlert.innerHTML = '<p>Eroare de conexiune. Încercați din nou.</p>';
+                    
+                    // Insert error message at top of form
+                    registerForm.insertBefore(errorAlert, registerForm.firstChild);
+                    
+                    console.error('Registration error:', error);
+                });
+            });
+            
+            // Modal functionality
+            const termsLink = document.getElementById('terms-link');
+            const privacyLink = document.getElementById('privacy-link');
+            const termsModal = document.getElementById('terms-modal');
+            const privacyModal = document.getElementById('privacy-modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            const modalButtons = document.querySelectorAll('.modal-button');
+            
+            // Open modals
+            termsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                termsModal.style.display = 'block';
+            });
+            
+            privacyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                privacyModal.style.display = 'block';
+            });
+            
+            // Close modals
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    termsModal.style.display = 'none';
+                    privacyModal.style.display = 'none';
+                });
+            });
+            
+            modalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    termsModal.style.display = 'none';
+                    privacyModal.style.display = 'none';
+                    
+                    // Check the terms agreement checkbox
+                    termsCheckbox.checked = true;
+                    updateFormValidity();
+                });
+            });
+            
+            // Close when clicking outside of modal
+            window.addEventListener('click', function(e) {
+                if (e.target === termsModal) {
+                    termsModal.style.display = 'none';
+                }
+                if (e.target === privacyModal) {
+                    privacyModal.style.display = 'none';
+                }
+            });
+            
+            // Initialize
+            updatePasswordStrength();
+            checkPasswordMatch();
+            updateDnaSequence('');
         });
     </script>
+    
+    <style>
+        /* Registration page specific styles */
+        .register-section {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .register-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .register-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Password strength meter */
+        .password-strength {
+            margin-top: 0.5rem;
+        }
+        
+        .strength-meter {
+            height: 5px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .strength-meter-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .strength-text {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* DNA Security Info */
+        .dna-security-info {
+            background-color: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .dna-security-info h4 {
+            color: #0066cc;
+            margin-top: 0;
+        }
+        
+        .dna-generation-animation {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .dna-helix.extended {
+            width: 40px;
+            height: 80px;
+        }
+        
+        .dna-helix.extended::before,
+        .dna-helix.extended::after {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .dna-helix.extended::before {
+            left: -30px;
+        }
+        
+        .dna-helix.extended::after {
+            right: -30px;
+        }
+        
+        .dna-helix.processing::before,
+        .dna-helix.processing::after {
+            animation-duration: 0.5s;
+            background: linear-gradient(0deg, 
+                #ff0000 0%, #00ff00 50%, #0000ff 100%);
+        }
+        
+        .dna-sequence {
+            background-color: #fff;
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            border: 1px solid #ccc;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #0066cc;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .dna-sequence.updating {
+            background-color: #e6f0ff;
+            color: #0055aa;
+            transform: scale(1.02);
+        }
+        
+        /* Terms agreement */
+        .terms-agreement {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terms-agreement input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Benefits Grid */
+        .registration-benefits {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 3rem auto;
+            max-width: 1200px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .benefit-card {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+        
+        .secure-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>');
+        }
+        
+        .personal-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+        }
+        
+        .access-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>');
+        }
+        
+        .community-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230066cc"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>');
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 80%;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 1.5rem 0;
+            padding-right: 1rem;
+        }
+        
+        .modal-body h4 {
+            color: #0066cc;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .modal-button:hover {
+            background-color: #004080;
+        }
+        
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .modal-body {
+                max-height: 300px;
+            }
+        }
+    </style>
 </body>
 </html>
