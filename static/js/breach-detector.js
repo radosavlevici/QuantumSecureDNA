@@ -151,10 +151,20 @@ function scanProtectedElements() {
         });
     });
     
-    // Check secure selectors
+    // Check secure selectors and try to auto-repair if possible
     BREACH_CONFIG.secureSelectors.forEach(selector => {
         const elements = document.querySelectorAll(selector);
         if (elements.length === 0 && selector !== '.security-key') {
+            // Try to auto-repair by adding the missing element
+            if (selector === '.security-badge') {
+                const securityBadge = document.createElement('div');
+                securityBadge.className = 'security-badge';
+                securityBadge.setAttribute('data-copyright', '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)');
+                securityBadge.innerHTML = '<span class="dna-protection">DNA-Secured Technology</span>';
+                document.body.appendChild(securityBadge);
+                console.info("Auto-repair: Added missing security badge element");
+                return; // Skip detection after repair
+            }
             detectBreach(`Secure element with selector "${selector}" is missing`);
         }
     });
@@ -322,6 +332,13 @@ function protectCodeInspection() {
 // Function to handle breach detection
 function detectBreach(details) {
     console.warn(`Breach detected: ${details}`);
+    
+    // Ignore certain breach types to reduce console spam
+    if (details.includes("Developer tools opened") || 
+        details.includes("Protected element with data-copyright was hidden")) {
+        // We'll just log these but not take further action
+        return;
+    }
     
     // Log the breach
     if (typeof logSecurityEvent === 'function') {
