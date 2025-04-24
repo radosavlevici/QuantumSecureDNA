@@ -15,19 +15,21 @@ import secrets
 from typing import List, Dict, Any, Tuple, Optional
 
 from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, ForeignKey, create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from flask_sqlalchemy import SQLAlchemy
 
-# Initialize SQLAlchemy base class
-Base = declarative_base()
+# We use Flask-SQLAlchemy's db.Model so we don't need explicit declarative_base
 
 # Global database connection
 db = SQLAlchemy()
 
-class User(Base):
+# We use Flask-SQLAlchemy's db.Model so we don't need explicit declarative_base
+
+# Define the User model using Flask-SQLAlchemy
+class User(db.Model):
     """
-    User model with DNA-based security features
+    User model with DNA-based security features and enhanced copyright protection
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
     """
     __tablename__ = 'users'
     
@@ -43,10 +45,15 @@ class User(Base):
     # Relationships
     security_events = relationship("SecurityEvent", back_populates="user")
     simulations = relationship("QuantumSimulation", back_populates="user")
+    
+    # Metadata for copyright protection
+    __copyright__ = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    __protection_level__ = "DNA-based security"
 
-class SecurityEvent(Base):
+class SecurityEvent(db.Model):
     """
     Security event log with DNA protection
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
     """
     __tablename__ = 'security_events'
     
@@ -60,10 +67,15 @@ class SecurityEvent(Base):
     
     # Relationships
     user = relationship("User", back_populates="security_events")
+    
+    # Metadata for copyright protection
+    __copyright__ = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    __protection_level__ = "DNA-based security"
 
-class QuantumSimulation(Base):
+class QuantumSimulation(db.Model):
     """
     Quantum simulation results with copyright protection
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
     """
     __tablename__ = 'quantum_simulations'
     
@@ -76,10 +88,15 @@ class QuantumSimulation(Base):
     
     # Relationships
     user = relationship("User", back_populates="simulations")
+    
+    # Metadata for copyright protection
+    __copyright__ = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    __protection_level__ = "DNA-based security"
 
-class DNAEncryption(Base):
+class DNAEncryption(db.Model):
     """
     DNA encryption records with protected metadata
+    © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)
     """
     __tablename__ = 'dna_encryptions'
     
@@ -90,6 +107,10 @@ class DNAEncryption(Base):
     key_signature = Column(String(128), nullable=False)  # Hash of the key used
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     is_decryption = Column(Boolean, default=False)  # True if this was a decryption operation
+    
+    # Metadata for copyright protection
+    __copyright__ = "© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)"
+    __protection_level__ = "DNA-based security"
 
 def initialize_database(app):
     """
@@ -103,8 +124,8 @@ def initialize_database(app):
     
     # Create tables within app context
     with app.app_context():
-        # Create all tables
-        Base.metadata.create_all(db.engine)
+        # Create all tables using Flask-SQLAlchemy
+        db.create_all()
         
         # Log database initialization
         log_security_event(
