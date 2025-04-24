@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Computing Educational Platform | © Ervin Remus Radosavlevici</title>
+    <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Toate drepturile rezervate">
+    <meta name="description" content="Platformă educațională pentru calcul cuantic cu securitate bazată pe ADN">
+    <title>Quantum Computing Academy - Platforma Educațională cu Securitate ADN</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <!-- Meta tags for copyright protection -->
-    <meta name="author" content="Ervin Remus Radosavlevici">
-    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.">
-    <meta name="description" content="Quantum Computing Educational Platform with DNA-Based Security and Self-Repair Capabilities">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="main-nav">
             <div class="logo">
-                <h1>Quantum <span>DNA</span> Platform</h1>
+                <h1>Quantum Computing Academy</h1>
+                <span class="copyright-tag">© 2025 Ervin Remus Radosavlevici</span>
             </div>
             <ul class="nav-links">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/quantum_basics">Quantum Basics</a></li>
-                <li><a href="/quantum_algorithms">Quantum Algorithms</a></li>
-                <li><a href="/dna_security">DNA Security</a></li>
-                <li><a href="/quantum_ml">Quantum ML</a></li>
-                <li><a href="/resources">Resources</a></li>
+                <li><a href="{{ url_for('index') }}" class="active">Acasă</a></li>
+                <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                <li><a href="{{ url_for('quantum_ml') }}">Cuantic & ML</a></li>
+                <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                <li><a href="{{ url_for('login_page') }}" class="btn-login">Autentificare</a></li>
             </ul>
         </nav>
     </header>
@@ -30,60 +31,82 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h2>Welcome to the Quantum Computing Educational Platform</h2>
-                <p>Explore quantum computing concepts with interactive simulations and learn about cutting-edge DNA-based security</p>
+                <h2>Platforma Educațională pentru Calcul Cuantic cu Securitate ADN</h2>
+                <p>Descoperă lumea fascinantă a calculului cuantic și învață despre algoritmi cuantici, teleportare, securitate bazată pe ADN și integrarea cu învățarea automată.</p>
+                <div class="security-badge">
+                    <span class="security-key">Cheie de securitate: {{ security_key }}</span>
+                    <span class="security-info">Protejat prin tehnologie cuantică și ADN</span>
+                </div>
                 <div class="hero-buttons">
-                    <a href="/quantum_basics" class="btn primary">Get Started</a>
-                    <a href="/dna_security" class="btn secondary">Explore DNA Security</a>
+                    <a href="{{ url_for('quantum_basics') }}" class="btn primary">Începe să înveți</a>
+                    <a href="{{ url_for('dna_security_page') }}" class="btn secondary">Despre securitatea ADN</a>
                 </div>
             </div>
             <div class="hero-image">
-                <div class="quantum-visual" id="homepage-visual"></div>
+                <img src="{{ url_for('static', filename='images/quantum-hero.svg') }}" alt="Ilustrație circuit cuantic" class="quantum-illustration">
             </div>
         </section>
 
         <section class="features">
-            <h2>Platform Features</h2>
+            <h2>Caracteristici Principale</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🔬</div>
-                    <h3>Quantum Basics</h3>
-                    <p>Learn fundamental quantum computing concepts with interactive visualizations</p>
-                    <a href="/quantum_basics" class="feature-link">Learn More</a>
+                    <div class="feature-icon quantum-icon"></div>
+                    <h3>Simulări Cuantice</h3>
+                    <p>Experimentează cu circuite cuantice interactive și vizualizează efectele porților cuantice asupra qubiților.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🧬</div>
-                    <h3>DNA-Based Security</h3>
-                    <p>Explore quantum-enhanced DNA encryption with self-repair capabilities</p>
-                    <a href="/dna_security" class="feature-link">Learn More</a>
+                    <div class="feature-icon dna-icon"></div>
+                    <h3>Securitate Bazată pe ADN</h3>
+                    <p>Descoperă cum integrăm modelarea ADN cu calcul cuantic pentru securitate avansată și criptare.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Quantum Algorithms</h3>
-                    <p>Understand how quantum algorithms provide computational advantages</p>
-                    <a href="/quantum_algorithms" class="feature-link">Learn More</a>
+                    <div class="feature-icon teleport-icon"></div>
+                    <h3>Teleportare Cuantică</h3>
+                    <p>Învață despre principiile teleportării cuantice și cum poate fi simulată folosind Qiskit.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>Quantum ML</h3>
-                    <p>Discover how quantum computing enhances machine learning capabilities</p>
-                    <a href="/quantum_ml" class="feature-link">Learn More</a>
+                    <div class="feature-icon ml-icon"></div>
+                    <h3>Învățare Automată Cuantică</h3>
+                    <p>Explorează intersecția dintre algoritmi cuantici și învățare automată.</p>
                 </div>
             </div>
         </section>
 
-        <section class="about">
-            <h2>About This Platform</h2>
-            <div class="about-content">
-                <p>
-                    This educational platform is designed to make quantum computing concepts accessible to everyone through interactive demonstrations and visualizations. Our focus on DNA-based security showcases the intersection of quantum computing with biological systems.
-                </p>
-                <p>
-                    The platform includes advanced security features with self-repair, self-upgrade, and self-defense capabilities, ensuring your learning experience is both secure and enriching.
-                </p>
-                <div class="copyright-notice">
-                    <h3>Copyright Protection</h3>
-                    <p>{{ copyright|safe }}</p>
+        <section class="quick-start">
+            <h2>Pornește Rapid</h2>
+            <div class="quick-start-content">
+                <div class="code-example">
+                    <h3>Creează primul tău circuit cuantic</h3>
+                    <pre><code>
+# Creează un circuit Bell State
+from qiskit import QuantumCircuit
+
+# Inițializează un circuit cu 2 qubiți
+qc = QuantumCircuit(2, 2)
+
+# Aplică poarta Hadamard pe primul qubit
+qc.h(0)
+
+# Aplică CNOT cu qubit 0 ca control și qubit 1 ca țintă
+qc.cx(0, 1)
+
+# Măsoară ambii qubiți
+qc.measure([0, 1], [0, 1])
+
+# Execută și vizualizează
+qc.draw(output='mpl')
+                    </code></pre>
+                </div>
+                <div class="getting-started">
+                    <h3>Cum să Începi</h3>
+                    <ol>
+                        <li>Explorează <a href="{{ url_for('quantum_basics') }}">noțiunile de bază</a> ale calculului cuantic</li>
+                        <li>Încearcă simulatoarele interactive pentru a înțelege comportamentul qubiților</li>
+                        <li>Învață despre <a href="{{ url_for('quantum_algorithms') }}">algoritmi cuantici</a> fundamentali</li>
+                        <li>Descoperă avantajele <a href="{{ url_for('dna_security_page') }}">securității bazate pe ADN</a></li>
+                        <li><a href="{{ url_for('register_page') }}">Creează un cont</a> pentru a salva progresul și experimentele</li>
+                    </ol>
                 </div>
             </div>
         </section>
@@ -93,102 +116,25 @@
         <div class="footer-content">
             <div class="footer-copyright">
                 <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                <p>Toate drepturile rezervate global. Protejat de legile internaționale ale drepturilor de autor.</p>
             </div>
             <div class="footer-security">
-                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                <p>Enhanced with DNA-based quantum security</p>
+                <p>Securizat cu tehnologie cuantică și ADN</p>
+                <p>Cheie de Securitate: {{ security_key }}</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                    <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                    <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                </ul>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript includes for security, breach detection, and visualizations -->
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
     <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
-    
-    <!-- Ultra-secure DNA-based security system with self-repair, self-defense, and self-upgrade capabilities -->
-    <script>
-        // Copyright protection and self-repair system with advanced breach prevention
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize security system with DNA-based protection and multi-layer breach prevention
-            if (window.initDNASecurity) {
-                window.initDNASecurity({
-                    author: "Ervin Remus Radosavlevici",
-                    email: "ervin210@icloud.com",
-                    securityKey: "{{ security_key }}",
-                    securityLevel: 3, // Maximum security level
-                    enableBreachDetection: true,
-                    enableSelfRepair: true,
-                    enableAntiScraping: true
-                });
-            }
-            
-            // Set up quantum-secured copyright notice verification with advanced breach detection
-            const verifyInterval = setInterval(function() {
-                const footerCopyright = document.querySelector('.footer-copyright');
-                
-                // Self-repair if copyright notice is removed or modified (DNA-secured)
-                if (!footerCopyright || !footerCopyright.textContent.includes('Ervin Remus Radosavlevici')) {
-                    console.warn("Copyright notice breach detected. Self-repairing with DNA-secured mechanisms...");
-                    
-                    // Recreate footer if missing with quantum-secure verification
-                    if (!document.querySelector('footer')) {
-                        const footer = document.createElement('footer');
-                        footer.setAttribute('data-dna-protected', 'true');
-                        footer.setAttribute('data-security-level', '3');
-                        document.body.appendChild(footer);
-                    }
-                    
-                    // Recreate footer content with enhanced copyright protection
-                    document.querySelector('footer').innerHTML = `
-                        <div class="footer-content">
-                            <div class="footer-copyright">
-                                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
-                                <p class="hidden-warning">UNAUTHORIZED REPRODUCTION, DISTRIBUTION, OR MODIFICATION IS STRICTLY PROHIBITED</p>
-                            </div>
-                            <div class="footer-security">
-                                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                                <p>Enhanced with DNA-based quantum security and breach detection</p>
-                            </div>
-                        </div>
-                    `;
-                    
-                    // Add breach detection metadata
-                    const securityMeta = document.createElement('meta');
-                    securityMeta.name = 'copyright-validation';
-                    securityMeta.content = 'dna-secured-' + new Date().getTime();
-                    document.head.appendChild(securityMeta);
-                }
-                
-                // Verify all copyright elements remain intact with quantum verification
-                document.querySelectorAll('[data-copyright-protected]').forEach(element => {
-                    if (element.getAttribute('data-author') !== "Ervin Remus Radosavlevici") {
-                        console.warn("Protected element breach detected. Applying quantum DNA repair...");
-                        element.setAttribute('data-author', "Ervin Remus Radosavlevici");
-                        element.setAttribute('data-secure-timestamp', new Date().getTime());
-                    }
-                });
-            }, 1000); // Check every second for maximum security
-            
-            // Add steganographic watermarking for unauthorized copy prevention
-            const stegoData = JSON.stringify({
-                author: "Ervin Remus Radosavlevici",
-                email: "ervin210@icloud.com",
-                copyright: "WORLDWIDE",
-                securityKey: "{{ security_key }}".substring(0, 8) + "..."
-            });
-            
-            // Hide steganographic data in invisible elements throughout the page
-            for (let i = 0; i < 5; i++) {
-                const stego = document.createElement('div');
-                stego.className = 'stego-watermark-' + i;
-                stego.style.display = 'none';
-                stego.setAttribute('data-stego', btoa(stegoData + i));
-                document.body.appendChild(stego);
-            }
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/breach-detector.js') }}"></script>
 </body>
 </html>

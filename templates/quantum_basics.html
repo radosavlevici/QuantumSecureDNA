@@ -1,106 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Basics | © Ervin Remus Radosavlevici</title>
+    <meta name="author" content="Ervin Remus Radosavlevici (ervin210@icloud.com)">
+    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - Toate drepturile rezervate">
+    <meta name="description" content="Noțiuni de bază despre calculul cuantic și simulatoare interactive">
+    <title>Noțiuni de Bază în Calcul Cuantic - Quantum Computing Academy</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <!-- Meta tags for worldwide copyright protection -->
-    <meta name="author" content="Ervin Remus Radosavlevici">
-    <meta name="copyright" content="© 2025 Ervin Remus Radosavlevici. All Rights Reserved Globally.">
-    <meta name="description" content="Quantum Computing Educational Platform with DNA-Based Security and Self-Repair Capabilities">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="main-nav">
             <div class="logo">
-                <h1>Quantum <span>DNA</span> Platform</h1>
+                <h1>Quantum Computing Academy</h1>
+                <span class="copyright-tag">© 2025 Ervin Remus Radosavlevici</span>
             </div>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/quantum_basics" class="active">Quantum Basics</a></li>
-                <li><a href="/quantum_algorithms">Quantum Algorithms</a></li>
-                <li><a href="/dna_security">DNA Security</a></li>
-                <li><a href="/quantum_ml">Quantum ML</a></li>
-                <li><a href="/resources">Resources</a></li>
+                <li><a href="{{ url_for('index') }}">Acasă</a></li>
+                <li><a href="{{ url_for('quantum_basics') }}" class="active">Noțiuni de Bază</a></li>
+                <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                <li><a href="{{ url_for('quantum_ml') }}">Cuantic & ML</a></li>
+                <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                <li><a href="{{ url_for('login_page') }}" class="btn-login">Autentificare</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section class="page-header">
-            <h2>Quantum Computing Basics</h2>
-            <p>Learn about the fundamental concepts of quantum computing with interactive demonstrations</p>
-        </section>
-
-        <section class="content-grid">
-            <div class="content-card">
-                <h3>Quantum Bits (Qubits)</h3>
-                <p>Unlike classical bits which can be either 0 or 1, qubits can exist in superposition, representing both 0 and 1 simultaneously.</p>
-                <div class="quantum-demo" id="qubit-visualization">
-                    <div class="demo-placeholder">
-                        <p>Qubit Visualization Loading...</p>
-                        <button class="btn primary" onclick="fetchBlochSphere()">Show Bloch Sphere</button>
-                    </div>
-                    <div class="demo-result" id="bloch-result"></div>
-                </div>
-            </div>
-
-            <div class="content-card">
-                <h3>Quantum Superposition</h3>
-                <p>Superposition allows quantum systems to exist in multiple states simultaneously, exponentially increasing computational power.</p>
-                <div class="quantum-demo" id="superposition-demo">
-                    <div class="demo-placeholder">
-                        <p>Superposition Demonstration Loading...</p>
-                        <button class="btn primary" onclick="fetchBellState()">Generate Bell State</button>
-                    </div>
-                    <div class="demo-result" id="bell-result"></div>
-                </div>
-            </div>
-
-            <div class="content-card">
-                <h3>Quantum Entanglement</h3>
-                <p>Entanglement creates correlations between qubits, where the state of one qubit instantly influences another, regardless of distance.</p>
-                <div class="quantum-demo" id="entanglement-demo">
-                    <div class="demo-placeholder">
-                        <p>Entanglement Demonstration Loading...</p>
-                        <button class="btn primary" onclick="fetchGHZState()">Generate GHZ State</button>
-                    </div>
-                    <div class="demo-result" id="ghz-result"></div>
-                </div>
-            </div>
-
-            <div class="content-card wide-card">
-                <h3>Quantum Gates and Circuits</h3>
-                <p>Quantum gates are the building blocks of quantum circuits, manipulating qubits through rotations and entanglement operations.</p>
-                <div class="quantum-demo" id="gates-demo">
-                    <div class="demo-controls">
-                        <label for="gate-select">Select Gate:</label>
-                        <select id="gate-select" onchange="updateGateDescription()">
-                            <option value="hadamard">Hadamard (H)</option>
-                            <option value="pauli-x">Pauli X</option>
-                            <option value="pauli-y">Pauli Y</option>
-                            <option value="pauli-z">Pauli Z</option>
-                            <option value="cnot">CNOT</option>
-                        </select>
-                        <button class="btn primary" onclick="applyGate()">Apply Gate</button>
-                    </div>
-                    <div class="gate-description" id="gate-description">
-                        <p>Hadamard (H) Gate: Creates a superposition state from |0⟩ or |1⟩ states, essential for quantum algorithms.</p>
-                    </div>
-                    <div class="demo-result" id="gate-result"></div>
-                </div>
+            <h2>Noțiuni de Bază în Calculul Cuantic</h2>
+            <p>Descoperă conceptele fundamentale ale calculului cuantic și experimentează cu simulări interactive.</p>
+            <div class="security-badge">
+                <span class="security-key">Cheie de securitate: {{ security_key }}</span>
+                <span class="security-info">Protejat prin tehnologie cuantică și ADN</span>
             </div>
         </section>
 
-        <section class="copyright-section">
-            <div class="copyright-container">
-                <h3>Copyright and Security Notice</h3>
-                <p>All quantum computing concepts, visualizations, and interactive demonstrations on this page are protected by worldwide copyright. Unauthorized reproduction, distribution, or modification is strictly prohibited.</p>
-                <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                <p>Enhanced with DNA-based quantum security and automatic self-repair capabilities.</p>
-                <div class="security-badge">
-                    <span class="security-key">Quantum Protection Active</span>
+        <section class="basics-content">
+            <div class="basics-grid">
+                <div class="basics-theory">
+                    <h3>Ce este un Qubit?</h3>
+                    <p>Qubit-ul este unitatea fundamentală de informație în calculul cuantic, analog cu bit-ul din calculul clasic. Spre deosebire de bit-ul clasic, care poate fi fie 0, fie 1, un qubit poate exista într-o superpoziție a ambelor stări simultan.</p>
+                    
+                    <h3>Notația Dirac</h3>
+                    <p>În mecanica cuantică, utilizăm <em>notația Dirac</em> pentru a reprezenta stările cuantice:</p>
+                    <ul>
+                        <li>|0⟩ - starea de bază corespunzătoare bitului clasic 0</li>
+                        <li>|1⟩ - starea de bază corespunzătoare bitului clasic 1</li>
+                        <li>|ψ⟩ = α|0⟩ + β|1⟩ - superpoziție generală unde |α|² + |β|² = 1</li>
+                    </ul>
+                    
+                    <h3>Sfera Bloch</h3>
+                    <p>Sfera Bloch este o reprezentare geometrică a stării unui qubit. Orice stare pură a unui qubit poate fi reprezentată ca un punct pe suprafața unei sfere tridimensionale.</p>
+                    <div class="bloch-interactive">
+                        <h4>Experimentează cu Sfera Bloch</h4>
+                        <div class="controls">
+                            <label for="theta">Theta (θ): <span id="thetaValue">π/2</span></label>
+                            <input type="range" id="theta" min="0" max="314" value="157" step="1">
+                            
+                            <label for="phi">Phi (φ): <span id="phiValue">0</span></label>
+                            <input type="range" id="phi" min="0" max="628" value="0" step="1">
+                        </div>
+                        <div class="bloch-display">
+                            <img id="blochVisualization" src="" alt="Vizualizare Sferă Bloch">
+                            <div class="state-info">
+                                <p>Stare: <span id="stateKet">|+⟩ = |0⟩ + |1⟩</span></p>
+                                <p>Probabilitate |0⟩: <span id="prob0">50%</span></p>
+                                <p>Probabilitate |1⟩: <span id="prob1">50%</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="basics-simulations">
+                    <h3>Porțile Cuantice Fundamentale</h3>
+                    <p>Porțile cuantice sunt operații care manipulează starea qubiților. Iată câteva porți fundamentale:</p>
+                    
+                    <div class="gate-selector">
+                        <button class="gate-btn" data-gate="hadamard">Hadamard (H)</button>
+                        <button class="gate-btn" data-gate="pauli_x">Pauli X</button>
+                        <button class="gate-btn" data-gate="pauli_y">Pauli Y</button>
+                        <button class="gate-btn" data-gate="pauli_z">Pauli Z</button>
+                    </div>
+                    
+                    <div class="gate-visualization">
+                        <div class="gate-info">
+                            <h4 id="selectedGate">Poarta Hadamard (H)</h4>
+                            <p id="gateDescription">Poarta Hadamard creează o superpoziție transformând |0⟩ în |+⟩ și |1⟩ în |-⟩.</p>
+                        </div>
+                        
+                        <div class="initial-state-selector">
+                            <label>Stare inițială:</label>
+                            <select id="initialState">
+                                <option value="0">|0⟩</option>
+                                <option value="1">|1⟩</option>
+                                <option value="+">|+⟩</option>
+                                <option value="-">|-⟩</option>
+                            </select>
+                        </div>
+                        
+                        <div class="circuit-display">
+                            <h4>Circuit:</h4>
+                            <img id="circuitImage" src="" alt="Circuit cuantic">
+                        </div>
+                        
+                        <div class="result-display">
+                            <h4>Rezultate:</h4>
+                            <img id="resultImage" src="" alt="Rezultate măsurare">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advanced-concepts">
+            <h3>Stări Multi-Qubit și Entanglement</h3>
+            <p>Când lucrăm cu mai mulți qubiți, apare un fenomen remarcabil numit <em>entanglement</em> (încurcătură sau inseparabilitate cuantică). Acesta permite qubiților să fie corelați într-un mod care nu are echivalent în fizica clasică.</p>
+            
+            <div class="bell-state-demo">
+                <h4>Starea Bell (Einstein-Podolsky-Rosen)</h4>
+                <p>Starea Bell este cel mai simplu exemplu de stare entangled, implicând doi qubiți:</p>
+                <div class="bell-state-eq">|Φ⁺⟩ = (|00⟩ + |11⟩)/√2</div>
+                
+                <button id="generateBellState" class="action-btn">Generează Stare Bell</button>
+                
+                <div class="bell-result">
+                    <div class="bell-circuit">
+                        <h5>Circuit Bell State:</h5>
+                        <img id="bellCircuitImage" src="" alt="Circuit Bell State">
+                    </div>
+                    <div class="bell-histogram">
+                        <h5>Distribuția Măsurătorilor:</h5>
+                        <img id="bellHistogramImage" src="" alt="Histogramă Bell State">
+                    </div>
+                </div>
+                
+                <p class="bell-explanation">
+                    În starea Bell |Φ⁺⟩, când se măsoară primul qubit, starea celui de-al doilea qubit este determinată instantaneu,
+                    indiferent de distanța dintre cei doi qubiți. Einstein a numit acest fenomen "acțiune înfricoșătoare la distanță".
+                </p>
+            </div>
+        </section>
+
+        <section class="ghz-demo">
+            <h3>Stări GHZ (Greenberger-Horne-Zeilinger)</h3>
+            <p>Stările GHZ sunt o generalizare a stărilor Bell la mai mulți qubiți:</p>
+            <div class="ghz-eq">|GHZ⟩ = (|000...0⟩ + |111...1⟩)/√2</div>
+            
+            <div class="ghz-controls">
+                <label for="numQubits">Număr de qubiți:</label>
+                <select id="numQubits">
+                    <option value="3">3 qubiți</option>
+                    <option value="5">5 qubiți</option>
+                    <option value="10">10 qubiți</option>
+                    <option value="15">15 qubiți</option>
+                    <option value="20">20 qubiți</option>
+                </select>
+                <button id="generateGHZ" class="action-btn">Generează Stare GHZ</button>
+            </div>
+            
+            <div class="ghz-result">
+                <div class="ghz-circuit">
+                    <h5>Circuit GHZ State:</h5>
+                    <img id="ghzCircuitImage" src="" alt="Circuit GHZ State">
+                </div>
+                <div class="ghz-state">
+                    <h5>Vizualizare Stare:</h5>
+                    <img id="ghzStateImage" src="" alt="Vizualizare Stare GHZ">
                 </div>
             </div>
         </section>
@@ -110,135 +178,174 @@
         <div class="footer-content">
             <div class="footer-copyright">
                 <p>© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)</p>
-                <p>All Rights Reserved Globally. Protected by International Copyright Law.</p>
+                <p>Toate drepturile rezervate global. Protejat de legile internaționale ale drepturilor de autor.</p>
             </div>
             <div class="footer-security">
-                <p>Security Key: <span class="security-key">{{ security_key }}</span></p>
-                <p>Enhanced with DNA-based quantum security</p>
+                <p>Securizat cu tehnologie cuantică și ADN</p>
+                <p>Cheie de Securitate: {{ security_key }}</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ url_for('quantum_basics') }}">Noțiuni de Bază</a></li>
+                    <li><a href="{{ url_for('quantum_algorithms') }}">Algoritmi Cuantici</a></li>
+                    <li><a href="{{ url_for('dna_security_page') }}">Securitate ADN</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resurse</a></li>
+                </ul>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript for quantum visualizations and copyright protection -->
     <script src="{{ url_for('static', filename='js/security.js') }}"></script>
     <script src="{{ url_for('static', filename='js/quantum_visuals.js') }}"></script>
-    
     <script>
-        // Quantum demonstration API calls
-        function fetchBlochSphere() {
-            fetch('/api/bloch_sphere')
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inițializare Sferă Bloch
+            updateBlochSphere();
+            
+            // Actualizare Sferă Bloch la schimbarea parametrilor
+            document.getElementById('theta').addEventListener('input', updateBlochSphere);
+            document.getElementById('phi').addEventListener('input', updateBlochSphere);
+            
+            // Inițializare vizualizare poartă
+            updateGateVisualization('hadamard', document.getElementById('initialState').value);
+            
+            // Listener pentru butoanele de porți
+            document.querySelectorAll('.gate-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const gate = this.getAttribute('data-gate');
+                    updateGateVisualization(gate, document.getElementById('initialState').value);
+                });
+            });
+            
+            // Listener pentru schimbarea stării inițiale
+            document.getElementById('initialState').addEventListener('change', function() {
+                const activeGateBtn = document.querySelector('.gate-btn.active') || document.querySelector('.gate-btn[data-gate="hadamard"]');
+                const gate = activeGateBtn.getAttribute('data-gate');
+                updateGateVisualization(gate, this.value);
+            });
+            
+            // Generare Bell State
+            document.getElementById('generateBellState').addEventListener('click', generateBellState);
+            
+            // Generare GHZ State
+            document.getElementById('generateGHZ').addEventListener('click', generateGHZState);
+        });
+        
+        // Funcție pentru actualizarea sferei Bloch
+        function updateBlochSphere() {
+            const theta = document.getElementById('theta').value * (Math.PI / 314);
+            const phi = document.getElementById('phi').value * (Math.PI / 314);
+            
+            document.getElementById('thetaValue').textContent = `${(theta / Math.PI).toFixed(2)}π`;
+            document.getElementById('phiValue').textContent = `${(phi / Math.PI).toFixed(2)}π`;
+            
+            fetch(`/api/bloch_sphere?theta=${theta}&phi=${phi}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('bloch-result').innerHTML = `
-                        <img src="data:image/png;base64,${data.image}" alt="Bloch Sphere Visualization" class="demo-image">
-                        <p class="demo-caption">${data.description}</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
+                    document.getElementById('blochVisualization').src = `data:image/png;base64,${data.image}`;
+                    
+                    const prob0 = (data.prob_0 * 100).toFixed(1);
+                    const prob1 = (data.prob_1 * 100).toFixed(1);
+                    
+                    document.getElementById('prob0').textContent = `${prob0}%`;
+                    document.getElementById('prob1').textContent = `${prob1}%`;
+                    
+                    // Actualizează reprezentarea ket
+                    const real0 = data.state_vector.real_0.toFixed(2);
+                    const real1 = data.state_vector.real_1.toFixed(2);
+                    const imag1 = data.state_vector.imag_1.toFixed(2);
+                    
+                    let ketStr = `|ψ⟩ = ${real0}|0⟩`;
+                    
+                    if (real1 >= 0) {
+                        ketStr += ` + ${real1}`;
+                    } else {
+                        ketStr += ` - ${Math.abs(real1)}`;
+                    }
+                    
+                    if (imag1 > 0) {
+                        ketStr += ` + ${imag1}i`;
+                    } else if (imag1 < 0) {
+                        ketStr += ` - ${Math.abs(imag1)}i`;
+                    }
+                    
+                    ketStr += `|1⟩`;
+                    
+                    document.getElementById('stateKet').textContent = ketStr;
                 })
                 .catch(error => {
-                    console.error('Error fetching Bloch sphere:', error);
-                    document.getElementById('bloch-result').innerHTML = `
-                        <p class="error-message">Error loading visualization. Please try again.</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
+                    console.error('Eroare la încărcarea sferei Bloch:', error);
                 });
         }
-
-        function fetchBellState() {
+        
+        // Funcție pentru actualizarea vizualizării porților
+        function updateGateVisualization(gate, initialState) {
+            document.querySelectorAll('.gate-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.gate-btn[data-gate="${gate}"]`).classList.add('active');
+            
+            // Actualizează descrierea porții
+            const gateDescriptions = {
+                'hadamard': 'Poarta Hadamard creează o superpoziție transformând |0⟩ în |+⟩ și |1⟩ în |-⟩.',
+                'pauli_x': 'Poarta Pauli X (NOT) inversează starea qubitului, transformând |0⟩ în |1⟩ și |1⟩ în |0⟩.',
+                'pauli_y': 'Poarta Pauli Y rotește starea qubitului în jurul axei Y a sferei Bloch.',
+                'pauli_z': 'Poarta Pauli Z modifică faza qubitului, lăsând |0⟩ neschimbat și transformând |1⟩ în -|1⟩.'
+            };
+            
+            const gateNames = {
+                'hadamard': 'Poarta Hadamard (H)',
+                'pauli_x': 'Poarta Pauli X (NOT)',
+                'pauli_y': 'Poarta Pauli Y',
+                'pauli_z': 'Poarta Pauli Z'
+            };
+            
+            document.getElementById('selectedGate').textContent = gateNames[gate];
+            document.getElementById('gateDescription').textContent = gateDescriptions[gate];
+            
+            // Obține circuitul și rezultatele de la server
+            fetch(`/api/apply_gate?gate=${gate}&initial_state=${initialState}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('circuitImage').src = `data:image/png;base64,${data.circuit_image}`;
+                    document.getElementById('resultImage').src = `data:image/png;base64,${data.histogram_image}`;
+                })
+                .catch(error => {
+                    console.error('Eroare la încărcarea vizualizării porții:', error);
+                });
+        }
+        
+        // Funcție pentru generarea stării Bell
+        function generateBellState() {
             fetch('/api/bell_state')
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('bell-result').innerHTML = `
-                        <img src="data:image/png;base64,${data.circuit_image}" alt="Bell State Circuit" class="demo-image">
-                        <img src="data:image/png;base64,${data.histogram}" alt="Measurement Results" class="demo-image">
-                        <p class="demo-caption">${data.description}</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
+                    document.getElementById('bellCircuitImage').src = `data:image/png;base64,${data.circuit_image}`;
+                    document.getElementById('bellHistogramImage').src = `data:image/png;base64,${data.histogram_image}`;
                 })
                 .catch(error => {
-                    console.error('Error fetching Bell state:', error);
-                    document.getElementById('bell-result').innerHTML = `
-                        <p class="error-message">Error loading Bell state. Please try again.</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
+                    console.error('Eroare la generarea stării Bell:', error);
                 });
         }
-
-        function fetchGHZState() {
-            fetch('/api/ghz_state?num_qubits=3')
+        
+        // Funcție pentru generarea stării GHZ
+        function generateGHZState() {
+            const numQubits = document.getElementById('numQubits').value;
+            
+            fetch(`/api/ghz_state?num_qubits=${numQubits}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('ghz-result').innerHTML = `
-                        <img src="data:image/png;base64,${data.circuit_image}" alt="GHZ State Circuit" class="demo-image">
-                        <img src="data:image/png;base64,${data.histogram}" alt="Measurement Results" class="demo-image">
-                        <p class="demo-caption">${data.description}</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
+                    document.getElementById('ghzCircuitImage').src = `data:image/png;base64,${data.circuit_image}`;
+                    if (data.state_image) {
+                        document.getElementById('ghzStateImage').src = `data:image/png;base64,${data.state_image}`;
+                    } else {
+                        document.getElementById('ghzStateImage').src = "";
+                    }
                 })
                 .catch(error => {
-                    console.error('Error fetching GHZ state:', error);
-                    document.getElementById('ghz-result').innerHTML = `
-                        <p class="error-message">Error loading GHZ state. Please try again.</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
+                    console.error('Eroare la generarea stării GHZ:', error);
                 });
         }
-
-        function updateGateDescription() {
-            const gateSelect = document.getElementById('gate-select');
-            const gateDescription = document.getElementById('gate-description');
-            
-            const descriptions = {
-                'hadamard': 'Hadamard (H) Gate: Creates a superposition state from |0⟩ or |1⟩ states, essential for quantum algorithms.',
-                'pauli-x': 'Pauli X Gate: Quantum equivalent of the classical NOT gate, flips the state of a qubit.',
-                'pauli-y': 'Pauli Y Gate: Rotates the qubit state around the Y-axis of the Bloch sphere.',
-                'pauli-z': 'Pauli Z Gate: Performs a phase flip operation, commonly used in quantum error correction.',
-                'cnot': 'CNOT Gate: Two-qubit gate that performs a controlled-NOT operation, fundamental for entanglement.'
-            };
-            
-            gateDescription.innerHTML = `<p>${descriptions[gateSelect.value]}</p>`;
-        }
-
-        function applyGate() {
-            const gateSelect = document.getElementById('gate-select');
-            const selectedGate = gateSelect.value;
-            
-            fetch(`/api/apply_gate?gate=${selectedGate}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('gate-result').innerHTML = `
-                        <img src="data:image/png;base64,${data.circuit_image}" alt="Gate Circuit" class="demo-image">
-                        <img src="data:image/png;base64,${data.state_image}" alt="Resulting State" class="demo-image">
-                        <p class="demo-caption">${data.description}</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
-                })
-                .catch(error => {
-                    console.error('Error applying gate:', error);
-                    document.getElementById('gate-result').innerHTML = `
-                        <p class="error-message">Error applying gate. Please try again.</p>
-                        <p class="copyright-note">© Ervin Remus Radosavlevici</p>
-                    `;
-                });
-        }
-
-        // Initialize self-repair and copyright protection
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize DNA-based security
-            if (window.initDNASecurity) {
-                window.initDNASecurity({
-                    author: "Ervin Remus Radosavlevici",
-                    email: "ervin210@icloud.com",
-                    securityKey: "{{ security_key }}",
-                    page: "quantum_basics"
-                });
-            }
-            
-            // Apply watermarks and self-repair capabilities
-            if (window.applySecurityWatermarks) {
-                window.applySecurityWatermarks();
-            }
-        });
     </script>
 </body>
 </html>
