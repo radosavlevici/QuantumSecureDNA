@@ -41,7 +41,7 @@ def index():
 @app.route('/api/analyze', methods=['POST'])
 def analyze():
     """
-    Analizează un URL pentru a detecta dacă este phishing
+    Analizează un URL pentru a detecta dacă este phishing sau conține viruși
     """
     data = request.get_json()
     url = data.get('url', '')
