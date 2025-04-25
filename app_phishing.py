@@ -10,6 +10,7 @@ from flask_cors import CORS
 import os
 import json
 from phishing_detection import analyze_url_for_phishing
+from web_scraper import get_website_text_content, analyze_website_content
 
 app = Flask(__name__)
 CORS(app)
@@ -64,6 +65,81 @@ def analyze():
     except Exception as e:
         return jsonify({
             'error': f'Eroare în timpul analizei: {str(e)}',
+            'copyright': '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+        }), 500
+
+# Endpoint API pentru extragerea textului de pe un site web
+@app.route('/api/extract_text', methods=['POST'])
+def extract_text():
+    """
+    Extrage conținutul textual de pe un site web
+    """
+    data = request.get_json()
+    url = data.get('url', '')
+    
+    if not url:
+        return jsonify({
+            'error': 'URL-ul nu a fost furnizat',
+            'copyright': '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+        }), 400
+    
+    try:
+        # Extrage textul de pe site-ul web
+        text = get_website_text_content(url)
+        
+        # Limitează răspunsul la 5000 de caractere pentru performanță
+        truncated = len(text) > 5000
+        if truncated:
+            display_text = text[:5000] + "... (text truncat)"
+        else:
+            display_text = text
+        
+        return jsonify({
+            'url': url,
+            'text': display_text,
+            'text_length': len(text),
+            'truncated': truncated,
+            'copyright': '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+        })
+    except Exception as e:
+        return jsonify({
+            'error': f'Eroare în timpul extragerii textului: {str(e)}',
+            'copyright': '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+        }), 500
+
+# Endpoint API pentru analiză completă a unui website
+@app.route('/api/analyze_content', methods=['POST'])
+def analyze_content():
+    """
+    Realizează o analiză completă a conținutului unui site web
+    """
+    data = request.get_json()
+    url = data.get('url', '')
+    
+    if not url:
+        return jsonify({
+            'error': 'URL-ul nu a fost furnizat',
+            'copyright': '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+        }), 400
+    
+    try:
+        # Analizează conținutul site-ului
+        analysis = analyze_website_content(url)
+        
+        # Adaugă informații suplimentare de securitate dacă este necesar
+        if analysis.get('success'):
+            # Verifică dacă există și o analiză de phishing
+            phishing_analysis = analyze_url_for_phishing(url)
+            analysis['phishing_analysis'] = phishing_analysis
+        
+        # Adaugă copyright
+        if 'copyright' not in analysis:
+            analysis['copyright'] = '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
+        
+        return jsonify(analysis)
+    except Exception as e:
+        return jsonify({
+            'error': f'Eroare în timpul analizei conținutului: {str(e)}',
             'copyright': '© 2025 Ervin Remus Radosavlevici (ervin210@icloud.com)'
         }), 500
 
