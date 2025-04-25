@@ -405,6 +405,41 @@
                 suspiciousList.innerHTML = '';
             }
             
+            // Încarcă statisticile despre phishing
+            function loadStatsData() {
+                fetch('/api/phishing_stats')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Actualizează acuratețea
+                        accuracyValue.innerText = `${data.detection_accuracy}%`;
+                        
+                        // Afișează mărcile imitate
+                        brandList.innerHTML = '';
+                        data.top_mimicked_brands.forEach(brand => {
+                            const brandItem = document.createElement('div');
+                            brandItem.className = 'brand-item';
+                            
+                            const brandInfo = document.createElement('div');
+                            brandInfo.innerHTML = `${brand.name}: <strong>${brand.percentage}%</strong>`;
+                            
+                            const brandBarContainer = document.createElement('div');
+                            brandBarContainer.className = 'brand-bar';
+                            
+                            const brandFill = document.createElement('div');
+                            brandFill.className = 'brand-fill';
+                            brandFill.style.width = `${brand.percentage}%`;
+                            
+                            brandBarContainer.appendChild(brandFill);
+                            brandItem.appendChild(brandInfo);
+                            brandItem.appendChild(brandBarContainer);
+                            brandList.appendChild(brandItem);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Eroare la încărcarea statisticilor:', error);
+                    });
+            }
+            
             // Funcție pentru a actualiza UI cu rezultate
             function updateResults(data) {
                 resetUI();
@@ -468,49 +503,8 @@
                     'Sigur - nu au fost detectate indicii de phishing';
             }
             
-            // Funcție pentru a încărca statisticile
-            function loadPhishingStats() {
-                fetch('/api/phishing_stats')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Actualizează valoarea preciziei
-                        accuracyValue.innerText = `${data.detection_accuracy}%`;
-                        
-                        // Actualizează lista de mărci
-                        brandList.innerHTML = '';
-                        data.top_mimicked_brands.forEach(brand => {
-                            const div = document.createElement('div');
-                            div.className = 'brand-item';
-                            
-                            const nameSpan = document.createElement('span');
-                            nameSpan.innerText = brand.name;
-                            
-                            const percentSpan = document.createElement('span');
-                            percentSpan.innerText = `${brand.percentage}%`;
-                            
-                            div.appendChild(nameSpan);
-                            div.appendChild(percentSpan);
-                            
-                            const barDiv = document.createElement('div');
-                            barDiv.className = 'brand-bar';
-                            
-                            const fillDiv = document.createElement('div');
-                            fillDiv.className = 'brand-fill';
-                            fillDiv.style.width = `${brand.percentage * 2}%`;
-                            
-                            barDiv.appendChild(fillDiv);
-                            
-                            brandList.appendChild(div);
-                            brandList.appendChild(barDiv);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Eroare la încărcarea statisticilor:', error);
-                    });
-            }
-            
             // Încarcă statisticile la încărcarea paginii
-            loadPhishingStats();
+            loadStatsData();
             
             // Adaugă eveniment pentru butonul de scanare
             scanButton.addEventListener('click', function() {
