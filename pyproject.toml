@@ -20,4 +20,5 @@ dependencies = [
     "flask-jwt-extended>=4.7.1",
     "sqlalchemy>=2.0.40",
     "trafilatura>=2.0.0",
+    "requests>=2.32.3",
 ]
