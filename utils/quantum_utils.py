@@ -29,23 +29,23 @@ def create_bell_state():
     
     return circuit
 
-def create_ghz_state(num_qubits=10, advanced_mode=True):
+def create_ghz_state(num_qubits=3, advanced_mode=False):
     """
     Create a GHZ state (generalized Bell state) with n qubits
     
     Args:
-        num_qubits: Number of qubits in the GHZ state (supports up to 100 qubits)
+        num_qubits: Number of qubits in the GHZ state (supports up to 32 qubits)
         advanced_mode: If True, create a more complex GHZ variant with optimization
             for large qubit counts using optimal circuit decomposition
         
     Returns:
         QuantumCircuit: GHZ state circuit
     """
-    # Enhanced support for larger qubit counts (up to 100, maximum supported by the enhanced simulator)
-    num_qubits = min(max(num_qubits, 10), 100)  # Limit between 10 and 100 qubits for simulator compatibility
+    # Enhanced support for larger qubit counts (up to 32, maximum supported by the simulator)
+    num_qubits = min(max(num_qubits, 3), 32)  # Limit between 3 and 32 qubits for simulator compatibility
     
     # Classical approach for creating GHZ state (optimized for visualization)
-    if num_qubits <= 20 or not advanced_mode:
+    if num_qubits <= 15 or not advanced_mode:
         circuit = QuantumCircuit(num_qubits, num_qubits)
         circuit.h(0)  # Apply Hadamard gate to first qubit
         
@@ -285,23 +285,23 @@ def create_quantum_teleportation_circuit(multi_qubit=False):
     
     return circuit
 
-def visualize_quantum_fourier_transform(num_qubits=10, optimization_level=3):
+def visualize_quantum_fourier_transform(num_qubits=3, optimization_level=1):
     """
     Create and visualize a Quantum Fourier Transform circuit with enhanced optimization
     
     Args:
-        num_qubits: Number of qubits in the QFT (supports up to 100 qubits)
+        num_qubits: Number of qubits in the QFT (supports up to 32 qubits)
         optimization_level: Level of circuit optimization (0-3)
             0: No optimization
-            1: Standard optimization
+            1: Standard optimization (default)
             2: Advanced optimization for large circuits
-            3: Maximum optimization with high performance (default)
+            3: Maximum optimization (may reduce visualization clarity)
         
     Returns:
         QuantumCircuit: QFT circuit
     """
-    # Enhanced support for maximum qubit counts (up to 100, maximum supported by the simulator)
-    num_qubits = min(max(num_qubits, 10), 100)  # Limit between 10 and 100 qubits for simulator compatibility
+    # Enhanced support for larger qubit counts (up to 32, maximum supported by the simulator)
+    num_qubits = min(max(num_qubits, 3), 32)  # Limit between 3 and 32 qubits for simulator compatibility
     
     # Use built-in QFT for maximum efficiency with large qubit counts
     if num_qubits > 15 and optimization_level > 1:
@@ -355,7 +355,7 @@ def visualize_quantum_fourier_transform(num_qubits=10, optimization_level=3):
     
     return circuit
 
-def simulate_circuit(circuit, get_statevector=False, shots=2048, advanced_mode=True):
+def simulate_circuit(circuit, get_statevector=False, shots=1024, advanced_mode=False):
     """
     Simulate a quantum circuit with enhanced capabilities
     
@@ -370,7 +370,7 @@ def simulate_circuit(circuit, get_statevector=False, shots=2048, advanced_mode=T
     """
     # Increase shots for advanced mode
     if advanced_mode:
-        shots = 16384  # Maximum shot count for advanced simulations
+        shots = 8192  # Much higher shot count for advanced simulations
         
     if get_statevector:
         # Statevector simulation with enhanced precision
@@ -386,12 +386,11 @@ def simulate_circuit(circuit, get_statevector=False, shots=2048, advanced_mode=T
         # Configure advanced simulation parameters
         sim_config = {}
         if advanced_mode and circuit.num_qubits > 10:
-            # Advanced settings for large circuit simulation with maximum parallel processing
+            # Advanced settings for large circuit simulation
             sim_config = {
                 'method': 'statevector',  # Use statevector method for accuracy
-                'max_parallel_threads': 16,  # Utilize maximum threads
-                'max_parallel_experiments': 8,  # Run maximum circuits in parallel
-                'max_memory_mb': 8192  # Allocate more memory for large simulations
+                'max_parallel_threads': 8,  # Utilize more threads
+                'max_parallel_experiments': 4  # Run multiple circuits in parallel
             }
         return simulator.run(transpiled_circuit, shots=shots, **sim_config).result()
 

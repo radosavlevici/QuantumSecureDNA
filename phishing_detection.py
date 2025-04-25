@@ -11,14 +11,11 @@ import trafilatura
 import urllib.parse
 from typing import Dict, List, Tuple, Any
 
-# Lista de cuvinte cheie ce pot indica un site de phishing sau viruși
+# Lista de cuvinte cheie ce pot indica un site de phishing
 PHISHING_KEYWORDS = [
     'login', 'sign in', 'signin', 'account', 'password', 'secure', 'update', 'verify',
     'bank', 'paypal', 'credit', 'verification', 'confirm', 'security', 'authenticate',
-    'wallet', 'crypto', 'bitcoin', 'reset', 'recovery', 'virus', 'malware', 'trojan',
-    'worm', 'spyware', 'ransomware', 'keylogger', 'hack', 'exploit', 'vulnerable', 
-    'infected', 'download.exe', 'free.crack', 'keygen', 'antivirus', 'win32', 'dll',
-    'replit', 'janeway', 'riker'
+    'wallet', 'crypto', 'bitcoin', 'reset', 'recovery'
 ]
 
 # Lista de domenii comune care sunt adesea ținta atacurilor de phishing
@@ -26,8 +23,7 @@ HIGH_VALUE_DOMAINS = [
     'paypal.com', 'google.com', 'gmail.com', 'apple.com', 'icloud.com', 'microsoft.com',
     'office365.com', 'outlook.com', 'amazon.com', 'facebook.com', 'instagram.com',
     'netflix.com', 'bank', 'chase.com', 'wellsfargo.com', 'citibank.com', 'coinbase.com',
-    'binance.com', 'twitter.com', 'linkedin.com', 'blockchain.com', 'replit.dev',
-    'janeway.replit.dev', 'riker.replit.dev'
+    'binance.com', 'twitter.com', 'linkedin.com', 'blockchain.com'
 ]
 
 # Caracteristici suspecte în URL-uri
@@ -40,8 +36,6 @@ SUSPICIOUS_URL_PATTERNS = [
     r'[^a-z0-9.-]paypal|[^a-z0-9.-]apple|[^a-z0-9.-]google',     # Nume de companii în subdomenii 
     r'secure[^a-z0-9.-]|account[^a-z0-9.-]|login[^a-z0-9.-]',    # Cuvinte de încredere în subdomen
     r'-(?:[a-z0-9]){12,}',                                       # ID-uri suspecte în URL
-    r'replit(?!\.dev)|janeway(?!\.replit\.dev)|riker(?!\.replit\.dev)', # Imitații ale domeniilor replit
-    r'virus|malware|trojan|worm|spyware|ransomware|keylogger'    # Termeni legate de viruși
 ]
 
 class PhishingDetector:
@@ -133,7 +127,7 @@ class PhishingDetector:
     
     def analyze_content(self, url: str) -> Dict[str, Any]:
         """
-        Analizează conținutul unei pagini web pentru a detecta phishing și viruși.
+        Analizează conținutul unei pagini web pentru a detecta phishing.
         
         Args:
             url: URL-ul paginii de analizat
@@ -245,7 +239,7 @@ class PhishingDetector:
     
     def get_report(self) -> Dict[str, Any]:
         """
-        Generează un raport detaliat al analizei de phishing și viruși.
+        Generează un raport detaliat al analizei de phishing.
         
         Returns:
             Dict conținând raportul complet
@@ -274,7 +268,7 @@ class PhishingDetector:
 # Funcție pentru analiza rapidă a unui URL
 def analyze_url_for_phishing(url: str) -> Dict[str, Any]:
     """
-    Analizează rapid un URL pentru a determina riscul de phishing și viruși.
+    Analizează rapid un URL pentru a determina riscul de phishing.
     
     Args:
         url: URL-ul de analizat
