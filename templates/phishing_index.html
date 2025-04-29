@@ -229,7 +229,6 @@
     </style>
     <script src="{{ url_for('static', filename='js/security.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/breach-detector.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/web_scraper.js') }}" defer></script>
 </head>
 <body>
     <header>
@@ -517,41 +516,41 @@
                     return;
                 }
                 
+                try {
+                    new URL(url);
+                } catch (e) {
+                    showError('URL invalid. Asigurați-vă că începe cu http:// sau https://');
+                    return;
+                }
+                
                 // Resetează UI și afișează loading
                 resetUI();
                 loadingSection.style.display = 'block';
                 
-                // Utilizează modulul WebScraper pentru verificare
-                WebScraper.checkForPhishing(
-                    url,
-                    // Success callback
-                    function(data) {
-                        if (data.error) {
-                            showError(data.error);
-                        } else {
-                            // După ce primim rezultatele phishing, analizăm și conținutul site-ului
-                            updateResults(data);
-                            
-                            // Analiză suplimentară de conținut dacă site-ul nu e clar phishing
-                            if (data.combined_risk_score < 70) {
-                                WebScraper.analyzeWebsiteContent(
-                                    url,
-                                    function(contentData) {
-                                        console.log("Analiză de conținut completă:", contentData);
-                                        // Putem actualiza UI cu detalii suplimentare dacă e necesar
-                                    },
-                                    function(error) {
-                                        console.error("Eroare la analiza de conținut:", error);
-                                    }
-                                );
-                            }
-                        }
+                // Trimite cererea la server
+                fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
                     },
-                    // Error callback
-                    function(errorMessage) {
-                        showError(errorMessage);
+                    body: JSON.stringify({ url: url }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Eroare de rețea sau server');
                     }
-                );
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        showError(data.error);
+                    } else {
+                        updateResults(data);
+                    }
+                })
+                .catch(error => {
+                    showError(`Eroare în timpul analizei: ${error.message}`);
+                });
             });
             
             // Permite utilizatorului să apese Enter pentru a scana

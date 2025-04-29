@@ -21,5 +21,4 @@ dependencies = [
     "sqlalchemy>=2.0.40",
     "trafilatura>=2.0.0",
     "requests>=2.32.3",
-    "twilio>=9.5.2",
 ]
